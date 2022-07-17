@@ -13,6 +13,7 @@ namespace Web.Api.Controllers.V1
     [ApiController]
     [Route("api/v{version:apiVersion}/User")]
     public class UserController : BaseController
+
     {
         private readonly IMediator _mediator;
 
