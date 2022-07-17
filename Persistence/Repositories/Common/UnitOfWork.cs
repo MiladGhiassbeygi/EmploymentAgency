@@ -5,16 +5,19 @@ namespace Persistence.Repositories.Common
     public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationDbContext _db;
-       
+
         public IUserRefreshTokenRepository UserRefreshTokenRepository { get; }
+        public ICountryRepository CountryRepository { get; }
 
         public UnitOfWork(ApplicationDbContext db)
-       {
-           _db = db;
-           UserRefreshTokenRepository = new UserRefreshTokenRepository(_db);
-       }
+        {
+            _db = db;
+            UserRefreshTokenRepository = new UserRefreshTokenRepository(_db);
+            CountryRepository = new CountryRepository(_db);
 
-        public  Task CommitAsync()
+        }
+
+        public Task CommitAsync()
         {
             return _db.SaveChangesAsync();
         }
@@ -23,5 +26,5 @@ namespace Persistence.Repositories.Common
         {
             return _db.DisposeAsync();
         }
-   }
+    }
 }
