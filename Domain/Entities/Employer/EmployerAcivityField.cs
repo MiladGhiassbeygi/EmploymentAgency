@@ -11,7 +11,6 @@ namespace Domain.Entities.Employer
             EmployerDetails = new HashSet<EmployerDetails>();
         }
 
-        public byte Id { get; set; }
         public string Title { get; set; }
 
         public virtual ICollection<EmployerDetails> EmployerDetails { get; set; }
