@@ -45,31 +45,6 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "JobDefinitions",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    HoursOfWork = table.Column<int>(type: "int", nullable: false),
-                    SalaryMin = table.Column<decimal>(type: "money", nullable: false),
-                    SalaryMax = table.Column<decimal>(type: "money", nullable: false),
-                    AnnualLeave = table.Column<byte>(type: "tinyint", nullable: false),
-                    SalaryByPercent = table.Column<byte>(type: "tinyint", nullable: true),
-                    SalaryFixed = table.Column<decimal>(type: "money", nullable: true),
-                    ExactAmountRecived = table.Column<decimal>(type: "money", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EssentialSkills = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UnnecessarySkills = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_JobDefinitions", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Orders",
                 columns: table => new
                 {
@@ -82,6 +57,24 @@ namespace Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Orders", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ReminderData",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EventDate = table.Column<DateTime>(type: "datetime", nullable: false),
+                    NoteTitle = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Note = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OwnerId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ReminderData", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -100,6 +93,22 @@ namespace Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Roles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Skills",
+                columns: table => new
+                {
+                    Id = table.Column<short>(type: "smallint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    Percentage = table.Column<byte>(type: "tinyint", nullable: false),
+                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Skills", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -133,30 +142,32 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "JobSeekerDetails",
+                name: "JobSeekers",
                 columns: table => new
                 {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     CountryId = table.Column<int>(type: "int", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     LinkedinAddress = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     ResumeFilePath = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Id = table.Column<long>(type: "bigint", nullable: false),
                     CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
+                    table.PrimaryKey("PK_JobSeekers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_JobSeekerDetails_Country",
+                        name: "FK_JobSeeker_Country",
                         column: x => x.CountryId,
                         principalTable: "Countries",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "EmployerDetails",
+                name: "Employers",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
@@ -168,17 +179,15 @@ namespace Persistence.Migrations
                     Email = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     WebsiteLink = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     NecessaryExplanation = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    JobSalaryFixed = table.Column<decimal>(type: "money", nullable: true),
-                    JobSalaryByPercent = table.Column<byte>(type: "tinyint", nullable: true),
                     FieldOfActivityId = table.Column<byte>(type: "tinyint", nullable: false),
                     CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EmployerDetails", x => x.Id);
+                    table.PrimaryKey("PK_Employers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_EmployerDetails_EmployerAcivityField",
+                        name: "FK_Employer_EmployerAcivityField",
                         column: x => x.FieldOfActivityId,
                         principalTable: "EmployerAcivityFields",
                         principalColumn: "Id");
@@ -329,15 +338,195 @@ namespace Persistence.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "EmployerCommissions",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IsFixed = table.Column<bool>(type: "bit", nullable: false, defaultValueSql: "((1))"),
+                    Value = table.Column<int>(type: "int", nullable: false),
+                    EmployerId = table.Column<long>(type: "bigint", nullable: false),
+                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EmployerCommissions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_EmployerCommission_EmployerInformation",
+                        column: x => x.EmployerId,
+                        principalTable: "Employers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Jobs",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    HoursOfWork = table.Column<int>(type: "int", nullable: false),
+                    SalaryMin = table.Column<decimal>(type: "money", nullable: false),
+                    SalaryMax = table.Column<decimal>(type: "money", nullable: false),
+                    AnnualLeave = table.Column<byte>(type: "tinyint", nullable: false),
+                    ExactAmountRecived = table.Column<decimal>(type: "money", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EssentialSkills = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UnnecessarySkills = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EmployerId = table.Column<long>(type: "bigint", nullable: false),
+                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Jobs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Job_EmployerInformation",
+                        column: x => x.EmployerId,
+                        principalTable: "Employers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SuccessedContracts",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EmployerId = table.Column<long>(type: "bigint", nullable: false),
+                    JobSeekerId = table.Column<long>(type: "bigint", nullable: false),
+                    EmploymentAgencyId = table.Column<int>(type: "int", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "(getdate())"),
+                    IsAmountFixed = table.Column<bool>(type: "bit", nullable: false),
+                    Amount = table.Column<decimal>(type: "money", nullable: false),
+                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SuccessedContracts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SuccessedContract_Employer",
+                        column: x => x.EmployerId,
+                        principalTable: "Employers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_SuccessedContract_JobSeeker",
+                        column: x => x.JobSeekerId,
+                        principalTable: "JobSeekers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "JobCommissions",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IsFixed = table.Column<bool>(type: "bit", nullable: false),
+                    Value = table.Column<int>(type: "int", nullable: false),
+                    JobId = table.Column<long>(type: "bigint", nullable: false),
+                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_JobCommissions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_JobCommission_JobDefinition",
+                        column: x => x.JobId,
+                        principalTable: "Jobs",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "JobEssentialSkills",
+                columns: table => new
+                {
+                    JobId = table.Column<long>(type: "bigint", nullable: false),
+                    SkillId = table.Column<short>(type: "smallint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.ForeignKey(
+                        name: "FK_JobEssentialSkills_Job",
+                        column: x => x.JobId,
+                        principalTable: "Jobs",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_JobEssentialSkills_Skill",
+                        column: x => x.SkillId,
+                        principalTable: "Skills",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "JobUnnecessarySkills",
+                columns: table => new
+                {
+                    JobId = table.Column<long>(type: "bigint", nullable: false),
+                    SkillId = table.Column<short>(type: "smallint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.ForeignKey(
+                        name: "FK_JobUnnecessarySkills_Job",
+                        column: x => x.JobId,
+                        principalTable: "Jobs",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_JobUnnecessarySkills_Skill",
+                        column: x => x.SkillId,
+                        principalTable: "Skills",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.CreateIndex(
-                name: "IX_EmployerDetails_FieldOfActivityId",
-                table: "EmployerDetails",
+                name: "IX_EmployerCommissions_EmployerId",
+                table: "EmployerCommissions",
+                column: "EmployerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Employers_FieldOfActivityId",
+                table: "Employers",
                 column: "FieldOfActivityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_JobSeekerDetails_CountryId",
-                table: "JobSeekerDetails",
+                name: "IX_JobCommissions_JobId",
+                table: "JobCommissions",
+                column: "JobId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_JobEssentialSkills_JobId",
+                table: "JobEssentialSkills",
+                column: "JobId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_JobEssentialSkills_SkillId",
+                table: "JobEssentialSkills",
+                column: "SkillId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Jobs_EmployerId",
+                table: "Jobs",
+                column: "EmployerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_JobSeekers_CountryId",
+                table: "JobSeekers",
                 column: "CountryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_JobUnnecessarySkills_JobId",
+                table: "JobUnnecessarySkills",
+                column: "JobId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_JobUnnecessarySkills_SkillId",
+                table: "JobUnnecessarySkills",
+                column: "SkillId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RoleClaims_RoleId",
@@ -352,6 +541,16 @@ namespace Persistence.Migrations
                 column: "NormalizedName",
                 unique: true,
                 filter: "[NormalizedName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SuccessedContracts_EmployerId",
+                table: "SuccessedContracts",
+                column: "EmployerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SuccessedContracts_JobSeekerId",
+                table: "SuccessedContracts",
+                column: "JobSeekerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserClaims_UserId",
@@ -395,20 +594,29 @@ namespace Persistence.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "EmployerDetails");
+                name: "EmployerCommissions");
 
             migrationBuilder.DropTable(
-                name: "JobDefinitions");
+                name: "JobCommissions");
 
             migrationBuilder.DropTable(
-                name: "JobSeekerDetails");
+                name: "JobEssentialSkills");
+
+            migrationBuilder.DropTable(
+                name: "JobUnnecessarySkills");
 
             migrationBuilder.DropTable(
                 name: "Orders");
 
             migrationBuilder.DropTable(
+                name: "ReminderData");
+
+            migrationBuilder.DropTable(
                 name: "RoleClaims",
                 schema: "usr");
+
+            migrationBuilder.DropTable(
+                name: "SuccessedContracts");
 
             migrationBuilder.DropTable(
                 name: "UserClaims",
@@ -431,10 +639,13 @@ namespace Persistence.Migrations
                 schema: "usr");
 
             migrationBuilder.DropTable(
-                name: "EmployerAcivityFields");
+                name: "Jobs");
 
             migrationBuilder.DropTable(
-                name: "Countries");
+                name: "Skills");
+
+            migrationBuilder.DropTable(
+                name: "JobSeekers");
 
             migrationBuilder.DropTable(
                 name: "Roles",
@@ -443,6 +654,15 @@ namespace Persistence.Migrations
             migrationBuilder.DropTable(
                 name: "Users",
                 schema: "usr");
+
+            migrationBuilder.DropTable(
+                name: "Employers");
+
+            migrationBuilder.DropTable(
+                name: "Countries");
+
+            migrationBuilder.DropTable(
+                name: "EmployerAcivityFields");
         }
     }
 }

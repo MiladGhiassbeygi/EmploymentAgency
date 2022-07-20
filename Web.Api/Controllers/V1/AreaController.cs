@@ -1,8 +1,13 @@
-﻿using Application.Features.Area.Commands.AddArea;
+﻿using Application.Features.Area.Commands.CreateCountry;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Web.Api.Dto.Area;
 using WebFramework.BaseController;
+using Web.Api.Profile;
+using Domain.Entities;
+using Application.Features.Area;
+using Web.Api.Dto;
 
 namespace Web.Api.Controllers.V1
 {
@@ -11,19 +16,43 @@ namespace Web.Api.Controllers.V1
     [Route("api/v{version:apiVersion}/Area")]
     public class AreaController : BaseController
     {
-       private readonly ISender _sender;
+        private readonly ISender _sender;
 
         public AreaController(ISender sender)
         {
             _sender = sender;
         }
 
-        //[HttpPost("CreateArea")]
-        //public async Task<IActionResult> CreateArea(CreateAreaViewModel model)
-        //{
-        //    var commandResult = await _sender.Send(new AddAreaCommand("Tehran", 021));
+        [HttpPost("CreateCountry")]
+        public async Task<IActionResult> CreateArea(CreateCountryForm model)
+        {
+            var commandResult = await _sender.Send(new CreateCountryCommand(model.Title, model.PostalCode, model.AreaCode));
 
-        //    return base.OperationResult(commandResult);
-        //}
+            if (commandResult.IsSuccess)
+            {
+                //CreateCountryDto dto = new CreateCountryDto()
+                //{
+                //    Id = commandResult.Result.Id,
+                //    Title = model.Title,
+                //    PostalCode = model.PostalCode,
+                //    AreaCode = model.AreaCode,
+                //};
+
+                return base.OperationResult(commandResult);
+            }
+            return base.OperationResult(commandResult);
+        }
+
+        [HttpGet("GetCountries")]
+        public async Task<IActionResult> GetCountries()
+        {
+            //var countries = await _sender.Send(new GetCountriesQuery());
+
+            //List<GetCountriesDto> countriesDtos = new List<GetCountriesDto>();
+            //countriesDtos.AddRange(countries.Result.ConvertAll(x => new GetCountriesDto() { Id = x.Id, Title = x.Title, AreaCode = x.AreaCode, PostalCode = x.PostalCode }));
+            
+
+            return base.OperationResult(await _sender.Send(new GetCountriesQuery()));
+        }
     }
 }

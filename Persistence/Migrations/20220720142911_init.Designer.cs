@@ -12,7 +12,7 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220717140718_init")]
+    [Migration("20220720142911_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,7 +24,7 @@ namespace Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Domain.Entities.Area.Country", b =>
+            modelBuilder.Entity("Domain.Entities.Country", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -56,30 +56,7 @@ namespace Persistence.Migrations
                     b.ToTable("Countries");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Employer.EmployerAcivityField", b =>
-                {
-                    b.Property<byte>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("tinyint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreatedTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("EmployerAcivityFields");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Employer.EmployerDetails", b =>
+            modelBuilder.Entity("Domain.Entities.Employer", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -108,12 +85,6 @@ namespace Persistence.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
 
-                    b.Property<byte?>("JobSalaryByPercent")
-                        .HasColumnType("tinyint");
-
-                    b.Property<decimal?>("JobSalaryFixed")
-                        .HasColumnType("money");
-
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(25)
@@ -140,10 +111,65 @@ namespace Persistence.Migrations
 
                     b.HasIndex("FieldOfActivityId");
 
-                    b.ToTable("EmployerDetails");
+                    b.ToTable("Employers");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Job.JobDefinition", b =>
+            modelBuilder.Entity("Domain.Entities.EmployerAcivityField", b =>
+                {
+                    b.Property<byte>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<byte>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EmployerAcivityFields");
+                });
+
+            modelBuilder.Entity("Domain.Entities.EmployerCommission", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("EmployerId")
+                        .HasColumnType("bigint");
+
+                    b.Property<bool>("IsFixed")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValueSql("((1))");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Value")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployerId");
+
+                    b.ToTable("EmployerCommissions");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Job", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -161,6 +187,9 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<long>("EmployerId")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("EssentialSkills")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -173,12 +202,6 @@ namespace Persistence.Migrations
 
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<byte?>("SalaryByPercent")
-                        .HasColumnType("tinyint");
-
-                    b.Property<decimal?>("SalaryFixed")
-                        .HasColumnType("money");
 
                     b.Property<decimal>("SalaryMax")
                         .HasColumnType("money");
@@ -197,11 +220,64 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("JobDefinitions");
+                    b.HasIndex("EmployerId");
+
+                    b.ToTable("Jobs");
                 });
 
-            modelBuilder.Entity("Domain.Entities.JobSeeker.JobSeekerDetails", b =>
+            modelBuilder.Entity("Domain.Entities.JobCommission", b =>
                 {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsFixed")
+                        .HasColumnType("bit");
+
+                    b.Property<long>("JobId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Value")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("JobId");
+
+                    b.ToTable("JobCommissions");
+                });
+
+            modelBuilder.Entity("Domain.Entities.JobEssentialSkills", b =>
+                {
+                    b.Property<long>("JobId")
+                        .HasColumnType("bigint");
+
+                    b.Property<short>("SkillId")
+                        .HasColumnType("smallint");
+
+                    b.HasIndex("JobId");
+
+                    b.HasIndex("SkillId");
+
+                    b.ToTable("JobEssentialSkills");
+                });
+
+            modelBuilder.Entity("Domain.Entities.JobSeeker", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
                     b.Property<int>("CountryId")
                         .HasColumnType("int");
 
@@ -217,9 +293,6 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
-
-                    b.Property<long>("Id")
-                        .HasColumnType("bigint");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -238,9 +311,26 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.HasKey("Id");
+
                     b.HasIndex("CountryId");
 
-                    b.ToTable("JobSeekerDetails");
+                    b.ToTable("JobSeekers");
+                });
+
+            modelBuilder.Entity("Domain.Entities.JobUnnecessarySkills", b =>
+                {
+                    b.Property<long>("JobId")
+                        .HasColumnType("bigint");
+
+                    b.Property<short>("SkillId")
+                        .HasColumnType("smallint");
+
+                    b.HasIndex("JobId");
+
+                    b.HasIndex("SkillId");
+
+                    b.ToTable("JobUnnecessarySkills");
                 });
 
             modelBuilder.Entity("Domain.Entities.Order.Order", b =>
@@ -263,6 +353,111 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("Domain.Entities.ReminderData", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("EventDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Note")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NoteTitle")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("OwnerId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ReminderData");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Skill", b =>
+                {
+                    b.Property<short>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("smallint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<short>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte>("Percentage")
+                        .HasColumnType("tinyint");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Skills");
+                });
+
+            modelBuilder.Entity("Domain.Entities.SuccessedContract", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("money");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Date")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<long>("EmployerId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("EmploymentAgencyId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsAmountFixed")
+                        .HasColumnType("bit");
+
+                    b.Property<long>("JobSeekerId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployerId");
+
+                    b.HasIndex("JobSeekerId");
+
+                    b.ToTable("SuccessedContracts");
                 });
 
             modelBuilder.Entity("Domain.Entities.User.Role", b =>
@@ -522,26 +717,116 @@ namespace Persistence.Migrations
                     b.ToTable("UserTokens", "usr");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Employer.EmployerDetails", b =>
+            modelBuilder.Entity("Domain.Entities.Employer", b =>
                 {
-                    b.HasOne("Domain.Entities.Employer.EmployerAcivityField", "FieldOfActivity")
+                    b.HasOne("Domain.Entities.EmployerAcivityField", "FieldOfActivity")
                         .WithMany("EmployerDetails")
                         .HasForeignKey("FieldOfActivityId")
                         .IsRequired()
-                        .HasConstraintName("FK_EmployerDetails_EmployerAcivityField");
+                        .HasConstraintName("FK_Employer_EmployerAcivityField");
 
                     b.Navigation("FieldOfActivity");
                 });
 
-            modelBuilder.Entity("Domain.Entities.JobSeeker.JobSeekerDetails", b =>
+            modelBuilder.Entity("Domain.Entities.EmployerCommission", b =>
                 {
-                    b.HasOne("Domain.Entities.Area.Country", "Country")
+                    b.HasOne("Domain.Entities.Employer", "Employer")
+                        .WithMany("EmployerCommission")
+                        .HasForeignKey("EmployerId")
+                        .IsRequired()
+                        .HasConstraintName("FK_EmployerCommission_EmployerInformation");
+
+                    b.Navigation("Employer");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Job", b =>
+                {
+                    b.HasOne("Domain.Entities.Employer", "Employer")
+                        .WithMany("Job")
+                        .HasForeignKey("EmployerId")
+                        .IsRequired()
+                        .HasConstraintName("FK_Job_EmployerInformation");
+
+                    b.Navigation("Employer");
+                });
+
+            modelBuilder.Entity("Domain.Entities.JobCommission", b =>
+                {
+                    b.HasOne("Domain.Entities.Job", "Job")
+                        .WithMany("JobCommission")
+                        .HasForeignKey("JobId")
+                        .IsRequired()
+                        .HasConstraintName("FK_JobCommission_JobDefinition");
+
+                    b.Navigation("Job");
+                });
+
+            modelBuilder.Entity("Domain.Entities.JobEssentialSkills", b =>
+                {
+                    b.HasOne("Domain.Entities.Job", "Job")
                         .WithMany()
+                        .HasForeignKey("JobId")
+                        .IsRequired()
+                        .HasConstraintName("FK_JobEssentialSkills_Job");
+
+                    b.HasOne("Domain.Entities.Skill", "Skill")
+                        .WithMany()
+                        .HasForeignKey("SkillId")
+                        .IsRequired()
+                        .HasConstraintName("FK_JobEssentialSkills_Skill");
+
+                    b.Navigation("Job");
+
+                    b.Navigation("Skill");
+                });
+
+            modelBuilder.Entity("Domain.Entities.JobSeeker", b =>
+                {
+                    b.HasOne("Domain.Entities.Country", "Country")
+                        .WithMany("JobSeeker")
                         .HasForeignKey("CountryId")
                         .IsRequired()
-                        .HasConstraintName("FK_JobSeekerDetails_Country");
+                        .HasConstraintName("FK_JobSeeker_Country");
 
                     b.Navigation("Country");
+                });
+
+            modelBuilder.Entity("Domain.Entities.JobUnnecessarySkills", b =>
+                {
+                    b.HasOne("Domain.Entities.Job", "Job")
+                        .WithMany()
+                        .HasForeignKey("JobId")
+                        .IsRequired()
+                        .HasConstraintName("FK_JobUnnecessarySkills_Job");
+
+                    b.HasOne("Domain.Entities.Skill", "Skill")
+                        .WithMany()
+                        .HasForeignKey("SkillId")
+                        .IsRequired()
+                        .HasConstraintName("FK_JobUnnecessarySkills_Skill");
+
+                    b.Navigation("Job");
+
+                    b.Navigation("Skill");
+                });
+
+            modelBuilder.Entity("Domain.Entities.SuccessedContract", b =>
+                {
+                    b.HasOne("Domain.Entities.Employer", "Employer")
+                        .WithMany("SuccessedContract")
+                        .HasForeignKey("EmployerId")
+                        .IsRequired()
+                        .HasConstraintName("FK_SuccessedContract_Employer");
+
+                    b.HasOne("Domain.Entities.JobSeeker", "JobSeeker")
+                        .WithMany("SuccessedContract")
+                        .HasForeignKey("JobSeekerId")
+                        .IsRequired()
+                        .HasConstraintName("FK_SuccessedContract_JobSeeker");
+
+                    b.Navigation("Employer");
+
+                    b.Navigation("JobSeeker");
                 });
 
             modelBuilder.Entity("Domain.Entities.User.RoleClaim", b =>
@@ -618,9 +903,33 @@ namespace Persistence.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Employer.EmployerAcivityField", b =>
+            modelBuilder.Entity("Domain.Entities.Country", b =>
+                {
+                    b.Navigation("JobSeeker");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Employer", b =>
+                {
+                    b.Navigation("EmployerCommission");
+
+                    b.Navigation("Job");
+
+                    b.Navigation("SuccessedContract");
+                });
+
+            modelBuilder.Entity("Domain.Entities.EmployerAcivityField", b =>
                 {
                     b.Navigation("EmployerDetails");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Job", b =>
+                {
+                    b.Navigation("JobCommission");
+                });
+
+            modelBuilder.Entity("Domain.Entities.JobSeeker", b =>
+                {
+                    b.Navigation("SuccessedContract");
                 });
 
             modelBuilder.Entity("Domain.Entities.User.Role", b =>

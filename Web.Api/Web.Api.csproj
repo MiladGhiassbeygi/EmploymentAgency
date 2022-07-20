@@ -31,8 +31,4 @@
     <ProjectReference Include="..\WebFramework\WebFramework.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\Area\" />
-  </ItemGroup>
-
 </Project>

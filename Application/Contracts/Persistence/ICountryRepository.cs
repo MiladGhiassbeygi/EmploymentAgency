@@ -9,5 +9,6 @@ namespace Application.Contracts.Persistence
         Task<Country> GetCountryByTitleAsync(string title);
         Task<Country> UpdateCountryAsync(Country country);
         Task<Country> DeleteCountryByIdAsync(int id);
+        Task<List<Country>> GetAll();
     }
 }

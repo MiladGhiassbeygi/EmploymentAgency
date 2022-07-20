@@ -42,6 +42,10 @@ namespace Persistence.Repositories
             await base.DeleteAsync(fetchedCountry);
             return fetchedCountry;
         }
+        public async Task<List<Country>> GetAll()
+        {
+            return await base.TableNoTracking.ToListAsync();
+        }
     }
 }
 
