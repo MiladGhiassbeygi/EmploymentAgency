@@ -1,6 +1,4 @@
-﻿using Domain.Entities.Area;
-using Domain.Entities.Employer;
-using Domain.Entities.User;
+﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

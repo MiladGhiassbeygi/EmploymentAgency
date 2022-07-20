@@ -1,14 +1,12 @@
-﻿using Domain.Entities.Area;
-using Domain.Entities.Employer;
-using Domain.Entities.User;
+﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Persistence.Configuration.EmployerConfig
 {
-    internal class EmployerDetailsConfig : IEntityTypeConfiguration<EmployerDetails>
+    internal class EmployerConfig : IEntityTypeConfiguration<Employer>
     {
-        public void Configure(EntityTypeBuilder<EmployerDetails> builder)
+        public void Configure(EntityTypeBuilder<Employer> builder)
         {
             builder.Property(e => e.Address)
                     .IsRequired()
@@ -22,7 +20,6 @@ namespace Persistence.Configuration.EmployerConfig
                 .IsRequired()
                 .HasMaxLength(15);
 
-            builder.Property(e => e.JobSalaryFixed).HasColumnType("money");
 
             builder.Property(e => e.LastName)
                 .IsRequired()
@@ -42,7 +39,7 @@ namespace Persistence.Configuration.EmployerConfig
                 .WithMany(p => p.EmployerDetails)
                 .HasForeignKey(d => d.FieldOfActivityId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_EmployerDetails_EmployerAcivityField");
+                .HasConstraintName("FK_Employer_EmployerAcivityField");
         }
     }
 }

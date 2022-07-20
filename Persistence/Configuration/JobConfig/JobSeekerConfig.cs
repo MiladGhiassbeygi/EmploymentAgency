@@ -1,17 +1,14 @@
-﻿using Domain.Entities.Area;
-using Domain.Entities.Employer;
-using Domain.Entities.JobSeeker;
-using Domain.Entities.User;
+﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Persistence.Configuration.JobConfig
 {
-    internal class JobSeekerDetailsConfig : IEntityTypeConfiguration<JobSeekerDetails>
+    internal class JobSeekerConfig : IEntityTypeConfiguration<JobSeeker>
     {
-        public void Configure(EntityTypeBuilder<JobSeekerDetails> builder)
+        public void Configure(EntityTypeBuilder<JobSeeker> builder)
         {
-            builder.HasNoKey();
+            builder.Property(e => e.Id).ValueGeneratedOnAdd();
 
             builder.Property(e => e.Email)
                 .IsRequired()
@@ -32,10 +29,10 @@ namespace Persistence.Configuration.JobConfig
             builder.Property(e => e.ResumeFilePath).IsRequired();
 
             builder.HasOne(d => d.Country)
-                .WithMany()
+                .WithMany(p => p.JobSeeker)
                 .HasForeignKey(d => d.CountryId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_JobSeekerDetails_Country");
+                .HasConstraintName("FK_JobSeeker_Country");
         }
     }
 }

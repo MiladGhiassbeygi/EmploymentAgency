@@ -1,12 +1,16 @@
 ﻿using Domain.Common;
-using Domain.Entities.Area;
 using System;
 using System.Collections.Generic;
 
-namespace Domain.Entities.JobSeeker
+namespace Domain.Entities
 {
-    public partial class JobSeekerDetails : BaseEntity<long>
+    public partial class JobSeeker : BaseEntity<long>
     {
+        public JobSeeker()
+        {
+            SuccessedContract = new HashSet<SuccessedContract>();
+        }
+
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int CountryId { get; set; }
@@ -15,5 +19,6 @@ namespace Domain.Entities.JobSeeker
         public string ResumeFilePath { get; set; }
 
         public virtual Country Country { get; set; }
+        public virtual ICollection<SuccessedContract> SuccessedContract { get; set; }
     }
 }
