@@ -1,4 +1,6 @@
-﻿namespace Application.Models.Common
+﻿using Application.Models.Area;
+
+namespace Application.Models.Common
 {
    
 
@@ -23,6 +25,11 @@
         public static OperationResult<TResult> NotFoundResult(string message)
         {
             return new OperationResult<TResult> { ErrorMessage = message, IsSuccess = false, IsNotFound = true };
+        }
+
+        internal static OperationResult<List<GetCountriesDto>> SuccessResult(object v)
+        {
+            throw new NotImplementedException();
         }
     }
 }

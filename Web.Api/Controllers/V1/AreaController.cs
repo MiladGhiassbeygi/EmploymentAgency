@@ -46,12 +46,6 @@ namespace Web.Api.Controllers.V1
         [HttpGet("GetCountries")]
         public async Task<IActionResult> GetCountries()
         {
-            //var countries = await _sender.Send(new GetCountriesQuery());
-
-            //List<GetCountriesDto> countriesDtos = new List<GetCountriesDto>();
-            //countriesDtos.AddRange(countries.Result.ConvertAll(x => new GetCountriesDto() { Id = x.Id, Title = x.Title, AreaCode = x.AreaCode, PostalCode = x.PostalCode }));
-            
-
             return base.OperationResult(await _sender.Send(new GetCountriesQuery()));
         }
     }

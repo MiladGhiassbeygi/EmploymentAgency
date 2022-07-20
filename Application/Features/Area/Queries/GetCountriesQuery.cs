@@ -1,9 +1,9 @@
-﻿using Application.Models.Common;
-using Domain.Entities;
+﻿using Application.Models.Area;
+using Application.Models.Common;
 using MediatR;
 
 namespace Application.Features.Area
 {
     
-    public record GetCountriesQuery() : IRequest<OperationResult<List<Country>>>;
+    public record GetCountriesQuery() : IRequest<OperationResult<List<GetCountriesDto>>>;
 }
