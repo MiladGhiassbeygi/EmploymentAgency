@@ -44,7 +44,7 @@ namespace Persistence.Repositories
         }
         public async Task<List<Country>> GetAll()
         {
-            return await base.TableNoTracking.ToListAsync();
+            return await base.TableNoTracking.Select(x=> new Country {Id = x.Id, Title = x.Title,AreaCode = x.AreaCode,PostalCode = x.PostalCode }).ToListAsync();
         }
     }
 }
