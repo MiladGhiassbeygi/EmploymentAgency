@@ -9,12 +9,14 @@ namespace Persistence.Repositories.Common
 
         public IUserRefreshTokenRepository UserRefreshTokenRepository { get; }
         public ICountryRepository CountryRepository { get; }
+        public ISuccessedContractRepository SuccessedContractRepository { get; }
 
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
             UserRefreshTokenRepository = new UserRefreshTokenRepository(_db);
             CountryRepository = new CountryRepository(_db);
+            SuccessedContractRepository = new SuccessedContractRepository(_db);
 
         }
 

@@ -6,6 +6,7 @@ namespace Application.Contracts.Persistence
     {
         public IUserRefreshTokenRepository UserRefreshTokenRepository { get; }
         public ICountryRepository CountryRepository { get; }
+        public ISuccessedContractRepository SuccessedContractRepository { get; }
         Task CommitAsync();
         ValueTask RollBackAsync();
     }
