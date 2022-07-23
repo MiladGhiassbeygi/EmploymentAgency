@@ -1,4 +1,6 @@
-﻿namespace Application.Contracts.Persistence
+﻿using Application.Contracts.Persistence.Area;
+
+namespace Application.Contracts.Persistence
 {
     public interface IUnitOfWork
     {

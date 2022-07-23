@@ -12,7 +12,7 @@
 
     public abstract class BaseEntity<TKey> : IEntity, ITimeModification
     {
-        public TKey Id { get;  set; }
+        public TKey Id { get; protected set; }
 
         public override bool Equals(object obj)
         {

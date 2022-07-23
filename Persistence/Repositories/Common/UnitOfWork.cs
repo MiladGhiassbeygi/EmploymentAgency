@@ -1,4 +1,5 @@
 ﻿using Application.Contracts.Persistence;
+using Application.Contracts.Persistence.Area;
 
 namespace Persistence.Repositories.Common
 {

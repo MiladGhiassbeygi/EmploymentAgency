@@ -1,4 +1,4 @@
-﻿using Application.Contracts.Persistence;
+﻿using Application.Contracts.Persistence.Area;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Repositories.Common;

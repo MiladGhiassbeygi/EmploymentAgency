@@ -12,6 +12,7 @@ namespace Persistence.Repositories.Common
 
         protected BaseAsyncRepository(ApplicationDbContext dbContext)
         {
+            
             DbContext = dbContext;
             Entities = DbContext.Set<T>(); // City => Cities
         }
