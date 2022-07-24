@@ -10,7 +10,7 @@ namespace Domain.Entities
         {
             EmployerDetails = new HashSet<Employer>();
         }
-
+        public byte Id { get; set; }
         public string Title { get; set; }
 
         public virtual ICollection<Employer> EmployerDetails { get; set; }

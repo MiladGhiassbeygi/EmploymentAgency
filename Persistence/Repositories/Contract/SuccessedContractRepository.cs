@@ -21,6 +21,10 @@ namespace Persistence.Repositories
         {
             return await base.TableNoTracking.FirstOrDefaultAsync(x => x.Id.Equals(id));
         }
+        public async Task<SuccessedContract> GetSuccessedContractByIdAsync(long id)
+        {
+            throw new NotImplementedException();
+        }
         public async Task<SuccessedContract> FindContractByTermAsync(SuccessedContract successedContract)
         {
             throw new NotImplementedException();

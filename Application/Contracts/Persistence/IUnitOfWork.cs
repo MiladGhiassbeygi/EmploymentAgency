@@ -10,6 +10,8 @@ namespace Application.Contracts.Persistence
         public ICountryRepository CountryRepository { get; }
         public IEmployerAcivityFieldRepository EmployerAcivityFieldRepository { get; }
         public ISuccessedContractRepository SuccessedContractRepository { get; }
+        public IJobCommissionRepository JobCommissionRepository { get; }
+        public IJobRepository JobRepository { get; }
         Task CommitAsync();
         ValueTask RollBackAsync();
     }

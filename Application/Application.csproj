@@ -17,9 +17,9 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Domain\Domain.csproj" />
+    <Folder Include="Features\Contract\Queries\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Features\Contract\Queries\" />
+    <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 </Project>
