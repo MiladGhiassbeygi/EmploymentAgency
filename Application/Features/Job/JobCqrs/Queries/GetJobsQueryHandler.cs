@@ -5,7 +5,7 @@ using Application.Models.Job;
 using Domain.Entities;
 using MediatR;
 
-namespace Application.Features.Job.Queries
+namespace Application.Features.JobFeatures
 {
     internal class GetJobsQueryHandler : IRequestHandler<GetJobsQuery, OperationResult<List<GetJobsDto>>>
     {

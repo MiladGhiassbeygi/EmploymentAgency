@@ -3,7 +3,7 @@ using Application.Models.Common;
 using Application.Models.Job;
 using MediatR;
 
-namespace Application.Features.Job
+namespace Application.Features.JobFeatures
 {
     public record GetJobsQuery() : IRequest<OperationResult<List<GetJobsDto>>>;
 }

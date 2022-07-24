@@ -1,21 +1,14 @@
-﻿using Application.Features.Area.Commands.CreateCountry;
-using MediatR;
-using Microsoft.AspNetCore.Http;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Web.Api.Dto.Area;
 using WebFramework.BaseController;
-using Web.Api.Profile;
-using Domain.Entities;
-using Application.Features.Area;
-using Web.Api.Dto;
-using Web.Api.Form;
 using Web.Api.Form.Job;
-using Application.Features.Job;
 using Web.Api.Dto.Jobs;
-using Application.Features.Area.Commands.CreateJob;
+using Application.Features.JobFeatures.Commands;
+using Application.Features.JobFeatures;
 
 namespace Web.Api.Controllers.V1
-{   [ApiVersion("1")]
+{   
+    [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/Job")]
     [ApiController]
     public class JobController : BaseController
