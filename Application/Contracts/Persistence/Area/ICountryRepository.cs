@@ -1,6 +1,6 @@
 ﻿using Domain.Entities;
 
-namespace Application.Contracts.Persistence
+namespace Application.Contracts.Persistence.Area
 {
     public interface ICountryRepository
     {
