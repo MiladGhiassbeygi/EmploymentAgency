@@ -1,6 +1,8 @@
 ﻿using Application.Contracts.Persistence;
 using Persistence.Repositories.Employer;
 using Application.Contracts.Persistence.Area;
+using Application.Contracts.Persistence.JobContract;
+using Persistence.Repositories.JobRepositories;
 
 namespace Persistence.Repositories.Common
 {
@@ -12,12 +14,17 @@ namespace Persistence.Repositories.Common
         public ICountryRepository CountryRepository { get; }
         public ISuccessedContractRepository SuccessedContractRepository { get; }
 
+        public IJobRepository JobRepository { get; }
+        public IJobCommissionRepository JobCommissionRepository { get; }
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
             UserRefreshTokenRepository = new UserRefreshTokenRepository(_db);
             CountryRepository = new CountryRepository(_db);
             SuccessedContractRepository = new SuccessedContractRepository(_db);
+            JobRepository = new JobRepository(_db);
+            JobCommissionRepository = new JobCommissionRepository(_db);
+
 
         }
 

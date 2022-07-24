@@ -1,4 +1,6 @@
-﻿using Application.Contracts.Persistence.Area;
+﻿using Application.Contracts.Persistence.JobContract;
+
+using Application.Contracts.Persistence.Area;
 
 namespace Application.Contracts.Persistence
 {

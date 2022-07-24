@@ -5,6 +5,10 @@
 	  <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 <ItemGroup>
+  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.0">
+    <PrivateAssets>all</PrivateAssets>
+    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+  </PackageReference>
   <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0" />
   <PackageReference Include="Serilog.Sinks.Console" Version="4.0.1" />
   <PackageReference Include="Serilog.Sinks.MSSqlServer" Version="5.6.1" />
