@@ -4,7 +4,7 @@ using WebFramework.BaseController;
 using Web.Api.Form.Job;
 using Web.Api.Dto.Jobs;
 using Application.Features.JobFeatures.Commands;
-using Application.Features.JobFeatures;
+using Application.Features.JobFeatures.Queries;
 
 namespace Web.Api.Controllers.V1
 {   
