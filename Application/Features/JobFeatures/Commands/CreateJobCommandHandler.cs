@@ -3,9 +3,9 @@ using Application.Models.Common;
 using Domain.Entities;
 using MediatR;
 
-namespace Application.Features.JobFeatures.Commands.CreateJob
+namespace Application.Features.JobFeatures.Commands
 {
-    internal class CreateJobCommandHandler: IRequestHandler<CreateJobCommand, OperationResult<Domain.Entities.Job>>
+    internal class CreateJobCommandHandler : IRequestHandler<CreateJobCommand, OperationResult<Domain.Entities.Job>>
     {
         readonly IUnitOfWork _unitOfWork;
 
@@ -18,7 +18,7 @@ namespace Application.Features.JobFeatures.Commands.CreateJob
             if (await _unitOfWork.JobRepository.GetJobByTitleAsync(request.Title) is not null)
                 return OperationResult<Domain.Entities.Job>.FailureResult("This Job Already Exists");
 
-            var job = new Job { Title = request.Title, SalaryMin = request.SalaryMin,SalaryMax  = request.SalaryMax };
+            var job = new Job { Title = request.Title, SalaryMin = request.SalaryMin, SalaryMax = request.SalaryMax };
 
             var result = await _unitOfWork.JobRepository.CreateJobAsync(job);
 
