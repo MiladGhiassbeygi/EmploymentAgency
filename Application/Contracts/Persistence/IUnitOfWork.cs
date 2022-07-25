@@ -12,6 +12,7 @@ namespace Application.Contracts.Persistence
         public IJobCommissionRepository JobCommissionRepository { get; }
         public ISuccessedContractRepository SuccessedContractRepository { get; }
         public IOrderRepository OrderRepository { get; }    
+        public ISkillRepository SkillRepository { get; }
         Task CommitAsync();
         ValueTask RollBackAsync();
     }
