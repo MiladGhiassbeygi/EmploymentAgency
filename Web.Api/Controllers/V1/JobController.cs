@@ -12,7 +12,8 @@ using Web.Api.Form;
 using Web.Api.Form.Job;
 using Application.Features.Job;
 using Web.Api.Dto.Jobs;
-using Application.Features.Area.Commands.CreateJob;
+using Application.Features.Area.Commands;
+using Application.Features.JobFeatures.Commands.CreateJob;
 
 namespace Web.Api.Controllers.V1
 {   [ApiVersion("1")]

@@ -46,7 +46,7 @@ namespace Persistence.Repositories
         }
         public async Task<List<Job>> GetAll()
         {
-            return await base.TableNoTracking.Select(x => new Job { Id = x.Id, Title = x.Title, HoursOfWork = x.HoursOfWork,
+            return await base.TableNoTracking.Select(x => new Job { /*Id= x.Id,*/ Title = x.Title, HoursOfWork = x.HoursOfWork,
                 SalaryMin= x.SalaryMin,SalaryMax=x.SalaryMax,
             AnnualLeave= x.AnnualLeave,ExactAmountRecived=x.ExactAmountRecived,Description=x.Description,
             EssentialSkills=x.EssentialSkills,UnnecessarySkills= x.UnnecessarySkills,EmployerId=x.EmployerId}).ToListAsync();

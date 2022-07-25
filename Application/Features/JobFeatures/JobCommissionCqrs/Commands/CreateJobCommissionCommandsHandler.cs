@@ -1,5 +1,5 @@
 ﻿using Application.Contracts.Persistence;
-using Application.Features.Area.Commands.CreateJob;
+using Application.Features.Area.Commands;
 using Application.Models.Common;
 using Domain.Entities;
 using MediatR;

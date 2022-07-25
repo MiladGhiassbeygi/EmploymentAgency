@@ -45,5 +45,10 @@ namespace Persistence.Repositories
         {
             return await base.TableNoTracking.ToListAsync();    
         }
+
+        public Task<SuccessedContract> GetSuccessedContractByIdAsync(long id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
