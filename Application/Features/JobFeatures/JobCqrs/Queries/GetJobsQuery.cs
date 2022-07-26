@@ -1,9 +1,8 @@
-﻿using Application.Models;
-using Application.Models.Common;
-using Application.Models.Job;
+﻿using Application.Models.Common;
+using Application.Models.JobModel;
 using MediatR;
 
-namespace Application.Features.Job
+namespace Application.Features.JobFeature
 {
     public record GetJobsQuery() : IRequest<OperationResult<List<GetJobsDto>>>;
 }

@@ -1,5 +1,5 @@
 ﻿using Application.Models.Common;
-using Domain.Entities;
+using Domain.WriteModel;
 using MediatR;
 using System;
 using System.Collections.Generic;

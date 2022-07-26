@@ -1,11 +1,9 @@
 ﻿using Application.Contracts.Persistence;
-using Application.Models.Area;
 using Application.Models.Common;
-using Application.Models.Job;
-using Domain.Entities;
+using Application.Models.JobModel;
 using MediatR;
 
-namespace Application.Features.Job.Queries
+namespace Application.Features.JobFeature.Queries
 {
     internal class GetJobsQueryHandler : IRequestHandler<GetJobsQuery, OperationResult<List<GetJobsDto>>>
     {

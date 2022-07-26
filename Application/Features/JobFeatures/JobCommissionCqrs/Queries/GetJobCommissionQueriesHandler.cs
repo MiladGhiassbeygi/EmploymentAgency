@@ -1,9 +1,8 @@
 ﻿using Application.Contracts.Persistence;
 using Application.Models.Area;
 using Application.Models.Common;
-using Application.Models.Job;
 using Application.Models.JobModel;
-using Domain.Entities;
+using Domain.WriteModel;
 using MediatR;
 
 namespace Application.Features.JobFeatures.JobCommissionCqrs.Queries

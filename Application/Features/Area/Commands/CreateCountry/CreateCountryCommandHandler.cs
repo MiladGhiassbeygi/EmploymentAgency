@@ -1,6 +1,8 @@
-﻿using Application.Contracts.Persistence;
+﻿using Application.BackgroundWorker.Common.Events;
+using Application.Common.BaseChannel;
+using Application.Contracts.Persistence;
 using Application.Models.Common;
-using Domain.Entities;
+using Domain.WriteModel;
 using MediatR;
 
 namespace Application.Features.Area.Commands.CreateCountry
@@ -8,7 +10,7 @@ namespace Application.Features.Area.Commands.CreateCountry
     internal class CreateCountryCommandHandler : IRequestHandler<CreateCountryCommand, OperationResult<Country>>
     {
         readonly IUnitOfWork _unitOfWork;
-
+        private readonly ChannelQueue<CountryAdded> _channel;
         public CreateCountryCommandHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;

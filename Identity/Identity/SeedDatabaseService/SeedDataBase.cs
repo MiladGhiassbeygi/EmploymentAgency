@@ -1,4 +1,4 @@
-﻿using Domain.Entities.User;
+﻿using Domain.WriteModel.User;
 using Identity.Identity.Manager;
 using Microsoft.EntityFrameworkCore;
 

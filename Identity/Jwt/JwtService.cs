@@ -4,7 +4,7 @@ using System.Text;
 using Application.Contracts;
 using Application.Contracts.Persistence;
 using Application.Models.Jwt;
-using Domain.Entities.User;
+using Domain.WriteModel.User;
 using Identity.Identity.Dtos;
 using Identity.Identity.Manager;
 using Microsoft.AspNetCore.Identity;

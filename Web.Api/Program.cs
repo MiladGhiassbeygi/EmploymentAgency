@@ -1,8 +1,9 @@
 using System.Diagnostics;
-using System.Reflection;
-using Application.Contracts;
+using Application.BackgroundWorker.AddReadMovie;
+using Application.Common.BaseChannel;
+using Application.Contracts.ReadPersistence.Area;
 using Application.ServiceConfiguration;
-using Domain.Entities.User;
+using Domain.WriteModel.User;
 using Identity.Identity.Dtos;
 using Identity.Identity.SeedDatabaseService;
 using Identity.Jwt;
@@ -11,11 +12,11 @@ using InfrastructureServices.Logging;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
+using MongoDB.Driver;
 using Persistence;
-using Persistence.Repositories;
+using Persistence.ReadRepositories.Area;
 using Persistence.ServiceConfiguration;
 using Serilog;
-using Web.Api.Controllers;
 using Web.Api.Controllers.V1;
 using WebFramework.Filters;
 using WebFramework.ServiceConfiguration;
@@ -46,10 +47,29 @@ builder.Services.AddControllers(options =>
 
 builder.Services.AddSwagger();
 
+#region Mongo Singleton Injection
+
+var mongoClient = new MongoClient("mongodb://localhost:27017");
+var mongoDatabase = mongoClient.GetDatabase("EmploymentAgency");
+builder.Services.AddSingleton(mongoDatabase);
+
+#endregion
+
+#region Channel Singletion Injection 
+
+builder.Services.AddSingleton(typeof(ChannelQueue<>));
+
+builder.Services.AddHostedService<AddReadModelWorker>();
+#endregion
+
+
+
 builder.Services.AddApplicationServices().RegisterIdentityServices(identitySettings)
     .AddPersistenceServices(configuration).AddWebFrameworkServices();
 
 builder.Services.AddAutoMapper(typeof(User),typeof(JwtService),typeof(UserController));
+
+builder.Services.AddScoped<IReadCountryRepository, ReadCountryRepository>();
 
 var app = builder.Build();
 

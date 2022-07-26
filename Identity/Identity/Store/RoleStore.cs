@@ -1,4 +1,4 @@
-﻿using Domain.Entities.User;
+﻿using Domain.WriteModel.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Persistence;

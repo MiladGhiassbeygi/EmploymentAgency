@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using Application.Contracts.Identity;
 using Application.Models.Common;
-using Domain.Entities.User;
+using Domain.WriteModel.User;
 using MediatR;
 using Microsoft.Extensions.Logging;
 

@@ -1,0 +1,42 @@
+﻿using Application.Contracts.Persistence;
+using Application.Contracts.Persistence.Area;
+using Application.Contracts.Persistence.JobContract;
+using Persistence.WriteRepositories.JobRepositories;
+
+namespace Persistence.WriteRepositories.Common
+{
+    public class UnitOfWork : IUnitOfWork
+    {
+        private readonly ApplicationDbContext _db;
+
+        public IUserRefreshTokenRepository UserRefreshTokenRepository { get; }
+        public ICountryRepository CountryRepository { get; }
+        public ISuccessedContractRepository SuccessedContractRepository { get; }
+        public IJobRepository JobRepository { get; }
+        public IJobCommissionRepository JobCommissionRepository { get; }
+        public ISkillRepository SkillRepository { get; }
+        public IJobEssentialSkillsRepository JobEssentialSkillsRepository { get; }
+        public UnitOfWork(ApplicationDbContext db)
+        {
+            _db = db;
+            UserRefreshTokenRepository = new UserRefreshTokenRepository(_db);
+            CountryRepository = new CountryRepository(_db);
+            SuccessedContractRepository = new SuccessedContractRepository(_db);
+            JobRepository = new JobRepository(_db);
+            JobCommissionRepository = new JobCommissionRepository(_db);
+            SkillRepository = new SkillRepository(_db);
+            JobEssentialSkillsRepository = new JobEssentialSkillsRepository(_db);
+
+        }
+
+        public Task CommitAsync()
+        {
+            return _db.SaveChangesAsync();
+        }
+
+        public ValueTask RollBackAsync()
+        {
+            return _db.DisposeAsync();
+        }
+    }
+}

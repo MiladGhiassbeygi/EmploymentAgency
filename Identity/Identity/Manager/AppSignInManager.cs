@@ -1,4 +1,4 @@
-﻿using Domain.Entities.User;
+﻿using Domain.WriteModel.User;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;

@@ -2,8 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Persistence.Repositories;
-using Persistence.Repositories.Common;
+using Persistence.WriteRepositories;
+using Persistence.WriteRepositories.Common;
 
 namespace Persistence.ServiceConfiguration
 {
