@@ -17,6 +17,7 @@ namespace Persistence.Repositories.Common
         public IJobCommissionRepository JobCommissionRepository { get; }
         public IOrderRepository OrderRepository { get; }
         public ISkillRepository SkillRepository { get; }
+        public IJobEssentialSkillsRepository JobEssentialSkillsRepository { get; }
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
@@ -27,6 +28,7 @@ namespace Persistence.Repositories.Common
             JobCommissionRepository = new JobCommissionRepository(_db);
             OrderRepository = new OrderRepository(_db);
             SkillRepository = new SkillRepository(_db);
+            JobEssentialSkillsRepository = new JobEssentialSkillsRepository(_db);
 
         }
 

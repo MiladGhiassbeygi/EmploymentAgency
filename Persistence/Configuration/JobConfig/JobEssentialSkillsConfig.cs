@@ -10,6 +10,10 @@ namespace Persistence.Configuration.JobConfig
         {
             builder.HasNoKey();
 
+            builder.Ignore(x => x.CreatedTime);
+            builder.Ignore(x=> x.ModifiedDate);
+            builder.Ignore(x=> x.Id);
+
             builder.HasOne(d => d.Job)
                 .WithMany()
                 .HasForeignKey(d => d.JobId)
