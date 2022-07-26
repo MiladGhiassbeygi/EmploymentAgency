@@ -9,11 +9,13 @@ namespace Domain.ReadModel
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         [BsonIgnoreIfDefault]
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         [BsonElement("title")]
         public string Title { get; set; }
 
+        [BsonElement("countryId")]
+        public int CountryId { get; set; }
         [BsonElement("postalCode")]
         public string PostalCode { get; set; }
         

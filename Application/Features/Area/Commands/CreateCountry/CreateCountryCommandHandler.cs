@@ -11,9 +11,10 @@ namespace Application.Features.Area.Commands.CreateCountry
     {
         readonly IUnitOfWork _unitOfWork;
         private readonly ChannelQueue<CountryAdded> _channel;
-        public CreateCountryCommandHandler(IUnitOfWork unitOfWork)
+        public CreateCountryCommandHandler(IUnitOfWork unitOfWork, ChannelQueue<CountryAdded> channel)
         {
             _unitOfWork = unitOfWork;
+            _channel = channel;
         }
 
         public async Task<OperationResult<Country>> Handle(CreateCountryCommand request, CancellationToken cancellationToken)
@@ -24,8 +25,10 @@ namespace Application.Features.Area.Commands.CreateCountry
             var country = new Country { Title = request.Title, PostalCode = request.PostalCode, AreaCode = request.AreaCode };
 
             var result = await _unitOfWork.CountryRepository.CreateCountryAsync(country);
-
+            
             await _unitOfWork.CommitAsync();
+            
+            await _channel.AddToChannelAsync(new CountryAdded { CountryId = country.Id }, cancellationToken);
 
             return OperationResult<Country>.SuccessResult(country);
         }

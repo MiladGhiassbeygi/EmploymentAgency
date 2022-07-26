@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Application.BackgroundWorker.AddReadMovie;
 using Application.Common.BaseChannel;
+using Application.Contracts.Persistence.Area;
 using Application.Contracts.ReadPersistence.Area;
 using Application.ServiceConfiguration;
 using Domain.WriteModel.User;
@@ -47,13 +48,13 @@ builder.Services.AddControllers(options =>
 
 builder.Services.AddSwagger();
 
-#region Mongo Singleton Injection
+//#region Mongo Singleton Injection
 
-var mongoClient = new MongoClient("mongodb://localhost:27017");
-var mongoDatabase = mongoClient.GetDatabase("EmploymentAgency");
-builder.Services.AddSingleton(mongoDatabase);
+//var mongoClient = new MongoClient("mongodb://localhost:27017");
+//var mongoDatabase = mongoClient.GetDatabase("EmploymentAgency");
+//builder.Services.AddSingleton(mongoDatabase);
 
-#endregion
+//#endregion
 
 #region Channel Singletion Injection 
 
@@ -69,7 +70,7 @@ builder.Services.AddApplicationServices().RegisterIdentityServices(identitySetti
 
 builder.Services.AddAutoMapper(typeof(User),typeof(JwtService),typeof(UserController));
 
-builder.Services.AddScoped<IReadCountryRepository, ReadCountryRepository>();
+//builder.Services.AddScoped<IReadCountryRepository, ReadCountryRepository>();
 
 var app = builder.Build();
 

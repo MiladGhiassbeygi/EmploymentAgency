@@ -6,7 +6,7 @@ using Application.Contracts.ReadPersistence.Area;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-
+using MongoDB.Bson;
 
 namespace Application.BackgroundWorker.AddReadMovie
 {
@@ -40,7 +40,7 @@ namespace Application.BackgroundWorker.AddReadMovie
                         {
                             await readRepository.AddAsync(new Country
                             {
-                                Id = country.Id,
+                                CountryId = country.Id,
                                 AreaCode = country.AreaCode,
                                 PostalCode = country.PostalCode,
                                 Title = country.Title

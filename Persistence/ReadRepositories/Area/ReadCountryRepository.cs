@@ -1,5 +1,6 @@
 ﻿using Application.Contracts.ReadPersistence.Area;
 using Domain.ReadModel;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using Persistence.ReadRepositories.Common;
 
@@ -14,7 +15,7 @@ namespace Persistence.ReadRepositories.Area
 
         public Task<Country> GetByCountryIdAsync(int countryId, CancellationToken cancellationToken = default)
         {
-            return base.FirstOrDefaultAsync(x => x.Id == countryId, cancellationToken);
+            return base.FirstOrDefaultAsync(x => x.CountryId == countryId, cancellationToken);
         }
 
         public Task<Country> GetByTitleAsync(string title, CancellationToken cancellationToken = default)

@@ -1,4 +1,5 @@
-﻿using Application.Contracts.ReadPersistence.Area;
+﻿using Application.Contracts.Persistence;
+using Application.Contracts.ReadPersistence.Area;
 using Application.Models.Common;
 using Domain.ReadModel;
 using MediatR;
@@ -8,17 +9,17 @@ namespace Application.Features.Area
     internal class GetCountriesQueryHandler : IRequestHandler<GetCountriesQuery, OperationResult<List<Country>>>
     {
 
-        readonly IReadCountryRepository _readCountryRepository;
+        readonly IUnitOfWork _uow;
 
-        public GetCountriesQueryHandler(IReadCountryRepository readCountryRepository)
+        public GetCountriesQueryHandler(IUnitOfWork uow)
         {
-            _readCountryRepository = readCountryRepository;
+            _uow = uow;
         }
 
         public async Task<OperationResult<List<Country>>> Handle(GetCountriesQuery request, CancellationToken cancellationToken)
         {
 
-            var countries = await _readCountryRepository.GetAllAsync();
+            var countries = await _uow.ReadCountryRepository.GetAllAsync();
 
             if (countries is not null)
                 return OperationResult<List<Country>>.SuccessResult(countries);
