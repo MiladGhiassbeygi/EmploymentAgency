@@ -60,7 +60,7 @@ builder.Services.AddSwagger();
 
 builder.Services.AddSingleton(typeof(ChannelQueue<>));
 
-builder.Services.AddHostedService<AddReadModelWorker>();
+builder.Services.AddHostedService<AddReadCountryWorker>();
 #endregion
 
 

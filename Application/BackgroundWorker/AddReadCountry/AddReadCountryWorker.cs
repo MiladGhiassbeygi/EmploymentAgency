@@ -10,13 +10,13 @@ using MongoDB.Bson;
 
 namespace Application.BackgroundWorker.AddReadMovie
 {
-    public class AddReadModelWorker : BackgroundService
+    public class AddReadCountryWorker : BackgroundService
     {
         private readonly ChannelQueue<CountryAdded> _readModelChannel;
-        private readonly ILogger<AddReadModelWorker> _logger;
+        private readonly ILogger<AddReadCountryWorker> _logger;
         private readonly IServiceProvider _serviceProvider;
 
-        public AddReadModelWorker(ChannelQueue<CountryAdded> readModelChannel, ILogger<AddReadModelWorker> logger, IServiceProvider serviceProvider)
+        public AddReadCountryWorker(ChannelQueue<CountryAdded> readModelChannel, ILogger<AddReadCountryWorker> logger, IServiceProvider serviceProvider)
         {
             _readModelChannel = readModelChannel;
             _logger = logger;
