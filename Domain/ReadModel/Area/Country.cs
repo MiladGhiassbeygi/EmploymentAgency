@@ -16,6 +16,7 @@ namespace Domain.ReadModel
 
         [BsonElement("countryId")]
         public int CountryId { get; set; }
+
         [BsonElement("postalCode")]
         public string PostalCode { get; set; }
         
