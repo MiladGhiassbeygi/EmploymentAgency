@@ -1,5 +1,5 @@
 ﻿using Application.Profiles;
-using Domain.Entities.User;
+using Domain.WriteModel.User;
 
 namespace Application.Models.Identity
 {

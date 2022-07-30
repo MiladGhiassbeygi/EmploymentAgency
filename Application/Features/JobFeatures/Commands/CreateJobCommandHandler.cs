@@ -1,11 +1,12 @@
 ﻿using Application.Contracts.Persistence;
+using Application.Features.Area.Commands.CreateJob;
 using Application.Models.Common;
-using Domain.Entities;
+using Domain.WriteModel;
 using MediatR;
 
-namespace Application.Features.JobFeatures.Commands
+namespace Application.Features.JobFeature.Commands.CreateJob
 {
-    internal class CreateJobCommandHandler : IRequestHandler<CreateJobCommand, OperationResult<Domain.Entities.Job>>
+    internal class CreateJobCommandHandler: IRequestHandler<CreateJobCommand, OperationResult<Job>>
     {
         readonly IUnitOfWork _unitOfWork;
 
@@ -13,18 +14,18 @@ namespace Application.Features.JobFeatures.Commands
         {
             _unitOfWork = unitOfWork;
         }
-        public async Task<OperationResult<Domain.Entities.Job>> Handle(CreateJobCommand request, CancellationToken cancellationToken)
+        public async Task<OperationResult<Job>> Handle(CreateJobCommand request, CancellationToken cancellationToken)
         {
             if (await _unitOfWork.JobRepository.GetJobByTitleAsync(request.Title) is not null)
-                return OperationResult<Domain.Entities.Job>.FailureResult("This Job Already Exists");
+                return OperationResult<Job>.FailureResult("This Job Already Exists");
 
-            var job = new Job { Title = request.Title, SalaryMin = request.SalaryMin, SalaryMax = request.SalaryMax };
+            var job = new Job { Title = request.Title, SalaryMin = request.SalaryMin,SalaryMax  = request.SalaryMax };
 
             var result = await _unitOfWork.JobRepository.CreateJobAsync(job);
 
             await _unitOfWork.CommitAsync();
 
-            return OperationResult<Domain.Entities.Job>.SuccessResult(job);
+            return OperationResult<Job>.SuccessResult(job);
         }
     }
 }

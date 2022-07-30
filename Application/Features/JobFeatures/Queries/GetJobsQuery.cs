@@ -1,6 +1,5 @@
-﻿using Application.Models;
-using Application.Models.Common;
-using Application.Models.Job;
+﻿using Application.Models.Common;
+using Application.Models.JobModel;
 using MediatR;
 
 namespace Application.Features.JobFeatures.Queries

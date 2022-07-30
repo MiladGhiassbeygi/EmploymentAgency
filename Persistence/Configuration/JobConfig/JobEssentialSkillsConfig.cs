@@ -1,4 +1,4 @@
-﻿using Domain.Entities;
+﻿using Domain.WriteModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -9,6 +9,10 @@ namespace Persistence.Configuration.JobConfig
         public void Configure(EntityTypeBuilder<JobEssentialSkills> builder)
         {
             builder.HasNoKey();
+
+            builder.Ignore(x => x.CreatedTime);
+            builder.Ignore(x=> x.ModifiedDate);
+            builder.Ignore(x=> x.Id);
 
             builder.HasOne(d => d.Job)
                 .WithMany()

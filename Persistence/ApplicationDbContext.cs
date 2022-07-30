@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
-using Domain.Common;
-using Domain.Entities.User;
+using Domain.WriteModel.Common;
+using Domain.WriteModel.User;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Utils;

@@ -3,7 +3,7 @@ using System.Reflection;
 using Application.Contracts.Identity;
 using Application.Models.Identity;
 using AutoMapper;
-using Domain.Entities.User;
+using Domain.WriteModel.User;
 using Identity.Identity.Manager;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;

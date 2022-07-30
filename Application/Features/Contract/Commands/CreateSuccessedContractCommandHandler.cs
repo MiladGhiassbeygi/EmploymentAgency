@@ -1,7 +1,7 @@
 ﻿using Application.Contracts.Persistence;
 using Application.Features.Area.Commands;
 using Application.Models.Common;
-using Domain.Entities;
+using Domain.WriteModel;
 using MediatR;
 
 namespace Application.Features.Contract.Commands

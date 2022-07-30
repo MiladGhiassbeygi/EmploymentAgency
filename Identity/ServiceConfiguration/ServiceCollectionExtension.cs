@@ -4,7 +4,7 @@ using Application.Contracts;
 using Application.Contracts.Identity;
 using Application.Models.ApiResult;
 using Application.Models.Jwt;
-using Domain.Entities.User;
+using Domain.WriteModel.User;
 using Identity.Identity;
 using Identity.Identity.Dtos;
 using Identity.Identity.Extensions;

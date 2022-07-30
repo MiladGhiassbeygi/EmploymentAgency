@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
 using Application.Models.Jwt;
-using Domain.Entities.User;
+using Domain.WriteModel.User;
 
 namespace Application.Contracts
 {

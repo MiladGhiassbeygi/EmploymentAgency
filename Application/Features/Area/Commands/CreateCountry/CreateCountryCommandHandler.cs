@@ -1,6 +1,8 @@
-﻿using Application.Contracts.Persistence;
+﻿using Application.BackgroundWorker.Common.Events;
+using Application.Common.BaseChannel;
+using Application.Contracts.Persistence;
 using Application.Models.Common;
-using Domain.Entities;
+using Domain.WriteModel;
 using MediatR;
 
 namespace Application.Features.Area.Commands.CreateCountry
@@ -8,10 +10,11 @@ namespace Application.Features.Area.Commands.CreateCountry
     internal class CreateCountryCommandHandler : IRequestHandler<CreateCountryCommand, OperationResult<Country>>
     {
         readonly IUnitOfWork _unitOfWork;
-
-        public CreateCountryCommandHandler(IUnitOfWork unitOfWork)
+        private readonly ChannelQueue<CountryAdded> _channel;
+        public CreateCountryCommandHandler(IUnitOfWork unitOfWork, ChannelQueue<CountryAdded> channel)
         {
             _unitOfWork = unitOfWork;
+            _channel = channel;
         }
 
         public async Task<OperationResult<Country>> Handle(CreateCountryCommand request, CancellationToken cancellationToken)
@@ -22,8 +25,10 @@ namespace Application.Features.Area.Commands.CreateCountry
             var country = new Country { Title = request.Title, PostalCode = request.PostalCode, AreaCode = request.AreaCode };
 
             var result = await _unitOfWork.CountryRepository.CreateCountryAsync(country);
-
+            
             await _unitOfWork.CommitAsync();
+            
+            await _channel.AddToChannelAsync(new CountryAdded { CountryId = country.Id }, cancellationToken);
 
             return OperationResult<Country>.SuccessResult(country);
         }
