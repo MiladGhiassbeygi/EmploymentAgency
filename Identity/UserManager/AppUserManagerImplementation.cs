@@ -16,6 +16,10 @@ namespace Identity.UserManager
            _signInManager = signInManager;
        }
 
+        public Task<IdentityResult> CreateUser(User user,string password)
+        {
+            return _userManager.CreateAsync(user, password);
+        }
         public Task<IdentityResult> CreateUser(User user)
         {
             return _userManager.CreateAsync(user);

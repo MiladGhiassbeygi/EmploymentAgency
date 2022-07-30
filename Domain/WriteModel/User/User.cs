@@ -13,7 +13,8 @@ namespace Domain.WriteModel.User
         public string Name { get; set; }
         public string FamilyName { get; set; }
         public string GeneratedCode { get; set; }
-       
+        public string SaltPassword { get; set; }
+
         public ICollection<UserRole> UserRoles { get; set; }
         public ICollection<UserLogin> Logins { get; set; }
         public ICollection<UserClaim> Claims { get; set; }

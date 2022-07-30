@@ -48,13 +48,7 @@ builder.Services.AddControllers(options =>
 
 builder.Services.AddSwagger();
 
-//#region Mongo Singleton Injection
 
-//var mongoClient = new MongoClient("mongodb://localhost:27017");
-//var mongoDatabase = mongoClient.GetDatabase("EmploymentAgency");
-//builder.Services.AddSingleton(mongoDatabase);
-
-//#endregion
 
 #region Channel Singletion Injection 
 
