@@ -13,8 +13,6 @@ namespace Application.Contracts.Persistence
         public ISuccessedContractRepository SuccessedContractRepository { get; }
         public IJobCommissionRepository JobCommissionRepository { get; }
         public IJobRepository JobRepository { get; }
-        public IJobCommissionRepository JobCommissionRepository { get; }
-        public ISuccessedContractRepository SuccessedContractRepository { get; }
         public ISkillRepository SkillRepository { get; }
         public IJobEssentialSkillsRepository JobEssentialSkillsRepository { get; }
         Task CommitAsync();

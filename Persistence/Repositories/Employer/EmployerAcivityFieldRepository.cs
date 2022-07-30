@@ -1,8 +1,7 @@
 ﻿using Application.Contracts.Persistence;
-using Domain.Entities;
+using Domain.WriteModel;
 using Microsoft.EntityFrameworkCore;
-using Persistence.Repositories.Common;
-
+using Persistence.WriteRepositories.Common;
 
 namespace Persistence.Repositories.Employer
 {

@@ -17,17 +17,14 @@ namespace Persistence.WriteRepositories
             await base.AddAsync(newSuccessedContract);
             return newSuccessedContract;
         }
-        public async Task<SuccessedContract> GetSuccessedContractByIdAsync(int id)
+        public async Task<SuccessedContract> GetSuccessedContractByIdAsync(long id)
         {
             return await base.TableNoTracking.FirstOrDefaultAsync(x => x.Id.Equals(id));
         }
-        public async Task<SuccessedContract> GetSuccessedContractByIdAsync(long id)
-        {
-            throw new NotImplementedException();
-        }
+     
         public async Task<SuccessedContract> FindContractByTermAsync(SuccessedContract successedContract)
         {
-            throw new NotImplementedException();
+            throw new  NotImplementedException();
         }
         public async Task<SuccessedContract> UpdateSuccessedContractAsync(SuccessedContract successedContract)
         {
@@ -38,7 +35,7 @@ namespace Persistence.WriteRepositories
             await base.UpdateAsync(fetchedSuccessedContract);
             return fetchedSuccessedContract;
         }
-        public async Task<SuccessedContract> DeleteSuccessedContractByIdAsync(int id)
+        public async Task<SuccessedContract> DeleteSuccessedContractByIdAsync(long id)
         {
             var fetchedSuccessedContract = await base.TableNoTracking.FirstOrDefaultAsync(x => x.Id.Equals(id));
 
@@ -50,9 +47,6 @@ namespace Persistence.WriteRepositories
             return await base.TableNoTracking.ToListAsync();    
         }
 
-        public Task<SuccessedContract> GetSuccessedContractByIdAsync(long id)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

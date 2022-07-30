@@ -22,6 +22,7 @@ namespace Persistence.WriteRepositories.Common
         public IJobCommissionRepository JobCommissionRepository { get; }
         public ISkillRepository SkillRepository { get; }
         public IJobEssentialSkillsRepository JobEssentialSkillsRepository { get; }
+        public IEmployerAcivityFieldRepository EmployerAcivityFieldRepository { get; }
 
         public UnitOfWork(ApplicationDbContext db, IMongoDatabase readDb)
         {

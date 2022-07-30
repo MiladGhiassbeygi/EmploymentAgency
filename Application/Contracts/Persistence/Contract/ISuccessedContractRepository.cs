@@ -10,7 +10,7 @@ namespace Application.Contracts.Persistence
         Task<SuccessedContract> GetSuccessedContractByIdAsync(long id);
         Task<SuccessedContract> FindContractByTermAsync(SuccessedContract successedContract);
         Task<SuccessedContract> UpdateSuccessedContractAsync(SuccessedContract successedContract);
-        Task<SuccessedContract> DeleteSuccessedContractByIdAsync(int id);
+        Task<SuccessedContract> DeleteSuccessedContractByIdAsync(long id);
         Task<List<SuccessedContract>> GetAll();
     }
 }

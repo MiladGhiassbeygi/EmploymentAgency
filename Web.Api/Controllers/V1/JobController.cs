@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using WebFramework.BaseController;
 using Web.Api.Form.Job;
 using Web.Api.Dto.Jobs;
-using Application.Features.JobFeatures.Commands;
 using Application.Features.JobFeatures.Queries;
+using Application.Features.JobFeatures.Commands.CreateJob;
 
 namespace Web.Api.Controllers.V1
 {   
