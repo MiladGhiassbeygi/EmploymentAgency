@@ -23,14 +23,13 @@ namespace Web.Api.Controllers.V1
         [HttpPost("CreateJobSeeker")]
         public async Task<IActionResult> CreateJobSeeker(CreateJobSeekerForm model)
         {
-            var commandResult = await _sender.Send(new CreateJobSeekerCommand(model.Id,model.FirstName,model.LastName,model.CountryId,model.Email,model.LinkedinAddress,model.ResumeFilePath
+            var commandResult = await _sender.Send(new CreateJobSeekerCommand(model.FirstName,model.LastName,model.CountryId,model.Email,model.LinkedinAddress,model.ResumeFilePath
                 ));
 
             if (commandResult.IsSuccess)
             {
                 CreateJobSeekerDto jobSeekerDto = new CreateJobSeekerDto()
                 {
-                    Id = model.Id,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     CountryId = model.CountryId,

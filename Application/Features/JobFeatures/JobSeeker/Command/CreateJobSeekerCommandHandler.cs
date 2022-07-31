@@ -1,34 +1,41 @@
-﻿using Application.Contracts.Persistence;
-using Application.Features.JobFeatures.Commands.CreateJob;
+﻿using Application.BackgroundWorker.Common.Events;
+using Application.Common.BaseChannel;
+using Application.Contracts.Persistence;
 using Application.Models.Common;
 using Domain.WriteModel;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Features.JobFeatures.Commands.CreateJobSeeker
 {
     internal class CreateJobSeekerCommandHandler : IRequestHandler<CreateJobSeekerCommand, OperationResult<JobSeeker>>
     {
         readonly IUnitOfWork _unitOfWork;
-
-        public CreateJobSeekerCommandHandler(IUnitOfWork unitOfWork)
+        private readonly ChannelQueue<JobSeekerAdded> _channel;
+        public CreateJobSeekerCommandHandler(IUnitOfWork unitOfWork, ChannelQueue<JobSeekerAdded> channel)
         {
             _unitOfWork = unitOfWork;
+            _channel = channel;
         }
         public async Task<OperationResult<JobSeeker>> Handle(CreateJobSeekerCommand request, CancellationToken cancellationToken)
         {
-            if (await _unitOfWork.JobSeekerRepository.GetJobSeekerByIdAsync(request.Id) is not null)
+            if (await _unitOfWork.JobSeekerRepository.IsExist(request.FirstName, request.LastName) is not null)
                 return OperationResult<JobSeeker>.FailureResult("This Job Seeker Already Exists");
 
-            var jobSeeker = new JobSeeker { Id = request.Id, FirstName = request.FirstName, LastName= request.LastName,CountryId=request.CountryId,LinkedinAddress=request.LinkedinAddress,ResumeFilePath=request.ResumeFilePath};
+            var jobSeeker = new JobSeeker
+            {
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                CountryId = request.CountryId,
+                Email = request.Email,
+                LinkedinAddress = request.LinkedinAddress,
+                ResumeFilePath = request.ResumeFilePath
+            };
 
             var result = await _unitOfWork.JobSeekerRepository.CreateJobSeekerAcync(jobSeeker);
 
             await _unitOfWork.CommitAsync();
+
+            await _channel.AddToChannelAsync(new JobSeekerAdded { JobSeekerId = jobSeeker.Id }, cancellationToken);
 
             return OperationResult<JobSeeker>.SuccessResult(jobSeeker);
         }

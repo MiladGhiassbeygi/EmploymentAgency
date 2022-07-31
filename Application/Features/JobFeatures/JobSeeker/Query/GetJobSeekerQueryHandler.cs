@@ -1,16 +1,11 @@
 ﻿using Application.Contracts.Persistence;
 using Application.Models.Common;
-using Application.Models.JobModel;
+using Domain.ReadModel;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Features.JobFeatures
 {
-    internal class GetJobSeekerQueryHandler : IRequestHandler<GetJobSeekerQuery, OperationResult<List<GetJobSeekerDto>>>
+    internal class GetJobSeekerQueryHandler : IRequestHandler<GetJobSeekerQuery, OperationResult<List<JobSeeker>>>
     {
 
         readonly IUnitOfWork _unitOfWork;
@@ -20,30 +15,15 @@ namespace Application.Features.JobFeatures
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<OperationResult<List<GetJobSeekerDto>>> Handle(GetJobSeekerQuery request, CancellationToken cancellationToken)
+        public async Task<OperationResult<List<JobSeeker>>> Handle(GetJobSeekerQuery request, CancellationToken cancellationToken)
         {
 
-            var jobSeeker = await _unitOfWork.JobSeekerRepository.GetAll();
+            var jobSeekers = await _unitOfWork.ReadJobSeekerRepository.GetAllAsync();
 
-            if (jobSeeker is not null)
-            {
-                var jobSeekerDto = new List<GetJobSeekerDto>();
-                jobSeekerDto.AddRange(jobSeekerDto.ConvertAll(x => new GetJobSeekerDto()
-                {
-                    Id = x.Id,
-                    FirstName = x.FirstName,
-                    LastName = x.LastName,
-                    Email = x.Email,
-                    CountryId = x.CountryId,
-                    LinkedinAddress = x.LinkedinAddress,
-                    ResumeFilePath = x.ResumeFilePath
-                }));
+            if (jobSeekers is not null)
+                return OperationResult<List<JobSeeker>>.SuccessResult(jobSeekers);
 
-                return OperationResult<List<GetJobSeekerDto>>.SuccessResult(jobSeekerDto);
-
-            }
-
-            return OperationResult<List<GetJobSeekerDto>>.FailureResult("There is no job seeker !!!");
+            return OperationResult<List<JobSeeker>>.FailureResult("There is no countries !!!");
         }
     }
 }

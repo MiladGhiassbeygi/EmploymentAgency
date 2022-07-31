@@ -14,7 +14,11 @@ namespace Persistence.WriteRepositories
 
         }
 
-
+        public async Task<JobSeeker> IsExist(string firstName, string lastName)
+        {
+            return await base.TableNoTracking
+                                .FirstOrDefaultAsync(x => x.FirstName == firstName && x.LastName == lastName);
+        }
         public async Task<JobSeeker> CreateJobSeekerAcync(JobSeeker jobSeeker)
         {
             var newJobSeeker = jobSeeker;

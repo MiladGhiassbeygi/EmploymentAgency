@@ -51,6 +51,8 @@ builder.Services.AddSwagger();
 builder.Services.AddSingleton(typeof(ChannelQueue<>));
 
 builder.Services.AddHostedService<AddReadCountryWorker>();
+builder.Services.AddHostedService<AddReadJobSeekerWorker>();
+
 #endregion
 
 

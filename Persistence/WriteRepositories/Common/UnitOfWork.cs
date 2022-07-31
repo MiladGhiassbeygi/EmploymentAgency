@@ -1,8 +1,10 @@
 ﻿using Application.Contracts.Persistence;
 using Application.Contracts.Persistence.Area;
 using Application.Contracts.Persistence.JobContract;
+using Application.Contracts.ReadPersistence;
 using Application.Contracts.ReadPersistence.Area;
 using MongoDB.Driver;
+using Persistence.ReadRepositories;
 using Persistence.ReadRepositories.Area;
 using Persistence.WriteRepositories.JobRepositories;
 
@@ -14,6 +16,7 @@ namespace Persistence.WriteRepositories.Common
         private readonly IMongoDatabase _readDb;
 
         public IReadCountryRepository ReadCountryRepository { get; }
+        public IReadJobSeekerRepository ReadJobSeekerRepository { get; }
         public IUserRefreshTokenRepository UserRefreshTokenRepository { get; }
         public ICountryRepository CountryRepository { get; }
         public ISuccessedContractRepository SuccessedContractRepository { get; }
@@ -29,6 +32,7 @@ namespace Persistence.WriteRepositories.Common
             _db = db;
             _readDb = readDb;
             ReadCountryRepository = new ReadCountryRepository(_readDb);
+            ReadJobSeekerRepository = new ReadJobSeekerRepository(_readDb);
             UserRefreshTokenRepository = new UserRefreshTokenRepository(_db);
             CountryRepository = new CountryRepository(_db);
             SuccessedContractRepository = new SuccessedContractRepository(_db);

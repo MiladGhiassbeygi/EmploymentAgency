@@ -1,5 +1,4 @@
 ﻿using Application.Contracts.Persistence;
-using Application.Contracts.ReadPersistence.Area;
 using Application.Models.Common;
 using Domain.ReadModel;
 using MediatR;

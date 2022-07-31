@@ -1,6 +1,5 @@
 ﻿using Application.Contracts.ReadPersistence.Area;
 using Domain.ReadModel;
-using MongoDB.Bson;
 using MongoDB.Driver;
 using Persistence.ReadRepositories.Common;
 
