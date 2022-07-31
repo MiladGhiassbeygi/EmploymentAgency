@@ -6,9 +6,8 @@ using Application.Contracts.ReadPersistence.Area;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using MongoDB.Bson;
 
-namespace Application.BackgroundWorker.AddReadMovie
+namespace Application.BackgroundWorker.AddReadCountry
 {
     public class AddReadCountryWorker : BackgroundService
     {

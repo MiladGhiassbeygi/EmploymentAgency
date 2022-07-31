@@ -3,8 +3,8 @@ using Domain.WriteModel;
 using Microsoft.EntityFrameworkCore;
 using Persistence.WriteRepositories.Common;
 
-namespace Persistence.Repositories.Employer
-{
+namespace Persistence.WriteRepositories
+{ 
     internal class EmployerAcivityFieldRepository : BaseAsyncRepository<EmployerAcivityField>, IEmployerAcivityFieldRepository
     {
         public EmployerAcivityFieldRepository(ApplicationDbContext dbContext) : base(dbContext)
