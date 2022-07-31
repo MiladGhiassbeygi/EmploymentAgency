@@ -14,6 +14,7 @@ namespace Application.Contracts.Persistence
         public ISuccessedContractRepository SuccessedContractRepository { get; }
         public ISkillRepository SkillRepository { get; }
         public IJobEssentialSkillsRepository JobEssentialSkillsRepository { get; }
+        public IJobSeekerRepository JobSeekerRepository { get; }
         Task CommitAsync();
         ValueTask RollBackAsync();
     }

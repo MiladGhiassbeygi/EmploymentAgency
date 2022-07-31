@@ -21,6 +21,7 @@ namespace Persistence.WriteRepositories.Common
         public IJobCommissionRepository JobCommissionRepository { get; }
         public ISkillRepository SkillRepository { get; }
         public IJobEssentialSkillsRepository JobEssentialSkillsRepository { get; }
+        public IJobSeekerRepository JobSeekerRepository { get; }
 
         public UnitOfWork(ApplicationDbContext db, IMongoDatabase readDb)
         {
@@ -34,6 +35,7 @@ namespace Persistence.WriteRepositories.Common
             JobCommissionRepository = new JobCommissionRepository(_db);
             SkillRepository = new SkillRepository(_db);
             JobEssentialSkillsRepository = new JobEssentialSkillsRepository(_db);
+            JobSeekerRepository = new JobSeekerRepository(_db);
 
         }
 
