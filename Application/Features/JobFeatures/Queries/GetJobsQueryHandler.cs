@@ -1,11 +1,12 @@
 ﻿using Application.Contracts.Persistence;
 using Application.Models.Common;
 using Application.Models.JobModel;
+using Domain.ReadModel;
 using MediatR;
 
 namespace Application.Features.JobFeatures.Queries
 {
-    internal class GetJobsQueryHandler : IRequestHandler<GetJobsQuery, OperationResult<List<GetJobsDto>>>
+    internal class GetJobsQueryHandler : IRequestHandler<GetJobsQuery, OperationResult<List<Job>>>
     {
 
         readonly IUnitOfWork _unitOfWork;
@@ -15,32 +16,17 @@ namespace Application.Features.JobFeatures.Queries
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<OperationResult<List<GetJobsDto>>> Handle(GetJobsQuery request, CancellationToken cancellationToken)
+        public async Task<OperationResult<List<Job>>> Handle(GetJobsQuery request, CancellationToken cancellationToken)
         {
 
-            var jobs = await _unitOfWork.JobRepository.GetAll();
+            var job = await _unitOfWork.ReadJobRepository.GetAllAsync();
 
-            if (jobs is not null)
-            {
-                var jobsDto = new List<GetJobsDto>();
-                jobsDto.AddRange(jobs.ConvertAll(x => new GetJobsDto()
-                {
-                    Title = x.Title,
-                    SalaryMax = x.SalaryMax,
-                    SalaryMin = x.SalaryMin,
-                    Description = x.Description,
-                    HoursOfWork = x.HoursOfWork,
-                    EssentialSkills = x.EssentialSkills,
-                    AnnualLeave = x.AnnualLeave,
-                    ExactAmountRecived = x.ExactAmountRecived,
-                    UnnecessarySkills = x.UnnecessarySkills
-                }));
+            if (job is not null)
+                return OperationResult<List<Job>>.SuccessResult(job);
 
-                return OperationResult<List<GetJobsDto>>.SuccessResult(jobsDto);
-
-            }
-
-            return OperationResult<List<GetJobsDto>>.FailureResult("There is no job !!!");
+            return OperationResult<List<Job>>.FailureResult("There is no job !!!");
         }
+
+       
     }
 }

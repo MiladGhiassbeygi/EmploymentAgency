@@ -1,5 +1,4 @@
-﻿using Application.Models.Area;
-using Application.Models.Common;
+﻿using Application.Models.Common;
 using Domain.ReadModel;
 using MediatR;
 

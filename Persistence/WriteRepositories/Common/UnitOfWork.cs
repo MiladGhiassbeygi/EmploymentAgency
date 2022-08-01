@@ -17,6 +17,7 @@ namespace Persistence.WriteRepositories.Common
 
         public IReadCountryRepository ReadCountryRepository { get; }
         public IReadJobSeekerRepository ReadJobSeekerRepository { get; }
+        public IReadJobRepository ReadJobRepository { get; }
         public IUserRefreshTokenRepository UserRefreshTokenRepository { get; }
         public ICountryRepository CountryRepository { get; }
         public ISuccessedContractRepository SuccessedContractRepository { get; }
@@ -33,6 +34,7 @@ namespace Persistence.WriteRepositories.Common
             _readDb = readDb;
             ReadCountryRepository = new ReadCountryRepository(_readDb);
             ReadJobSeekerRepository = new ReadJobSeekerRepository(_readDb);
+            ReadJobRepository = new ReadJobRepository(_readDb);
             UserRefreshTokenRepository = new UserRefreshTokenRepository(_db);
             CountryRepository = new CountryRepository(_db);
             SuccessedContractRepository = new SuccessedContractRepository(_db);

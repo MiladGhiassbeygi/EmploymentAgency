@@ -9,6 +9,7 @@ namespace Application.Contracts.Persistence
     {
         public IReadCountryRepository ReadCountryRepository { get; }
         public IReadJobSeekerRepository ReadJobSeekerRepository { get; }
+        public IReadJobRepository ReadJobRepository { get; }
         public IUserRefreshTokenRepository UserRefreshTokenRepository { get; }
         public ICountryRepository CountryRepository { get; }
         public IEmployerAcivityFieldRepository EmployerAcivityFieldRepository { get; }

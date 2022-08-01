@@ -23,7 +23,7 @@ namespace Application.Features.JobFeatures
             if (jobSeekers is not null)
                 return OperationResult<List<JobSeeker>>.SuccessResult(jobSeekers);
 
-            return OperationResult<List<JobSeeker>>.FailureResult("There is no countries !!!");
+            return OperationResult<List<JobSeeker>>.FailureResult("There is no job seeker !!!");
         }
     }
 }
