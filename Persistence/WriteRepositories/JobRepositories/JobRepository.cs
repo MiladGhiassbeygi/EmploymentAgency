@@ -18,7 +18,7 @@ namespace Persistence.WriteRepositories
             return newJob;
 
         }
-        public async Task<Job> GetJobByIdAsync(int id)
+        public async Task<Job> GetJobByIdAsync(long id)
         {
             var job = await base.TableNoTracking.FirstOrDefaultAsync(x => x.Id.Equals(id));
             return job;
@@ -36,7 +36,7 @@ namespace Persistence.WriteRepositories
             await base.UpdateAsync(fetchedJob);
             return fetchedJob;
         }
-        public async Task<Job> DeleteJobByIdAsync(int id)
+        public async Task<Job> DeleteJobByIdAsync(long id)
         {
 
             var fetchedJob = await base.Table.Where(t => t.Id.Equals(id)).FirstOrDefaultAsync();

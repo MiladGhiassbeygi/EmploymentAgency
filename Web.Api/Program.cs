@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using Application.BackgroundWorker;
 using Application.BackgroundWorker.AddReadCountry;
 using Application.Common.BaseChannel;
 using Application.ServiceConfiguration;
@@ -52,6 +53,7 @@ builder.Services.AddSingleton(typeof(ChannelQueue<>));
 
 builder.Services.AddHostedService<AddReadCountryWorker>();
 builder.Services.AddHostedService<AddReadJobSeekerWorker>();
+builder.Services.AddHostedService<AddReadJobWorker>();
 
 #endregion
 

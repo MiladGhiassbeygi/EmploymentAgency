@@ -7,7 +7,7 @@ using Application.Features.JobFeatures.Queries;
 using Application.Features.JobFeatures.Commands.CreateJob;
 
 namespace Web.Api.Controllers.V1
-{   
+{
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/Job")]
     [ApiController]
@@ -23,8 +23,8 @@ namespace Web.Api.Controllers.V1
         [HttpPost("CreateJob")]
         public async Task<IActionResult> CreateJob(CreateJobForm model)
         {
-            var commandResult = await _sender.Send(new CreateJobCommand(model.Title,model.HoursOfWork, model.SalaryMin, model.SalaryMax
-                , model.AnnualLeave, model.ExactAmountRecived, model.Description, model.EssentialSkills,model.UnnecessarySkills,model.EmployerId
+            var commandResult = await _sender.Send(new CreateJobCommand(model.Title, model.HoursOfWork, model.SalaryMin, model.SalaryMax
+                , model.AnnualLeave, model.ExactAmountRecived, model.Description, model.EssentialSkills, model.UnnecessarySkills, model.EmployerId
                 ));
 
             if (commandResult.IsSuccess)
@@ -32,15 +32,17 @@ namespace Web.Api.Controllers.V1
                 CreateJobDto jobDto = new CreateJobDto()
                 {
                     Title = model.Title,
+                    HoursOfWork = model.HoursOfWork,
                     SalaryMax = model.SalaryMax,
-                        SalaryMin = model.SalaryMin,
-                        UnnecessarySkills = model.UnnecessarySkills,
-                        ExactAmountRecived = model.ExactAmountRecived,
-                        Description = model.Description
-
-
+                    SalaryMin = model.SalaryMin,
+                    AnnualLeave = model.AnnualLeave,
+                    ExactAmountRecived = model.ExactAmountRecived,
+                    Description = model.Description,
+                    EssentialSkills = model.EssentialSkills,
+                    UnnecessarySkills = model.UnnecessarySkills,
+                    EmployerId = model.EmployerId
                 };
-                
+
                 return base.OperationResult(commandResult);
             }
             return base.OperationResult(commandResult);

@@ -9,7 +9,10 @@ namespace Domain.ReadModel
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         [BsonIgnoreIfDefault]
-        public long Id { get; set; }
+        public string Id { get; set; }
+
+        [BsonElement("jobId")]
+        public long JobId { get; set; }
 
         [BsonElement("title")]
         public string Title { get; set; }

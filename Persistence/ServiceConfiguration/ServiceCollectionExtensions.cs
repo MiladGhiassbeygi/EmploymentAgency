@@ -21,8 +21,12 @@ namespace Persistence.ServiceConfiguration
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<ICountryRepository,CountryRepository>();
             services.AddScoped<IReadCountryRepository,ReadCountryRepository>();
+            
             services.AddScoped<IJobSeekerRepository, JobSeekerRepository>();
             services.AddScoped<IReadJobSeekerRepository,ReadJobSeekerRepository>();
+
+            services.AddScoped<IJobRepository, JobRepository>();
+            services.AddScoped<IReadJobRepository,ReadJobRepository>();
 
             var mongoClient = new MongoClient("mongodb://localhost:27017");
             var mongoDatabase = mongoClient.GetDatabase("EmploymentAgency");
