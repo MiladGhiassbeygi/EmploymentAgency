@@ -3,6 +3,7 @@ using Application.Contracts.Persistence.Area;
 using Application.Contracts.Persistence.JobContract;
 using Application.Contracts.ReadPersistence;
 using Application.Contracts.ReadPersistence.Area;
+using Application.Contracts.WritePersistence;
 using MongoDB.Driver;
 using Persistence.ReadRepositories;
 using Persistence.ReadRepositories.Area;
@@ -25,7 +26,10 @@ namespace Persistence.WriteRepositories.Common
         public IJobCommissionRepository JobCommissionRepository { get; }
         public ISkillRepository SkillRepository { get; }
         public IJobEssentialSkillsRepository JobEssentialSkillsRepository { get; }
+        public IEmployerRepository EmployerRepository { get; }
+        public IReadEmployerRepository ReadEmployerRepository { get; }
         public IEmployerAcivityFieldRepository EmployerAcivityFieldRepository { get; }
+
         public IJobSeekerRepository JobSeekerRepository { get; }
 
         public UnitOfWork(ApplicationDbContext db, IMongoDatabase readDb)
@@ -42,8 +46,10 @@ namespace Persistence.WriteRepositories.Common
             JobCommissionRepository = new JobCommissionRepository(_db);
             SkillRepository = new SkillRepository(_db);
             JobEssentialSkillsRepository = new JobEssentialSkillsRepository(_db);
+            EmployerRepository = new EmployerRepository(_db);
             EmployerAcivityFieldRepository = new EmployerAcivityFieldRepository(_db);
             JobSeekerRepository = new JobSeekerRepository(_db);
+            ReadEmployerRepository = new ReadEmployerRepository(_readDb);
 
         }
 
