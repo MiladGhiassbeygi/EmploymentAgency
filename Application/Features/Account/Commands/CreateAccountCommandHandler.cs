@@ -38,6 +38,8 @@ namespace Application.Features.Account.Commands
                 Email = request.Email,
                 EmailConfirmed = true,
                 SaltPassword = request.Password,
+                PhoneNumber = "09183566483",
+                PhoneNumberConfirmed = true,
             };
 
             var fechedUser = await _userManager.CreateUser(user, request.Password);

@@ -1,4 +1,5 @@
 ﻿using Application.Features.Account.Commands;
+using Application.Features.Admin.Queries.GetToken;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Web.Api.Form.Account;
@@ -21,22 +22,26 @@ namespace Web.Api.Controllers.V1
         [HttpPost("Register")]
         public async Task<IActionResult> Register(RegisterForm input)
         {
-            var commandResult = await _sender.Send(new CreateAccountCommand(input.Name,input.Password,input.Email));
+            var commandResult = await _sender.Send(new CreateAccountCommand(input.Name, input.Password, input.Email));
+
+            if (commandResult.IsSuccess)
+            {
+                AdminGetTokenQuery tokenQuery = new AdminGetTokenQuery()
+                {
+                    UserName = input.Email,
+                    Password = input.Password
+                };
+                var tokenResult = await _sender.Send(tokenQuery);
+                return base.OperationResult(tokenResult);
+            }
             return base.OperationResult(commandResult);
-            
-            
-            
-            //if (commandResult.IsSuccess)
-            //{
-                
-            //}
-            //return base.OperationResult("Broken User");
-            
+
         }
         [HttpPost("Login")]
-        public async Task<IActionResult> Login()
+        public async Task<IActionResult> Login(LoginForm loginForm)
         {
-            return new JsonResult("Endpoint Is Not Implemented ! ");
+            var tokenResult = await _sender.Send(new AdminGetTokenQuery { UserName = loginForm.Email, Password = loginForm.Password });
+            return base.OperationResult(tokenResult);
         }
         [HttpPost("VerifyEmail")]
         public async Task<IActionResult> VerifyEmail()

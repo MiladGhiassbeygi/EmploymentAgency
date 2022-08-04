@@ -28,10 +28,6 @@ namespace Application.Models.Common
         {
             return new OperationResult<TResult> { ErrorMessage = message, IsSuccess = false, IsNotFound = true };
         }
-
-        internal static OperationResult<List<GetCountriesDto>> SuccessResult(object v)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }
