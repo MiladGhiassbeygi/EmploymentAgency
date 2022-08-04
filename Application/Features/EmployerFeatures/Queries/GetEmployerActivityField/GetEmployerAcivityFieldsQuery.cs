@@ -3,7 +3,7 @@ using Application.Models.Employer;
 using MediatR;
 
 
-namespace Application.Features.Employer
+namespace Application.Features.EmployerActivityField
 {
     public record GetEmployerAcivityFieldsQuery() : IRequest<OperationResult<List<GetEmployerAcivityFieldsDto>>>;
 }

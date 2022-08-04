@@ -1,15 +1,17 @@
-﻿using MediatR;
+﻿using Application.Features.EmployerFeatures.Commands.CreateEmployer;
+using Application.Features.EmployerFeatures.Queries.GetEmployer;
+using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using WebFramework.BaseController;
+using Web.Api.Dto.Employer;
 using Web.Api.Form.Employer;
-using Application.Features.Employer.Commands.CreateEmployerAcivityField;
-using Application.Features.Employer;
+using WebFramework.BaseController;
 
 namespace Web.Api.Controllers.V1
 {
     [ApiVersion("1")]
-    [ApiController]
     [Route("api/v{version:apiVersion}/Employer")]
+    [ApiController]
     public class EmployerController : BaseController
     {
         private readonly ISender _sender;
@@ -18,30 +20,44 @@ namespace Web.Api.Controllers.V1
         {
             _sender = sender;
         }
-        [HttpPost("CreateEmployerAcivityField")]
-        public async Task<IActionResult> CreateEmployerAcivityField(CreateEmployerAcivityFieldForm model)
+        [HttpPost("CreateEmployer")]
+        public async Task<IActionResult> CreateEmployer(CreateEmployerForm model)
         {
-            var commandResult = await _sender.Send(new CreateEmployerAcivityFieldCommand(model.Title));
+            var commandResult = await _sender.Send(new CreateEmployerCommand
+                (
+                model.FirstName,
+                model.LastName,
+                model.Address,
+                model.Email,
+                model.WebsiteLink,
+                model.PhoneNumber
+                , model.NecessaryExplanation
+                , model.FieldOfActivityId
+                ));
 
             if (commandResult.IsSuccess)
             {
-                //CreateCountryDto dto = new CreateCountryDto()
-                //{
-                //    Id = commandResult.Result.Id,
-                //    Title = model.Title,
-                //    PostalCode = model.PostalCode,
-                //    AreaCode = model.AreaCode,
-                //};
+                CreateEmployerDto employerDto = new CreateEmployerDto()
+                {
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Address = model.Address,
+                    Email = model.Email,
+                    WebsiteLink = model.WebsiteLink,
+                    PhoneNumber = model.PhoneNumber,
+                    NecessaryExplanation = model.NecessaryExplanation,
+                    FieldOfActivityId = model.FieldOfActivityId
+                };
 
                 return base.OperationResult(commandResult);
             }
             return base.OperationResult(commandResult);
         }
 
-        [HttpGet("GetEmployerAcivityFields")]
-        public async Task<IActionResult> GetEmployerAcivityFields()
+        [HttpGet("GetEmployer")]
+        public async Task<IActionResult> GetEmployer()
         {
-            return base.OperationResult(await _sender.Send(new GetEmployerAcivityFieldsQuery()));
+            return base.OperationResult(await _sender.Send(new GetEmployerQuery()));
         }
     }
 }

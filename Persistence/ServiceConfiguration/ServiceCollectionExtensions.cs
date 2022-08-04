@@ -3,6 +3,7 @@ using Application.Contracts.Persistence.Area;
 using Application.Contracts.Persistence.JobContract;
 using Application.Contracts.ReadPersistence;
 using Application.Contracts.ReadPersistence.Area;
+using Application.Contracts.WritePersistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,6 +28,9 @@ namespace Persistence.ServiceConfiguration
 
             services.AddScoped<IJobRepository, JobRepository>();
             services.AddScoped<IReadJobRepository,ReadJobRepository>();
+
+            services.AddScoped<IEmployerRepository, EmployerRepository>();
+            services.AddScoped<IReadEmployerRepository,ReadEmployerRepository>();
 
             var mongoClient = new MongoClient("mongodb://localhost:27017");
             var mongoDatabase = mongoClient.GetDatabase("EmploymentAgency");

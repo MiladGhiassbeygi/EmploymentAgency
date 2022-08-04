@@ -1,15 +1,13 @@
 ﻿using Domain.ReadModel;
 using Application.BackgroundWorker.Common.Events;
 using Application.Common.BaseChannel;
-using Application.Contracts.Persistence.Area;
-using Application.Contracts.ReadPersistence.Area;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Application.Contracts.Persistence.JobContract;
 using Application.Contracts.ReadPersistence;
 
-namespace Application.BackgroundWorker.AddReadCountry
+namespace Application.BackgroundWorker.AddReadJobSeeker
 {
     public class AddReadJobSeekerWorker : BackgroundService
     {

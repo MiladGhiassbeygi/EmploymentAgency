@@ -3,7 +3,7 @@ using Application.Models.Common;
 using Domain.WriteModel;
 using MediatR;
 
-namespace Application.Features.Employer.Commands.CreateEmployerAcivityField
+namespace Application.Features.EmployerActivityFieldsFeature.Commands.CreateEmployerAcivityField
 {
     internal class CreateEmployerAcivityFieldCommandHandler : IRequestHandler<CreateEmployerAcivityFieldCommand, OperationResult<EmployerAcivityField>>
     {
