@@ -65,7 +65,7 @@ builder.Services.AddHostedService<AddReadEmplyerWorker>();
 builder.Services.AddApplicationServices().RegisterIdentityServices(identitySettings)
     .AddPersistenceServices(configuration).AddWebFrameworkServices();
 
-builder.Services.AddAutoMapper(typeof(User),typeof(JwtService),typeof(UserController));
+//builder.Services.AddAutoMapper(typeof(User),typeof(JwtService),typeof(UserController));
 
 //builder.Services.AddScoped<IReadCountryRepository, ReadCountryRepository>();
 
