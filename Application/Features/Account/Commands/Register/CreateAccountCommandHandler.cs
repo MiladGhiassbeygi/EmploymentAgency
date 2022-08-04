@@ -13,7 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.Account.Commands
+namespace Application.Features.Account.Commands.Register
 {
     internal class CreateAccountCommandHandler : IRequestHandler<CreateAccountCommand, OperationResult<User>>
     {
@@ -29,7 +29,7 @@ namespace Application.Features.Account.Commands
 
         public async Task<OperationResult<User>> Handle(CreateAccountCommand request, CancellationToken cancellationToken)
         {
-            
+
             var user = new User
             {
                 Name = request.Name,
@@ -44,11 +44,11 @@ namespace Application.Features.Account.Commands
 
             var fechedUser = await _userManager.CreateUser(user, request.Password);
 
-            if(fechedUser.Succeeded)
+            if (fechedUser.Succeeded)
                 return OperationResult<User>.SuccessResult(user);
 
             return OperationResult<User>.FailureResult(fechedUser.Errors.FirstOrDefault().Description);
-           
+
             //await _channel.AddToChannelAsync(new CountryAdded { CountryId = country.Id }, cancellationToken);
 
         }

@@ -1,8 +1,6 @@
 ﻿using Application.Models.Common;
-using Application.Models.Jwt;
 using Domain.WriteModel.User;
 using MediatR;
-using Microsoft.AspNetCore.Identity;
 
 namespace Application.Features.Account.Commands
 {

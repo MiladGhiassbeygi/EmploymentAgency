@@ -61,7 +61,7 @@ namespace Identity.Jwt
             var refreshToken = await _unitOfWork.UserRefreshTokenRepository.CreateToken(user.Id);
             await _unitOfWork.CommitAsync();
 
-            return new AccessToken(securityToken,refreshToken.ToString());
+            return new AccessToken(securityToken, refreshToken.ToString());
         }
 
         public Task<ClaimsPrincipal> GetPrincipalFromExpiredToken(string token)
@@ -95,21 +95,26 @@ namespace Identity.Jwt
 
         public async Task<AccessToken> RefreshToken(string refreshTokenId)
         {
-            var refreshToken = await _unitOfWork.UserRefreshTokenRepository.GetTokenWithInvalidation(Guid.Parse(refreshTokenId));
-            
-            if (refreshToken is null)
-                return null;
+            Guid parseCheck = new Guid();
+            if (Guid.TryParse(refreshTokenId, out parseCheck))
+            {
+                var refreshToken = await _unitOfWork.UserRefreshTokenRepository.GetTokenWithInvalidation(Guid.Parse(refreshTokenId));
 
-            await _unitOfWork.CommitAsync();
+                if (refreshToken is null)
+                    return null;
 
-            var user = await _unitOfWork.UserRefreshTokenRepository.GetUserByRefreshToken(Guid.Parse(refreshTokenId));
+                await _unitOfWork.CommitAsync();
 
-            if (user is null)
-                return null;
+                var user = await _unitOfWork.UserRefreshTokenRepository.GetUserByRefreshToken(Guid.Parse(refreshTokenId));
 
-            var result = await this.GenerateAsync(user);
+                if (user is null)
+                    return null;
 
-            return result;
+                var result = await this.GenerateAsync(user);
+
+                return result;
+            }
+            return null;
         }
 
         private async Task<IEnumerable<Claim>> _getClaimsAsync(User user)

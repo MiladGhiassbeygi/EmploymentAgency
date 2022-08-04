@@ -33,7 +33,7 @@ namespace Application.Features.Admin.Queries.GetToken
 
            var token= await _jwtService.GenerateAsync(user);
 
-
+            
             return OperationResult<AccessToken>.SuccessResult(token);
         }
     }

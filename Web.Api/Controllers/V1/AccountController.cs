@@ -1,5 +1,7 @@
 ﻿using Application.Features.Account.Commands;
+using Application.Features.Account.Queries.RefreshToken;
 using Application.Features.Admin.Queries.GetToken;
+using Application.Models.ApiResult;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Web.Api.Form.Account;
@@ -43,10 +45,11 @@ namespace Web.Api.Controllers.V1
             var tokenResult = await _sender.Send(new AdminGetTokenQuery { UserName = loginForm.Email, Password = loginForm.Password });
             return base.OperationResult(tokenResult);
         }
-        [HttpPost("VerifyEmail")]
-        public async Task<IActionResult> VerifyEmail()
+        [HttpPost("RefreshToken")]
+        public async Task<IActionResult> RefreshToken(RefreshTokenForm refreshToken)
         {
-            return new JsonResult("Endpoint Is Not Implemented ! ");
+            var refreshResult = await _sender.Send(new RefreshTokenQuery(refreshToken.TokenId));
+            return base.OperationResult(refreshResult);
         }
         [HttpPost("ForgotPassword")]
         public async Task<IActionResult> Register()
