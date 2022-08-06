@@ -3,6 +3,7 @@ using Application.Contracts.Persistence.Area;
 using Application.Contracts.ReadPersistence.Area;
 using Application.Contracts.ReadPersistence;
 using Application.Contracts.WritePersistence;
+using Application.Contracts.WritePersistence.Reminder;
 
 namespace Application.Contracts.Persistence
 {
@@ -12,6 +13,7 @@ namespace Application.Contracts.Persistence
         public IReadJobSeekerRepository ReadJobSeekerRepository { get; }
         public IReadJobRepository ReadJobRepository { get; }
         public IReadEmployerRepository ReadEmployerRepository { get; }
+        public IReadReminderRepository ReadReminderRepository { get; }
         public IUserRefreshTokenRepository UserRefreshTokenRepository { get; }
         public ICountryRepository CountryRepository { get; }
         public IEmployerRepository EmployerRepository { get; }
@@ -22,6 +24,8 @@ namespace Application.Contracts.Persistence
         public ISkillRepository SkillRepository { get; }
         public IJobEssentialSkillsRepository JobEssentialSkillsRepository { get; }
         public IJobSeekerRepository JobSeekerRepository { get; }
+        public IReminderRepository ReminderRepository { get; }
+        
         Task CommitAsync();
         ValueTask RollBackAsync();
     }

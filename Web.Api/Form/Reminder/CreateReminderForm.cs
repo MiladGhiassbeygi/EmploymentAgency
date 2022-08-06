@@ -1,10 +1,7 @@
-﻿using Domain.WriteModel.Common;
-
-namespace Domain.WriteModel
+﻿namespace Web.Api.Form.Reminder
 {
-    public partial class ReminderData : BaseEntity<long>
+    public class CreateReminderForm
     {
-        
         public DateTime EventDate { get; set; }
         public string NoteTitle { get; set; }
         public string Note { get; set; }

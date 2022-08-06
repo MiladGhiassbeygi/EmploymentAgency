@@ -8,8 +8,10 @@ namespace Domain.ReadModel
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         [BsonIgnoreIfDefault]
-        public int Id { get; set; }
+        public string Id { get; set; }
 
+        [BsonElement("ReminderId")]
+        public long ReminderId { get; set; }
         [BsonElement("eventDate")]
         public DateTime EventDate { get; set; }
         [BsonElement("notetitle")]
