@@ -51,11 +51,6 @@ namespace Web.Api.Controllers.V1
             var refreshResult = await _sender.Send(new RefreshTokenQuery(refreshToken.TokenId));
             return base.OperationResult(refreshResult);
         }
-        [HttpPost("ForgotPassword")]
-        public async Task<IActionResult> Register()
-        {
-            return new JsonResult("Endpoint Is Not Implemented ! ");
-        }
 
     }
 }

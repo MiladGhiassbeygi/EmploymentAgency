@@ -37,7 +37,7 @@ namespace InfrastructureServices.Logging
            {
                configuration.WriteTo
                    .MSSqlServer(
-                       connectionString: context.Configuration.GetConnectionString("SqlServer"),
+                       connectionString: context.Configuration.GetConnectionString("PostgreSQL"),
                        sinkOptions: new MSSqlServerSinkOptions { TableName = "LogEvents" ,AutoCreateSqlTable = true,SchemaName = "log"})
                    .MinimumLevel.Warning();
 

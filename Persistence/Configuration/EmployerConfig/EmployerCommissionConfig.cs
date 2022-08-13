@@ -12,13 +12,16 @@ namespace Persistence.Configuration.EmployerConfig
 
             builder.Property(e => e.IsFixed)
                    .IsRequired()
-                   .HasDefaultValueSql("((1))");
+                   .HasDefaultValueSql("y");
 
             builder.HasOne(d => d.Employer)
                 .WithMany(p => p.EmployerCommission)
-                .HasForeignKey(d => d.EmployerId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+               
                 .HasConstraintName("FK_EmployerCommission_EmployerInformation");
         }
     }
 }
+
+
+ //.HasForeignKey(d => d.EmployerId)
+ //               .OnDelete(DeleteBehavior.ClientSetNull)

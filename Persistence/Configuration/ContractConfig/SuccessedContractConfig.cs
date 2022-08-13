@@ -16,15 +16,23 @@ namespace Persistence.Configuration.JobConfig
 
             builder.HasOne(d => d.Employer)
                 .WithMany(p => p.SuccessedContract)
-                .HasForeignKey(d => d.EmployerId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+           
                 .HasConstraintName("FK_SuccessedContract_Employer");
 
             builder.HasOne(d => d.JobSeeker)
                 .WithMany(p => p.SuccessedContract)
-                .HasForeignKey(d => d.JobSeekerId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                
                 .HasConstraintName("FK_SuccessedContract_JobSeeker");
         }
     }
 }
+
+
+
+     //.HasForeignKey(d => d.EmployerId)
+     //           .OnDelete(DeleteBehavior.ClientSetNull)
+
+
+
+                //.HasForeignKey(d => d.JobSeekerId)
+                //.OnDelete(DeleteBehavior.ClientSetNull)

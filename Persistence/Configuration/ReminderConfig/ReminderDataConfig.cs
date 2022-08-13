@@ -10,7 +10,7 @@ namespace Persistence.Configuration.AreaConfig
         {
             builder.Property(e => e.Id).ValueGeneratedOnAdd();
 
-            builder.Property(e => e.EventDate).HasColumnType("datetime");
+            builder.Property(e => e.EventDate).HasColumnType("timestamp");
 
             builder.Property(e => e.Note).IsRequired();
 

@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Data.Common;
+using System.Reflection;
 using Domain.WriteModel.Common;
 using Domain.WriteModel.User;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -14,7 +15,15 @@ namespace Persistence
         {
             base.SavingChanges += OnSavingChanges;
         }
+        //public static void Configure(DbContextOptionsBuilder<ApplicationDbContext> builder, string connectionString)
+        //{
+        //    builder.UseNpgsql(connectionString);
+        //}
 
+        //public static void Configure(DbContextOptionsBuilder<ApplicationDbContext> builder, DbConnection connection)
+        //{
+        //    builder.UseNpgsql(connection);
+        //}
         private void OnSavingChanges(object sender, SavingChangesEventArgs e)
         {
             _cleanString();
@@ -59,8 +68,6 @@ namespace Persistence
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
             modelBuilder.AddRestrictDeleteBehaviorConvention();
             modelBuilder.AddPluralizingTableNameConvention();
-
-
         }
 
         private void ConfigureEntityDates()
