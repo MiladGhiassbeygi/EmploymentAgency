@@ -12,11 +12,10 @@ namespace Persistence.Configuration.EmployerConfig
 
             builder.Property(e => e.IsFixed)
                    .IsRequired()
-                   .HasDefaultValueSql("y");
+                   .HasDefaultValue(true);
 
             builder.HasOne(d => d.Employer)
-                .WithMany(p => p.EmployerCommission)
-               
+                .WithMany(p => p.EmployerCommission)               
                 .HasConstraintName("FK_EmployerCommission_EmployerInformation");
         }
     }

@@ -10,9 +10,8 @@ namespace Persistence.Configuration.JobConfig
         {
             builder.Property(e => e.Amount).HasColumnType("money");
 
-            builder.Property(e => e.Date)
-                .HasColumnType("datetime")
-                .HasDefaultValueSql("(getdate())");
+            builder.Property(e => e.Date)                
+                .HasDefaultValue(DateTime.Now);
 
             builder.HasOne(d => d.Employer)
                 .WithMany(p => p.SuccessedContract)

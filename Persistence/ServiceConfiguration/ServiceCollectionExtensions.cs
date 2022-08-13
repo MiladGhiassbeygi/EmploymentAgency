@@ -22,25 +22,25 @@ namespace Persistence.ServiceConfiguration
         public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<ICountryRepository,CountryRepository>();
-            services.AddScoped<IReadCountryRepository,ReadCountryRepository>();
-            
+            services.AddScoped<ICountryRepository, CountryRepository>();
+            services.AddScoped<IReadCountryRepository, ReadCountryRepository>();
+
             services.AddScoped<IJobSeekerRepository, JobSeekerRepository>();
-            services.AddScoped<IReadJobSeekerRepository,ReadJobSeekerRepository>();
+            services.AddScoped<IReadJobSeekerRepository, ReadJobSeekerRepository>();
 
             services.AddScoped<IJobRepository, JobRepository>();
-            services.AddScoped<IReadJobRepository,ReadJobRepository>();
+            services.AddScoped<IReadJobRepository, ReadJobRepository>();
 
             services.AddScoped<IEmployerRepository, EmployerRepository>();
-            services.AddScoped<IReadEmployerRepository,ReadEmployerRepository>();
+            services.AddScoped<IReadEmployerRepository, ReadEmployerRepository>();
 
             services.AddScoped<IReminderRepository, ReminderRepository>();
-            services.AddScoped<IReadReminderRepository,ReadReminderRepository>();
+            services.AddScoped<IReadReminderRepository, ReadReminderRepository>();
 
             var mongoClient = new MongoClient("mongodb://localhost:27017");
             var mongoDatabase = mongoClient.GetDatabase("EmploymentAgency");
             services.AddSingleton(mongoDatabase);
-            
+
             services.AddDbContext<ApplicationDbContext>(options =>
                     {
                         options
