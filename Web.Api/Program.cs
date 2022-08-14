@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using Application.BackgroundWorker;
+using Application.BackgroundWorker.Account;
 using Application.BackgroundWorker.AddReadCountry;
 using Application.BackgroundWorker.AddReadEmplyer;
 using Application.BackgroundWorker.AddReadJobSeeker;
@@ -55,6 +56,7 @@ builder.Services.AddSwagger();
 builder.Services.AddSingleton(typeof(ChannelQueue<>));
 
 builder.Services.AddHostedService<AddReadCountryWorker>();
+builder.Services.AddHostedService<AddReadAccountWorker>();
 builder.Services.AddHostedService<AddReadJobSeekerWorker>();
 builder.Services.AddHostedService<AddReadJobWorker>();
 builder.Services.AddHostedService<AddReadEmplyerWorker>();

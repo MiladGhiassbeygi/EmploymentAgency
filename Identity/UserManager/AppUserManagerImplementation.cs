@@ -76,6 +76,10 @@ namespace Identity.UserManager
         {
             return _userManager.FindByNameAsync(userName);
         }
+        public Task<User> GetByUserId(int userId)
+        {
+            return _userManager.Users.FirstOrDefaultAsync(x => x.Id == userId);
+        }
 
    }
 }

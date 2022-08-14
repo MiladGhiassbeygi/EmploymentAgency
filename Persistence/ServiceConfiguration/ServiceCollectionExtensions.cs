@@ -1,7 +1,9 @@
-﻿using Application.Contracts.Persistence;
+﻿using Application.Contracts.Identity;
+using Application.Contracts.Persistence;
 using Application.Contracts.Persistence.Area;
 using Application.Contracts.Persistence.JobContract;
 using Application.Contracts.ReadPersistence;
+using Application.Contracts.ReadPersistence.Account;
 using Application.Contracts.ReadPersistence.Area;
 using Application.Contracts.WritePersistence;
 using Application.Contracts.WritePersistence.Reminder;
@@ -10,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
 using Persistence.ReadRepositories;
+using Persistence.ReadRepositories.Account;
 using Persistence.ReadRepositories.Area;
 using Persistence.WriteRepositories;
 using Persistence.WriteRepositories.Common;
@@ -22,6 +25,9 @@ namespace Persistence.ServiceConfiguration
         public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            services.AddScoped<IReadAccountRepository, ReadAccountRepository>();
+
             services.AddScoped<ICountryRepository, CountryRepository>();
             services.AddScoped<IReadCountryRepository, ReadCountryRepository>();
 

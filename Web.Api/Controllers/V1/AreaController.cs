@@ -4,12 +4,14 @@ using Microsoft.AspNetCore.Mvc;
 using Web.Api.Dto.Area;
 using WebFramework.BaseController;
 using Application.Features.Area;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Web.Api.Controllers.V1
 {
     [ApiVersion("1")]
     [ApiController]
     [Route("api/v{version:apiVersion}/Area")]
+    [Authorize]
     public class AreaController : BaseController
     {
         private readonly ISender _sender;
