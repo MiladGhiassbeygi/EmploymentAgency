@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Persistence.Migrations
 {
-    public partial class initPostgresQl : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -105,7 +105,6 @@ namespace Persistence.Migrations
                     UserId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: true),
-                    FamilyName = table.Column<string>(type: "text", nullable: true),
                     GeneratedCode = table.Column<string>(type: "text", nullable: true),
                     SaltPassword = table.Column<string>(type: "text", nullable: true),
                     UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
@@ -386,7 +385,7 @@ namespace Persistence.Migrations
                     EmployerId = table.Column<long>(type: "bigint", nullable: false),
                     JobSeekerId = table.Column<long>(type: "bigint", nullable: false),
                     EmploymentAgencyId = table.Column<int>(type: "integer", nullable: false),
-                    Date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValue: new DateTime(2022, 8, 13, 14, 39, 56, 239, DateTimeKind.Local).AddTicks(4836)),
+                    Date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValue: new DateTime(2022, 8, 14, 17, 34, 58, 586, DateTimeKind.Local).AddTicks(9950)),
                     IsAmountFixed = table.Column<bool>(type: "boolean", nullable: false),
                     Amount = table.Column<decimal>(type: "money", nullable: false),
                     CreatedTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),

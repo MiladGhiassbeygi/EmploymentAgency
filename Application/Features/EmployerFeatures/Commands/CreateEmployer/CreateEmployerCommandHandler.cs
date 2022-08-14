@@ -35,10 +35,17 @@ namespace Application.Features.EmployerFeatures.Commands.CreateEmployer
             };
 
             var result = await _unitOfWork.EmployerRepository.CreateEmployerAsync(employer);
+            try
+            {
+                await _unitOfWork.CommitAsync();
 
-            await _unitOfWork.CommitAsync();
-
-            await _channel.AddToChannelAsync(new EmployerAdded { EmployerId = employer.Id }, cancellationToken);
+                await _channel.AddToChannelAsync(new EmployerAdded { EmployerId = employer.Id }, cancellationToken);
+            }
+            catch (Exception ex)
+            {
+                var exception = ex.Message;
+            }
+            
 
             return OperationResult<Employer>.SuccessResult(employer);
         }

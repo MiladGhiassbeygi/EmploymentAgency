@@ -2,11 +2,6 @@
 using Domain.ReadModel;
 using MongoDB.Driver;
 using Persistence.ReadRepositories.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Persistence.ReadRepositories
 {
@@ -23,6 +18,10 @@ namespace Persistence.ReadRepositories
         public async Task<List<Employer>> GetEmployers()
         {
             return await base.GetAllAsync();
+        }
+        public async Task<List<Employer>> FilterByTerm(string term)
+        {
+            return await base.GetWithFilterAsync(x => x.FirstName.Contains(term) || x.LastName.Contains(term) || x.Email.Contains(term));
         }
     }
 }

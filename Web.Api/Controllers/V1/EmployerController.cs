@@ -1,4 +1,5 @@
 ﻿using Application.Features.EmployerFeatures.Commands.CreateEmployer;
+using Application.Features.EmployerFeatures.Queries.FilterEmpolyer;
 using Application.Features.EmployerFeatures.Queries.GetEmployer;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -30,9 +31,9 @@ namespace Web.Api.Controllers.V1
                 model.Address,
                 model.Email,
                 model.WebsiteLink,
-                model.PhoneNumber
-                , model.NecessaryExplanation
-                , model.FieldOfActivityId
+                model.PhoneNumber,
+                model.NecessaryExplanation,
+                model.FieldOfActivityId
                 ));
 
             if (commandResult.IsSuccess)
@@ -54,10 +55,17 @@ namespace Web.Api.Controllers.V1
             return base.OperationResult(commandResult);
         }
 
+
         [HttpGet("GetEmployer")]
         public async Task<IActionResult> GetEmployer()
         {
             return base.OperationResult(await _sender.Send(new GetEmployerQuery()));
+        }
+
+        [HttpGet("Filter")]
+        public async Task<IActionResult> Filter([FromQuery] string term)
+        {
+            return base.OperationResult(await _sender.Send(new FilterEmpolyerQuery(term)));
         }
     }
 }

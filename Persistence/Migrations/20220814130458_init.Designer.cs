@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Persistence;
@@ -11,9 +12,10 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220814130458_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -65,7 +67,7 @@ namespace Persistence.Migrations
                     b.Property<string>("Address")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("text");
+                        .HasColumnType("character varying(100)");
 
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("timestamp without time zone");
@@ -73,7 +75,7 @@ namespace Persistence.Migrations
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(30)
-                        .HasColumnType("text");
+                        .HasColumnType("character varying(30)");
 
                     b.Property<byte>("FieldOfActivityId")
                         .HasColumnType("smallint");
@@ -81,12 +83,12 @@ namespace Persistence.Migrations
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasMaxLength(15)
-                        .HasColumnType("text");
+                        .HasColumnType("character varying(15)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(25)
-                        .HasColumnType("text");
+                        .HasColumnType("character varying(25)");
 
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("timestamp without time zone");
@@ -98,12 +100,12 @@ namespace Persistence.Migrations
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasMaxLength(15)
-                        .HasColumnType("text");
+                        .HasColumnType("character varying(15)");
 
                     b.Property<string>("WebsiteLink")
                         .IsRequired()
                         .HasMaxLength(30)
-                        .HasColumnType("text");
+                        .HasColumnType("character varying(30)");
 
                     b.HasKey("Id");
 
@@ -410,7 +412,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("Date")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2022, 8, 14, 18, 1, 21, 589, DateTimeKind.Local).AddTicks(7566));
+                        .HasDefaultValue(new DateTime(2022, 8, 14, 17, 34, 58, 586, DateTimeKind.Local).AddTicks(9950));
 
                     b.Property<long>("EmployerId")
                         .HasColumnType("bigint");

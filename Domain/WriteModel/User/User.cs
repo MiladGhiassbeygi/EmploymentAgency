@@ -11,7 +11,6 @@ namespace Domain.WriteModel.User
         }
 
         public string Name { get; set; }
-        public string FamilyName { get; set; }
         public string GeneratedCode { get; set; }
         public string SaltPassword { get; set; }
 

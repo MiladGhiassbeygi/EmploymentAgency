@@ -32,7 +32,7 @@ namespace Application.Features.Users.Commands.Create
             if (phoneNumberExist)
                 return OperationResult<UserCreateCommandResult>.FailureResult("این نام کاربری دارد");
 
-            var user = new User { UserName = request.UserName, Name = request.FirstName, FamilyName = request.LastName, PhoneNumber = request.PhoneNumber, PhoneNumberConfirmed = true };
+            var user = new User { UserName = request.UserName, Name = request.FirstName, PhoneNumber = request.PhoneNumber, PhoneNumberConfirmed = true };
 
             var createResult = await _userRepository.CreateUser(user);
 
