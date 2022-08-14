@@ -23,8 +23,22 @@ using Web.Api.Controllers.V1;
 using WebFramework.Filters;
 using WebFramework.ServiceConfiguration;
 using WebFramework.Swagger;
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 var builder= WebApplication.CreateBuilder(args);
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy
+                          .AllowAnyHeader()
+                          .AllowAnyOrigin()
+                          .AllowAnyMethod()
+                          ;
+                      });
+});
 
 builder.Host.UseSerilog(LoggingConfiguration.ConfigureLogger);
 
@@ -69,10 +83,6 @@ builder.Services.AddHostedService<AddReadReminderWorker>();
 builder.Services.AddApplicationServices().RegisterIdentityServices(identitySettings)
     .AddPersistenceServices(configuration).AddWebFrameworkServices();
 
-//builder.Services.AddAutoMapper(typeof(User),typeof(JwtService),typeof(UserController));
-
-//builder.Services.AddScoped<IReadCountryRepository, ReadCountryRepository>();
-
 var app = builder.Build();
 
 
@@ -109,7 +119,7 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseEndpoints(endpoints =>
 {

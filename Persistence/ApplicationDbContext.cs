@@ -16,15 +16,7 @@ namespace Persistence
             base.SavingChanges += OnSavingChanges;
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         }
-        //public static void Configure(DbContextOptionsBuilder<ApplicationDbContext> builder, string connectionString)
-        //{
-        //    builder.UseNpgsql(connectionString);
-        //}
-
-        //public static void Configure(DbContextOptionsBuilder<ApplicationDbContext> builder, DbConnection connection)
-        //{
-        //    builder.UseNpgsql(connection);
-        //}
+       
         private void OnSavingChanges(object sender, SavingChangesEventArgs e)
         {
             _cleanString();

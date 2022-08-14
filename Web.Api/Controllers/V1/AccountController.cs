@@ -37,14 +37,15 @@ namespace Web.Api.Controllers.V1
                 return base.OperationResult(tokenResult);
             }
             return base.OperationResult(commandResult);
-
         }
+
         [HttpPost("Login")]
         public async Task<IActionResult> Login(LoginForm loginForm)
         {
             var tokenResult = await _sender.Send(new AdminGetTokenQuery { UserName = loginForm.Email, Password = loginForm.Password });
             return base.OperationResult(tokenResult);
         }
+        
         [HttpPost("RefreshToken")]
         public async Task<IActionResult> RefreshToken(RefreshTokenForm refreshToken)
         {
