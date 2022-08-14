@@ -34,7 +34,6 @@ namespace Web.Api.Controllers.V1
                     EventDate = model.EventDate,
                     NoteTitle = model.NoteTitle,
                     Note = model.Note,
-                    OwnerId = model.OwnerId,
                 };
 
                 return base.OperationResult(commandResult);
