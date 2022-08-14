@@ -1,6 +1,7 @@
 ﻿using Application.Features.Reminders.Command;
 using Application.Features.Reminders.Query;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Web.Api.Dto.Reminder;
@@ -41,10 +42,11 @@ namespace Web.Api.Controllers.V1
             return base.OperationResult(commandResult);
         }
 
+        [Authorize]
         [HttpGet("GetReminder")]
         public async Task<IActionResult> GetReminder()
         {
-            return base.OperationResult(await _sender.Send(new GetReminderQuery()));
+            return base.OperationResult(await _sender.Send(new GetReminderQuery(UserId)));
         }
     }
 }

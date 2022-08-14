@@ -1,9 +1,13 @@
 ﻿using Application.Features.Account.Commands;
+using Application.Features.Account.Queries.GetUserData;
 using Application.Features.Account.Queries.RefreshToken;
 using Application.Features.Admin.Queries.GetToken;
 using Application.Models.ApiResult;
+using Domain.ReadModel;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Utils;
 using Web.Api.Form.Account;
 using WebFramework.BaseController;
 
@@ -45,7 +49,7 @@ namespace Web.Api.Controllers.V1
             var tokenResult = await _sender.Send(new AdminGetTokenQuery { UserName = loginForm.Email, Password = loginForm.Password });
             return base.OperationResult(tokenResult);
         }
-        
+
         [HttpPost("RefreshToken")]
         public async Task<IActionResult> RefreshToken(RefreshTokenForm refreshToken)
         {
@@ -53,5 +57,12 @@ namespace Web.Api.Controllers.V1
             return base.OperationResult(refreshResult);
         }
 
+        [Authorize]
+        [HttpGet("GetUserData")]
+        public async Task<IActionResult> GetUserData()
+        {
+            var user = await _sender.Send(new GetUserDataQuery(UserId));
+            return base.OperationResult(user);
+        }
     }
 }

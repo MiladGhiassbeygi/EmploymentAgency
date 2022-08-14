@@ -4,5 +4,5 @@ using MediatR;
 
 namespace Application.Features.Reminders.Query
 {
-    public record GetReminderQuery : IRequest<OperationResult<List<ReminderData>>>;
+    public record GetReminderQuery(int userId) : IRequest<OperationResult<List<ReminderData>>>;
 }

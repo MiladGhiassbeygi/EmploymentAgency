@@ -18,7 +18,7 @@ namespace Application.Features.Reminders.Query
         public async Task<OperationResult<List<ReminderData>>> Handle(GetReminderQuery request, CancellationToken cancellationToken)
         {
 
-            var reminder = await _unitOfWork.ReadReminderRepository.GetAllAsync();
+            var reminder = await _unitOfWork.ReadReminderRepository.GetWithFilterAsync(x=> x.OwnerId == request.userId.ToString());
 
             if (reminder is not null)
                 return OperationResult<List<ReminderData>>.SuccessResult(reminder);
