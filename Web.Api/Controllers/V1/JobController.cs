@@ -5,6 +5,7 @@ using Web.Api.Form.Job;
 using Web.Api.Dto.Jobs;
 using Application.Features.JobFeatures.Queries;
 using Application.Features.JobFeatures.Commands.CreateJob;
+using Application.Features.JobFeatures.Queries.FilterJob;
 
 namespace Web.Api.Controllers.V1
 {
@@ -53,5 +54,13 @@ namespace Web.Api.Controllers.V1
         {
             return base.OperationResult(await _sender.Send(new GetJobsQuery()));
         }
+
+
+        [HttpGet("Filter")]
+        public async Task <IActionResult> Filter([FromQuery]string term)
+        {
+            return base.OperationResult(await _sender.Send(new FilterJobQuery(term)));
+        }
+
     }
 }

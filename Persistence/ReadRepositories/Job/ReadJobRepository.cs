@@ -26,6 +26,13 @@ namespace Persistence.ReadRepositories
         {
             return await base.GetAllAsync();
         }
+
+        public async Task<List<Job>> FilterByTerm(string term)
+        {
+            return await base.GetWithFilterAsync(x => x.Title.Contains(term) || x.Description.Contains(term));
+        }
+
+
         //public Task DeleteByMovieIdAsync(int movieId, CancellationToken cancellationToken = default)
         //{
         //    return base.DeleteAsync(m => m.MovieId == movieId, cancellationToken);
