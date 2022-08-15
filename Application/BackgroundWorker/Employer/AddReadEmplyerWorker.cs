@@ -53,6 +53,8 @@ namespace Application.BackgroundWorker.AddReadEmplyer
                                 WebsiteLink = employer.WebsiteLink,
                                 NecessaryExplanation = employer.NecessaryExplanation,
                                 FieldOfActivityId = employer.FieldOfActivityId,
+                                IsFixed = employer.IsFixed,
+                                ExactAmountRecived = employer.ExactAmountRecived
                             }, stoppingToken);
                         }
                     }
