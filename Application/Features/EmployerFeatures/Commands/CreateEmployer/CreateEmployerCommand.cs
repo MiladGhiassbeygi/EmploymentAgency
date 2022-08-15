@@ -10,6 +10,6 @@ namespace Application.Features.EmployerFeatures.Commands.CreateEmployer
         string email,string websiteLink,
         string necessaryExplanation,
         bool isFixed, decimal exactAmountRecived 
-        ,byte fieldOfActivityId) 
+        ,byte fieldOfActivityId,int definerId) 
         : IRequest<OperationResult<Employer>>;
 }

@@ -44,7 +44,8 @@ namespace Domain.ReadModel
         [BsonElement("fieldOfActivityId")]
         public byte FieldOfActivityId { get; set; }
 
-       
+        [BsonElement("definerId")]
+        public int DefinerId { get; set; }
     }
 }
 

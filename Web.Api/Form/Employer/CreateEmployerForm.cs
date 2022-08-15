@@ -12,5 +12,6 @@
         public bool IsFixed { get; set; }
         public decimal ExactAmountRecived { get; set; }
         public byte FieldOfActivityId { get; set; }
+        public int DefinerId { get; set; }
     }
 }

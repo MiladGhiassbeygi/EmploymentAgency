@@ -49,6 +49,12 @@ namespace Persistence.Configuration.EmployerConfig
                 .HasForeignKey(d => d.FieldOfActivityId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Employer_EmployerAcivityField");
+
+            builder.HasOne(d => d.Definer)
+                .WithMany(d => d.Employers)
+                .HasForeignKey(d => d.DefinerId)
+                .HasConstraintName("FK_Employer_EmployerDefiner");
+                
         }
     }
 }

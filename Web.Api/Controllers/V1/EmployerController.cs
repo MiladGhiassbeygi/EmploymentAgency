@@ -35,7 +35,9 @@ namespace Web.Api.Controllers.V1
                 model.NecessaryExplanation,
                 model.IsFixed,
                 model.ExactAmountRecived,
-                model.FieldOfActivityId
+                model.FieldOfActivityId,
+                model.DefinerId
+                
                 ));
 
             if (commandResult.IsSuccess)
@@ -51,7 +53,8 @@ namespace Web.Api.Controllers.V1
                     NecessaryExplanation = model.NecessaryExplanation,
                     IsFixed = model.IsFixed,
                     ExactAmountRecived = model.ExactAmountRecived,
-                    FieldOfActivityId = model.FieldOfActivityId
+                    FieldOfActivityId = model.FieldOfActivityId,
+                    DefinerId = model.DefinerId
                 };
 
                 return base.OperationResult(commandResult);
