@@ -21,6 +21,8 @@ namespace Web.Api.Controllers.V1
         {
             _sender = sender;
         }
+
+        [Authorize]
         [HttpPost("CreateReminder")]
         public async Task<IActionResult> CreateReminder(CreateReminderForm model)
         {
