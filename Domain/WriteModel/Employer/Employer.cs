@@ -1,5 +1,5 @@
 ﻿using Domain.WriteModel.Common;
-
+using Domain.WriteModel.User;
 using System;
 using System.Collections.Generic;
 
@@ -23,10 +23,10 @@ namespace Domain.WriteModel
         public bool IsFixed { get; set; }
         public decimal ExactAmountRecived { get; set; }
         public byte FieldOfActivityId { get; set; }
-      
-
+        public int DefinerId { get; set; }
 
         public virtual EmployerAcivityField FieldOfActivity { get; set; }
+        public virtual User.User Definer { get; set; }
         public virtual ICollection<Job> Job { get; set; }
         public virtual ICollection<SuccessedContract> SuccessedContract { get; set; }
     }

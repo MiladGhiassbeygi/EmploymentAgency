@@ -1,7 +1,9 @@
 ﻿using Application.Features.EmployerFeatures.Queries.FilterEmpolyer;
 using Application.Features.JobFeatures.Queries.FilterJob;
+using Application.Features.JobFeatures.Queries.FilterJobSeeker;
 using Domain.ReadModel;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
@@ -20,6 +22,7 @@ namespace Web.Api.Controllers.V1
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/CommonFilter")]
     [ApiController]
+    [Authorize]
     public class CommonFilterController : BaseController
     {
         private readonly ISender _sender;
@@ -42,7 +45,10 @@ namespace Web.Api.Controllers.V1
                     {
                         return base.OperationResult(await _sender.Send(new FilterJobQuery(term)));
                     }
-
+                case FilterType.JobSeeker:
+                {
+                        return base.OperationResult(await _sender.Send(new FilterJobSeekerQuery(term)));
+                }
             }
             return base.OperationResult(BadRequest("Invalid Input Param's"));
         }
