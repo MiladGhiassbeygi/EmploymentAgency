@@ -35,6 +35,12 @@ namespace Domain.ReadModel
         [BsonElement("necessaryExplanation")]
         public string NecessaryExplanation { get; set; }
 
+        [BsonElement("isFixed")]
+        public bool IsFixed { get; set; }
+
+        [BsonElement("exactAmountRecived")]
+        public decimal ExactAmountRecived { get; set; }
+
         [BsonElement("fieldOfActivityId")]
         public byte FieldOfActivityId { get; set; }
 

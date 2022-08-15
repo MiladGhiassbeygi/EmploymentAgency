@@ -9,7 +9,6 @@ namespace Domain.WriteModel
     {
         public Employer()
         {
-            EmployerCommission = new HashSet<EmployerCommission>();
             Job = new HashSet<Job>();
             SuccessedContract = new HashSet<SuccessedContract>();
         }
@@ -21,11 +20,13 @@ namespace Domain.WriteModel
         public string Email { get; set; }
         public string WebsiteLink { get; set; }
         public string NecessaryExplanation { get; set; }
+        public bool IsFixed { get; set; }
+        public decimal ExactAmountRecived { get; set; }
         public byte FieldOfActivityId { get; set; }
+      
 
 
         public virtual EmployerAcivityField FieldOfActivity { get; set; }
-        public virtual ICollection<EmployerCommission> EmployerCommission { get; set; }
         public virtual ICollection<Job> Job { get; set; }
         public virtual ICollection<SuccessedContract> SuccessedContract { get; set; }
     }

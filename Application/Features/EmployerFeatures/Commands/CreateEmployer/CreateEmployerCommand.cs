@@ -8,6 +8,8 @@ namespace Application.Features.EmployerFeatures.Commands.CreateEmployer
         string firstName,string lastName,
         string addres,string phoneNumber,
         string email,string websiteLink,
-        string necessaryExplanation,byte fieldOfActivityId) 
+        string necessaryExplanation,
+        bool isFixed, decimal exactAmountRecived 
+        ,byte fieldOfActivityId) 
         : IRequest<OperationResult<Employer>>;
 }

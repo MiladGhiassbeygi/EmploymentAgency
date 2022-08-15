@@ -33,6 +33,8 @@ namespace Web.Api.Controllers.V1
                 model.WebsiteLink,
                 model.PhoneNumber,
                 model.NecessaryExplanation,
+                model.IsFixed,
+                model.ExactAmountRecived,
                 model.FieldOfActivityId
                 ));
 
@@ -47,6 +49,8 @@ namespace Web.Api.Controllers.V1
                     WebsiteLink = model.WebsiteLink,
                     PhoneNumber = model.PhoneNumber,
                     NecessaryExplanation = model.NecessaryExplanation,
+                    IsFixed = model.IsFixed,
+                    ExactAmountRecived = model.ExactAmountRecived,
                     FieldOfActivityId = model.FieldOfActivityId
                 };
 

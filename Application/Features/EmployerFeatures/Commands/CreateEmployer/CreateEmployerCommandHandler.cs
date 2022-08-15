@@ -31,6 +31,8 @@ namespace Application.Features.EmployerFeatures.Commands.CreateEmployer
                 Email=request.email,
                 WebsiteLink=request.websiteLink,
                 NecessaryExplanation=request.necessaryExplanation,
+                IsFixed=request.isFixed,
+                ExactAmountRecived=request.exactAmountRecived,
                 FieldOfActivityId=request.fieldOfActivityId,
             };
 

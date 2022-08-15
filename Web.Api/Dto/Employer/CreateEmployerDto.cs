@@ -10,6 +10,8 @@
         public string Email { get; set; }
         public string WebsiteLink { get; set; }
         public string NecessaryExplanation { get; set; }
+        public bool IsFixed { get; set; }
+        public decimal ExactAmountRecived { get; set; }
         public byte FieldOfActivityId { get; set; }
     }
 }
