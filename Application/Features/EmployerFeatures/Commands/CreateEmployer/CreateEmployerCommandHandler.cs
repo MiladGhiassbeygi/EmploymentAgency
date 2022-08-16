@@ -34,6 +34,7 @@ namespace Application.Features.EmployerFeatures.Commands.CreateEmployer
                 IsFixed=request.isFixed,
                 ExactAmountRecived=request.exactAmountRecived,
                 FieldOfActivityId=request.fieldOfActivityId,
+                DefinerId=request.definerId
             };
 
             var result = await _unitOfWork.EmployerRepository.CreateEmployerAsync(employer);
@@ -47,9 +48,9 @@ namespace Application.Features.EmployerFeatures.Commands.CreateEmployer
             {
                 var exception = ex.Message;
             }
-            
 
-            return OperationResult<Employer>.SuccessResult(employer);
+            result.Definer = null;
+            return OperationResult<Employer>.SuccessResult(result);
         }
     }
 }

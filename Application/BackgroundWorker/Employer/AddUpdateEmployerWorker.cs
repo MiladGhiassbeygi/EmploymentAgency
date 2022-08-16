@@ -12,15 +12,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.BackgroundWorker.AddReadEmployer
+namespace Application.BackgroundWorker.AddUpdateEmployer
 {
-    public class AddReadEmplyerWorker : BackgroundService
+    public class AddUpdateEmployerWorker : BackgroundService
     {
-        private readonly ChannelQueue<EmployerAdded> _readModelChannel;
-        private readonly ILogger<AddReadEmplyerWorker> _logger;
+        private readonly ChannelQueue<EmployerUpdated> _readModelChannel;
+        private readonly ILogger<AddUpdateEmployerWorker> _logger;
         private readonly IServiceProvider _serviceProvider;
 
-        public AddReadEmplyerWorker(ChannelQueue<EmployerAdded> readModelChannel, ILogger<AddReadEmplyerWorker> logger, IServiceProvider serviceProvider)
+        public AddUpdateEmployerWorker(ChannelQueue<EmployerUpdated> readModelChannel, ILogger<AddUpdateEmployerWorker> logger, IServiceProvider serviceProvider)
         {
             _readModelChannel = readModelChannel;
             _logger = logger;
@@ -56,7 +56,7 @@ namespace Application.BackgroundWorker.AddReadEmployer
                                 IsFixed = employer.IsFixed,
                                 ExactAmountRecived = employer.ExactAmountRecived,
                                 DefinerId = employer.DefinerId
-                                
+
                             }, stoppingToken);
                         }
                     }

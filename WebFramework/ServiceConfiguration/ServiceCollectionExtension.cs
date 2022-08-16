@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using System.Text.Json.Serialization;
 
 namespace WebFramework.ServiceConfiguration
 {
@@ -32,7 +33,11 @@ namespace WebFramework.ServiceConfiguration
                 //options.ApiVersionReader = ApiVersionReader.Combine(new QueryStringApiVersionReader("api-version"), new UrlSegmentApiVersionReader())
                 // combine of [querystring] & [urlsegment]
             });
-
+            services.AddMvc().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+            });
+           
             return services;
         }
     }

@@ -54,7 +54,7 @@ namespace Persistence.Configuration.EmployerConfig
                 .WithMany(d => d.Employers)
                 .HasForeignKey(d => d.DefinerId)
                 .HasConstraintName("FK_Employer_EmployerDefiner");
-                
+
         }
     }
 }

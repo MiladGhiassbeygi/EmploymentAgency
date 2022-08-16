@@ -1,6 +1,6 @@
-﻿namespace Web.Api.Dto.Employer
+﻿namespace Web.Api.Form.Employer
 {
-    public class GetEmployerDto
+    public class UpdateEmployerForm
     {
         public long Id { get; set; }
         public string FirstName { get; set; }

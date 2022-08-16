@@ -41,6 +41,7 @@ namespace Persistence.WriteRepositories
                 WebsiteLink=x.WebsiteLink,
                 NecessaryExplanation=x.NecessaryExplanation,
                 FieldOfActivity=x.FieldOfActivity, 
+                DefinerId = x.DefinerId
             }).ToListAsync();
         }
 

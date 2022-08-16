@@ -4,6 +4,7 @@ using WebFramework.BaseController;
 using Web.Api.Form.Employer;
 using Application.Features.EmployerActivityField;
 using Application.Features.EmployerActivityFieldsFeature.Commands.CreateEmployerAcivityField;
+using Web.Api.Dto.Employer;
 
 namespace Web.Api.Controllers.V1
 {
@@ -25,13 +26,10 @@ namespace Web.Api.Controllers.V1
 
             if (commandResult.IsSuccess)
             {
-                //CreateCountryDto dto = new CreateCountryDto()
-                //{
-                //    Id = commandResult.Result.Id,
-                //    Title = model.Title,
-                //    PostalCode = model.PostalCode,
-                //    AreaCode = model.AreaCode,
-                //};
+                CreateEmployerAcivityFieldDto employerAcivityFieldDto = new CreateEmployerAcivityFieldDto()
+                {
+                    Title = model.Title
+                };
 
                 return base.OperationResult(commandResult);
             }

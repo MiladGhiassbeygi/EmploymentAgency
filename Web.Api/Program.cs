@@ -1,9 +1,11 @@
 using System.Diagnostics;
 using Application.BackgroundWorker;
 using Application.BackgroundWorker.Account;
+using Application.BackgroundWorker.AddDeleteEmployer;
 using Application.BackgroundWorker.AddReadCountry;
-using Application.BackgroundWorker.AddReadEmplyer;
+using Application.BackgroundWorker.AddReadEmployer;
 using Application.BackgroundWorker.AddReadJobSeeker;
+using Application.BackgroundWorker.AddUpdateEmployer;
 using Application.BackgroundWorker.Reminder;
 using Application.Common.BaseChannel;
 using Application.ServiceConfiguration;
@@ -75,6 +77,8 @@ builder.Services.AddHostedService<AddReadJobSeekerWorker>();
 builder.Services.AddHostedService<AddReadJobWorker>();
 builder.Services.AddHostedService<AddReadEmplyerWorker>();
 builder.Services.AddHostedService<AddReadReminderWorker>();
+builder.Services.AddHostedService<AddDeleteEmployerWorker>();
+builder.Services.AddHostedService<AddUpdateEmployerWorker>();
 
 #endregion
 
