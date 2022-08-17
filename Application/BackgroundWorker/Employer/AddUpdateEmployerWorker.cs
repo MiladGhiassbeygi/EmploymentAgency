@@ -42,9 +42,8 @@ namespace Application.BackgroundWorker.AddUpdateEmployer
 
                         if (employer != null)
                         {
-                            await readRepository.AddAsync(new Employer
+                            var mongoEmployer = new Employer
                             {
-                                EmployerId = employer.Id,
                                 FirstName = employer.FirstName,
                                 LastName = employer.LastName,
                                 Address = employer.Address,
@@ -55,9 +54,9 @@ namespace Application.BackgroundWorker.AddUpdateEmployer
                                 FieldOfActivityId = employer.FieldOfActivityId,
                                 IsFixed = employer.IsFixed,
                                 ExactAmountRecived = employer.ExactAmountRecived,
-                                DefinerId = employer.DefinerId
+                            };
 
-                            }, stoppingToken);
+                            await readRepository.UpdateAsync(mongoEmployer, x => x.EmployerId == item.EmployerId, stoppingToken);
                         }
                     }
                 }
