@@ -25,7 +25,9 @@ namespace Persistence.ReadRepositories
 
         public async Task<List<EmployerAcivityField>> FilterByTerm(string term)
         {
-            return await base.GetWithFilterAsync(x=> x.Title.Contains(term));
+            if (term == null)
+                return null;
+            return await base.GetWithFilterAsync(x => x.Title.Contains(term));
         }
     }
 }
