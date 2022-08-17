@@ -25,7 +25,7 @@ namespace Application.Features.EmployerFeatures.Queries.FilterEmpolyer
             if (employer is not null)
                 return OperationResult<List<Employer>>.SuccessResult(employer);
 
-            return OperationResult<List<Employer>>.FailureResult("There is no job seeker !!!");
+            return OperationResult<List<Employer>>.FailureResult("There is no employer !!!");
         }
     }
 }

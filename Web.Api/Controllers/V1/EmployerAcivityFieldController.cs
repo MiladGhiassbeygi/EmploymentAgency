@@ -2,9 +2,13 @@
 using Microsoft.AspNetCore.Mvc;
 using WebFramework.BaseController;
 using Web.Api.Form.Employer;
-using Application.Features.EmployerActivityField;
+using Application.Features.GetEmployerActivityField;
 using Application.Features.EmployerActivityFieldsFeature.Commands.CreateEmployerAcivityField;
 using Web.Api.Dto.Employer;
+using Web.Api.Form.EmployerAcivityField;
+using Application.Features.EmployerActivityFieldsFeature.Queries.FilterEmployerAcivityField;
+using Domain.ReadModel;
+using Domain.WriteModel.User;
 
 namespace Web.Api.Controllers.V1
 {
@@ -24,15 +28,16 @@ namespace Web.Api.Controllers.V1
         {
             var commandResult = await _sender.Send(new CreateEmployerAcivityFieldCommand(model.Title));
 
-            if (commandResult.IsSuccess)
+            //if (commandResult.IsSuccess)
+            //{
+            CreateEmployerAcivityFieldDto employerAcivityFieldDto = new CreateEmployerAcivityFieldDto()
             {
-                CreateEmployerAcivityFieldDto employerAcivityFieldDto = new CreateEmployerAcivityFieldDto()
-                {
-                    Title = model.Title
-                };
 
-                return base.OperationResult(commandResult);
-            }
+                Title = model.Title
+            };
+
+            //return base.OperationResult(commandResult);
+            //}
             return base.OperationResult(commandResult);
         }
 
@@ -41,5 +46,16 @@ namespace Web.Api.Controllers.V1
         {
             return base.OperationResult(await _sender.Send(new GetEmployerAcivityFieldsQuery()));
         }
+
+        [HttpGet("FilterEmployerActivityFields")]
+        public async Task<IActionResult> FilterEmployerActivityFields([FromQuery]FilterEmployerActivityFieldForm form)
+        {
+            
+            
+            return base.OperationResult(await _sender.Send(new FilterEmployerAcivityFieldCommand(form.Term)));
+            
+        }
+
+
     }
 }

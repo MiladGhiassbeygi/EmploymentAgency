@@ -1,4 +1,6 @@
-﻿using Application.Contracts.Persistence;
+﻿using Application.BackgroundWorker.Common.Events;
+using Application.Common.BaseChannel;
+using Application.Contracts.Persistence;
 using Application.Models.Common;
 using Domain.WriteModel;
 using MediatR;
@@ -8,10 +10,12 @@ namespace Application.Features.EmployerActivityFieldsFeature.Commands.CreateEmpl
     internal class CreateEmployerAcivityFieldCommandHandler : IRequestHandler<CreateEmployerAcivityFieldCommand, OperationResult<EmployerAcivityField>>
     {
         readonly IUnitOfWork _unitOfWork;
+        private readonly ChannelQueue<EmployerActivityFieldAdded> _channel;
 
-        public CreateEmployerAcivityFieldCommandHandler(IUnitOfWork unitOfWork)
+        public CreateEmployerAcivityFieldCommandHandler(IUnitOfWork unitOfWork,ChannelQueue<EmployerActivityFieldAdded> channel)
         {
             _unitOfWork = unitOfWork;
+            _channel = channel;
         }
 
         public async Task<OperationResult<EmployerAcivityField>> Handle(CreateEmployerAcivityFieldCommand request, CancellationToken cancellationToken)
@@ -24,7 +28,7 @@ namespace Application.Features.EmployerActivityFieldsFeature.Commands.CreateEmpl
             var result = await _unitOfWork.EmployerAcivityFieldRepository.CreateEmployerAcivityFieldAsync(employerAcivityField);
 
             await _unitOfWork.CommitAsync();
-
+            await _channel.AddToChannelAsync(new EmployerActivityFieldAdded { EmployerActivityFieldId = employerAcivityField.Id }, cancellationToken);
             return OperationResult<EmployerAcivityField>.SuccessResult(employerAcivityField);
         }
     }

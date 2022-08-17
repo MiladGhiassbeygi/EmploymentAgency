@@ -1,4 +1,4 @@
-﻿using Application.Contracts.Persistence;
+﻿using Application.Contracts.WritePersistence;
 using Domain.WriteModel;
 using Microsoft.EntityFrameworkCore;
 using Persistence.WriteRepositories.Common;
@@ -17,7 +17,7 @@ namespace Persistence.WriteRepositories
             return newEmployerAcivityField;
 
         }
-        public async Task<EmployerAcivityField> GetEmployerAcivityFieldByIdAsync(int id)
+        public async Task<EmployerAcivityField> GetEmployerAcivityFieldByIdAsync(byte id)
         {
             var employerAcivityField = await base.TableNoTracking.FirstOrDefaultAsync(x => x.Id.Equals(id));
             return employerAcivityField;
@@ -28,12 +28,9 @@ namespace Persistence.WriteRepositories
             return employerAcivityField;
         }
         public async Task<EmployerAcivityField> UpdateEmployerAcivityFieldAsync(EmployerAcivityField employerAcivityField)
-        {
-            var fetchedemployerAcivityField = await base.Table.Where(t => t.Id.Equals(employerAcivityField.Id)).FirstOrDefaultAsync();
-
-            if (fetchedemployerAcivityField == null) return null;
-            await base.UpdateAsync(fetchedemployerAcivityField);
-            return fetchedemployerAcivityField;
+        {           
+            await base.UpdateAsync(employerAcivityField);
+            return employerAcivityField;
         }
         public async Task<EmployerAcivityField> DeleteEmployerAcivityFieldByIdAsync(int id)
         {

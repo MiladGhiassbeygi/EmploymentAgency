@@ -18,10 +18,20 @@ namespace Persistence.WriteRepositories.Common
         private readonly ApplicationDbContext _db;
         private readonly IMongoDatabase _readDb;
 
+
+        #region ReadRepositories
+        
         public IReadCountryRepository ReadCountryRepository { get; }
         public IReadJobSeekerRepository ReadJobSeekerRepository { get; }
         public IReadJobRepository ReadJobRepository { get; }
         public IReadReminderRepository ReadReminderRepository { get; }
+        public IReadEmployerRepository ReadEmployerRepository { get; }
+        public IReadEmployerActivitiesRepository ReadEmployerActivitiesRepository { get; }
+
+        #endregion
+
+        #region WriteRepositories
+
         public IUserRefreshTokenRepository UserRefreshTokenRepository { get; }
         public ICountryRepository CountryRepository { get; }
         public ISuccessedContractRepository SuccessedContractRepository { get; }
@@ -30,21 +40,29 @@ namespace Persistence.WriteRepositories.Common
         public ISkillRepository SkillRepository { get; }
         public IJobEssentialSkillsRepository JobEssentialSkillsRepository { get; }
         public IEmployerRepository EmployerRepository { get; }
-        public IReadEmployerRepository ReadEmployerRepository { get; }
         public IEmployerAcivityFieldRepository EmployerAcivityFieldRepository { get; }
         public IReminderRepository ReminderRepository { get; }
         public IJobSeekerRepository JobSeekerRepository { get; }
+
+        #endregion
 
         public UnitOfWork(ApplicationDbContext db, IMongoDatabase readDb)
         {
             _db = db;
             _readDb = readDb;
+
+            #region ReadRepositories
+
             ReadCountryRepository = new ReadCountryRepository(_readDb);
             ReadJobSeekerRepository = new ReadJobSeekerRepository(_readDb);
             ReadJobRepository = new ReadJobRepository(_readDb);
             ReadEmployerRepository = new ReadEmployerRepository(_readDb);
+            ReadEmployerActivitiesRepository = new ReadEmployerActivitiesRepository(_readDb);
             ReadReminderRepository = new ReadReminderRepository(_readDb);
 
+            #endregion
+
+            #region WriteRepositories
 
             UserRefreshTokenRepository = new UserRefreshTokenRepository(_db);
             CountryRepository = new CountryRepository(_db);
@@ -58,6 +76,7 @@ namespace Persistence.WriteRepositories.Common
             JobSeekerRepository = new JobSeekerRepository(_db);
             ReminderRepository = new ReminderRepository(_db);
 
+            #endregion
         }
 
         public Task CommitAsync()

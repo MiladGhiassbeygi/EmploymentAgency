@@ -40,6 +40,9 @@ namespace Persistence.ServiceConfiguration
             services.AddScoped<IEmployerRepository, EmployerRepository>();
             services.AddScoped<IReadEmployerRepository, ReadEmployerRepository>();
 
+            services.AddScoped<IEmployerAcivityFieldRepository, EmployerAcivityFieldRepository>();
+            services.AddScoped<IReadEmployerActivitiesRepository, ReadEmployerActivitiesRepository>();
+
             services.AddScoped<IReminderRepository, ReminderRepository>();
             services.AddScoped<IReadReminderRepository, ReadReminderRepository>();
 

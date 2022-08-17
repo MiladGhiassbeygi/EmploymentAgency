@@ -9,11 +9,20 @@ namespace Application.Contracts.Persistence
 {
     public interface IUnitOfWork
     {
+
+        #region ReadRepositories
+
         public IReadCountryRepository ReadCountryRepository { get; }
         public IReadJobSeekerRepository ReadJobSeekerRepository { get; }
         public IReadJobRepository ReadJobRepository { get; }
         public IReadEmployerRepository ReadEmployerRepository { get; }
+        public IReadEmployerActivitiesRepository ReadEmployerActivitiesRepository { get; }
         public IReadReminderRepository ReadReminderRepository { get; }
+
+        #endregion
+
+        #region WriteRepositories
+
         public IUserRefreshTokenRepository UserRefreshTokenRepository { get; }
         public ICountryRepository CountryRepository { get; }
         public IEmployerRepository EmployerRepository { get; }
@@ -25,7 +34,9 @@ namespace Application.Contracts.Persistence
         public IJobEssentialSkillsRepository JobEssentialSkillsRepository { get; }
         public IJobSeekerRepository JobSeekerRepository { get; }
         public IReminderRepository ReminderRepository { get; }
-        
+
+        #endregion
+
         Task CommitAsync();
         ValueTask RollBackAsync();
     }

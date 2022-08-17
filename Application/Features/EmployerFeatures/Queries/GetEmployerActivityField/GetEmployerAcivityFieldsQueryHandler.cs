@@ -2,10 +2,11 @@
 using Application.Models.Employer;
 using Application.Models.Common;
 using MediatR;
+using Domain.ReadModel;
 
-namespace Application.Features.EmployerActivityField
+namespace Application.Features.GetEmployerActivityField
 {
-    internal class GetEmployerAcivityFieldsQueryHandler : IRequestHandler<GetEmployerAcivityFieldsQuery, OperationResult<List<GetEmployerAcivityFieldsDto>>>
+    internal class GetEmployerAcivityFieldsQueryHandler : IRequestHandler<GetEmployerAcivityFieldsQuery, OperationResult<List<EmployerAcivityField>>>
     {
         readonly IUnitOfWork _unitOfWork;
         public GetEmployerAcivityFieldsQueryHandler(IUnitOfWork unitOfWork)
@@ -13,18 +14,21 @@ namespace Application.Features.EmployerActivityField
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<OperationResult<List<GetEmployerAcivityFieldsDto>>> Handle(GetEmployerAcivityFieldsQuery request, CancellationToken cancellationToken)
+        public async Task<OperationResult<List<EmployerAcivityField>>> Handle(GetEmployerAcivityFieldsQuery request, CancellationToken cancellationToken)
         {
-            var employerAcivityFields = await _unitOfWork.EmployerAcivityFieldRepository.GetAll();
+            var employerAcivityFields = await _unitOfWork.ReadEmployerActivitiesRepository.GetAllAsync();
 
-            if(employerAcivityFields is not null)
-            {
-                var employerAcivityFieldsDto=new List<GetEmployerAcivityFieldsDto>();
-                employerAcivityFieldsDto.AddRange(employerAcivityFields.ConvertAll(x => new GetEmployerAcivityFieldsDto() { Id = x.Id, Title = x.Title }));
-                return OperationResult<List<GetEmployerAcivityFieldsDto>>.SuccessResult(employerAcivityFieldsDto);
-            }
+            //if(employerAcivityFields is not null)
+            //{
+            //    var employerAcivityFieldsDto=new List<GetEmployerAcivityFieldsDto>();
+            //    employerAcivityFieldsDto.AddRange(employerAcivityFields.ConvertAll(x => new GetEmployerAcivityFieldsDto() { Id = x.EmployerAcivityFieldId, Title = x.Title }));
+            //    return OperationResult<List<GetEmployerAcivityFieldsDto>>.SuccessResult(employerAcivityFieldsDto);
+            //}
 
-            return OperationResult<List<GetEmployerAcivityFieldsDto>>.FailureResult("There is no Employer Acivity Fields !!");
+            if (employerAcivityFields is not null)
+                return OperationResult<List<EmployerAcivityField>>.SuccessResult(employerAcivityFields);
+
+                       return OperationResult<List<EmployerAcivityField>>.FailureResult("There is no Employer Acivity Fields !!");
         }
     }
 }
