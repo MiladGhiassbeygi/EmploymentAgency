@@ -45,7 +45,7 @@ namespace Web.Api.Controllers.V1
         public async Task<IActionResult> UpdateEmployer(UpdateEmployerForm input, CancellationToken cancellationToken)
         {
             return base.OperationResult(await _sender.Send(new UpdateEmployerCommand(input.Id,input.FirstName,input.LastName,input.Address,input.PhoneNumber,input.Email,input.WebsiteLink,
-                input.NecessaryExplanation,input.IsFixed,input.ExactAmountRecived,input.FieldOfActivityId,input.DefinerId)));
+                input.NecessaryExplanation,input.IsFixed,input.ExactAmountRecived,input.FieldOfActivityId)));
         }
 
         [HttpPost("DeleteEmployer")]

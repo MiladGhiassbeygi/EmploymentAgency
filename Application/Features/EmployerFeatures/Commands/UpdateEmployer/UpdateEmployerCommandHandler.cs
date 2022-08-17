@@ -23,7 +23,7 @@ namespace Application.Features.EmployerFeatures.Commands.UpdateEmployer
 
             if (fetchedEmployer is null)
                 return OperationResult<Employer>.FailureResult("The Employer Is Not Exist");
-         
+
             fetchedEmployer.FirstName = request.firstName;
             fetchedEmployer.LastName = request.lastName;
             fetchedEmployer.PhoneNumber = request.phoneNumber;
@@ -48,7 +48,7 @@ namespace Application.Features.EmployerFeatures.Commands.UpdateEmployer
                 var exception = ex.Message;
             }
 
-
+            fetchedEmployer.Definer = null;
             return OperationResult<Employer>.SuccessResult(fetchedEmployer);
         }
     }

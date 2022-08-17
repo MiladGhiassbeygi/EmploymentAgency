@@ -44,6 +44,7 @@ namespace Application.BackgroundWorker.AddUpdateEmployer
                         {
                             var mongoEmployer = new Employer
                             {
+                                EmployerId = employer.Id,   
                                 FirstName = employer.FirstName,
                                 LastName = employer.LastName,
                                 Address = employer.Address,
@@ -54,6 +55,7 @@ namespace Application.BackgroundWorker.AddUpdateEmployer
                                 FieldOfActivityId = employer.FieldOfActivityId,
                                 IsFixed = employer.IsFixed,
                                 ExactAmountRecived = employer.ExactAmountRecived,
+                                DefinerId = employer.DefinerId,
                             };
 
                             await readRepository.UpdateAsync(mongoEmployer, x => x.EmployerId == item.EmployerId, stoppingToken);
