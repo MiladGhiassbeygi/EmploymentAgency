@@ -14,6 +14,8 @@ namespace Domain.WriteModel.User
         public string GeneratedCode { get; set; }
         public string SaltPassword { get; set; }
 
+
+        public ICollection<JobSeeker> JobSeekers { get; set; }
         public ICollection<Employer> Employers { get; set; }
         public ICollection<UserRole> UserRoles { get; set; }
         public ICollection<UserLogin> Logins { get; set; }

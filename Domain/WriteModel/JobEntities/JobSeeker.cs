@@ -1,6 +1,5 @@
 ﻿using Domain.WriteModel.Common;
-using System;
-using System.Collections.Generic;
+using Domain.WriteModel.User;
 
 namespace Domain.WriteModel
 {
@@ -17,7 +16,9 @@ namespace Domain.WriteModel
         public string Email { get; set; }
         public string LinkedinAddress { get; set; }
         public string ResumeFilePath { get; set; }
+        public int DefinerId { get; set; }
 
+        public User.User Definer { get; set; }
         public virtual Country Country { get; set; }
         public virtual ICollection<SuccessedContract> SuccessedContract { get; set; }
     }
