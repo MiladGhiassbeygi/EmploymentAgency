@@ -45,7 +45,8 @@ namespace Application.BackgroundWorker.AddReadJobSeeker
                                 Email = jobSeeker.Email,
                                 CountryId = jobSeeker.CountryId,
                                 LinkedinAddress = jobSeeker.LinkedinAddress,
-                                ResumeFilePath = jobSeeker.ResumeFilePath
+                                ResumeFilePath = jobSeeker.ResumeFilePath,
+                                DefinerId = jobSeeker.DefinerId
                             }, stoppingToken);
                         }
                     }

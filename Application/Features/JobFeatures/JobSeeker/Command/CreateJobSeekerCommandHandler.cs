@@ -28,7 +28,8 @@ namespace Application.Features.JobFeatures.Commands.CreateJobSeeker
                 CountryId = request.CountryId,
                 Email = request.Email,
                 LinkedinAddress = request.LinkedinAddress,
-                ResumeFilePath = request.ResumeFilePath
+                ResumeFilePath = request.ResumeFilePath,
+                DefinerId = request.definerId
             };
 
             var result = await _unitOfWork.JobSeekerRepository.CreateJobSeekerAcync(jobSeeker);
@@ -37,6 +38,7 @@ namespace Application.Features.JobFeatures.Commands.CreateJobSeeker
 
             await _channel.AddToChannelAsync(new JobSeekerAdded { JobSeekerId = jobSeeker.Id }, cancellationToken);
 
+            result.Definer = null;
             return OperationResult<JobSeeker>.SuccessResult(jobSeeker);
         }
     }

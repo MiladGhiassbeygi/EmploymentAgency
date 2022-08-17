@@ -18,7 +18,7 @@ namespace Domain.WriteModel
         public string ResumeFilePath { get; set; }
         public int DefinerId { get; set; }
 
-        public User.User Definer { get; set; }
+        public virtual User.User Definer { get; set; }
         public virtual Country Country { get; set; }
         public virtual ICollection<SuccessedContract> SuccessedContract { get; set; }
     }

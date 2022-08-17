@@ -44,7 +44,8 @@ namespace Persistence.WriteRepositories
                 CountryId = x.CountryId,
                 Email = x.Email,
                 LinkedinAddress = x.LinkedinAddress,
-                ResumeFilePath = x.ResumeFilePath
+                ResumeFilePath = x.ResumeFilePath,
+                DefinerId = x.DefinerId
             }).ToListAsync();
         }
 

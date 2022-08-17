@@ -9,5 +9,6 @@
         public string Email { get; set; }
         public string LinkedinAddress { get; set; }
         public string ResumeFilePath { get; set; }
+        public int DefinerId { get; set; }
     }
 }

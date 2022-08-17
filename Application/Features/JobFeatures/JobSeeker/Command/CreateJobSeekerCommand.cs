@@ -4,5 +4,5 @@ using Domain.WriteModel;
 
 namespace Application.Features.JobFeatures.Commands.CreateJobSeeker
 {
-    public record CreateJobSeekerCommand(string FirstName,string LastName,int CountryId,string Email,string LinkedinAddress,string ResumeFilePath) :IRequest<OperationResult<JobSeeker>>;
+    public record CreateJobSeekerCommand(string FirstName,string LastName,int CountryId,string Email,string LinkedinAddress,string ResumeFilePath, int definerId) :IRequest<OperationResult<JobSeeker>>;
 }

@@ -33,6 +33,11 @@ namespace Persistence.Configuration.JobConfig
                 .HasForeignKey(d => d.CountryId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_JobSeeker_Country");
+
+            builder.HasOne(d => d.Definer)
+              .WithMany(d => d.JobSeekers)
+              .HasForeignKey(d => d.DefinerId)
+              .HasConstraintName("FK_JobSeeker_JobSeekerDefiner");
         }
     }
 }

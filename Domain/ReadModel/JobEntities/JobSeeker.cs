@@ -32,6 +32,8 @@ namespace Domain.ReadModel
         [BsonElement("resumeFilePath")]
         public string ResumeFilePath { get; set; }
 
-       
+        [BsonElement("definerId")]
+        public int DefinerId { get; set; }
+
     }
 }
