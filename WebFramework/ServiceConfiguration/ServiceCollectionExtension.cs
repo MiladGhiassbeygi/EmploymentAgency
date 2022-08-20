@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace WebFramework.ServiceConfiguration
 {
-   public static class ServiceCollectionExtension
+    public static class ServiceCollectionExtension
     {
         public static IServiceCollection AddWebFrameworkServices(this IServiceCollection services)
         {
@@ -36,8 +36,9 @@ namespace WebFramework.ServiceConfiguration
             services.AddMvc().AddJsonOptions(options =>
             {
                 options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+               
             });
-           
+
             return services;
         }
     }

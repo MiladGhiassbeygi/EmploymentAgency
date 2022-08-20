@@ -28,6 +28,13 @@ namespace WebFramework.Swagger
 
                 options.EnableAnnotations();
 
+                //var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                //var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                //options.IncludeXmlComments(xmlPath);
+
+                options.SchemaFilter<EnumTypesSchemaFilter>(xmlDocPath);
+
+                options.DocumentFilter<EnumTypesDocumentFilter>();
                 #region DescribeAllEnumsAsStrings
                 //This method was Deprecated. 
 

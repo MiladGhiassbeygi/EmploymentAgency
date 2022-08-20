@@ -1,21 +1,24 @@
 ﻿using Application.Features.EmployerFeatures.Queries.FilterEmpolyer;
 using Application.Features.JobFeatures.Queries.FilterJob;
 using Application.Features.JobFeatures.Queries.FilterJobSeeker;
-using Domain.ReadModel;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Converters;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using WebFramework.BaseController;
 
 namespace Web.Api.Controllers.V1
 {
-
+    
     public enum FilterType
     {
+        [Display(Name = "Emoloyer")]
         Employer = 1,
+        [Display(Name = "Job")]
         Job = 2,
+        [Display(Name = "JobSeeker")]
         JobSeeker = 3,
     }
 
@@ -35,22 +38,23 @@ namespace Web.Api.Controllers.V1
         [HttpGet("Filter")]
         public async Task<IActionResult> Filter([FromQuery] FilterType type, [FromQuery] string term)
         {
-            switch (type)
-            {
-                case FilterType.Employer:
-                    {
-                        return base.OperationResult(await _sender.Send(new FilterEmpolyerQuery(term)));
-                    }
-                case FilterType.Job:
-                    {
-                        return base.OperationResult(await _sender.Send(new FilterJobQuery(term)));
-                    }
-                case FilterType.JobSeeker:
+            
+                switch (type)
                 {
-                        return base.OperationResult(await _sender.Send(new FilterJobSeekerQuery(term)));
+                    case FilterType.Employer:
+                        {
+                            return base.OperationResult(await _sender.Send(new FilterEmpolyerQuery(term)));
+                        }
+                    case FilterType.Job:
+                        {
+                            return base.OperationResult(await _sender.Send(new FilterJobQuery(term)));
+                        }
+                    case FilterType.JobSeeker:
+                        {
+                            return base.OperationResult(await _sender.Send(new FilterJobSeekerQuery(term)));
+                        }
                 }
-            }
-            return base.OperationResult(BadRequest("Invalid Input Param's"));
+                        return base.OperationResult(BadRequest("Invalid Input Param's"));
         }
     }
 }

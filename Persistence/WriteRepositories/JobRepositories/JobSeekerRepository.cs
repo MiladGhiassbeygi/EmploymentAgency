@@ -57,11 +57,9 @@ namespace Persistence.WriteRepositories
 
         public async Task<JobSeeker> UpdateJobSeekerAsync(JobSeeker jobSeeker)
         {
-            var fetchedJobSeeker = await base.Table.Where(t => t.Id.Equals(jobSeeker.Id)).FirstOrDefaultAsync();
-
-            if (fetchedJobSeeker == null) return null;
-            await base.UpdateAsync(fetchedJobSeeker);
-            return fetchedJobSeeker;
+           
+            await base.UpdateAsync(jobSeeker);
+            return jobSeeker;
         }
     }
  }
