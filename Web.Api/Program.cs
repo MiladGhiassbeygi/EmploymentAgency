@@ -28,6 +28,8 @@ using Web.Api.Controllers.V1;
 using WebFramework.Filters;
 using WebFramework.ServiceConfiguration;
 using WebFramework.Swagger;
+using Application.BackgroundWorker.AddUpdateJob;
+
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 var builder= WebApplication.CreateBuilder(args);
@@ -80,6 +82,7 @@ builder.Services.AddHostedService<AddReadJobSeekerWorker>();
 builder.Services.AddHostedService<AddUpdateJobSeekerWorker>();
 builder.Services.AddHostedService<AddDeleteJobSeekerWorker>();
 builder.Services.AddHostedService<AddReadJobWorker>();
+builder.Services.AddHostedService<AddUpdateJobWorker>();
 builder.Services.AddHostedService<AddReadEmplyerWorker>();
 builder.Services.AddHostedService<AddReadEmployerAcivityFieldWorker>();
 builder.Services.AddHostedService<AddReadReminderWorker>();

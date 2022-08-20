@@ -6,6 +6,8 @@ using Web.Api.Dto.Jobs;
 using Application.Features.JobFeatures.Queries;
 using Application.Features.JobFeatures.Commands.CreateJob;
 using Application.Features.JobFeatures.Queries.FilterJob;
+using Application.Features.JobFeatures.Commands.UpdateJob;
+using Web.Api.Form.JobForm;
 
 namespace Web.Api.Controllers.V1
 {
@@ -48,6 +50,14 @@ namespace Web.Api.Controllers.V1
             }
             return base.OperationResult(commandResult);
         }
+
+        [HttpPut("UpdateJob")]
+        public async Task<IActionResult> UpdateJob(UpdateJobForm input, CancellationToken cancellationToken)
+        {
+            return base.OperationResult(await _sender.Send(new UpdateJobCommand(input.Id, input.Title, input.HoursOfWork, input.SalaryMin, input.SalaryMax, input.AnnualLeave, input.ExactAmountRecived,
+                input.Description, input.EssentialSkills,input.UnnecessarySkills)));
+        }
+
 
         [HttpGet("GetJobs")]
         public async Task<IActionResult> GetJobs()
