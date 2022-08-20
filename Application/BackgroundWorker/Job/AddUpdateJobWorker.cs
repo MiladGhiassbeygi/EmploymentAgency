@@ -54,6 +54,8 @@ namespace Application.BackgroundWorker.AddUpdateJob
                                 Description = job.Description,
                                 EssentialSkills = job.EssentialSkills,
                                 UnnecessarySkills = job.UnnecessarySkills,
+                                Email = job.Email,
+                                HireCompanies = job.HireCompanies,
                                 EmployerId = job.EmployerId
                             };
 

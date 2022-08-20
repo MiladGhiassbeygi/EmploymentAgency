@@ -1,4 +1,5 @@
-﻿using Domain.WriteModel.Common;
+﻿using Domain.ReadModel;
+using Domain.WriteModel.Common;
 using Domain.WriteModel.User;
 
 namespace Domain.WriteModel
@@ -17,11 +18,16 @@ namespace Domain.WriteModel
         public string LinkedinAddress { get; set; }
         public string ResumeFilePath { get; set; }
         public int DefinerId { get; set; }
+        public int EducationalBackgroundId { get; set; }
+        public int WorkExperienceId { get; set; }
 
 
-        
+
+
         public virtual User.User Definer { get; set; }
         public virtual Country Country { get; set; }
+        public virtual ICollection<WorkExperience> WorkExperiences { get; set; }
+        public virtual ICollection<EducationalBackground> EducationalBackgrounds { get; set; }
         public virtual ICollection<SuccessedContract> SuccessedContract { get; set; }
     }
 }

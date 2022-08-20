@@ -12,6 +12,8 @@
         public string Description { get; set; }
         public string EssentialSkills { get; set; }
         public string UnnecessarySkills { get; set; }
+        public string Email { get; set; }
+        public string HireCompanies { get; set; }
         public long EmployerId { get; set; }
     }
 }

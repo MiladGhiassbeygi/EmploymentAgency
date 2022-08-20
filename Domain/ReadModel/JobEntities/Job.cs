@@ -41,6 +41,12 @@ namespace Domain.ReadModel
         [BsonElement("unnecessarySkills")]
         public string UnnecessarySkills { get; set; }
 
+        [BsonElement("email")]
+        public string Email { get; set; }
+
+        [BsonElement("hireCompanies")]
+        public string HireCompanies { get; set; }
+
         [BsonElement("employerId")]
         public long EmployerId { get; set; }
 

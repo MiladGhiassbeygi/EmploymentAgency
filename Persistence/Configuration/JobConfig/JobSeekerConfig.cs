@@ -38,6 +38,8 @@ namespace Persistence.Configuration.JobConfig
               .WithMany(d => d.JobSeekers)
               .HasForeignKey(d => d.DefinerId)
               .HasConstraintName("FK_JobSeeker_JobSeekerDefiner");
+
+            
         }
     }
 }

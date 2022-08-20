@@ -39,6 +39,8 @@ namespace Application.Features.JobFeatures.Commands.UpdateJob
             fetchedJob.Description = request.description;
             fetchedJob.EssentialSkills = request.essentialSkills;
             fetchedJob.UnnecessarySkills = request.unnecessarySkills;
+            fetchedJob.Email = request.email;
+            fetchedJob.HireCompanies = request.hireCompanies;
 
             //fetchedEmployer = _mapper.From(request).Adapt<Employer>();
 

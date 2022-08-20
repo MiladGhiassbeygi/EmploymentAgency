@@ -54,6 +54,45 @@ namespace Persistence.Migrations
                     b.ToTable("Countries");
                 });
 
+            modelBuilder.Entity("Domain.WriteModel.EducationalBackground", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Degree")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("FieldOfStudy")
+                        .HasColumnType("text");
+
+                    b.Property<long>("JobSeekerId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("School")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("JobSeekerId");
+
+                    b.ToTable("EducationalBackgrounds");
+                });
+
             modelBuilder.Entity("Domain.WriteModel.Employer", b =>
                 {
                     b.Property<long>("Id")
@@ -164,6 +203,9 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("Email")
+                        .HasColumnType("text");
+
                     b.Property<long>("EmployerId")
                         .HasColumnType("bigint");
 
@@ -173,6 +215,9 @@ namespace Persistence.Migrations
 
                     b.Property<decimal>("ExactAmountRecived")
                         .HasColumnType("money");
+
+                    b.Property<string>("HireCompanies")
+                        .HasColumnType("text");
 
                     b.Property<int>("HoursOfWork")
                         .HasColumnType("integer");
@@ -264,6 +309,9 @@ namespace Persistence.Migrations
                     b.Property<int>("DefinerId")
                         .HasColumnType("integer");
 
+                    b.Property<int>("EducationalBackgroundId")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(30)
@@ -290,6 +338,9 @@ namespace Persistence.Migrations
                     b.Property<string>("ResumeFilePath")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<int>("WorkExperienceId")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -394,7 +445,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("Date")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2022, 8, 17, 16, 28, 25, 277, DateTimeKind.Local).AddTicks(1973));
+                        .HasDefaultValue(new DateTime(2022, 8, 20, 17, 54, 14, 943, DateTimeKind.Local).AddTicks(9914));
 
                     b.Property<long>("EmployerId")
                         .HasColumnType("bigint");
@@ -675,6 +726,65 @@ namespace Persistence.Migrations
                     b.ToTable("UserTokens", "usr");
                 });
 
+            modelBuilder.Entity("Domain.WriteModel.WorkExperience", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("HireCompanies")
+                        .HasColumnType("text");
+
+                    b.Property<int>("HoursOfWork")
+                        .HasColumnType("integer");
+
+                    b.Property<long>("JobSeekerId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("JobTitle")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<decimal>("SalaryPaid")
+                        .HasColumnType("numeric");
+
+                    b.Property<string>("Skills")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("TypeOfCooperation")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("JobSeekerId");
+
+                    b.ToTable("WorkExperiences");
+                });
+
+            modelBuilder.Entity("Domain.WriteModel.EducationalBackground", b =>
+                {
+                    b.HasOne("Domain.WriteModel.JobSeeker", "JobSeeker")
+                        .WithMany("EducationalBackgrounds")
+                        .HasForeignKey("JobSeekerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("JobSeeker");
+                });
+
             modelBuilder.Entity("Domain.WriteModel.Employer", b =>
                 {
                     b.HasOne("Domain.WriteModel.User.User", "Definer")
@@ -748,7 +858,8 @@ namespace Persistence.Migrations
                         .WithMany("JobSeekers")
                         .HasForeignKey("DefinerId")
                         .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("FK_JobSeeker_JobSeekerDefiner");
 
                     b.Navigation("Country");
 
@@ -869,6 +980,17 @@ namespace Persistence.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Domain.WriteModel.WorkExperience", b =>
+                {
+                    b.HasOne("Domain.WriteModel.JobSeeker", "JobSeeker")
+                        .WithMany("WorkExperiences")
+                        .HasForeignKey("JobSeekerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("JobSeeker");
+                });
+
             modelBuilder.Entity("Domain.WriteModel.Country", b =>
                 {
                     b.Navigation("JobSeeker");
@@ -893,7 +1015,11 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.WriteModel.JobSeeker", b =>
                 {
+                    b.Navigation("EducationalBackgrounds");
+
                     b.Navigation("SuccessedContract");
+
+                    b.Navigation("WorkExperiences");
                 });
 
             modelBuilder.Entity("Domain.WriteModel.User.Role", b =>

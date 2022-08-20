@@ -36,6 +36,8 @@ namespace Application.Features.JobFeature.Commands.CreateJob
                 Description = request.Description,
                 EssentialSkills = request.EssentialSkills,
                 UnnecessarySkills = request.UnnecessarySkills,
+                Email = request.email,
+                HireCompanies = request.hireCompanies,
                 EmployerId = request.EmployerId
 
             };

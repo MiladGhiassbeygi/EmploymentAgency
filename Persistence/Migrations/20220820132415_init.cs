@@ -128,58 +128,6 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "JobSeekers",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    FirstName = table.Column<string>(type: "character varying(15)", maxLength: 15, nullable: false),
-                    LastName = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
-                    CountryId = table.Column<int>(type: "integer", nullable: false),
-                    Email = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
-                    LinkedinAddress = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    ResumeFilePath = table.Column<string>(type: "text", nullable: false),
-                    CreatedTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    ModifiedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_JobSeekers", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_JobSeeker_Country",
-                        column: x => x.CountryId,
-                        principalTable: "Countries",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Employers",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    FirstName = table.Column<string>(type: "character varying(15)", maxLength: 15, nullable: false),
-                    LastName = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: false),
-                    Address = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    PhoneNumber = table.Column<string>(type: "character varying(15)", maxLength: 15, nullable: false),
-                    Email = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
-                    WebsiteLink = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
-                    NecessaryExplanation = table.Column<string>(type: "text", nullable: false),
-                    FieldOfActivityId = table.Column<byte>(type: "smallint", nullable: false),
-                    CreatedTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    ModifiedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Employers", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Employer_EmployerAcivityField",
-                        column: x => x.FieldOfActivityId,
-                        principalTable: "EmployerAcivityFields",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "RoleClaims",
                 schema: "usr",
                 columns: table => new
@@ -200,6 +148,78 @@ namespace Persistence.Migrations
                         principalSchema: "usr",
                         principalTable: "Roles",
                         principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Employers",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    FirstName = table.Column<string>(type: "text", maxLength: 15, nullable: false),
+                    LastName = table.Column<string>(type: "text", maxLength: 25, nullable: false),
+                    Address = table.Column<string>(type: "text", maxLength: 100, nullable: false),
+                    PhoneNumber = table.Column<string>(type: "text", maxLength: 15, nullable: false),
+                    Email = table.Column<string>(type: "text", maxLength: 30, nullable: false),
+                    WebsiteLink = table.Column<string>(type: "text", maxLength: 30, nullable: false),
+                    NecessaryExplanation = table.Column<string>(type: "text", nullable: false),
+                    IsFixed = table.Column<bool>(type: "boolean", nullable: false),
+                    ExactAmountRecived = table.Column<decimal>(type: "numeric", nullable: false),
+                    FieldOfActivityId = table.Column<byte>(type: "smallint", nullable: false),
+                    DefinerId = table.Column<int>(type: "integer", nullable: false),
+                    CreatedTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Employers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Employer_EmployerAcivityField",
+                        column: x => x.FieldOfActivityId,
+                        principalTable: "EmployerAcivityFields",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Employer_EmployerDefiner",
+                        column: x => x.DefinerId,
+                        principalSchema: "usr",
+                        principalTable: "Users",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "JobSeekers",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    FirstName = table.Column<string>(type: "character varying(15)", maxLength: 15, nullable: false),
+                    LastName = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
+                    CountryId = table.Column<int>(type: "integer", nullable: false),
+                    Email = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
+                    LinkedinAddress = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    ResumeFilePath = table.Column<string>(type: "text", nullable: false),
+                    DefinerId = table.Column<int>(type: "integer", nullable: false),
+                    EducationalBackgroundId = table.Column<int>(type: "integer", nullable: false),
+                    WorkExperienceId = table.Column<int>(type: "integer", nullable: false),
+                    CreatedTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_JobSeekers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_JobSeeker_Country",
+                        column: x => x.CountryId,
+                        principalTable: "Countries",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_JobSeeker_JobSeekerDefiner",
+                        column: x => x.DefinerId,
+                        principalSchema: "usr",
+                        principalTable: "Users",
+                        principalColumn: "UserId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -325,29 +345,6 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EmployerCommissions",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    IsFixed = table.Column<bool>(type: "boolean", nullable: false, defaultValue: true),
-                    Value = table.Column<int>(type: "integer", nullable: false),
-                    EmployerId = table.Column<long>(type: "bigint", nullable: false),
-                    CreatedTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    ModifiedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_EmployerCommissions", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_EmployerCommission_EmployerInformation",
-                        column: x => x.EmployerId,
-                        principalTable: "Employers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Jobs",
                 columns: table => new
                 {
@@ -362,6 +359,8 @@ namespace Persistence.Migrations
                     Description = table.Column<string>(type: "text", nullable: false),
                     EssentialSkills = table.Column<string>(type: "text", nullable: false),
                     UnnecessarySkills = table.Column<string>(type: "text", nullable: false),
+                    Email = table.Column<string>(type: "text", nullable: true),
+                    HireCompanies = table.Column<string>(type: "text", nullable: true),
                     EmployerId = table.Column<long>(type: "bigint", nullable: false),
                     CreatedTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
@@ -377,6 +376,32 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "EducationalBackgrounds",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    School = table.Column<string>(type: "text", nullable: true),
+                    Degree = table.Column<string>(type: "text", nullable: true),
+                    FieldOfStudy = table.Column<string>(type: "text", nullable: true),
+                    StartDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    JobSeekerId = table.Column<long>(type: "bigint", nullable: false),
+                    CreatedTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EducationalBackgrounds", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_EducationalBackgrounds_JobSeekers_JobSeekerId",
+                        column: x => x.JobSeekerId,
+                        principalTable: "JobSeekers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "SuccessedContracts",
                 columns: table => new
                 {
@@ -385,7 +410,7 @@ namespace Persistence.Migrations
                     EmployerId = table.Column<long>(type: "bigint", nullable: false),
                     JobSeekerId = table.Column<long>(type: "bigint", nullable: false),
                     EmploymentAgencyId = table.Column<int>(type: "integer", nullable: false),
-                    Date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValue: new DateTime(2022, 8, 14, 17, 34, 58, 586, DateTimeKind.Local).AddTicks(9950)),
+                    Date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValue: new DateTime(2022, 8, 20, 17, 54, 14, 943, DateTimeKind.Local).AddTicks(9914)),
                     IsAmountFixed = table.Column<bool>(type: "boolean", nullable: false),
                     Amount = table.Column<decimal>(type: "money", nullable: false),
                     CreatedTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
@@ -402,6 +427,35 @@ namespace Persistence.Migrations
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_SuccessedContract_JobSeeker",
+                        column: x => x.JobSeekerId,
+                        principalTable: "JobSeekers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "WorkExperiences",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    JobTitle = table.Column<string>(type: "text", nullable: true),
+                    HoursOfWork = table.Column<int>(type: "integer", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    SalaryPaid = table.Column<decimal>(type: "numeric", nullable: false),
+                    TypeOfCooperation = table.Column<string>(type: "text", nullable: true),
+                    HireCompanies = table.Column<string>(type: "text", nullable: true),
+                    Skills = table.Column<string>(type: "text", nullable: true),
+                    JobSeekerId = table.Column<long>(type: "bigint", nullable: false),
+                    CreatedTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WorkExperiences", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_WorkExperiences_JobSeekers_JobSeekerId",
                         column: x => x.JobSeekerId,
                         principalTable: "JobSeekers",
                         principalColumn: "Id",
@@ -473,9 +527,14 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_EmployerCommissions_EmployerId",
-                table: "EmployerCommissions",
-                column: "EmployerId");
+                name: "IX_EducationalBackgrounds_JobSeekerId",
+                table: "EducationalBackgrounds",
+                column: "JobSeekerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Employers_DefinerId",
+                table: "Employers",
+                column: "DefinerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Employers_FieldOfActivityId",
@@ -506,6 +565,11 @@ namespace Persistence.Migrations
                 name: "IX_JobSeekers_CountryId",
                 table: "JobSeekers",
                 column: "CountryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_JobSeekers_DefinerId",
+                table: "JobSeekers",
+                column: "DefinerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_JobUnnecessarySkills_JobId",
@@ -576,12 +640,17 @@ namespace Persistence.Migrations
                 table: "Users",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WorkExperiences_JobSeekerId",
+                table: "WorkExperiences",
+                column: "JobSeekerId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "EmployerCommissions");
+                name: "EducationalBackgrounds");
 
             migrationBuilder.DropTable(
                 name: "JobCommissions");
@@ -623,21 +692,20 @@ namespace Persistence.Migrations
                 schema: "usr");
 
             migrationBuilder.DropTable(
+                name: "WorkExperiences");
+
+            migrationBuilder.DropTable(
                 name: "Jobs");
 
             migrationBuilder.DropTable(
                 name: "Skills");
 
             migrationBuilder.DropTable(
-                name: "JobSeekers");
-
-            migrationBuilder.DropTable(
                 name: "Roles",
                 schema: "usr");
 
             migrationBuilder.DropTable(
-                name: "Users",
-                schema: "usr");
+                name: "JobSeekers");
 
             migrationBuilder.DropTable(
                 name: "Employers");
@@ -647,6 +715,10 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "EmployerAcivityFields");
+
+            migrationBuilder.DropTable(
+                name: "Users",
+                schema: "usr");
         }
     }
 }

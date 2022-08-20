@@ -27,7 +27,7 @@ namespace Web.Api.Controllers.V1
         public async Task<IActionResult> CreateJob(CreateJobForm model)
         {
             var commandResult = await _sender.Send(new CreateJobCommand(model.Title, model.HoursOfWork, model.SalaryMin, model.SalaryMax
-                , model.AnnualLeave, model.ExactAmountRecived, model.Description, model.EssentialSkills, model.UnnecessarySkills, model.EmployerId
+                , model.AnnualLeave, model.ExactAmountRecived, model.Description, model.EssentialSkills, model.UnnecessarySkills,model.Email,model.HireCompanies, model.EmployerId
                 ));
 
             if (commandResult.IsSuccess)
@@ -43,6 +43,8 @@ namespace Web.Api.Controllers.V1
                     Description = model.Description,
                     EssentialSkills = model.EssentialSkills,
                     UnnecessarySkills = model.UnnecessarySkills,
+                    Email = model.Email,
+                    HireCompanies = model.HireCompanies,
                     EmployerId = model.EmployerId
                 };
 
@@ -55,7 +57,7 @@ namespace Web.Api.Controllers.V1
         public async Task<IActionResult> UpdateJob(UpdateJobForm input, CancellationToken cancellationToken)
         {
             return base.OperationResult(await _sender.Send(new UpdateJobCommand(input.Id, input.Title, input.HoursOfWork, input.SalaryMin, input.SalaryMax, input.AnnualLeave, input.ExactAmountRecived,
-                input.Description, input.EssentialSkills,input.UnnecessarySkills)));
+                input.Description, input.EssentialSkills,input.UnnecessarySkills,input.Email,input.HireCompanies)));
         }
 
 
