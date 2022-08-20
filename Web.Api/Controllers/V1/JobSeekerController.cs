@@ -1,5 +1,6 @@
 ﻿using Application.Features.JobFeatures;
 using Application.Features.JobFeatures.Commands.CreateJobSeeker;
+using Application.Features.JobFeatures.DeleteJobSeeker;
 using Application.Features.JobFeatures.UpdateJobSeeker;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -48,10 +49,16 @@ namespace Web.Api.Controllers.V1
         }
 
 
-        [HttpPost("UpdateJobSeeker")]
+        [HttpPut("UpdateJobSeeker")]
         public async Task<IActionResult> UpdateJobSeeker(UpdateJobSeekerForm input, CancellationToken cancellationToken)
         {
             return base.OperationResult(await _sender.Send(new UpdateJobSeekerCommand(input.JobSeekerId,input.FirstName,input.LastName,input.CountryId,input.Email,input.LinkedinAddress,input.ResumeFilePath)));
+        }
+
+        [HttpPost("DeleteJobSeeker")]
+        public async Task<IActionResult> DeleteJobSeeker(DeleteJobSeekerForm input, CancellationToken cancellationToken)
+        {
+            return base.OperationResult(await _sender.Send(new DeleteJobSeekerCommand(input.Id)));
         }
 
         [HttpGet("GetJobSeeker")]
