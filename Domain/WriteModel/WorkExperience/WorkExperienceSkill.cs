@@ -4,7 +4,7 @@ using Domain.WriteModel.Common;
 
 namespace Domain.WriteModel
 {
-    public class WorkExperienceSkills : BaseEntity<short>
+    public class WorkExperienceSkill : BaseEntity<short>
     {
         public short SkillId { get; set; }
         public int WorkExperienceId { get; set; }

@@ -6,11 +6,6 @@ using Domain.ReadModel;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.BackgroundWorker
 {
@@ -34,12 +29,27 @@ namespace Application.BackgroundWorker
 
                 var writeRepository = scope.ServiceProvider.GetRequiredService<IWorkExperienceRepository>();
                 var readRepository = scope.ServiceProvider.GetRequiredService<IReadWorkExperienceRepository>();
+                var workExperienceSkillRepository = scope.ServiceProvider.GetRequiredService<IWorkExperienceSkillRepository>();
                 try
                 {
                     await foreach (var item in _readModelChannel.ReturnValue(stoppingToken))
                     {
                         var workExperience = await writeRepository.GetWorkExperienceByIdAsync(item.WorkExperienceId);
+                        
+                        
+                        var skilllList =  await workExperienceSkillRepository.GetWorkExperienceSkillByIdAsync(item.WorkExperienceId);
+                        string skills = "";
+                        if (skilllList is not null)
+                        {
+                            foreach (var essential in skilllList)
+                            {
+                                skills = skills + essential.Skill.Title + ',';
+                            }
+                            skills = skills.Remove(skills.Length - 1);
 
+                        }
+
+                        
                         if (workExperience != null)
                         {
                             await readRepository.AddAsync(new WorkExperience
@@ -52,6 +62,7 @@ namespace Application.BackgroundWorker
                               SalaryPaid = workExperience.SalaryPaid,
                               TypeOfCooperation = workExperience.TypeOfCooperation,
                               HireCompanies = workExperience.HireCompanies,
+                              Skills = skills
                             }, stoppingToken);
                         }
                     }

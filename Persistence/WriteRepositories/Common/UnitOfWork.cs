@@ -48,6 +48,7 @@ namespace Persistence.WriteRepositories.Common
         public IReminderRepository ReminderRepository { get; }
         public IJobSeekerRepository JobSeekerRepository { get; }
         public IWorkExperienceRepository WorkExperienceRepository { get; }
+        public IWorkExperienceSkillRepository WorkExperienceSkillRepository { get; }
 
         #endregion
 
@@ -83,6 +84,7 @@ namespace Persistence.WriteRepositories.Common
             JobSeekerRepository = new JobSeekerRepository(_db);
             ReminderRepository = new ReminderRepository(_db);
             WorkExperienceRepository = new WorkExperienceRepository(_db);
+            WorkExperienceSkillRepository = new WorkExperienceSkillRepository(_db);
 
             #endregion
         }

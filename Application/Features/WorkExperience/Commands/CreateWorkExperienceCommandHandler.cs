@@ -43,6 +43,13 @@ namespace Application.Features.CreateWorkExperience
 
             await _unitOfWork.CommitAsync();
 
+            foreach(var skillId in request.skillIds)
+            {
+                await _unitOfWork.WorkExperienceSkillRepository.CreateWorkExperienceSkillAsync(new WorkExperienceSkill { SkillId = skillId, WorkExperienceId = result.Id });
+            }
+
+            await _unitOfWork.CommitAsync();
+
             await _channel.AddToChannelAsync(new WorkExperienceAdded { WorkExperienceId = workExperience.Id }, cancellationToken);
 
             return OperationResult<WorkExperience>.SuccessResult(workExperience);

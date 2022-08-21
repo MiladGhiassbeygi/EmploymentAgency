@@ -38,6 +38,7 @@ namespace Application.Contracts.Persistence
         public IJobSeekerRepository JobSeekerRepository { get; }
         public IReminderRepository ReminderRepository { get; }
         public IWorkExperienceRepository WorkExperienceRepository { get; }
+        public IWorkExperienceSkillRepository WorkExperienceSkillRepository { get; }
 
         #endregion
 

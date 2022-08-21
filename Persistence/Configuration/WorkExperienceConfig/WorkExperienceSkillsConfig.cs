@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Persistence.Configuration.AreaConfig
 {
-    internal class WorkExperienceSkillsConfig : IEntityTypeConfiguration<WorkExperienceSkills>
+    internal class WorkExperienceSkillsConfig : IEntityTypeConfiguration<WorkExperienceSkill>
     {
-        public void Configure(EntityTypeBuilder<WorkExperienceSkills> builder)
+        public void Configure(EntityTypeBuilder<WorkExperienceSkill> builder)
         {
             builder.HasKey(x => new { x.SkillId, x.WorkExperienceId });
 
