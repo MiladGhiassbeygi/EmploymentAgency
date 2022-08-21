@@ -68,6 +68,11 @@ namespace Web.Api.Controllers.V1
             return base.OperationResult(await _sender.Send(new GetJobsQuery()));
         }
 
+        [HttpGet("GetJobById")]
+        public async Task<IActionResult> GetJobById(long Id)
+        {
+            return base.OperationResult(await _sender.Send(new GetJobQuery(Id)));
+        }
 
         [HttpGet("Filter")]
         public async Task <IActionResult> Filter([FromQuery]string term)

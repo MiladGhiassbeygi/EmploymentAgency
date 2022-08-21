@@ -56,7 +56,7 @@ namespace Web.Api.Controllers.V1
             return base.OperationResult(await _sender.Send(new GetEmployersQuery()));
         }
 
-        [HttpGet("GetEmployer")]
+        [HttpGet("GetEmployerById")]
         public async Task<IActionResult> GetEmployerById(long Id)
         {
             return base.OperationResult(await _sender.Send(new GetEmployerQuery(Id)));
