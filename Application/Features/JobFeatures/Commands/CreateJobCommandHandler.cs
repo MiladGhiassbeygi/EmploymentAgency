@@ -24,6 +24,11 @@ namespace Application.Features.JobFeature.Commands.CreateJob
             if (await _unitOfWork.JobRepository.GetJobByTitleAsync(request.Title) is not null)
                 return OperationResult<Job>.FailureResult("This Job Already Exists");
 
+            if (IsSkillIdsAreShort(request.EssentialSkills.Split(',')))
+                return OperationResult<Job>.FailureResult("Essential SkillIds Are Invalid");
+            if (IsSkillIdsAreShort(request.UnnecessarySkills.Split(',')))
+                return OperationResult<Job>.FailureResult("Unnessecary SkillIds Are Invalid");
+
             var job = new Job
             {
 
@@ -34,8 +39,6 @@ namespace Application.Features.JobFeature.Commands.CreateJob
                 AnnualLeave = request.AnnualLeave,
                 ExactAmountRecived = request.ExactAmountRecived,
                 Description = request.Description,
-                EssentialSkills = request.EssentialSkills,
-                UnnecessarySkills = request.UnnecessarySkills,
                 Email = request.email,
                 HireCompanies = request.hireCompanies,
                 EmployerId = request.EmployerId
@@ -46,9 +49,31 @@ namespace Application.Features.JobFeature.Commands.CreateJob
 
             await _unitOfWork.CommitAsync();
 
+            foreach(var skillId in request.EssentialSkills.Split(','))
+            {
+                await _unitOfWork.JobEssentialSkillsRepository.CreateJobEssentialSkillsAsync(new JobEssentialSkills { JobId = job.Id, SkillId = short.Parse(skillId) });
+            }
+            foreach (var skillId in request.EssentialSkills.Split(','))
+            {
+                await _unitOfWork.JobUnnessecarySkillsRepository.CreateJobUnnessecarySkillsAsync(new JobUnnecessarySkills { JobId = job.Id, SkillId = short.Parse(skillId) });
+            }
+
+            await _unitOfWork.CommitAsync();
+
             await _channel.AddToChannelAsync(new JobAdded { JobId = job.Id }, cancellationToken);
 
             return OperationResult<Job>.SuccessResult(job);
+        }
+        private bool IsSkillIdsAreShort(string[] skillIds)
+        {
+            foreach (var skiilId in skillIds)
+            {
+                short shortSkillId;
+                if (!short.TryParse(skiilId, out shortSkillId))
+                    return false;
+            }
+
+            return true;
         }
     }
 }

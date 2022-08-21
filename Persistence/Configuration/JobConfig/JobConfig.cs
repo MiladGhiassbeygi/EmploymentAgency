@@ -10,8 +10,6 @@ namespace Persistence.Configuration.JobConfig
         {
             builder.Property(e => e.Description).IsRequired();
 
-            builder.Property(e => e.EssentialSkills).IsRequired();
-
             builder.Property(e => e.ExactAmountRecived).HasColumnType("money");
 
             builder.Property(e => e.SalaryMax).HasColumnType("money");
@@ -21,8 +19,6 @@ namespace Persistence.Configuration.JobConfig
             builder.Property(e => e.Title)
                 .IsRequired()
                 .HasMaxLength(30);
-
-            builder.Property(e => e.UnnecessarySkills).IsRequired();
 
             builder.HasOne(d => d.Employer)
                 .WithMany(p => p.Job)

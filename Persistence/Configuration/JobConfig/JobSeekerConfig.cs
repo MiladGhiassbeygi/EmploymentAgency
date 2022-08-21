@@ -40,6 +40,8 @@ namespace Persistence.Configuration.JobConfig
               .HasConstraintName("FK_JobSeeker_JobSeekerDefiner");
 
             
+                
+            
         }
     }
 }

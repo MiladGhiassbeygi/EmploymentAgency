@@ -85,6 +85,7 @@ builder.Services.AddHostedService<AddReadJobWorker>();
 builder.Services.AddHostedService<AddUpdateJobWorker>();
 builder.Services.AddHostedService<AddReadEmplyerWorker>();
 builder.Services.AddHostedService<AddReadEmployerAcivityFieldWorker>();
+builder.Services.AddHostedService<AddReadWorkExperienceWorker>();
 builder.Services.AddHostedService<AddReadReminderWorker>();
 builder.Services.AddHostedService<AddDeleteEmployerWorker>();
 builder.Services.AddHostedService<AddUpdateEmployerWorker>();

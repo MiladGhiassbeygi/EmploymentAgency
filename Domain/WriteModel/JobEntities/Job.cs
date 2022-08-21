@@ -15,9 +15,8 @@ namespace Domain.WriteModel
         public decimal SalaryMax { get; set; }
         public byte AnnualLeave { get; set; }
         public decimal ExactAmountRecived { get; set; }
+        public bool IsFixed { get; set; }
         public string Description { get; set; }
-        public string EssentialSkills { get; set; }
-        public string UnnecessarySkills { get; set; }
         public string Email { get; set; }
         public string HireCompanies { get; set; }
         public long EmployerId { get; set; }

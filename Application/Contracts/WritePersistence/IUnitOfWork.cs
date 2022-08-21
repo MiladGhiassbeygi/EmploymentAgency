@@ -4,6 +4,7 @@ using Application.Contracts.ReadPersistence.Area;
 using Application.Contracts.ReadPersistence;
 using Application.Contracts.WritePersistence;
 using Application.Contracts.WritePersistence.Reminder;
+using Application.Contracts.ReadPersistence.ReadWorkExperience;
 
 namespace Application.Contracts.Persistence
 {
@@ -18,6 +19,7 @@ namespace Application.Contracts.Persistence
         public IReadEmployerRepository ReadEmployerRepository { get; }
         public IReadEmployerActivitiesRepository ReadEmployerActivitiesRepository { get; }
         public IReadReminderRepository ReadReminderRepository { get; }
+        public IReadWorkExperienceRepository ReadWorkExperienceRepository { get; }
 
         #endregion
 
@@ -32,8 +34,10 @@ namespace Application.Contracts.Persistence
         public IJobRepository JobRepository { get; }
         public ISkillRepository SkillRepository { get; }
         public IJobEssentialSkillsRepository JobEssentialSkillsRepository { get; }
+        public IJobUnnessecarySkillsRepository JobUnnessecarySkillsRepository { get; }  
         public IJobSeekerRepository JobSeekerRepository { get; }
         public IReminderRepository ReminderRepository { get; }
+        public IWorkExperienceRepository WorkExperienceRepository { get; }
 
         #endregion
 

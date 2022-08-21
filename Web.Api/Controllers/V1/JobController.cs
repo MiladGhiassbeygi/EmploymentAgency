@@ -29,6 +29,7 @@ namespace Web.Api.Controllers.V1
             var commandResult = await _sender.Send(new CreateJobCommand(model.Title, model.HoursOfWork, model.SalaryMin, model.SalaryMax
                 , model.AnnualLeave, model.ExactAmountRecived, model.Description, model.EssentialSkills, model.UnnecessarySkills,model.Email,model.HireCompanies, model.EmployerId
                 ));
+           
 
             if (commandResult.IsSuccess)
             {

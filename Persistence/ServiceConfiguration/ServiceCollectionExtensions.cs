@@ -5,6 +5,7 @@ using Application.Contracts.Persistence.JobContract;
 using Application.Contracts.ReadPersistence;
 using Application.Contracts.ReadPersistence.Account;
 using Application.Contracts.ReadPersistence.Area;
+using Application.Contracts.ReadPersistence.ReadWorkExperience;
 using Application.Contracts.WritePersistence;
 using Application.Contracts.WritePersistence.Reminder;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,7 @@ using MongoDB.Driver;
 using Persistence.ReadRepositories;
 using Persistence.ReadRepositories.Account;
 using Persistence.ReadRepositories.Area;
+using Persistence.ReadRepositories.ReadWorkExperience;
 using Persistence.WriteRepositories;
 using Persistence.WriteRepositories.Common;
 using Persistence.WriteRepositories.Reminder;
@@ -45,6 +47,9 @@ namespace Persistence.ServiceConfiguration
 
             services.AddScoped<IReminderRepository, ReminderRepository>();
             services.AddScoped<IReadReminderRepository, ReadReminderRepository>();
+
+            services.AddScoped<IWorkExperienceRepository, WorkExperienceRepository>();
+            services.AddScoped<IReadWorkExperienceRepository, ReadWorkExperienceRepository>();
 
             var mongoClient = new MongoClient("mongodb://localhost:27017");
             var mongoDatabase = mongoClient.GetDatabase("EmploymentAgency");

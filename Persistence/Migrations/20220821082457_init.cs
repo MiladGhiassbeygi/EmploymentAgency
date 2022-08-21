@@ -357,8 +357,6 @@ namespace Persistence.Migrations
                     AnnualLeave = table.Column<byte>(type: "smallint", nullable: false),
                     ExactAmountRecived = table.Column<decimal>(type: "money", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
-                    EssentialSkills = table.Column<string>(type: "text", nullable: false),
-                    UnnecessarySkills = table.Column<string>(type: "text", nullable: false),
                     Email = table.Column<string>(type: "text", nullable: true),
                     HireCompanies = table.Column<string>(type: "text", nullable: true),
                     EmployerId = table.Column<long>(type: "bigint", nullable: false),
@@ -410,7 +408,7 @@ namespace Persistence.Migrations
                     EmployerId = table.Column<long>(type: "bigint", nullable: false),
                     JobSeekerId = table.Column<long>(type: "bigint", nullable: false),
                     EmploymentAgencyId = table.Column<int>(type: "integer", nullable: false),
-                    Date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValue: new DateTime(2022, 8, 20, 17, 54, 14, 943, DateTimeKind.Local).AddTicks(9914)),
+                    Date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValue: new DateTime(2022, 8, 21, 12, 54, 57, 543, DateTimeKind.Local).AddTicks(2259)),
                     IsAmountFixed = table.Column<bool>(type: "boolean", nullable: false),
                     Amount = table.Column<decimal>(type: "money", nullable: false),
                     CreatedTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
@@ -510,7 +508,10 @@ namespace Persistence.Migrations
                 columns: table => new
                 {
                     JobId = table.Column<long>(type: "bigint", nullable: false),
-                    SkillId = table.Column<short>(type: "smallint", nullable: false)
+                    SkillId = table.Column<short>(type: "smallint", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false),
+                    CreatedTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
                 },
                 constraints: table =>
                 {

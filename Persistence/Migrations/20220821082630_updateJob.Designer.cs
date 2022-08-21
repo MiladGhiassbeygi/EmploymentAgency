@@ -12,8 +12,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220820132415_init")]
-    partial class init
+    [Migration("20220821082630_updateJob")]
+    partial class updateJob
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -211,10 +211,6 @@ namespace Persistence.Migrations
                     b.Property<long>("EmployerId")
                         .HasColumnType("bigint");
 
-                    b.Property<string>("EssentialSkills")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<decimal>("ExactAmountRecived")
                         .HasColumnType("money");
 
@@ -223,6 +219,9 @@ namespace Persistence.Migrations
 
                     b.Property<int>("HoursOfWork")
                         .HasColumnType("integer");
+
+                    b.Property<bool>("IsFixed")
+                        .HasColumnType("boolean");
 
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("timestamp without time zone");
@@ -237,10 +236,6 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("character varying(30)");
-
-                    b.Property<string>("UnnecessarySkills")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -355,8 +350,17 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.WriteModel.JobUnnecessarySkills", b =>
                 {
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("integer");
+
                     b.Property<long>("JobId")
                         .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<short>("SkillId")
                         .HasColumnType("smallint");
@@ -447,7 +451,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("Date")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2022, 8, 20, 17, 54, 14, 943, DateTimeKind.Local).AddTicks(9914));
+                        .HasDefaultValue(new DateTime(2022, 8, 21, 12, 56, 30, 293, DateTimeKind.Local).AddTicks(2519));
 
                     b.Property<long>("EmployerId")
                         .HasColumnType("bigint");

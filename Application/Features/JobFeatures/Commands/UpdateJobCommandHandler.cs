@@ -37,8 +37,6 @@ namespace Application.Features.JobFeatures.Commands.UpdateJob
             fetchedJob.AnnualLeave = request.annualLeave;
             fetchedJob.ExactAmountRecived = request.exactAmountRecived;
             fetchedJob.Description = request.description;
-            fetchedJob.EssentialSkills = request.essentialSkills;
-            fetchedJob.UnnecessarySkills = request.unnecessarySkills;
             fetchedJob.Email = request.email;
             fetchedJob.HireCompanies = request.hireCompanies;
 

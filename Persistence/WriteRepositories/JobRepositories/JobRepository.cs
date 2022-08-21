@@ -48,8 +48,8 @@ namespace Persistence.WriteRepositories
         {
             return await base.TableNoTracking.Select(x => new Job { /*Id= x.Id,*/ Title = x.Title, HoursOfWork = x.HoursOfWork,
                 SalaryMin= x.SalaryMin,SalaryMax=x.SalaryMax,
-            AnnualLeave= x.AnnualLeave,ExactAmountRecived=x.ExactAmountRecived,Description=x.Description,
-            EssentialSkills=x.EssentialSkills,UnnecessarySkills= x.UnnecessarySkills,Email=x.Email,HireCompanies = x.HireCompanies,EmployerId=x.EmployerId}).ToListAsync();
+            AnnualLeave= x.AnnualLeave,ExactAmountRecived=x.ExactAmountRecived,Description=x.Description
+            ,Email=x.Email,HireCompanies = x.HireCompanies,EmployerId=x.EmployerId}).ToListAsync();
         }
     }
 }

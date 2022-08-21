@@ -10,10 +10,10 @@ namespace Application.Contracts.WritePersistence
     public interface IEmployerRepository
     {
         Task<Employer> CreateEmployerAsync(Employer employer);
-        Task<Employer> GetEmployerByIdAsync(long id);//this was int
+        Task<Employer> GetEmployerByIdAsync(long id);
         Task<Employer> GetEmployerByNameAsync(string firstName,string lastName);
         Task<Employer> UpdateEmployerAsync(Employer employer);
-        Task<Employer> DeleteEmployerByIdAsync(long id); //this was int
+        Task<Employer> DeleteEmployerByIdAsync(long id);
         Task<List<Employer>> GetAll();
     }
 }

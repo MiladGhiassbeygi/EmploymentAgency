@@ -48,8 +48,6 @@ namespace Application.BackgroundWorker
                                AnnualLeave = job.AnnualLeave,
                                ExactAmountRecived = job.ExactAmountRecived,
                                Description = job.Description,
-                               EssentialSkills = job.EssentialSkills,
-                               UnnecessarySkills = job.UnnecessarySkills,
                                Email = job.Email,
                                HireCompanies = job.HireCompanies,
                                EmployerId = job.EmployerId

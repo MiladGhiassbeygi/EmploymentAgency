@@ -3,11 +3,13 @@ using Application.Contracts.Persistence.Area;
 using Application.Contracts.Persistence.JobContract;
 using Application.Contracts.ReadPersistence;
 using Application.Contracts.ReadPersistence.Area;
+using Application.Contracts.ReadPersistence.ReadWorkExperience;
 using Application.Contracts.WritePersistence;
 using Application.Contracts.WritePersistence.Reminder;
 using MongoDB.Driver;
 using Persistence.ReadRepositories;
 using Persistence.ReadRepositories.Area;
+using Persistence.ReadRepositories.ReadWorkExperience;
 using Persistence.WriteRepositories.JobRepositories;
 using Persistence.WriteRepositories.Reminder;
 
@@ -27,6 +29,7 @@ namespace Persistence.WriteRepositories.Common
         public IReadReminderRepository ReadReminderRepository { get; }
         public IReadEmployerRepository ReadEmployerRepository { get; }
         public IReadEmployerActivitiesRepository ReadEmployerActivitiesRepository { get; }
+        public IReadWorkExperienceRepository ReadWorkExperienceRepository { get; }
 
         #endregion
 
@@ -39,10 +42,12 @@ namespace Persistence.WriteRepositories.Common
         public IJobCommissionRepository JobCommissionRepository { get; }
         public ISkillRepository SkillRepository { get; }
         public IJobEssentialSkillsRepository JobEssentialSkillsRepository { get; }
+        public IJobUnnessecarySkillsRepository JobUnnessecarySkillsRepository { get; }
         public IEmployerRepository EmployerRepository { get; }
         public IEmployerAcivityFieldRepository EmployerAcivityFieldRepository { get; }
         public IReminderRepository ReminderRepository { get; }
         public IJobSeekerRepository JobSeekerRepository { get; }
+        public IWorkExperienceRepository WorkExperienceRepository { get; }
 
         #endregion
 
@@ -59,6 +64,7 @@ namespace Persistence.WriteRepositories.Common
             ReadEmployerRepository = new ReadEmployerRepository(_readDb);
             ReadEmployerActivitiesRepository = new ReadEmployerActivitiesRepository(_readDb);
             ReadReminderRepository = new ReadReminderRepository(_readDb);
+            ReadWorkExperienceRepository = new ReadWorkExperienceRepository(_readDb);
 
             #endregion
 
@@ -71,10 +77,12 @@ namespace Persistence.WriteRepositories.Common
             JobCommissionRepository = new JobCommissionRepository(_db);
             SkillRepository = new SkillRepository(_db);
             JobEssentialSkillsRepository = new JobEssentialSkillsRepository(_db);
+            JobUnnessecarySkillsRepository = new JobUnnessecarySkillsRepository(_db);
             EmployerRepository = new EmployerRepository(_db);
             EmployerAcivityFieldRepository = new EmployerAcivityFieldRepository(_db);
             JobSeekerRepository = new JobSeekerRepository(_db);
             ReminderRepository = new ReminderRepository(_db);
+            WorkExperienceRepository = new WorkExperienceRepository(_db);
 
             #endregion
         }
