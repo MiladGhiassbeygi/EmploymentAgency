@@ -6,6 +6,8 @@ using Application.Contracts.ReadPersistence;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Application.Contracts.Persistence.JobContract;
+using System.Text;
 
 namespace Application.BackgroundWorker
 {
@@ -29,11 +31,34 @@ namespace Application.BackgroundWorker
 
                 var writeRepository = scope.ServiceProvider.GetRequiredService<IJobRepository>();
                 var readRepository = scope.ServiceProvider.GetRequiredService<IReadJobRepository>();
+                var jobEssentialSkillsRepository = scope.ServiceProvider.GetRequiredService<IJobEssentialSkillsRepository>();
+                var jobUnnessecarySkillRepository = scope.ServiceProvider.GetRequiredService<IJobUnnessecarySkillsRepository>();
+
+
                 try
                 {
                     await foreach (var item in _readModelChannel.ReturnValue(stoppingToken))
                     {
+
                         var job = await writeRepository.GetJobByIdAsync(item.JobId);
+                        
+                       
+                        var essentialList = await jobEssentialSkillsRepository.GetJobEssentialSkillsByIdAsync(item.JobId);
+                        string essentialString = "";
+                        foreach (var essential in essentialList)
+                        {
+                            essentialString = essentialString + essential.Skill.Title + ',';
+                        }
+                        essentialString = essentialString.Remove(essentialString.Length - 1);
+
+                        
+                        var unnessecaryList = await jobUnnessecarySkillRepository.GetJobUnnessecarySkillsByIdAsync(item.JobId);
+                        string unnessecaryString = "";
+                        foreach (var unnessecary in unnessecaryList)
+                        {
+                            unnessecaryString = unnessecaryString + unnessecary.Skill.Title + ',';
+                        }
+                        unnessecaryString = unnessecaryString.Remove(unnessecaryString.Length - 1);
 
                         if (job != null)
                         {
@@ -49,6 +74,8 @@ namespace Application.BackgroundWorker
                                ExactAmountRecived = job.ExactAmountRecived,
                                Description = job.Description,
                                Email = job.Email,
+                               EssentialSkills = essentialString,
+                               UnnecessarySkills = unnessecaryString,
                                HireCompanies = job.HireCompanies,
                                EmployerId = job.EmployerId
                             }, stoppingToken);

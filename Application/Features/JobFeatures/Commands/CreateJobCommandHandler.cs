@@ -24,9 +24,9 @@ namespace Application.Features.JobFeature.Commands.CreateJob
             if (await _unitOfWork.JobRepository.GetJobByTitleAsync(request.Title) is not null)
                 return OperationResult<Job>.FailureResult("This Job Already Exists");
 
-            if (IsSkillIdsAreShort(request.EssentialSkills.Split(',')))
+            if (!IsSkillIdsAreShort(request.EssentialSkills.Split(',')))
                 return OperationResult<Job>.FailureResult("Essential SkillIds Are Invalid");
-            if (IsSkillIdsAreShort(request.UnnecessarySkills.Split(',')))
+            if (!IsSkillIdsAreShort(request.UnnecessarySkills.Split(',')))
                 return OperationResult<Job>.FailureResult("Unnessecary SkillIds Are Invalid");
 
             var job = new Job

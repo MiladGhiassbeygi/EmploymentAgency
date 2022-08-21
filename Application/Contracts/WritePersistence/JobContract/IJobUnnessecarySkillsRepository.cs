@@ -6,9 +6,9 @@ namespace Application.Contracts.Persistence.JobContract
     public interface IJobUnnessecarySkillsRepository
     {
         Task<JobUnnecessarySkills> CreateJobUnnessecarySkillsAsync(JobUnnecessarySkills jobUnnecessarySkills);
-        Task<JobUnnecessarySkills> GetJobUnnessecarySkillsByIdAsync(int id);
+        Task<List<JobUnnecessarySkills>> GetJobUnnessecarySkillsByIdAsync(long id);
         Task<JobUnnecessarySkills> UpdateJobUnnessecarySkillsAsync(JobUnnecessarySkills jobUnnecessarySkills);
-        Task<JobUnnecessarySkills> DeleteJobUnnessecarySkillsByIdAsync(int id);
+        Task<JobUnnecessarySkills> DeleteJobUnnessecarySkillsByIdAsync(long id);
         Task<List<JobUnnecessarySkills>> GetAll();
     }
 }

@@ -27,7 +27,7 @@ using Persistence.WriteRepositories.Common;
             return fetchedJobUnnessecarySkills;
         }
 
-        public Task<JobUnnecessarySkills> DeleteJobUnnessecarySkillsByIdAsync(int id)
+        public Task<JobUnnecessarySkills> DeleteJobUnnessecarySkillsByIdAsync(long id)
         {
             throw new NotImplementedException();
         }
@@ -42,10 +42,9 @@ using Persistence.WriteRepositories.Common;
             }).ToListAsync();
         }
 
-        public async Task<JobUnnecessarySkills> GetJobUnnessecarySkillsByIdAsync(int id)
+        public async Task<List<JobUnnecessarySkills>> GetJobUnnessecarySkillsByIdAsync(long id)
         {
-            var JobUnnessecarySkills = await base.TableNoTracking.FirstOrDefaultAsync(x => x.JobId.Equals(id));
-            return JobUnnessecarySkills;
+           return await base.TableNoTracking.Where(x => x.JobId.Equals(id)).ToListAsync();
         }
 
         public async Task<JobUnnecessarySkills> UpdateJobUnnessecarySkillsAsync(JobUnnecessarySkills JobUnnessecarySkills)
