@@ -30,6 +30,7 @@ namespace Persistence.WriteRepositories.Common
         public IReadEmployerRepository ReadEmployerRepository { get; }
         public IReadEmployerActivitiesRepository ReadEmployerActivitiesRepository { get; }
         public IReadWorkExperienceRepository ReadWorkExperienceRepository { get; }
+        public IReadSkillRepository ReadSkillRepository { get; }
 
         #endregion
 
@@ -66,6 +67,7 @@ namespace Persistence.WriteRepositories.Common
             ReadEmployerActivitiesRepository = new ReadEmployerActivitiesRepository(_readDb);
             ReadReminderRepository = new ReadReminderRepository(_readDb);
             ReadWorkExperienceRepository = new ReadWorkExperienceRepository(_readDb);
+            ReadSkillRepository = new ReadSkillRepository(_readDb);
 
             #endregion
 

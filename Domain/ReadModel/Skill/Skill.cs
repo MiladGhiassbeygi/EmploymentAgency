@@ -8,7 +8,10 @@ namespace Domain.ReadModel
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         [BsonIgnoreIfDefault]
-        public short Id { get; set; }
+        public string Id { get; set; }
+
+        [BsonElement("skillId")]
+        public short SkillId { get; set; }
 
         [BsonElement("title")]
         public string Title { get; set; }

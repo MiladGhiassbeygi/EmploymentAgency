@@ -37,6 +37,7 @@ namespace Persistence.ReadRepositories.Common
 
         public Task AddAsync(TEntity entity, CancellationToken cancellationToken = default)
         {
+            
             return Collection.InsertOneAsync(entity, cancellationToken: cancellationToken);
         }
 

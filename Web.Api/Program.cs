@@ -79,6 +79,7 @@ builder.Services.AddSingleton(typeof(ChannelQueue<>));
 builder.Services.AddHostedService<AddReadCountryWorker>();
 builder.Services.AddHostedService<AddReadAccountWorker>();
 builder.Services.AddHostedService<AddReadJobSeekerWorker>();
+builder.Services.AddHostedService<AddReadSkillWorker>();
 builder.Services.AddHostedService<AddUpdateJobSeekerWorker>();
 builder.Services.AddHostedService<AddDeleteJobSeekerWorker>();
 builder.Services.AddHostedService<AddReadJobWorker>();

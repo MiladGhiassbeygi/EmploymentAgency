@@ -24,7 +24,11 @@ namespace Application.Features.CreateWorkExperience
         }
         public async Task<OperationResult<WorkExperience>> Handle(CreateWorkExperienceCommand request, CancellationToken cancellationToken)
         {
-       
+
+            var checkAnySkillIds = await _unitOfWork.ReadSkillRepository.AnyListAsync(request.skillIds);
+            if(!checkAnySkillIds)
+                return OperationResult<WorkExperience>.FailureResult("Some Skill Ids Are Invalid !!!");
+
 
             var workExperience = new WorkExperience
             {
