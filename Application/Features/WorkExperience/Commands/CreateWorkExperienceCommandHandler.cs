@@ -24,8 +24,7 @@ namespace Application.Features.CreateWorkExperience
         }
         public async Task<OperationResult<WorkExperience>> Handle(CreateWorkExperienceCommand request, CancellationToken cancellationToken)
         {
-            //if (await _unitOfWork.WorkExperienceRepository.GetWorkExperienceByIdAsync(request.I) is not null)
-                //return OperationResult<WorkExperience>.FailureResult("This Job Already Exists");
+       
 
             var workExperience = new WorkExperience
             {
@@ -37,7 +36,7 @@ namespace Application.Features.CreateWorkExperience
                 SalaryPaid = request.salaryPaid,
                 TypeOfCooperation = request.typeOfCooperation,
                 HireCompanies = request.hireCompanies,
-                Skills = request.skills
+                JobSeekerId = request.jobSeekerId
             };
 
             var result = await _unitOfWork.WorkExperienceRepository.CreateWorkExperienceAsync(workExperience);

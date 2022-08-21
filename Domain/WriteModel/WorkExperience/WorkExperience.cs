@@ -11,7 +11,7 @@ namespace Domain.WriteModel
         public decimal SalaryPaid { get; set; }
         public string TypeOfCooperation { get; set; }
         public string HireCompanies { get; set; }
-        public string Skills { get; set; }
+        
 
         public long JobSeekerId { get; set; }
 

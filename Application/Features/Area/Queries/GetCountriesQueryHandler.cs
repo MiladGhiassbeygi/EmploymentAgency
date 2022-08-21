@@ -20,10 +20,10 @@ namespace Application.Features.Area
 
             var countries = await _uow.ReadCountryRepository.GetAllAsync();
 
-            if (countries is not null)
+            if (countries.Count > 0)
                 return OperationResult<List<Country>>.SuccessResult(countries);
 
-            return OperationResult<List<Country>>.FailureResult("There is no countries !!!");
+            return OperationResult<List<Country>>.NotFoundResult("There is no countries !!!");
         }
     }
 }

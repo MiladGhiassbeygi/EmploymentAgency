@@ -52,7 +52,6 @@ namespace Application.BackgroundWorker
                               SalaryPaid = workExperience.SalaryPaid,
                               TypeOfCooperation = workExperience.TypeOfCooperation,
                               HireCompanies = workExperience.HireCompanies,
-                              Skills = workExperience.Skills,
                             }, stoppingToken);
                         }
                     }
