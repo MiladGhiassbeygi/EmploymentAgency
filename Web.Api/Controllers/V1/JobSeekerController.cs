@@ -62,10 +62,16 @@ namespace Web.Api.Controllers.V1
             return base.OperationResult(await _sender.Send(new DeleteJobSeekerCommand(input.Id)));
         }
 
-        [HttpGet("GetJobSeeker")]
-        public async Task<IActionResult> GetJobSeeker()
+        [HttpGet("GetJobSeekers")]
+        public async Task<IActionResult> GetJobSeekers()
         {
-            return base.OperationResult(await _sender.Send(new GetJobSeekerQuery()));
+            return base.OperationResult(await _sender.Send(new GetJobSeekersQuery()));
+        }
+
+        [HttpGet("GetJobSeekerById")]
+        public async Task<IActionResult> GetJobSeekerById(long Id)
+        {
+            return base.OperationResult(await _sender.Send(new GetJobSeekerQuery(Id)));
         }
     }
 }

@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Application.Features.JobFeatures
 {
-    internal class GetJobSeekerQueryHandler : IRequestHandler<GetJobSeekerQuery, OperationResult<List<JobSeeker>>>
+    internal class GetJobSeekerQueryHandler : IRequestHandler<GetJobSeekerQuery, OperationResult<JobSeeker>>
     {
 
         readonly IUnitOfWork _unitOfWork;
@@ -15,15 +15,15 @@ namespace Application.Features.JobFeatures
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<OperationResult<List<JobSeeker>>> Handle(GetJobSeekerQuery request, CancellationToken cancellationToken)
+        public async Task<OperationResult<JobSeeker>> Handle(GetJobSeekerQuery request, CancellationToken cancellationToken)
         {
 
-            var jobSeekers = await _unitOfWork.ReadJobSeekerRepository.GetAllAsync();
+            var jobSeeker = await _unitOfWork.ReadJobSeekerRepository.FirstOrDefaultAsync(x=> x.JobSeekerId == request.Id);
 
-            if (jobSeekers is not null)
-                return OperationResult<List<JobSeeker>>.SuccessResult(jobSeekers);
+            if (jobSeeker is not null)
+                return OperationResult<JobSeeker>.SuccessResult(jobSeeker);
 
-            return OperationResult<List<JobSeeker>>.FailureResult("There is no job seeker !!!");
+            return OperationResult<JobSeeker>.FailureResult("There is no job seeker !!!");
         }
     }
 }
