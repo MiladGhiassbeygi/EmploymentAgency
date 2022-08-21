@@ -25,7 +25,7 @@ namespace Web.Api.Controllers.V1
         public async Task<IActionResult> CreateWorkExperience(CreateWorkExperienceForm model)
         {
             var commandResult = await _sender.Send(new CreateWorkExperienceCommand(model.JobTitle, model.HoursOfWork, model.StartDate, model.EndDate
-                , model.SalaryPaid, model.TypeOfCooperation, model.HireCompanies, model.Skills, model.JobSeekerId
+                , model.SalaryPaid, model.TypeOfCooperation, model.HireCompanies, model.SkillIds, model.JobSeekerId
                 ));
 
             if (commandResult.IsSuccess)
@@ -39,7 +39,7 @@ namespace Web.Api.Controllers.V1
                    SalaryPaid = model.SalaryPaid,
                    TypeOfCooperation = model.TypeOfCooperation,
                    HireCompanies = model.HireCompanies,
-                   Skills = model.Skills,
+                   SkillIds = model.SkillIds,
                    JobSeekerId = model.JobSeekerId
                 };
 
