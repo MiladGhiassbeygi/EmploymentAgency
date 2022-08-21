@@ -44,7 +44,7 @@ using Persistence.WriteRepositories.Common;
 
         public async Task<List<JobUnnecessarySkills>> GetJobUnnessecarySkillsByIdAsync(long id)
         {
-           return await base.TableNoTracking.Where(x => x.JobId.Equals(id)).ToListAsync();
+           return await base.TableNoTracking.Include(x=> x.Skill).Where(x => x.JobId.Equals(id)).ToListAsync();
         }
 
         public async Task<JobUnnecessarySkills> UpdateJobUnnessecarySkillsAsync(JobUnnecessarySkills JobUnnessecarySkills)

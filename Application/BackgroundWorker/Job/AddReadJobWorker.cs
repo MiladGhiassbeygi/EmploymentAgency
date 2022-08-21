@@ -45,20 +45,27 @@ namespace Application.BackgroundWorker
                        
                         var essentialList = await jobEssentialSkillsRepository.GetJobEssentialSkillsByIdAsync(item.JobId);
                         string essentialString = "";
-                        foreach (var essential in essentialList)
+                        if (essentialList is not null)
                         {
-                            essentialString = essentialString + essential.Skill.Title + ',';
-                        }
-                        essentialString = essentialString.Remove(essentialString.Length - 1);
+                            foreach (var essential in essentialList)
+                            {
+                                essentialString = essentialString + essential.Skill.Title + ',';
+                            }
+                            essentialString = essentialString.Remove(essentialString.Length - 1);
 
+                        }
                         
                         var unnessecaryList = await jobUnnessecarySkillRepository.GetJobUnnessecarySkillsByIdAsync(item.JobId);
                         string unnessecaryString = "";
-                        foreach (var unnessecary in unnessecaryList)
+                        if (unnessecaryList is not null)
                         {
-                            unnessecaryString = unnessecaryString + unnessecary.Skill.Title + ',';
+                            foreach (var unnessecary in unnessecaryList)
+                            {
+                                unnessecaryString = unnessecaryString + unnessecary.Skill.Title + ',';
+                            }
+                            unnessecaryString = unnessecaryString.Remove(unnessecaryString.Length - 1);
                         }
-                        unnessecaryString = unnessecaryString.Remove(unnessecaryString.Length - 1);
+                 
 
                         if (job != null)
                         {

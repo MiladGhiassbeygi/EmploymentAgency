@@ -33,11 +33,7 @@ namespace Persistence.WriteRepositories
 
         public async Task<List<Skill>> GetAll()
         {
-            return await base.TableNoTracking.Select(x => new Skill
-            { 
-                Title = x.Title,
-                Percentage = x.Percentage
-            }).ToListAsync();
+            return await base.TableNoTracking.ToListAsync();
         }
 
         public async Task<Skill> GetSkillByTitleAsync(string title)

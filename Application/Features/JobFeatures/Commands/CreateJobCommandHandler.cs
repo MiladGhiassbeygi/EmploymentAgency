@@ -53,7 +53,7 @@ namespace Application.Features.JobFeature.Commands.CreateJob
             {
                 await _unitOfWork.JobEssentialSkillsRepository.CreateJobEssentialSkillsAsync(new JobEssentialSkills { JobId = job.Id, SkillId = short.Parse(skillId) });
             }
-            foreach (var skillId in request.EssentialSkills.Split(','))
+            foreach (var skillId in request.UnnecessarySkills.Split(','))
             {
                 await _unitOfWork.JobUnnessecarySkillsRepository.CreateJobUnnessecarySkillsAsync(new JobUnnecessarySkills { JobId = job.Id, SkillId = short.Parse(skillId) });
             }
@@ -62,8 +62,9 @@ namespace Application.Features.JobFeature.Commands.CreateJob
 
             await _channel.AddToChannelAsync(new JobAdded { JobId = job.Id }, cancellationToken);
 
-            return OperationResult<Job>.SuccessResult(job);
+            return OperationResult<Job>.SuccessResult(result);
         }
+       
         private bool IsSkillIdsAreShort(string[] skillIds)
         {
             foreach (var skiilId in skillIds)

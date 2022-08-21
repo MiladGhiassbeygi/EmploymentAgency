@@ -8,7 +8,7 @@ namespace Persistence.Configuration.JobConfig
     {
         public void Configure(EntityTypeBuilder<JobEssentialSkills> builder)
         {
-            builder.HasNoKey();
+            builder.HasKey(x => new { x.SkillId, x.JobId });
 
             builder.Ignore(x => x.CreatedTime);
             builder.Ignore(x=> x.ModifiedDate);

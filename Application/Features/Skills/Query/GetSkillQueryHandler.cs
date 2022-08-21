@@ -30,7 +30,9 @@ namespace Application.Features.Skills.Query
                 var skillsDto = new List<GetSkillDto>();
                 skillsDto.AddRange(skills.ConvertAll(x => new GetSkillDto()
                 {
-                   Title = x.Title
+                   Title = x.Title,
+                   Id = x.Id,
+                   Percentage = x.Percentage
                 }));
 
                 return OperationResult<List<GetSkillDto>>.SuccessResult(skillsDto);

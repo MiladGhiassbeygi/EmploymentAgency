@@ -51,6 +51,9 @@ namespace Persistence.ServiceConfiguration
             services.AddScoped<IWorkExperienceRepository, WorkExperienceRepository>();
             services.AddScoped<IReadWorkExperienceRepository, ReadWorkExperienceRepository>();
 
+            services.AddScoped<IJobEssentialSkillsRepository,JobEssentialSkillsRepository>();  
+            services.AddScoped<IJobUnnessecarySkillsRepository,JobUnnessecarySkillsRepository>();  
+
             var mongoClient = new MongoClient("mongodb://localhost:27017");
             var mongoDatabase = mongoClient.GetDatabase("EmploymentAgency");
             services.AddSingleton(mongoDatabase);
