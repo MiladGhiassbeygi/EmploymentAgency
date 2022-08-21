@@ -34,6 +34,16 @@ namespace Persistence.Configuration.JobConfig
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_JobSeeker_Country");
 
+            builder.HasMany(d => d.WorkExperiences)
+                .WithOne(d => d.JobSeeker)
+                .HasForeignKey(x => x.JobSeekerId)
+                .HasConstraintName("FK_JobSeeker_JobseekerWorkExperience");
+
+            builder.HasMany(d => d.EducationalBackgrounds)
+             .WithOne(d => d.JobSeeker)
+             .HasForeignKey(x => x.JobSeekerId)
+             .HasConstraintName("FK_JobSeeker_JobseekerEducationalBackground");
+
             builder.HasOne(d => d.Definer)
               .WithMany(d => d.JobSeekers)
               .HasForeignKey(d => d.DefinerId)

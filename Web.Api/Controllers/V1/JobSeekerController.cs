@@ -34,6 +34,7 @@ namespace Web.Api.Controllers.V1
             {
                 CreateJobSeekerDto jobSeekerDto = new CreateJobSeekerDto()
                 {
+                    Id = commandResult.Result.Id,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     CountryId = model.CountryId,
