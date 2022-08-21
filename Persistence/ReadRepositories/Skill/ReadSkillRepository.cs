@@ -22,7 +22,7 @@ namespace Persistence.ReadRepositories
         }
         public async Task<bool> AnyListAsync(short[] skillIds)
         {
-            var skillsCount = base.Collection.CountDocuments(x => skillIds.Contains(x.SkillId));
+            var skillsCount = await base.Collection.CountDocumentsAsync(x => skillIds.Contains(x.SkillId));
             if (skillsCount == skillIds.Count())
                 return true;
             return false;

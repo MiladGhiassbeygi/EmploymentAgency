@@ -1,16 +1,12 @@
-﻿using Application.Contracts.WritePersistence;
-using Application.Features.EmployerFeatures.Commands.CreateEmployer;
+﻿using Application.Features.EmployerFeatures.Commands.CreateEmployer;
 using Application.Features.EmployerFeatures.Commands.DeleteEmployer;
 using Application.Features.EmployerFeatures.Commands.UpdateEmployer;
+using Application.Features.EmployerFeatures.Queries;
 using Application.Features.EmployerFeatures.Queries.FilterEmpolyer;
 using Application.Features.EmployerFeatures.Queries.GetEmployer;
-using Application.Models.Common;
-using Domain.WriteModel;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Web.Api.Dto.Employer;
 using Web.Api.Form.Employer;
 using WebFramework.BaseController;
 
@@ -54,12 +50,17 @@ namespace Web.Api.Controllers.V1
             return base.OperationResult(await _sender.Send(new DeleteEmployerCommand(input.Id)));
         }
 
-        [HttpGet("GetEmployer")]
-        public async Task<IActionResult> GetEmployer()
+        [HttpGet("GetEmployers")]
+        public async Task<IActionResult> GetEmployers()
         {
-            return base.OperationResult(await _sender.Send(new GetEmployerQuery()));
+            return base.OperationResult(await _sender.Send(new GetEmployersQuery()));
         }
 
+        [HttpGet("GetEmployer")]
+        public async Task<IActionResult> GetEmployerById(long Id)
+        {
+            return base.OperationResult(await _sender.Send(new GetEmployerQuery(Id)));
+        }
         [HttpGet("Filter")]
         public async Task<IActionResult> Filter([FromQuery] string term)
         {

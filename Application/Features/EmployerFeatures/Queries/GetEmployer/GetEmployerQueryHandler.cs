@@ -2,15 +2,10 @@
 using Application.Models.Common;
 using Domain.ReadModel;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Features.EmployerFeatures.Queries.GetEmployer
 {
-    internal class GetEmployerQueryHandler : IRequestHandler<GetEmployerQuery, OperationResult<List<Employer>>>
+    internal class GetEmployerQueryHandler : IRequestHandler<GetEmployerQuery, OperationResult<Employer>>
     {
 
         readonly IUnitOfWork _unitOfWork;
@@ -20,15 +15,15 @@ namespace Application.Features.EmployerFeatures.Queries.GetEmployer
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<OperationResult<List<Employer>>> Handle(GetEmployerQuery request, CancellationToken cancellationToken)
+        public async Task<OperationResult<Employer>> Handle(GetEmployerQuery request, CancellationToken cancellationToken)
         {
 
-            var employer = await _unitOfWork.ReadEmployerRepository.GetAllAsync();
+            var employer = await _unitOfWork.ReadEmployerRepository.FirstOrDefaultAsync(x=> x.EmployerId == request.Id);
 
             if (employer is not null)
-                return OperationResult<List<Employer>>.SuccessResult(employer);
+                return OperationResult<Employer>.SuccessResult(employer);
 
-            return OperationResult<List<Employer>>.FailureResult("There is no job seeker !!!");
+            return OperationResult<Employer>.FailureResult("There is no employer !!!");
         }
     }
 }
