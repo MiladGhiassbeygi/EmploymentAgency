@@ -31,6 +31,7 @@ namespace Persistence.WriteRepositories.Common
         public IReadEmployerActivitiesRepository ReadEmployerActivitiesRepository { get; }
         public IReadWorkExperienceRepository ReadWorkExperienceRepository { get; }
         public IReadSkillRepository ReadSkillRepository { get; }
+        public IReadEducationalBackgroundRepository ReadEducationalBackgroundRepository { get; }
 
         #endregion
 
@@ -50,6 +51,7 @@ namespace Persistence.WriteRepositories.Common
         public IJobSeekerRepository JobSeekerRepository { get; }
         public IWorkExperienceRepository WorkExperienceRepository { get; }
         public IWorkExperienceSkillRepository WorkExperienceSkillRepository { get; }
+        public IEducationalBackgroundRepository EducationalBackgroundRepository { get; }
 
         #endregion
 
@@ -68,6 +70,7 @@ namespace Persistence.WriteRepositories.Common
             ReadReminderRepository = new ReadReminderRepository(_readDb);
             ReadWorkExperienceRepository = new ReadWorkExperienceRepository(_readDb);
             ReadSkillRepository = new ReadSkillRepository(_readDb);
+            ReadEducationalBackgroundRepository = new ReadEducationalBackgroundRepository(_readDb); 
 
             #endregion
 
@@ -87,6 +90,7 @@ namespace Persistence.WriteRepositories.Common
             ReminderRepository = new ReminderRepository(_db);
             WorkExperienceRepository = new WorkExperienceRepository(_db);
             WorkExperienceSkillRepository = new WorkExperienceSkillRepository(_db);
+            EducationalBackgroundRepository = new EducationalBackgroundRepostory(_db);
 
             #endregion
         }
