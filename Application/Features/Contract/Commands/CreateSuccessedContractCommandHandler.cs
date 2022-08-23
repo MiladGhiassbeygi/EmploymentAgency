@@ -1,5 +1,6 @@
-﻿using Application.Contracts.Persistence;
-using Application.Features.Area.Commands;
+﻿using Application.BackgroundWorker.Common.Events;
+using Application.Common.BaseChannel;
+using Application.Contracts.Persistence;
 using Application.Models.Common;
 using Domain.WriteModel;
 using MediatR;
@@ -9,6 +10,7 @@ namespace Application.Features.Contract.Commands
     internal class CreateSuccessedContractCommandHandler : IRequestHandler<CreateSuccessedContractCommand, OperationResult<SuccessedContract>>
     {
         readonly IUnitOfWork _unitOfWork;
+         private readonly ChannelQueue<EducationalBackgroundAdded> _channel;
 
         public CreateSuccessedContractCommandHandler(IUnitOfWork unitOfWork)
         {

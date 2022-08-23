@@ -4,11 +4,6 @@ using Application.Contracts.Persistence;
 using Application.Models.Common;
 using Domain.WriteModel;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Features.JobFeatures.Commands.UpdateJob
 {
@@ -39,8 +34,6 @@ namespace Application.Features.JobFeatures.Commands.UpdateJob
             fetchedJob.Description = request.description;
             fetchedJob.Email = request.email;
             fetchedJob.HireCompanies = request.hireCompanies;
-
-            //fetchedEmployer = _mapper.From(request).Adapt<Employer>();
 
             var result = await _unitOfWork.JobRepository.UpdateJobAsync(fetchedJob);
             try

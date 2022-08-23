@@ -21,6 +21,7 @@ namespace Application.Contracts.Persistence
         public IReadReminderRepository ReadReminderRepository { get; }
         public IReadWorkExperienceRepository ReadWorkExperienceRepository { get; }
         public IReadSkillRepository ReadSkillRepository { get; }
+        public IReadEducationalBackgroundRepository ReadEducationalBackgroundRepository { get; }
 
         #endregion
 
@@ -40,6 +41,7 @@ namespace Application.Contracts.Persistence
         public IReminderRepository ReminderRepository { get; }
         public IWorkExperienceRepository WorkExperienceRepository { get; }
         public IWorkExperienceSkillRepository WorkExperienceSkillRepository { get; }
+        public IEducationalBackgroundRepository EducationalBackgroundRepository { get; }
 
         #endregion
 

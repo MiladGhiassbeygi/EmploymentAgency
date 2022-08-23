@@ -1,6 +1,4 @@
-﻿
-
-using Domain.WriteModel;
+﻿using Domain.WriteModel;
 
 namespace Application.Contracts.Persistence
 {
