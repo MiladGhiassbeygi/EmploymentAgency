@@ -1,12 +1,7 @@
-﻿using Application.Contracts.Persistence.EmployerCommissionContract;
+﻿using Application.Contracts.Persistence;
 using Domain.WriteModel;
 using Microsoft.EntityFrameworkCore;
 using Persistence.WriteRepositories.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Persistence.WriteRepositories.EmployerRepositories
 {
@@ -15,7 +10,6 @@ namespace Persistence.WriteRepositories.EmployerRepositories
         public EmployerCommissionRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
         }
-
         public async Task<EmployerCommission> CreateEmployerCommissionAsync(EmployerCommission employerCommission)
         {
             var newEmployerCommission = employerCommission;
@@ -23,18 +17,17 @@ namespace Persistence.WriteRepositories.EmployerRepositories
             return newEmployerCommission;
 
         }
-        public async Task<EmployerCommission> GetEmployerCommissionByIdAsync(int id)
+        public async Task<EmployerCommission> GetEmployerCommissionByIdAsync(long id)
         {
             var employerCommission = await base.TableNoTracking.FirstOrDefaultAsync(x => x.EmployerId.Equals(id));
             return employerCommission;
         }
-
         public async Task<EmployerCommission> UpdateEmployerCommissionAsync(EmployerCommission employerCommission)
         {
             await base.UpdateAsync(employerCommission);
             return employerCommission;
         }
-        public async Task<EmployerCommission> DeleteEmployerCommissionByIdAsync(int id)
+        public async Task<EmployerCommission> DeleteEmployerCommissionByIdAsync(long id)
         {
 
             var fetchedEmployerCommission = await base.Table.Where(t => t.EmployerId.Equals(id)).FirstOrDefaultAsync();
