@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Persistence;
@@ -11,9 +12,10 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220823100808_successedContractCorrectRelations")]
+    partial class successedContractCorrectRelations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -183,36 +185,6 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("EmployerAcivityFields");
-                });
-
-            modelBuilder.Entity("Domain.WriteModel.EmployerCommission", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
-
-                    b.Property<DateTime>("CreatedTime")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<long>("EmployerId")
-                        .HasColumnType("bigint");
-
-                    b.Property<bool>("IsFixed")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<int>("Value")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EmployerId");
-
-                    b.ToTable("EmployerCommissions");
                 });
 
             modelBuilder.Entity("Domain.WriteModel.Job", b =>
@@ -473,7 +445,10 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("Date")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2022, 8, 23, 15, 12, 18, 945, DateTimeKind.Local).AddTicks(6417));
+                        .HasDefaultValue(new DateTime(2022, 8, 23, 14, 38, 8, 136, DateTimeKind.Local).AddTicks(1117));
+
+                    b.Property<long?>("EmployerId")
+                        .HasColumnType("bigint");
 
                     b.Property<bool>("IsAmountFixed")
                         .HasColumnType("boolean");
@@ -490,6 +465,8 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ContractCreatorId");
+
+                    b.HasIndex("EmployerId");
 
                     b.HasIndex("JobId");
 
@@ -845,17 +822,6 @@ namespace Persistence.Migrations
                     b.Navigation("FieldOfActivity");
                 });
 
-            modelBuilder.Entity("Domain.WriteModel.EmployerCommission", b =>
-                {
-                    b.HasOne("Domain.WriteModel.Employer", "Employer")
-                        .WithMany("EmployerCommission")
-                        .HasForeignKey("EmployerId")
-                        .IsRequired()
-                        .HasConstraintName("FK_EmployerCommission_Employer");
-
-                    b.Navigation("Employer");
-                });
-
             modelBuilder.Entity("Domain.WriteModel.Job", b =>
                 {
                     b.HasOne("Domain.WriteModel.Employer", "Employer")
@@ -943,6 +909,10 @@ namespace Persistence.Migrations
                         .HasForeignKey("ContractCreatorId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("Domain.WriteModel.Employer", null)
+                        .WithMany("SuccessedContract")
+                        .HasForeignKey("EmployerId");
 
                     b.HasOne("Domain.WriteModel.Job", "Job")
                         .WithMany("SuccessedContract")
@@ -1077,9 +1047,9 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.WriteModel.Employer", b =>
                 {
-                    b.Navigation("EmployerCommission");
-
                     b.Navigation("Job");
+
+                    b.Navigation("SuccessedContract");
                 });
 
             modelBuilder.Entity("Domain.WriteModel.EmployerAcivityField", b =>

@@ -3,15 +3,16 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace Domain.ReadModel
 {
-    public class JobCommission 
+    public class EmployerCommission
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         [BsonIgnoreIfDefault]
         public string Id { get; set; }
 
-        [BsonElement("jobCommissionId")]
-        public bool JobCommissionId { get; set; }
+
+        [BsonElement("employerCommissionId")]
+        public long EmployerCommissionId { get; set; } 
 
         [BsonElement("isFixed")]
         public bool IsFixed { get; set; } = false;
@@ -19,8 +20,8 @@ namespace Domain.ReadModel
         [BsonElement("value")]
         public int Value { get; set; }
         
-        [BsonElement("jobId")]
-        public long JobId { get; set; }
+        [BsonElement("employerId")]
+        public long EmployerId { get; set; }
 
        
     }

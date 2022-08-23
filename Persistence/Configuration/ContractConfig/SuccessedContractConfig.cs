@@ -25,13 +25,3 @@ namespace Persistence.Configuration.JobConfig
         }
     }
 }
-
-
-
-     //.HasForeignKey(d => d.EmployerId)
-     //           .OnDelete(DeleteBehavior.ClientSetNull)
-
-
-
-                //.HasForeignKey(d => d.JobSeekerId)
-                //.OnDelete(DeleteBehavior.ClientSetNull)

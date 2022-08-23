@@ -1,7 +1,4 @@
 ﻿using Domain.WriteModel.Common;
-using Domain.WriteModel.User;
-using System;
-using System.Collections.Generic;
 
 namespace Domain.WriteModel
 {
@@ -10,7 +7,6 @@ namespace Domain.WriteModel
         public Employer()
         {
             Job = new HashSet<Job>();
-            SuccessedContract = new HashSet<SuccessedContract>();
         }
         
         public string FirstName { get; set; }
@@ -28,6 +24,6 @@ namespace Domain.WriteModel
         public virtual EmployerAcivityField FieldOfActivity { get; set; }
         public virtual User.User Definer { get; set; }
         public virtual ICollection<Job> Job { get; set; }
-        public virtual ICollection<SuccessedContract> SuccessedContract { get; set; }
+        public virtual ICollection<EmployerCommission> EmployerCommission { get; set; }
     }
 }
