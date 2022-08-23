@@ -29,6 +29,7 @@ using WebFramework.Filters;
 using WebFramework.ServiceConfiguration;
 using WebFramework.Swagger;
 using Application.BackgroundWorker.AddUpdateJob;
+using Application.BackgroundWorker.AddUpdateEducationalBackground;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
@@ -90,6 +91,9 @@ builder.Services.AddHostedService<AddReadWorkExperienceWorker>();
 builder.Services.AddHostedService<AddReadReminderWorker>();
 builder.Services.AddHostedService<AddDeleteEmployerWorker>();
 builder.Services.AddHostedService<AddUpdateEmployerWorker>();
+builder.Services.AddHostedService<AddReadEducationalBackgroundWorker>();
+builder.Services.AddHostedService<AddUpdateEducationalBackgroundWorker>();
+builder.Services.AddHostedService<AddDeleteEducationalBackgroundWorker>();
 
 #endregion
 

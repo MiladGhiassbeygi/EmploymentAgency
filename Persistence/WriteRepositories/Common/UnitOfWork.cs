@@ -1,5 +1,6 @@
 ﻿using Application.Contracts.Persistence;
 using Application.Contracts.Persistence.Area;
+using Application.Contracts.Persistence.EmployerCommissionContract;
 using Application.Contracts.Persistence.JobContract;
 using Application.Contracts.ReadPersistence;
 using Application.Contracts.ReadPersistence.Area;
@@ -10,6 +11,7 @@ using MongoDB.Driver;
 using Persistence.ReadRepositories;
 using Persistence.ReadRepositories.Area;
 using Persistence.ReadRepositories.ReadWorkExperience;
+using Persistence.WriteRepositories.EmployerRepositories;
 using Persistence.WriteRepositories.JobRepositories;
 using Persistence.WriteRepositories.Reminder;
 
@@ -26,9 +28,11 @@ namespace Persistence.WriteRepositories.Common
         public IReadCountryRepository ReadCountryRepository { get; }
         public IReadJobSeekerRepository ReadJobSeekerRepository { get; }
         public IReadJobRepository ReadJobRepository { get; }
+        public IReadJobCommissionRepository ReadJobCommissionRepository { get; }
         public IReadReminderRepository ReadReminderRepository { get; }
         public IReadEmployerRepository ReadEmployerRepository { get; }
         public IReadEmployerActivitiesRepository ReadEmployerActivitiesRepository { get; }
+        public IReadEmployerCommissionRepository ReadEmployerCommissionRepository { get; }
         public IReadWorkExperienceRepository ReadWorkExperienceRepository { get; }
         public IReadSkillRepository ReadSkillRepository { get; }
         public IReadEducationalBackgroundRepository ReadEducationalBackgroundRepository { get; }
@@ -52,6 +56,7 @@ namespace Persistence.WriteRepositories.Common
         public IWorkExperienceRepository WorkExperienceRepository { get; }
         public IWorkExperienceSkillRepository WorkExperienceSkillRepository { get; }
         public IEducationalBackgroundRepository EducationalBackgroundRepository { get; }
+        public IEmployerCommissionRepository EmployerCommissionRepository { get; }
 
         #endregion
 
@@ -65,8 +70,10 @@ namespace Persistence.WriteRepositories.Common
             ReadCountryRepository = new ReadCountryRepository(_readDb);
             ReadJobSeekerRepository = new ReadJobSeekerRepository(_readDb);
             ReadJobRepository = new ReadJobRepository(_readDb);
+            ReadJobCommissionRepository = new ReadJobCommissionRepository(_readDb);
             ReadEmployerRepository = new ReadEmployerRepository(_readDb);
             ReadEmployerActivitiesRepository = new ReadEmployerActivitiesRepository(_readDb);
+            ReadEmployerCommissionRepository = new ReadEmployerCommissionRepository(_readDb);
             ReadReminderRepository = new ReadReminderRepository(_readDb);
             ReadWorkExperienceRepository = new ReadWorkExperienceRepository(_readDb);
             ReadSkillRepository = new ReadSkillRepository(_readDb);
@@ -91,6 +98,7 @@ namespace Persistence.WriteRepositories.Common
             WorkExperienceRepository = new WorkExperienceRepository(_db);
             WorkExperienceSkillRepository = new WorkExperienceSkillRepository(_db);
             EducationalBackgroundRepository = new EducationalBackgroundRepository(_db);
+            EmployerCommissionRepository = new EmployerCommissionRepository(_db);
 
             #endregion
         }

@@ -11,7 +11,7 @@ namespace Domain.ReadModel
         public string Id { get; set; }
 
         [BsonElement("jobCommissionId")]
-        public bool JobCommissionId { get; set; }
+        public long JobCommissionId { get; set; }
 
         [BsonElement("isFixed")]
         public bool IsFixed { get; set; } = false;
