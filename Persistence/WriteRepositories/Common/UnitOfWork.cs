@@ -1,6 +1,5 @@
 ﻿using Application.Contracts.Persistence;
 using Application.Contracts.Persistence.Area;
-using Application.Contracts.Persistence.EmployerCommissionContract;
 using Application.Contracts.Persistence.JobContract;
 using Application.Contracts.ReadPersistence;
 using Application.Contracts.ReadPersistence.Area;

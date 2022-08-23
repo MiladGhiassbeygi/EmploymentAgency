@@ -5,7 +5,6 @@ using Application.Contracts.ReadPersistence;
 using Application.Contracts.WritePersistence;
 using Application.Contracts.WritePersistence.Reminder;
 using Application.Contracts.ReadPersistence.ReadWorkExperience;
-using Application.Contracts.Persistence.EmployerCommissionContract;
 
 namespace Application.Contracts.Persistence
 {
