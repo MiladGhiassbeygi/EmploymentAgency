@@ -27,9 +27,9 @@ namespace Application.Features.Contract.Commands
 
                 var SuccessedContract = new SuccessedContract
                 {
-                    EmployerId = request.employerId,
+                    JobId = request.jobId,
                     JobSeekerId = request.jobSeekerId,
-                    EmploymentAgencyId = request.employmentAgencyId,
+                    ContractCreatorId = request.contractCreatorId,
                     IsAmountFixed = request.isAmountFixed,
                     Amount = request.amount
                 };
@@ -47,4 +47,3 @@ namespace Application.Features.Contract.Commands
         }
     }
 }
-//long employerId,long jobSeekerId,int employmentAgencyId,bool isAmountFixed,decimal amount

@@ -13,10 +13,10 @@ namespace Persistence.Configuration.JobConfig
             builder.Property(e => e.Date)                
                 .HasDefaultValue(DateTime.Now);
 
-            builder.HasOne(d => d.Employer)
+            builder.HasOne(d => d.Job)
                 .WithMany(p => p.SuccessedContract)
-           
-                .HasConstraintName("FK_SuccessedContract_Employer");
+            
+                .HasConstraintName("FK_SuccessedContract_Job");
 
             builder.HasOne(d => d.JobSeeker)
                 .WithMany(p => p.SuccessedContract)
