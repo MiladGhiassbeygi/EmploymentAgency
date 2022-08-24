@@ -8,6 +8,7 @@ using Application.Features.JobFeatures.Commands.CreateJob;
 using Application.Features.JobFeatures.Queries.FilterJob;
 using Application.Features.JobFeatures.Commands.UpdateJob;
 using Web.Api.Form.JobForm;
+using Application.Features.JobFeatures.Commands.DeleteJob;
 
 namespace Web.Api.Controllers.V1
 {
@@ -61,6 +62,11 @@ namespace Web.Api.Controllers.V1
                 input.Description, input.EssentialSkills,input.UnnecessarySkills,input.Email,input.HireCompanies)));
         }
 
+        [HttpDelete("DeleteJob")]
+        public async Task<IActionResult> DeleteEmployer(DeleteJobForm input, CancellationToken cancellationToken)
+        {
+            return base.OperationResult(await _sender.Send(new DeleteJobCommand(input.Id)));
+        }
 
         [HttpGet("GetJobs")]
         public async Task<IActionResult> GetJobs()

@@ -44,7 +44,7 @@ namespace Web.Api.Controllers.V1
                 input.NecessaryExplanation,input.IsFixed,input.ExactAmountRecived,input.FieldOfActivityId)));
         }
 
-        [HttpPost("DeleteEmployer")]
+        [HttpDelete("DeleteEmployer")]
         public async Task<IActionResult> DeleteEmployer(DeleteEmployerForm input, CancellationToken cancellationToken)
         {
             return base.OperationResult(await _sender.Send(new DeleteEmployerCommand(input.Id)));

@@ -1,20 +1,20 @@
 ﻿using Application.BackgroundWorker.Common.Events;
 using Application.Common.BaseChannel;
-using Application.Contracts.Persistence.JobContract;
+using Application.Contracts.Persistence;
 using Application.Contracts.ReadPersistence;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace Application.BackgroundWorker.AddDeleteJobSeeker
+namespace Application.BackgroundWorker.AddDeleteJob
 {
-    public class AddDeleteJobSeekerWorker : BackgroundService
+    public class AddDeleteJobWorker : BackgroundService
     {
-        private readonly ChannelQueue<JobSeekerDeleted> _readModelChannel;
-        private readonly ILogger<AddDeleteJobSeekerWorker> _logger;
+        private readonly ChannelQueue<JobDeleted> _readModelChannel;
+        private readonly ILogger<AddDeleteJobWorker> _logger;
         private readonly IServiceProvider _serviceProvider;
 
-        public AddDeleteJobSeekerWorker(ChannelQueue<JobSeekerDeleted> readModelChannel, ILogger<AddDeleteJobSeekerWorker> logger, IServiceProvider serviceProvider)
+        public AddDeleteJobWorker(ChannelQueue<JobDeleted> readModelChannel, ILogger<AddDeleteJobWorker> logger, IServiceProvider serviceProvider)
         {
             _readModelChannel = readModelChannel;
             _logger = logger;
@@ -26,17 +26,17 @@ namespace Application.BackgroundWorker.AddDeleteJobSeeker
             {
                 using var scope = _serviceProvider.CreateScope();
 
-                var writeRepository = scope.ServiceProvider.GetRequiredService<IJobSeekerRepository>();
-                var readRepository = scope.ServiceProvider.GetRequiredService<IReadJobSeekerRepository>();
+                var writeRepository = scope.ServiceProvider.GetRequiredService<IJobRepository>();
+                var readRepository = scope.ServiceProvider.GetRequiredService<IReadJobRepository>();
                 try
                 {
                     await foreach (var item in _readModelChannel.ReturnValue(stoppingToken))
                     {
-                        var jobSeeker = await writeRepository.GetJobSeekerByIdAsync(item.JobSeekerId);
+                        var job = await writeRepository.GetJobByIdAsync(item.JobId);
 
-                        if (jobSeeker != null)
+                        if (job != null)
                         {
-                            await readRepository.DeleteAsync(x => x.JobSeekerId == item.JobSeekerId, stoppingToken);
+                            await readRepository.DeleteAsync(x => x.JobId == item.JobId, stoppingToken);
                         }
                     }
                 }

@@ -56,7 +56,7 @@ namespace Web.Api.Controllers.V1
             return base.OperationResult(await _sender.Send(new UpdateJobSeekerCommand(input.JobSeekerId,input.FirstName,input.LastName,input.CountryId,input.Email,input.LinkedinAddress,input.ResumeFilePath)));
         }
 
-        [HttpPost("DeleteJobSeeker")]
+        [HttpDelete("DeleteJobSeeker")]
         public async Task<IActionResult> DeleteJobSeeker(DeleteJobSeekerForm input, CancellationToken cancellationToken)
         {
             return base.OperationResult(await _sender.Send(new DeleteJobSeekerCommand(input.Id)));
