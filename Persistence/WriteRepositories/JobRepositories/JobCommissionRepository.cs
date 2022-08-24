@@ -31,11 +31,8 @@ namespace Persistence.WriteRepositories.JobRepositories
        
         public async Task<JobCommission> UpdateJobCommissionAsync(JobCommission jobCommission)
         {
-            var fetchedJobCommission = await base.Table.Where(t => t.Id.Equals(jobCommission.JobId)).FirstOrDefaultAsync();
-
-            if (fetchedJobCommission == null) return null;
-            await base.UpdateAsync(fetchedJobCommission);
-            return fetchedJobCommission;
+            await base.UpdateAsync(jobCommission);
+            return jobCommission;
         }
         public async Task<JobCommission> DeleteJobCommissionByIdAsync(int id)
         {

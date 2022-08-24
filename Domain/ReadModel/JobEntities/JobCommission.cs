@@ -8,7 +8,10 @@ namespace Domain.ReadModel
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         [BsonIgnoreIfDefault]
-        public long Id { get; set; }
+        public string Id { get; set; }
+
+        [BsonElement("jobCommissionId")]
+        public long JobCommissionId { get; set; }
 
         [BsonElement("isFixed")]
         public bool IsFixed { get; set; } = false;

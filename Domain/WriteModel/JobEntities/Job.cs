@@ -23,5 +23,6 @@ namespace Domain.WriteModel
 
         public virtual Employer Employer { get; set; }
         public virtual ICollection<JobCommission> JobCommission { get; set; }
+        public virtual ICollection<SuccessedContract> SuccessedContract { get; set; }
     }
 }

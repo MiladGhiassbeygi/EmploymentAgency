@@ -4,7 +4,6 @@ using Application.Contracts.Persistence;
 using Application.Models.Common;
 using Domain.WriteModel;
 using MediatR;
-using MongoDB.Driver.Core.Bindings;
 
 namespace Application.Features.Skills.Command
 {

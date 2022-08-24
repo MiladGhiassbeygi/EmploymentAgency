@@ -1,5 +1,4 @@
-﻿using Application.Contracts.Identity;
-using Application.Contracts.Persistence;
+﻿using Application.Contracts.Persistence;
 using Application.Contracts.Persistence.Area;
 using Application.Contracts.Persistence.JobContract;
 using Application.Contracts.ReadPersistence;
@@ -18,6 +17,8 @@ using Persistence.ReadRepositories.Area;
 using Persistence.ReadRepositories.ReadWorkExperience;
 using Persistence.WriteRepositories;
 using Persistence.WriteRepositories.Common;
+using Persistence.WriteRepositories.EmployerRepositories;
+using Persistence.WriteRepositories.JobRepositories;
 using Persistence.WriteRepositories.Reminder;
 
 namespace Persistence.ServiceConfiguration
@@ -51,12 +52,21 @@ namespace Persistence.ServiceConfiguration
             services.AddScoped<IWorkExperienceRepository, WorkExperienceRepository>();
             services.AddScoped<IReadWorkExperienceRepository, ReadWorkExperienceRepository>();
 
+            services.AddScoped<IEducationalBackgroundRepository, EducationalBackgroundRepository>();
+            services.AddScoped<IReadEducationalBackgroundRepository, ReadEducationalBackgroundRepository>();
+
             services.AddScoped<ISkillRepository, SkillRepository>();
             services.AddScoped<IReadSkillRepository, ReadSkillRepository>();
             
             services.AddScoped<IJobEssentialSkillsRepository,JobEssentialSkillsRepository>();  
             services.AddScoped<IJobUnnessecarySkillsRepository,JobUnnessecarySkillsRepository>();
             services.AddScoped<IWorkExperienceSkillRepository, WorkExperienceSkillRepository>();
+
+            services.AddScoped<IEmployerCommissionRepository, EmployerCommissionRepository>();
+            services.AddScoped<IReadEmployerCommissionRepository, ReadEmployerCommissionRepository>();
+           
+            services.AddScoped<IJobCommissionRepository, JobCommissionRepository>();
+            services.AddScoped<IReadJobCommissionRepository,ReadJobCommissionRepository>(); 
 
             var mongoClient = new MongoClient("mongodb://localhost:27017");
             var mongoDatabase = mongoClient.GetDatabase("EmploymentAgency");
