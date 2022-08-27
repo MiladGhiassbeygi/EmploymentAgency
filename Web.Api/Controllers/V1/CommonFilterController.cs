@@ -20,6 +20,8 @@ namespace Web.Api.Controllers.V1
         Job = 2,
         [Display(Name = "JobSeeker")]
         JobSeeker = 3,
+        [Display(Name = "HiredPeople")]
+        HiredPeople = 4
     }
 
     [ApiVersion("1")]
