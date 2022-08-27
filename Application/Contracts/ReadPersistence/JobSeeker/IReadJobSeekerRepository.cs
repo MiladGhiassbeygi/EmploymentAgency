@@ -5,6 +5,6 @@ namespace Application.Contracts.ReadPersistence
 {
     public interface IReadJobSeekerRepository : IReadBaseRepository<JobSeeker>
     {
-        Task<List<JobSeeker>> FilterByTerm(string term);
+        Task<List<JobSeeker>> FilterByTerm(string term, long userId,CancellationToken cancellationToken);
     }
 }

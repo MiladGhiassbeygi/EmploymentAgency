@@ -23,7 +23,7 @@ namespace Application.Features.JobFeatures.Queries.FilterJobSeeker
         public async Task<OperationResult<List<JobSeeker>>> Handle(FilterJobSeekerQuery request, CancellationToken cancellationToken)
         {
 
-            var jobSeeker = await _unitOfWork.ReadJobSeekerRepository.FilterByTerm(request.term);
+            var jobSeeker = await _unitOfWork.ReadJobSeekerRepository.FilterByTerm(request.term,request.userId);
 
             if (jobSeeker is not null)
                 return OperationResult<List<JobSeeker>>.SuccessResult(jobSeeker);

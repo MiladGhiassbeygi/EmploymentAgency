@@ -51,7 +51,7 @@ namespace Web.Api.Controllers.V1
                         }
                     case FilterType.JobSeeker:
                         {
-                            return base.OperationResult(await _sender.Send(new FilterJobSeekerQuery(term)));
+                            return base.OperationResult(await _sender.Send(new FilterJobSeekerQuery(term,UserId)));
                         }
                 }
                         return base.OperationResult(BadRequest("Invalid Input Param's"));
