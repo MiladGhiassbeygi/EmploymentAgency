@@ -8,8 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Application.BackgroundWorker.AddDeleteEmployer
 {
-   
-    public class AddDeleteEmployerWorker : BackgroundService
+      public class AddDeleteEmployerWorker : BackgroundService
     {
         private readonly ChannelQueue<EmployerDeleted> _readModelChannel;
         private readonly ILogger<AddDeleteEmployerWorker> _logger;

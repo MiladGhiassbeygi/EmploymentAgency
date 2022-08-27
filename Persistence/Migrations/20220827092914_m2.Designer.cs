@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Persistence;
@@ -11,9 +12,10 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220827092914_m2")]
+    partial class m2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -304,15 +306,20 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.WriteModel.JobEssentialSkills", b =>
                 {
-                    b.Property<short?>("SkillId")
+                    b.Property<short>("SkillId")
                         .HasColumnType("smallint");
 
-                    b.Property<long?>("JobId")
+                    b.Property<long>("JobId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("JobId1")
                         .HasColumnType("bigint");
 
                     b.HasKey("SkillId", "JobId");
 
                     b.HasIndex("JobId");
+
+                    b.HasIndex("JobId1");
 
                     b.ToTable("JobEssentialSkills");
                 });
@@ -378,15 +385,20 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.WriteModel.JobUnnecessarySkills", b =>
                 {
-                    b.Property<short?>("SkillId")
+                    b.Property<short>("SkillId")
                         .HasColumnType("smallint");
 
-                    b.Property<long?>("JobId")
+                    b.Property<long>("JobId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("JobId1")
                         .HasColumnType("bigint");
 
                     b.HasKey("SkillId", "JobId");
 
                     b.HasIndex("JobId");
+
+                    b.HasIndex("JobId1");
 
                     b.ToTable("JobUnnecessarySkills");
                 });
@@ -473,7 +485,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("Date")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2022, 8, 27, 14, 18, 51, 429, DateTimeKind.Local).AddTicks(503));
+                        .HasDefaultValue(new DateTime(2022, 8, 27, 13, 59, 14, 47, DateTimeKind.Local).AddTicks(4247));
 
                     b.Property<bool>("IsAmountFixed")
                         .HasColumnType("boolean");
@@ -881,14 +893,18 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.WriteModel.JobEssentialSkills", b =>
                 {
                     b.HasOne("Domain.WriteModel.Job", "Job")
-                        .WithMany("JobEssentialSkills")
+                        .WithMany()
                         .HasForeignKey("JobId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired()
                         .HasConstraintName("FK_JobEssentialSkills_Job");
 
-                    b.HasOne("Domain.WriteModel.Skill", "Skill")
+                    b.HasOne("Domain.WriteModel.Job", null)
                         .WithMany("JobEssentialSkills")
+                        .HasForeignKey("JobId1");
+
+                    b.HasOne("Domain.WriteModel.Skill", "Skill")
+                        .WithMany()
                         .HasForeignKey("SkillId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired()
@@ -922,14 +938,18 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.WriteModel.JobUnnecessarySkills", b =>
                 {
                     b.HasOne("Domain.WriteModel.Job", "Job")
-                        .WithMany("JobUnnecessarySkills")
+                        .WithMany()
                         .HasForeignKey("JobId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired()
                         .HasConstraintName("FK_JobUnnecessarySkills_Job");
 
-                    b.HasOne("Domain.WriteModel.Skill", "Skill")
+                    b.HasOne("Domain.WriteModel.Job", null)
                         .WithMany("JobUnnecessarySkills")
+                        .HasForeignKey("JobId1");
+
+                    b.HasOne("Domain.WriteModel.Skill", "Skill")
+                        .WithMany()
                         .HasForeignKey("SkillId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired()
@@ -1109,13 +1129,6 @@ namespace Persistence.Migrations
                     b.Navigation("SuccessedContract");
 
                     b.Navigation("WorkExperiences");
-                });
-
-            modelBuilder.Entity("Domain.WriteModel.Skill", b =>
-                {
-                    b.Navigation("JobEssentialSkills");
-
-                    b.Navigation("JobUnnecessarySkills");
                 });
 
             modelBuilder.Entity("Domain.WriteModel.User.Role", b =>

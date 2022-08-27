@@ -15,15 +15,15 @@ namespace Persistence.Configuration.JobConfig
             builder.Ignore(x=> x.Id);
 
             builder.HasOne(d => d.Job)
-                .WithMany()
+                .WithMany(d=> d.JobEssentialSkills)
                 .HasForeignKey(d => d.JobId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_JobEssentialSkills_Job");
 
             builder.HasOne(d => d.Skill)
-                .WithMany()
+                .WithMany(d=> d.JobEssentialSkills)
                 .HasForeignKey(d => d.SkillId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_JobEssentialSkills_Skill");
         }
     }

@@ -20,7 +20,7 @@ namespace Application.Features.EmployerFeatures.EmployerCommissionCqrs.Query
 
             var employerCommissions = await _unitOfWork.EmployerCommissionRepository.GetAll();
 
-            if (employerCommissions is not null)
+            if (employerCommissions.Count() > 0)
             {
                 var employerCommissionDto = new List<GetEmployerCommissionDto>();
                 employerCommissionDto.AddRange(employerCommissions.ConvertAll(x => new GetEmployerCommissionDto()
@@ -34,7 +34,7 @@ namespace Application.Features.EmployerFeatures.EmployerCommissionCqrs.Query
 
             }
 
-            return OperationResult<List<GetEmployerCommissionDto>>.FailureResult("There is no job commission !!!");
+            return OperationResult<List<GetEmployerCommissionDto>>.FailureResult("There is no employer commission's !!!");
         }
     }
 }

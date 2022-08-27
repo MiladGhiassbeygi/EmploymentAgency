@@ -1,8 +1,4 @@
 ﻿using Domain.WriteModel;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Contracts.Persistence
 {
@@ -10,9 +6,11 @@ namespace Application.Contracts.Persistence
     {
         Task<Job> CreateJobAsync(Job job);
         Task<Job> GetJobByIdAsync(long id);//this was int
+        Task<Job> GetJobAggregateByIdAsync(long id);
         Task<Job> GetJobByTitleAsync(string title);
         Task<Job> UpdateJobAsync(Job job);
         Task<Job> DeleteJobByIdAsync(long id); //this was int
+        Task<Job> DeleteJobAsync(Job job);
         Task<List<Job>> GetAll();
     }
 }

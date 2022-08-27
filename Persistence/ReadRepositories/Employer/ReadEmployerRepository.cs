@@ -5,7 +5,7 @@ using Persistence.ReadRepositories.Common;
 
 namespace Persistence.ReadRepositories
 {
-    public class ReadEmployerRepository : BaseReadRepository<Employer>,IReadEmployerRepository
+    public class ReadEmployerRepository : BaseReadRepository<Employer>, IReadEmployerRepository
     {
         public ReadEmployerRepository(IMongoDatabase db) : base(db)
         {
@@ -21,6 +21,10 @@ namespace Persistence.ReadRepositories
         }
         public async Task<List<Employer>> FilterByTerm(string term)
         {
+            if (string.IsNullOrWhiteSpace(term))
+            {
+                return await base.GetAllAsync();
+            }
             return await base.GetWithFilterAsync(x => x.FirstName.Contains(term) || x.LastName.Contains(term) || x.Email.Contains(term));
         }
     }

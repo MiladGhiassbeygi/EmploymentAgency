@@ -29,6 +29,10 @@ namespace Persistence.ReadRepositories
 
         public async Task<List<Job>> FilterByTerm(string term)
         {
+            if (string.IsNullOrWhiteSpace(term))
+            {
+                return await base.GetAllAsync();
+            }
             return await base.GetWithFilterAsync(x => x.Title.Contains(term) || x.Description.Contains(term));
         }
 

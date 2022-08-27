@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Persistence;
@@ -11,9 +12,10 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220827093903_m3")]
+    partial class m3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -304,10 +306,10 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.WriteModel.JobEssentialSkills", b =>
                 {
-                    b.Property<short?>("SkillId")
+                    b.Property<short>("SkillId")
                         .HasColumnType("smallint");
 
-                    b.Property<long?>("JobId")
+                    b.Property<long>("JobId")
                         .HasColumnType("bigint");
 
                     b.HasKey("SkillId", "JobId");
@@ -378,10 +380,10 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.WriteModel.JobUnnecessarySkills", b =>
                 {
-                    b.Property<short?>("SkillId")
+                    b.Property<short>("SkillId")
                         .HasColumnType("smallint");
 
-                    b.Property<long?>("JobId")
+                    b.Property<long>("JobId")
                         .HasColumnType("bigint");
 
                     b.HasKey("SkillId", "JobId");
@@ -473,7 +475,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("Date")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2022, 8, 27, 14, 18, 51, 429, DateTimeKind.Local).AddTicks(503));
+                        .HasDefaultValue(new DateTime(2022, 8, 27, 14, 9, 3, 721, DateTimeKind.Local).AddTicks(420));
 
                     b.Property<bool>("IsAmountFixed")
                         .HasColumnType("boolean");

@@ -25,8 +25,8 @@ namespace Application.Features.JobFeatures.JobEssentialSkills.Query
                 var jobEssentialSkillsDto = new List<GetJobEssentialSkillsDto>();
                 jobEssentialSkillsDto.AddRange(jobEssentialSkills.ConvertAll(x => new GetJobEssentialSkillsDto()
                 {
-                  JobId=x.JobId
-                  ,SkillId=x.SkillId
+                  JobId=(long)x.JobId
+                  ,SkillId=(short)x.SkillId
                 }));
 
                 return OperationResult<List<GetJobEssentialSkillsDto>>.SuccessResult(jobEssentialSkillsDto);

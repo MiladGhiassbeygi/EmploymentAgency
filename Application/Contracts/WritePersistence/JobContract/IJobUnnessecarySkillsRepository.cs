@@ -8,7 +8,7 @@ namespace Application.Contracts.Persistence.JobContract
         Task<JobUnnecessarySkills> CreateJobUnnessecarySkillsAsync(JobUnnecessarySkills jobUnnecessarySkills);
         Task<List<JobUnnecessarySkills>> GetJobUnnessecarySkillsByIdAsync(long id);
         Task<JobUnnecessarySkills> UpdateJobUnnessecarySkillsAsync(JobUnnecessarySkills jobUnnecessarySkills);
-        Task<JobUnnecessarySkills> DeleteJobUnnessecarySkillsByIdAsync(long id);
+        Task<JobUnnecessarySkills> DeleteJobUnnessecarySkillsByIdAsync(long jobId,short skillId);
         Task<List<JobUnnecessarySkills>> GetAll();
     }
 }

@@ -33,24 +33,27 @@ namespace Web.Api.Controllers.V1
             return base.OperationResult(commandResult);
         }
 
-        [HttpGet("GetEducationalBackgrounds")]
-        public async Task<IActionResult> GetEducationalBackgrounds()
-        {
-            var queryResult = await _sender.Send(new GetEducationalBackgroundsQuery());
-            return base.OperationResult(queryResult);
-        }
-        [HttpGet("GetEducationalBackground")]
-        public async Task<IActionResult> GetEducationalBackground(int Id)
-        {
-            var queryResult = await _sender.Send(new GetEducationalBackgroundQuery(Id));
-            return base.OperationResult(queryResult);
-        }
         [HttpDelete("DeleteEducationalBackground")]
         public async Task<IActionResult> DeleteEducationalBackground(int Id)
         {
             var commandResult = await _sender.Send(new DeleteEducationalBackgroundCommand(Id));
             return base.OperationResult(commandResult);
         }
+
+        [HttpGet("GetEducationalBackgrounds")]
+        public async Task<IActionResult> GetEducationalBackgrounds()
+        {
+            var queryResult = await _sender.Send(new GetEducationalBackgroundsQuery());
+            return base.OperationResult(queryResult);
+        }
+
+        [HttpGet("GetEducationalBackground")]
+        public async Task<IActionResult> GetEducationalBackground(int Id)
+        {
+            var queryResult = await _sender.Send(new GetEducationalBackgroundQuery(Id));
+            return base.OperationResult(queryResult);
+        }
+        
 
     }
 }

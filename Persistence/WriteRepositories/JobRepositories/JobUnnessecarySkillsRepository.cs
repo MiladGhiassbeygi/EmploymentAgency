@@ -27,11 +27,6 @@ using Persistence.WriteRepositories.Common;
             return fetchedJobUnnessecarySkills;
         }
 
-        public Task<JobUnnecessarySkills> DeleteJobUnnessecarySkillsByIdAsync(long id)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<List<JobUnnecessarySkills>> GetAll()
         {
             return await base.TableNoTracking.Select(x => new JobUnnecessarySkills

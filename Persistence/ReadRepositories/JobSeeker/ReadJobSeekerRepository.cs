@@ -28,11 +28,11 @@ namespace Persistence.ReadRepositories
 
         public async Task<List<JobSeeker>> FilterByTerm(string term)
         {
-            return await base.GetWithFilterAsync(x => x.FirstName.Contains(term) || x.LastName.Contains(term) || x.LinkedinAddress.Contains(term) || x.Email.Contains(term));
+            if (string.IsNullOrWhiteSpace(term))
+            {
+                return await base.GetAllAsync();
+            }
+            return await base.GetWithFilterAsync(x => x.FirstName.Contains(term) ||x.LastName.Contains(term) || x.LinkedinAddress.Contains(term) ||x.Email.Contains(term));
         }
-        //public Task DeleteByMovieIdAsync(int movieId, CancellationToken cancellationToken = default)
-        //{
-        //    return base.DeleteAsync(m => m.MovieId == movieId, cancellationToken);
-        //}
     }
 }
