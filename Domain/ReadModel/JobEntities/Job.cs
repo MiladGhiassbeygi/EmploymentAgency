@@ -29,6 +29,9 @@ namespace Domain.ReadModel
         [BsonElement("annualLeave")]
         public byte AnnualLeave { get; set; }
 
+        [BsonElement("isFixed")]
+        public bool IsFixed { get; set; }
+
         [BsonElement("exactAmountRecived")]
         public decimal ExactAmountRecived { get; set; }
 

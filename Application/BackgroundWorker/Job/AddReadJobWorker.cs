@@ -84,7 +84,8 @@ namespace Application.BackgroundWorker
                                EssentialSkills = essentialString,
                                UnnecessarySkills = unnessecaryString,
                                HireCompanies = job.HireCompanies,
-                               EmployerId = job.EmployerId
+                               EmployerId = job.EmployerId,
+                               IsFixed = job.IsFixed
                             }, stoppingToken);
                         }
                     }

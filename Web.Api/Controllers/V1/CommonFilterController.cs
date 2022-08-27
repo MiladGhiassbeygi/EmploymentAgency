@@ -29,7 +29,7 @@ namespace Web.Api.Controllers.V1
     public class CommonFilterController : BaseController
     {
         private readonly ISender _sender;
-
+        
         public CommonFilterController(ISender sender)
         {
             _sender = sender;
@@ -43,7 +43,7 @@ namespace Web.Api.Controllers.V1
                 {
                     case FilterType.Employer:
                         {
-                            return base.OperationResult(await _sender.Send(new FilterEmpolyerQuery(term)));
+                            return base.OperationResult(await _sender.Send(new FilterEmpolyerQuery(term,UserId)));
                         }
                     case FilterType.Job:
                         {

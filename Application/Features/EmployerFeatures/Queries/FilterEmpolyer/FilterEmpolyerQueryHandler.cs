@@ -20,7 +20,7 @@ namespace Application.Features.EmployerFeatures.Queries.FilterEmpolyer
         public async Task<OperationResult<List<Employer>>> Handle(FilterEmpolyerQuery request, CancellationToken cancellationToken)
         {
 
-            var employer = await _unitOfWork.ReadEmployerRepository.FilterByTerm(request.term);
+            var employer = await _unitOfWork.ReadEmployerRepository.FilterByTerm(request.term,request.userId,cancellationToken);
 
             if (employer is not null)
                 return OperationResult<List<Employer>>.SuccessResult(employer);

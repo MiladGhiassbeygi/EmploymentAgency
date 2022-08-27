@@ -19,13 +19,13 @@ namespace Persistence.ReadRepositories
         {
             return await base.GetAllAsync();
         }
-        public async Task<List<Employer>> FilterByTerm(string term)
+        public async Task<List<Employer>> FilterByTerm(string term,long userId,CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(term))
             {
-                return await base.GetAllAsync();
+                return await base.GetWithFilterAsync(x=> x.DefinerId == userId);
             }
-            return await base.GetWithFilterAsync(x => x.FirstName.Contains(term) || x.LastName.Contains(term) || x.Email.Contains(term));
+            return await base.GetWithFilterAsync(x => x.DefinerId == userId && x.FirstName.Contains(term) || x.LastName.Contains(term) || x.Email.Contains(term) );
         }
     }
 }

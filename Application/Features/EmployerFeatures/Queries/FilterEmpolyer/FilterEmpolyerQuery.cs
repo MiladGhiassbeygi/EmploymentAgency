@@ -4,5 +4,5 @@ using MediatR;
 
 namespace Application.Features.EmployerFeatures.Queries.FilterEmpolyer
 {
-    public record FilterEmpolyerQuery(string term) : IRequest<OperationResult<List<Employer>>>;
+    public record FilterEmpolyerQuery(string term,long userId) : IRequest<OperationResult<List<Employer>>>;
 }

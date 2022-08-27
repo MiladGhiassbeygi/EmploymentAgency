@@ -64,7 +64,7 @@ namespace Web.Api.Controllers.V1
         [HttpGet("Filter")]
         public async Task<IActionResult> Filter([FromQuery] string term)
         {
-            return base.OperationResult(await _sender.Send(new FilterEmpolyerQuery(term)));
+            return base.OperationResult(await _sender.Send(new FilterEmpolyerQuery(term,UserId)));
         }
     }
 }
