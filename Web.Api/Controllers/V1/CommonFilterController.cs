@@ -47,7 +47,7 @@ namespace Web.Api.Controllers.V1
                         }
                     case FilterType.Job:
                         {
-                            return base.OperationResult(await _sender.Send(new FilterJobQuery(term)));
+                            return base.OperationResult(await _sender.Send(new FilterJobQuery(term,UserId)));
                         }
                     case FilterType.JobSeeker:
                         {

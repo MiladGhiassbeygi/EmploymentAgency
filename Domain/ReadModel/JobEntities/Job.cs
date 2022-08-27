@@ -52,7 +52,9 @@ namespace Domain.ReadModel
 
         [BsonElement("employerId")]
         public long EmployerId { get; set; }
+        [BsonElement("definerId")]
+        public long DefinerId { get; set; }
 
-        
+
     }
 }

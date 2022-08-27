@@ -27,13 +27,13 @@ namespace Persistence.ReadRepositories
             return await base.GetAllAsync();
         }
 
-        public async Task<List<Job>> FilterByTerm(string term)
+        public async Task<List<Job>> FilterByTerm(string term, long userId,CancellationToken cancellationToken = default)
         {
             if (string.IsNullOrWhiteSpace(term))
             {
-                return await base.GetAllAsync();
+                return await base.GetWithFilterAsync(x=> x.DefinerId == userId);
             }
-            return await base.GetWithFilterAsync(x => x.Title.Contains(term) || x.Description.Contains(term));
+            return await base.GetWithFilterAsync(x => x.DefinerId == userId && x.Title.Contains(term) || x.Description.Contains(term));
         }
 
 

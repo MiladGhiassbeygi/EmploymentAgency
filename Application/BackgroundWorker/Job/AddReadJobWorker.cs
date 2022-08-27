@@ -85,7 +85,8 @@ namespace Application.BackgroundWorker
                                UnnecessarySkills = unnessecaryString,
                                HireCompanies = job.HireCompanies,
                                EmployerId = job.EmployerId,
-                               IsFixed = job.IsFixed
+                               IsFixed = job.IsFixed,
+                               DefinerId = job.Employer.DefinerId
                             }, stoppingToken);
                         }
                     }
