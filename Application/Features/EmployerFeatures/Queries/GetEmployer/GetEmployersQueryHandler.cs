@@ -18,7 +18,7 @@ namespace Application.Features.EmployerFeatures.Queries.GetEmployer
         public async Task<OperationResult<List<Employer>>> Handle(GetEmployersQuery request, CancellationToken cancellationToken)
         {
 
-            var employer = await _unitOfWork.ReadEmployerRepository.GetAllAsync();
+            var employer = await _unitOfWork.ReadEmployerRepository.GetWithFilterAsync(x=> x.DefinerId == request.userId);
 
             if (employer is not null)
                 return OperationResult<List<Employer>>.SuccessResult(employer);
