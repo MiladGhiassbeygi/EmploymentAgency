@@ -33,7 +33,7 @@ namespace Persistence.ReadRepositories
             {
                 return await base.GetWithFilterAsync(x=> x.DefinerId == userId);
             }
-            return await base.GetWithFilterAsync(x => x.DefinerId == userId && x.Title.Contains(term) || x.Description.Contains(term));
+            return await base.GetWithFilterAsync(x => (x.DefinerId == userId) && (x.Title.Contains(term) || x.Description.Contains(term)));
         }
 
 

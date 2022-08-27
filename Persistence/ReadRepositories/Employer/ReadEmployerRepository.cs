@@ -25,7 +25,7 @@ namespace Persistence.ReadRepositories
             {
                 return await base.GetWithFilterAsync(x=> x.DefinerId == userId);
             }
-            return await base.GetWithFilterAsync(x => x.DefinerId == userId && x.FirstName.Contains(term) || x.LastName.Contains(term) || x.Email.Contains(term) );
+            return await base.GetWithFilterAsync(x => (x.DefinerId == userId) && (x.FirstName.Contains(term) || x.LastName.Contains(term) || x.Email.Contains(term)));
         }
     }
 }
