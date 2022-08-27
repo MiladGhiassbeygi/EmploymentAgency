@@ -53,7 +53,7 @@ namespace Web.Api.Controllers.V1
         [HttpGet("GetEmployers")]
         public async Task<IActionResult> GetEmployers()
         {
-            return base.OperationResult(await _sender.Send(new GetEmployersQuery()));
+            return base.OperationResult(await _sender.Send(new GetEmployersQuery(UserId)));
         }
 
         [HttpGet("GetEmployerById")]
