@@ -22,18 +22,10 @@ namespace Persistence.WriteRepositories
             return await base.TableNoTracking.FirstOrDefaultAsync(x => x.Id.Equals(id));
         }
      
-        public async Task<SuccessedContract> FindContractByTermAsync(SuccessedContract successedContract)
-        {
-            throw new  NotImplementedException();
-        }
         public async Task<SuccessedContract> UpdateSuccessedContractAsync(SuccessedContract successedContract)
         {
-            var fetchedSuccessedContract = await base.TableNoTracking.FirstOrDefaultAsync(x => x.Id.Equals(successedContract.Id));
-
-            if (fetchedSuccessedContract == null) return null;
-
-            await base.UpdateAsync(fetchedSuccessedContract);
-            return fetchedSuccessedContract;
+            await base.UpdateAsync(successedContract);
+            return successedContract;
         }
         public async Task<SuccessedContract> DeleteSuccessedContractByIdAsync(long id)
         {
