@@ -22,7 +22,7 @@ namespace Web.Api.Controllers.V1
         [HttpPost("CreateSuccessedContract")]
         public async Task<IActionResult> CreateArea(CreateContractForm model)
         {
-            var commandResult = await _sender.Send(new CreateSuccessedContractCommand(model.Id,model.EmployerId,model.JobSeekerId,model.ContractCreatorId,model.IsAmountFixed,model.Amount,model.EmployerId));
+            var commandResult = await _sender.Send(new CreateSuccessedContractCommand(model.Id,model.Date,model.EmployerId,model.JobSeekerId,model.ContractCreatorId,model.IsAmountFixed,model.Amount,model.EmployerId));
 
             if (commandResult.IsSuccess)
             {
