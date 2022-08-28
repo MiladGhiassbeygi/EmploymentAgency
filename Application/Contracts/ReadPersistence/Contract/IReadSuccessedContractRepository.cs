@@ -1,13 +1,9 @@
-﻿using Domain.ReadModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Application.Contracts.ReadPersistence.Common;
+using Domain.ReadModel;
 
 namespace Application.Contracts.ReadPersistence
 {
-    public interface IReadSuccessedContractRepository
+    public interface IReadSuccessedContractRepository :IReadBaseRepository<SuccessedContract>
     {
         Task<List<SuccessedContract>> FilterByTerm(string term, long userId, CancellationToken cancellationToken);
     }

@@ -24,6 +24,7 @@ namespace Application.Contracts.Persistence
         public IReadWorkExperienceRepository ReadWorkExperienceRepository { get; }
         public IReadSkillRepository ReadSkillRepository { get; }
         public IReadEducationalBackgroundRepository ReadEducationalBackgroundRepository { get; }
+        public IReadSuccessedContractRepository ReadSuccessedContractRepository { get; }
 
         #endregion
 
