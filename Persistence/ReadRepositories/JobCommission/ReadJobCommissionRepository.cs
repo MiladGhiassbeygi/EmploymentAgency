@@ -2,11 +2,6 @@
 using Domain.ReadModel;
 using MongoDB.Driver;
 using Persistence.ReadRepositories.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Persistence.ReadRepositories
 {

@@ -1,5 +1,4 @@
-﻿using Application.Contracts.Persistence;
-using Application.Contracts.WritePersistence.Reminder;
+﻿using Application.Contracts.WritePersistence.Reminder;
 using Domain.WriteModel;
 using Microsoft.EntityFrameworkCore;
 using Persistence.WriteRepositories.Common;

@@ -1,5 +1,4 @@
 ﻿using Application.Contracts.Persistence;
-using Application.Models.Employer;
 using Application.Models.Common;
 using MediatR;
 using Domain.ReadModel;
@@ -18,12 +17,6 @@ namespace Application.Features.GetEmployerActivityField
         {
             var employerAcivityFields = await _unitOfWork.ReadEmployerActivitiesRepository.GetAllAsync();
 
-            //if(employerAcivityFields is not null)
-            //{
-            //    var employerAcivityFieldsDto=new List<GetEmployerAcivityFieldsDto>();
-            //    employerAcivityFieldsDto.AddRange(employerAcivityFields.ConvertAll(x => new GetEmployerAcivityFieldsDto() { Id = x.EmployerAcivityFieldId, Title = x.Title }));
-            //    return OperationResult<List<GetEmployerAcivityFieldsDto>>.SuccessResult(employerAcivityFieldsDto);
-            //}
 
             if (employerAcivityFields is not null)
                 return OperationResult<List<EmployerAcivityField>>.SuccessResult(employerAcivityFields);

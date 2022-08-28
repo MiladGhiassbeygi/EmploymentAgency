@@ -1,6 +1,5 @@
 ﻿using Domain.WriteModel.Common;
-using System;
-using System.Collections.Generic;
+
 
 namespace Domain.WriteModel
 {

@@ -1,5 +1,4 @@
-﻿using Application.Contracts.Persistence;
-using Application.Contracts.Persistence.JobContract;
+﻿using Application.Contracts.Persistence.JobContract;
 using Domain.WriteModel;
 using Microsoft.EntityFrameworkCore;
 using Persistence.WriteRepositories.Common;

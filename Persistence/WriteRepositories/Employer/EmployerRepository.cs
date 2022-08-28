@@ -1,7 +1,6 @@
 ﻿using Application.Contracts.WritePersistence;
 using Domain.WriteModel;
 using Microsoft.EntityFrameworkCore;
-using Persistence.ReadRepositories.Common;
 using Persistence.WriteRepositories.Common;
 
 namespace Persistence.WriteRepositories
