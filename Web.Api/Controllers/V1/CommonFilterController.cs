@@ -1,4 +1,5 @@
-﻿using Application.Features.EmployerFeatures.Queries.FilterEmpolyer;
+﻿using Application.Features.Contract.Queries;
+using Application.Features.EmployerFeatures.Queries.FilterEmpolyer;
 using Application.Features.JobFeatures.Queries.FilterJob;
 using Application.Features.JobFeatures.Queries.FilterJobSeeker;
 using MediatR;
@@ -55,7 +56,11 @@ namespace Web.Api.Controllers.V1
                         {
                             return base.OperationResult(await _sender.Send(new FilterJobSeekerQuery(term,UserId)));
                         }
-                }
+                    case FilterType.HiredPeople:
+                    {
+                        return base.OperationResult(await _sender.Send(new FilterSuccessedContractQuery(term, UserId)));
+                    }
+            }
                         return base.OperationResult(BadRequest("Invalid Input Param's"));
         }
     }
