@@ -20,8 +20,11 @@ namespace Persistence.Configuration.JobConfig
 
             builder.HasOne(d => d.JobSeeker)
                 .WithMany(p => p.SuccessedContract)
-                
                 .HasConstraintName("FK_SuccessedContract_JobSeeker");
+
+            builder.HasOne(f => f.Employer)
+                .WithMany(f => f.SuccessContract)
+                .HasConstraintName("FK_SuccessedContract_Employer");
         }
     }
 }
