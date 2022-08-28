@@ -31,11 +31,18 @@ namespace Web.Api.Controllers.V1
             return base.OperationResult(commandResult);
         }
 
+        [HttpPut("UpdateSuccessedContract")]
+        public async Task<IActionResult> UpdateSuccessedContract(UpdateSuccessedContractForm input, CancellationToken cancellationToken)
+        {
+            return base.OperationResult(await _sender.Send(new UpdateSuccessedContractCommand(input.Date,input.IsAmountFixed,input.Amount,input.JobId,input.JobSeekerId,input.ContractCreatorId,input.EmployerId)));
+        }
+
 
         [HttpGet("GetSuccessedContracts")]
         public async Task<IActionResult> GetSuccessedContracts()
         {
             return base.OperationResult(await _sender.Send(new GetSuccessedContractQuery(UserId)));
+            
         }
 
         [HttpGet("GetSuccessedContractById")]
