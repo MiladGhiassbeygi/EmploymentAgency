@@ -5,8 +5,6 @@ using MediatR;
 
 namespace Application.Features.EmployerFeatures.Queries.FilterEmpolyer
 {
-
-
     internal class FilterEmpolyerQueryHandler : IRequestHandler<FilterEmpolyerQuery, OperationResult<List<Employer>>>
     {
 
@@ -29,4 +27,3 @@ namespace Application.Features.EmployerFeatures.Queries.FilterEmpolyer
         }
     }
 }
-//(x => x.FirstName.Contains(request.term)).

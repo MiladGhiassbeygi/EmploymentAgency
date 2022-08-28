@@ -43,6 +43,12 @@ namespace Web.Api.Controllers.V1
         {
             return base.OperationResult(await _sender.Send(new GetSuccessedContractQuery(Id)));
         }
+
+        [HttpGet("Filter")]
+        public async Task<IActionResult> Filter([FromQuery] string term)
+        {
+            return base.OperationResult(await _sender.Send(new FilterSuccessedContractQuery(term, UserId)));
+        }
     }
 }
 
