@@ -30,7 +30,6 @@ namespace Application.Features.Contract.Commands
                     JobId = request.jobId,
                     JobSeekerId = request.jobSeekerId,
                     Date = request.date,
-                    EmployerId =request.employerId,
                     ContractCreatorId = request.contractCreatorId,
                     IsAmountFixed = request.isAmountFixed,
                     Amount = request.amount

@@ -10,11 +10,9 @@ namespace Domain.WriteModel
         public long JobId { get; set; }
         public long JobSeekerId { get; set; }
         public int ContractCreatorId { get; set; }
-        public long EmployerId { get; set; }
 
         public virtual Job Job { get; set; }
         public virtual JobSeeker JobSeeker { get; set; }
-        public virtual Employer Employer { get; set; }
         public User.User ContractCreator { get; set; }
     }
 }
