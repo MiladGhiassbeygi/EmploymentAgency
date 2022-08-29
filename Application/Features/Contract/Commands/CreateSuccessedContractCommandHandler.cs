@@ -12,7 +12,7 @@ namespace Application.Features.Contract.Commands
         readonly IUnitOfWork _unitOfWork;
         private readonly ChannelQueue<SuccessedContractAdded> _channel;
 
-        public CreateSuccessedContractCommandHandler(IUnitOfWork unitOfWork, ChannelQueue<SuccessContractAdded> channel)
+        public CreateSuccessedContractCommandHandler(IUnitOfWork unitOfWork, ChannelQueue<SuccessedContractAdded> channel)
         {
             _unitOfWork = unitOfWork;
             _channel = channel;
@@ -33,7 +33,6 @@ namespace Application.Features.Contract.Commands
                 {
                     JobId = request.jobId,
                     JobSeekerId = request.jobSeekerId,
-                    Date = request.date,
                     ContractCreatorId = request.contractCreatorId,
                     IsAmountFixed = request.isAmountFixed,
                     Amount = request.amount
@@ -43,7 +42,7 @@ namespace Application.Features.Contract.Commands
 
                 await _unitOfWork.CommitAsync();
 
-                await _channel.AddToChannelAsync(new SuccessContractAdded { SuccessContractId = result.Id }, cancellationToken);
+                await _channel.AddToChannelAsync(new SuccessedContractAdded { SuccessedContractId = result.Id }, cancellationToken);
 
                 return OperationResult<SuccessedContract>.SuccessResult(SuccessedContract);
             }

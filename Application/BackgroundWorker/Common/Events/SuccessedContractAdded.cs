@@ -2,6 +2,6 @@
 {
     public class SuccessedContractAdded
     {
-        public int SuccessedContractId { get; set; }
+        public long SuccessedContractId { get; set; }
     }
 }
