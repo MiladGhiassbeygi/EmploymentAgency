@@ -20,7 +20,7 @@ namespace Domain.WriteModel
         public string Email { get; set; }
         public string HireCompanies { get; set; }
         public long EmployerId { get; set; }
-
+        
         public virtual Employer Employer { get; set; }
         public virtual ICollection<JobCommission> JobCommission { get; set; }
         public virtual ICollection<JobEssentialSkills> JobEssentialSkills { get; set; }

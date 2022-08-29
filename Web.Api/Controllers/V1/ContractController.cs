@@ -43,7 +43,7 @@ namespace Web.Api.Controllers.V1
         [HttpGet("GetSuccessedContracts")]
         public async Task<IActionResult> GetSuccessedContracts()
         {
-            return base.OperationResult(await _sender.Send(new GetSuccessedContractQuery(UserId)));
+            return base.OperationResult(await _sender.Send(new GetSuccessedContractsQuery()));
             
         }
 

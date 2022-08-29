@@ -45,7 +45,7 @@ namespace Application.BackgroundWorker
                        
                         var essentialList = await jobEssentialSkillsRepository.GetJobEssentialSkillsByIdAsync(item.JobId);
                         string essentialString = "";
-                        if (essentialList is not null)
+                        if (essentialList.Count() > 0)
                         {
                             foreach (var essential in essentialList)
                             {
@@ -57,7 +57,7 @@ namespace Application.BackgroundWorker
                         
                         var unnessecaryList = await jobUnnessecarySkillRepository.GetJobUnnessecarySkillsByIdAsync(item.JobId);
                         string unnessecaryString = "";
-                        if (unnessecaryList is not null)
+                        if (unnessecaryList.Count() > 0)
                         {
                             foreach (var unnessecary in unnessecaryList)
                             {
@@ -86,7 +86,7 @@ namespace Application.BackgroundWorker
                                HireCompanies = job.HireCompanies,
                                EmployerId = job.EmployerId,
                                IsFixed = job.IsFixed,
-                               DefinerId = job.Employer.DefinerId
+                               DefinerId = item.DefinerId
                             }, stoppingToken);
                         }
                     }
