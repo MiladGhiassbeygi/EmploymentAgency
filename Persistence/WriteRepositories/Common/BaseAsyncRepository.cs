@@ -1,4 +1,5 @@
-﻿using Domain.WriteModel.Common;
+﻿using Domain.WriteModel;
+using Domain.WriteModel.Common;
 using Microsoft.EntityFrameworkCore;
 
 namespace Persistence.WriteRepositories.Common
@@ -38,6 +39,11 @@ namespace Persistence.WriteRepositories.Common
         {
             Entities.Remove(entity);
            return Task.CompletedTask;
+        }
+
+        internal Task<SuccessedContract> GetWithFilterAsync(Func<object, bool> p)
+        {
+            throw new NotImplementedException();
         }
     }
 }

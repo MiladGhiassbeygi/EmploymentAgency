@@ -5,7 +5,6 @@ using Application.Features.JobFeatures.Commands.CreateJob;
 using Application.Models.Common;
 using Domain.WriteModel;
 using MediatR;
-using MongoDB.Driver.Core.Bindings;
 
 namespace Application.Features.JobFeature.Commands.CreateJob
 {

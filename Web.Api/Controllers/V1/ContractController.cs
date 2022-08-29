@@ -31,7 +31,32 @@ namespace Web.Api.Controllers.V1
             }
             return base.OperationResult(commandResult);
         }
-      
+
+        [HttpPut("UpdateSuccessedContract")]
+        public async Task<IActionResult> UpdateSuccessedContract(UpdateSuccessedContractForm input, CancellationToken cancellationToken)
+        {
+            return base.OperationResult(await _sender.Send(new UpdateSuccessedContractCommand(input.Date,input.IsAmountFixed,input.Amount,input.JobId,input.JobSeekerId,input.ContractCreatorId)));
+        }
+
+
+        [HttpGet("GetSuccessedContracts")]
+        public async Task<IActionResult> GetSuccessedContracts()
+        {
+            return base.OperationResult(await _sender.Send(new GetSuccessedContractQuery(UserId)));
+            
+        }
+
+        [HttpGet("GetSuccessedContractById")]
+        public async Task<IActionResult> GetSuccessedContractById(long Id)
+        {
+            return base.OperationResult(await _sender.Send(new GetSuccessedContractQuery(Id)));
+        }
+
+        [HttpGet("Filter")]
+        public async Task<IActionResult> Filter([FromQuery] string term)
+        {
+            return base.OperationResult(await _sender.Send(new FilterSuccessedContractQuery(term, UserId)));
+        }
     }
 }
 

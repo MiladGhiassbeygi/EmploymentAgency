@@ -9,6 +9,7 @@ using Application.Contracts.WritePersistence.Reminder;
 using MongoDB.Driver;
 using Persistence.ReadRepositories;
 using Persistence.ReadRepositories.Area;
+using Persistence.ReadRepositories.Contract;
 using Persistence.ReadRepositories.ReadWorkExperience;
 using Persistence.WriteRepositories.EmployerRepositories;
 using Persistence.WriteRepositories.JobRepositories;
@@ -35,6 +36,7 @@ namespace Persistence.WriteRepositories.Common
         public IReadWorkExperienceRepository ReadWorkExperienceRepository { get; }
         public IReadSkillRepository ReadSkillRepository { get; }
         public IReadEducationalBackgroundRepository ReadEducationalBackgroundRepository { get; }
+        public IReadSuccessedContractRepository ReadSuccessedContractRepository { get; }
 
         #endregion
 
@@ -77,6 +79,7 @@ namespace Persistence.WriteRepositories.Common
             ReadWorkExperienceRepository = new ReadWorkExperienceRepository(_readDb);
             ReadSkillRepository = new ReadSkillRepository(_readDb);
             ReadEducationalBackgroundRepository = new ReadEducationalBackgroundRepository(_readDb);
+            ReadSuccessedContractRepository = new ReadSuccessedContractRepository(_readDb);
 
             #endregion
 

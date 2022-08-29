@@ -10,7 +10,7 @@ namespace Application.Features.Contract.Commands
     internal class CreateSuccessedContractCommandHandler : IRequestHandler<CreateSuccessedContractCommand, OperationResult<SuccessedContract>>
     {
         readonly IUnitOfWork _unitOfWork;
-        private readonly ChannelQueue<SuccessContractAdded> _channel;
+        private readonly ChannelQueue<SuccessedContractAdded> _channel;
 
         public CreateSuccessedContractCommandHandler(IUnitOfWork unitOfWork, ChannelQueue<SuccessContractAdded> channel)
         {
@@ -33,6 +33,7 @@ namespace Application.Features.Contract.Commands
                 {
                     JobId = request.jobId,
                     JobSeekerId = request.jobSeekerId,
+                    Date = request.date,
                     ContractCreatorId = request.contractCreatorId,
                     IsAmountFixed = request.isAmountFixed,
                     Amount = request.amount

@@ -14,6 +14,7 @@ using MongoDB.Driver;
 using Persistence.ReadRepositories;
 using Persistence.ReadRepositories.Account;
 using Persistence.ReadRepositories.Area;
+using Persistence.ReadRepositories.Contract;
 using Persistence.ReadRepositories.ReadWorkExperience;
 using Persistence.WriteRepositories;
 using Persistence.WriteRepositories.Common;
@@ -67,6 +68,9 @@ namespace Persistence.ServiceConfiguration
            
             services.AddScoped<IJobCommissionRepository, JobCommissionRepository>();
             services.AddScoped<IReadJobCommissionRepository,ReadJobCommissionRepository>(); 
+
+            services.AddScoped<ISuccessedContractRepository, SuccessedContractRepository>();
+            services.AddScoped<IReadSuccessedContractRepository, ReadSuccessedContractRepository>();
 
             var mongoClient = new MongoClient("mongodb://localhost:27017");
             var mongoDatabase = mongoClient.GetDatabase("EmploymentAgency");

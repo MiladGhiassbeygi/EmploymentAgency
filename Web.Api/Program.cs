@@ -103,6 +103,7 @@ builder.Services.AddHostedService<AddReadEducationalBackgroundWorker>();
 builder.Services.AddHostedService<AddUpdateEducationalBackgroundWorker>();
 builder.Services.AddHostedService<AddDeleteEducationalBackgroundWorker>();
 
+builder.Services.AddHostedService<AddReadSuccessedContractWorker>();
 #endregion
 
 
