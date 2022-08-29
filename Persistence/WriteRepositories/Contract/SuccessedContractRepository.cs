@@ -2,6 +2,7 @@
 using Domain.WriteModel;
 using Microsoft.EntityFrameworkCore;
 using Persistence.WriteRepositories.Common;
+using System.Linq.Expressions;
 
 namespace Persistence.WriteRepositories
 {
@@ -22,9 +23,9 @@ namespace Persistence.WriteRepositories
             return await base.TableNoTracking.FirstOrDefaultAsync(x => x.Id.Equals(id));
         }
      
-        public async Task<SuccessedContract> FindContractByTermAsync(SuccessedContract successedContract)
+        public async Task<SuccessedContract> FindContractByTermAsync(Expression<Func<SuccessedContract, bool>> filter )
         {
-            throw new  NotImplementedException();
+            return await base.TableNoTracking.FirstOrDefaultAsync(filter);
         }
         public async Task<SuccessedContract> UpdateSuccessedContractAsync(SuccessedContract successedContract)
         {

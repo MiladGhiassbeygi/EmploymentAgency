@@ -10,11 +10,12 @@ namespace Application.Features.Contract.Commands
     internal class CreateSuccessedContractCommandHandler : IRequestHandler<CreateSuccessedContractCommand, OperationResult<SuccessedContract>>
     {
         readonly IUnitOfWork _unitOfWork;
-         private readonly ChannelQueue<EducationalBackgroundAdded> _channel;
+        private readonly ChannelQueue<SuccessContractAdded> _channel;
 
-        public CreateSuccessedContractCommandHandler(IUnitOfWork unitOfWork)
+        public CreateSuccessedContractCommandHandler(IUnitOfWork unitOfWork, ChannelQueue<SuccessContractAdded> channel)
         {
             _unitOfWork = unitOfWork;
+            _channel = channel;
         }
 
         public async Task<OperationResult<SuccessedContract>> Handle(CreateSuccessedContractCommand request, CancellationToken cancellationToken)
@@ -22,7 +23,10 @@ namespace Application.Features.Contract.Commands
 
             try
             {
-                if (await _unitOfWork.SuccessedContractRepository.GetSuccessedContractByIdAsync(request.id) is not null)
+                if (await _unitOfWork.SuccessedContractRepository
+                    .FindContractByTermAsync
+                    (x=> x.ContractCreatorId == request.contractCreatorId &&
+                    x.JobSeekerId == request.jobSeekerId && x.JobId == request.jobId) is not null)
                     return OperationResult<SuccessedContract>.FailureResult("This SuccessedContract Already Exists");
 
                 var SuccessedContract = new SuccessedContract
@@ -38,9 +42,11 @@ namespace Application.Features.Contract.Commands
 
                 await _unitOfWork.CommitAsync();
 
+                await _channel.AddToChannelAsync(new SuccessContractAdded { SuccessContractId = result.Id }, cancellationToken);
+
                 return OperationResult<SuccessedContract>.SuccessResult(SuccessedContract);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return OperationResult<SuccessedContract>.FailureResult(ex.Message);
             }
