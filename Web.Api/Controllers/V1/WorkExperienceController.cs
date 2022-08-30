@@ -1,7 +1,7 @@
 ﻿using Application.Features.CreateWorkExperience;
 using Application.Features.GetWorkExperience;
 using MediatR;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Web.Api.Dto.WorkExperience;
 using Web.Api.Form.WorkExperienceForm;
@@ -12,6 +12,7 @@ namespace Web.Api.Controllers.V1
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/WorkExperience")]
     [ApiController]
+    [Authorize]
     public class WorkExperienceController : BaseController
     {
         private readonly ISender _sender;

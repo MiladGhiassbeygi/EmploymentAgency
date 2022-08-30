@@ -9,12 +9,14 @@ using Web.Api.Form.EmployerAcivityField;
 using Application.Features.EmployerActivityFieldsFeature.Queries.FilterEmployerAcivityField;
 using Domain.ReadModel;
 using Domain.WriteModel.User;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Web.Api.Controllers.V1
 {
     [ApiVersion("1")]
     [ApiController]
     [Route("api/v{version:apiVersion}/EmployerAcivityField")]
+    [Authorize]
     public class EmployerAcivityFieldController : BaseController
     {
         private readonly ISender _sender;

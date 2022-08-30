@@ -1,6 +1,7 @@
 ﻿using Application.Features.EmployerFeatures.EmployerCommissionCqrs.Commands;
 using Application.Features.EmployerFeatures.EmployerCommissionCqrs.Query;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Web.Api.Dto.EmployerCommissionDto;
@@ -12,6 +13,7 @@ namespace Web.Api.Controllers.V1
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/EmployerCommission")]
     [ApiController]
+    [Authorize]
     public class EmployerCommissionController : BaseController
     {
         private readonly ISender _sender;

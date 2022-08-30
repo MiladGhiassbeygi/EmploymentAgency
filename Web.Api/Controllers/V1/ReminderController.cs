@@ -13,6 +13,7 @@ namespace Web.Api.Controllers.V1
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/Reminder")]
     [ApiController]
+    [Authorize]
     public class ReminderController : BaseController
     {
         private readonly ISender _sender;
