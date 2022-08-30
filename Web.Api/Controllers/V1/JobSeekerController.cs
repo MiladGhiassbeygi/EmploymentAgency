@@ -73,5 +73,10 @@ namespace Web.Api.Controllers.V1
         {
             return base.OperationResult(await _sender.Send(new GetJobSeekerQuery(Id)));
         }
+        [HttpGet("GetAvalaibleJobs")]
+        public async Task<IActionResult> GetAvalaibleJobs()
+        {
+            return new JsonResult("MioMio");
+        }
     }
 }

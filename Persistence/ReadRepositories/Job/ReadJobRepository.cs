@@ -35,5 +35,11 @@ namespace Persistence.ReadRepositories
             }
             return await base.GetWithFilterAsync(x => (x.DefinerId == userId) && (x.Title.Contains(term) || x.Description.Contains(term)));
         }
+        public async Task<List<Job>> GetAvalaibleJobsForJobSeeker(long jobSeekerId)
+        {
+            
+            return null;
+
+        }
     }
 }
