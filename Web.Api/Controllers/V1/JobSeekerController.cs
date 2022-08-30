@@ -59,7 +59,7 @@ namespace Web.Api.Controllers.V1
         [HttpGet("GetAvalaibleJobs")]
         public async Task<IActionResult> GetAvalaibleJobs(long id)
         {
-            return base.OperationResult(await _sender.Send(new GetAvailableJobsForJobSeekerQuery(id)));
+            return base.OperationResult(await _sender.Send(new GetAvailableJobsForJobSeekerQuery(id,UserId)));
         }
     }
 }

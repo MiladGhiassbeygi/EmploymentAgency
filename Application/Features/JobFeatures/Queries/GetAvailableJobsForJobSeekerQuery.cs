@@ -4,5 +4,5 @@ using MediatR;
 
 namespace Application.Features.JobFeatures
 {
-    public record GetAvailableJobsForJobSeekerQuery(long jobSeekerId) : IRequest<OperationResult<List<Job>>>;
+    public record GetAvailableJobsForJobSeekerQuery(long jobSeekerId,long definerId) : IRequest<OperationResult<List<Job>>>;
 }

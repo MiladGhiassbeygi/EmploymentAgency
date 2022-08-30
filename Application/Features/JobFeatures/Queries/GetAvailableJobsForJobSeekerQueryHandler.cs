@@ -23,7 +23,7 @@ namespace Application.Features.JobFeatures
             var jobSkills = await _unitOfWork.ReadJobEssentialRepository.GetWithFilterAsync(x=> skillIds.Contains(x.SkillId));
             List<long> jobIds = jobSkills.Select(x => x.JobId).ToList();
 
-            var availableJobs = await _unitOfWork.ReadJobRepository.GetWithFilterAsync(x => jobIds.Contains(x.JobId));
+            var availableJobs = await _unitOfWork.ReadJobRepository.GetWithFilterAsync(x => jobIds.Contains(x.JobId) && x.DefinerId == request.definerId);
 
             return OperationResult<List<Job>>.SuccessResult(availableJobs);
 
