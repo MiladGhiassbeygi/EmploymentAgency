@@ -7,6 +7,7 @@ using Application.Features.Area;
 using Microsoft.AspNetCore.Authorization;
 using Web.Api.Form.Area;
 using Application.Features.Area.Commands;
+using Application.Features.Area.Commands.DeleteCountry;
 
 namespace Web.Api.Controllers.V1
 {
@@ -39,6 +40,12 @@ namespace Web.Api.Controllers.V1
         public async Task<IActionResult> UpdateCountry(UpdateCountryForm input, CancellationToken cancellationToken)
         {
             return base.OperationResult(await _sender.Send(new UpdateCountryCommand(input.CountryId, input.Title,input.PostalCode,input.AreaCode)));
+        }
+
+        [HttpDelete("DeleteCountry")]
+        public async Task<IActionResult> DeleteCountry (DeleteCountryForm input, CancellationToken cancellationToken)
+        {
+            return base.OperationResult(await _sender.Send(new DeleteCountryCommand(input.Id)));
         }
 
         [HttpGet("GetCountries")]
