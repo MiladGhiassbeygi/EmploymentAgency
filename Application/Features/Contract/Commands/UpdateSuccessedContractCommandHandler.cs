@@ -30,7 +30,6 @@ namespace Application.Features.Contract.Commands
             fetchedSuccessedContract.JobId = request.jobId;
             fetchedSuccessedContract.JobSeekerId = request.jobSeekerId;
             fetchedSuccessedContract.ContractCreatorId = request.contractCreatorId;
-            fetchedSuccessedContract.EmployerId = request.employerId;
 
 
             var result = await _unitOfWork.SuccessedContractRepository.UpdateSuccessedContractAsync(fetchedSuccessedContract);

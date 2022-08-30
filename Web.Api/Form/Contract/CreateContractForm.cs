@@ -9,7 +9,6 @@
         public long JobId { get; set; }
         public long JobSeekerId { get; set; }
         public int ContractCreatorId { get; set; }
-        public long EmployerId { get; set; }
     }
 }
 

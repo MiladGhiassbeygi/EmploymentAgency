@@ -42,7 +42,6 @@ namespace Application.BackgroundWorker
                             await readRepository.AddAsync(new SuccessedContract
                             {
                                 SuccessedContractId = successedContract.Id,
-                                EmployerId = successedContract.EmployerId,
                                 JobSeekerId = successedContract.JobSeekerId,
                                 ContractCreatorId = successedContract.ContractCreatorId,
                                 Date = successedContract.Date,

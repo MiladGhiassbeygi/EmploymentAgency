@@ -22,7 +22,7 @@ namespace Web.Api.Controllers.V1
         [HttpPost("CreateSuccessedContract")]
         public async Task<IActionResult> CreateArea(CreateContractForm model)
         {
-            var commandResult = await _sender.Send(new CreateSuccessedContractCommand(model.Id,model.Date,model.EmployerId,model.JobSeekerId,model.ContractCreatorId,model.IsAmountFixed,model.Amount,model.EmployerId));
+            var commandResult = await _sender.Send(new CreateSuccessedContractCommand(model.Id,model.Date,model.JobId,model.JobSeekerId,model.ContractCreatorId,model.IsAmountFixed,model.Amount));
 
             if (commandResult.IsSuccess)
             {
@@ -34,7 +34,7 @@ namespace Web.Api.Controllers.V1
         [HttpPut("UpdateSuccessedContract")]
         public async Task<IActionResult> UpdateSuccessedContract(UpdateSuccessedContractForm input, CancellationToken cancellationToken)
         {
-            return base.OperationResult(await _sender.Send(new UpdateSuccessedContractCommand(input.Date,input.IsAmountFixed,input.Amount,input.JobId,input.JobSeekerId,input.ContractCreatorId,input.EmployerId)));
+            return base.OperationResult(await _sender.Send(new UpdateSuccessedContractCommand(input.Date,input.IsAmountFixed,input.Amount,input.JobId,input.JobSeekerId,input.ContractCreatorId)));
         }
 
 

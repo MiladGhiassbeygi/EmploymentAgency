@@ -24,7 +24,6 @@ namespace Domain.WriteModel
         public virtual EmployerAcivityField FieldOfActivity { get; set; }
         public virtual User.User Definer { get; set; }
         public virtual ICollection<Job> Job { get; set; }
-        public virtual ICollection<SuccessedContract> SuccessContract { get; set; }
         public virtual ICollection<EmployerCommission> EmployerCommission { get; set; }
     }
 }
