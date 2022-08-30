@@ -35,11 +35,5 @@ namespace Persistence.ReadRepositories
             }
             return await base.GetWithFilterAsync(x => (x.DefinerId == userId) && (x.Title.Contains(term) || x.Description.Contains(term)));
         }
-
-
-        //public Task DeleteByMovieIdAsync(int movieId, CancellationToken cancellationToken = default)
-        //{
-        //    return base.DeleteAsync(m => m.MovieId == movieId, cancellationToken);
-        //}
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Application.Features.EducationalBackgrounds.Commands;
 using Application.Features.EducationalBackgrounds.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Web.Api.Form;
 using WebFramework.BaseController;
@@ -10,6 +11,7 @@ namespace Web.Api.Controllers.V1
     [ApiVersion("1")]
     [ApiController]
     [Route("api/v{version:apiVersion}/EducationalBackground")]
+    [Authorize]
     public class EducationalBackgroundController : BaseController
     {
         private readonly ISender _sender;

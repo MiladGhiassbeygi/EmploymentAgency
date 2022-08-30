@@ -6,6 +6,6 @@ namespace Application.Contracts.ReadPersistence
    
     public interface IReadSkillRepository : IReadBaseRepository<Skill>
     {
-        Task<bool> AnyListAsync(short[] skillIds);
+        Task<bool> AnyListAsync(short [] skillIds);
     }
 }

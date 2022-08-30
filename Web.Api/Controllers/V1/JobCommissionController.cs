@@ -1,6 +1,7 @@
 ﻿using Application.Features.JobFeatures.JobCommissionCqrs.Commands;
 using Application.Features.JobFeatures.JobCommissionCqrs.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Web.Api.Dto.JobCommissionsDto;
@@ -12,6 +13,7 @@ namespace Web.Api.Controllers.V1
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/JobCommission")]
     [ApiController]
+    [Authorize]
     public class JobCommissionController : BaseController
     {
         private readonly ISender _sender;

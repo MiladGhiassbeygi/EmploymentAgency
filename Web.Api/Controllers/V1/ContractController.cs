@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using WebFramework.BaseController;
 using Web.Api.Form.Contract;
 using Application.Features.Contract.Commands;
+using Microsoft.AspNetCore.Authorization;
 using Application.Features.Contract.Queries;
 
 namespace Web.Api.Controllers.V1
@@ -10,6 +11,7 @@ namespace Web.Api.Controllers.V1
     [ApiVersion("1")]
     [ApiController]
     [Route("api/v{version:apiVersion}/Contract")]
+    [Authorize]
     public class ContractController : BaseController
     {
         private readonly ISender _sender;
@@ -22,7 +24,7 @@ namespace Web.Api.Controllers.V1
         [HttpPost("CreateSuccessedContract")]
         public async Task<IActionResult> CreateArea(CreateContractForm model)
         {
-            var commandResult = await _sender.Send(new CreateSuccessedContractCommand(model.Id,model.Date,model.JobId,model.JobSeekerId,model.ContractCreatorId,model.IsAmountFixed,model.Amount));
+            var commandResult = await _sender.Send(new CreateSuccessedContractCommand(model.JobId,model.JobSeekerId,UserId,model.IsAmountFixed,model.Amount));
 
             if (commandResult.IsSuccess)
             {
@@ -41,7 +43,7 @@ namespace Web.Api.Controllers.V1
         [HttpGet("GetSuccessedContracts")]
         public async Task<IActionResult> GetSuccessedContracts()
         {
-            return base.OperationResult(await _sender.Send(new GetSuccessedContractQuery(UserId)));
+            return base.OperationResult(await _sender.Send(new GetSuccessedContractsQuery()));
             
         }
 

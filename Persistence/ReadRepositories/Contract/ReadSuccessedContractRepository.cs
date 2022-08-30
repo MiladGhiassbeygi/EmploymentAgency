@@ -19,5 +19,13 @@ namespace Persistence.ReadRepositories.Contract
             }
             return await base.GetWithFilterAsync(x => (x.ContractCreatorId == userId));
         }
+        public async Task<List<SuccessedContract>> GetSuccessedContracts()
+        {
+            return await base.GetAllAsync();
+        }
+        public Task<SuccessedContract> GetSuccessedContractByIdAsync(long id, CancellationToken cancellationToken = default)
+        {
+            return base.FirstOrDefaultAsync(x => x.SuccessedContractId == id, cancellationToken);
+        }
     }
 }

@@ -5,5 +5,7 @@ using MediatR;
 
 namespace Application.Features.Contract.Commands
 {
-    public record CreateSuccessedContractCommand(long id,DateTime date,long jobId,long jobSeekerId,int contractCreatorId, bool isAmountFixed,decimal amount) : IRequest<OperationResult<SuccessedContract>>;
+    public record CreateSuccessedContractCommand(long jobId,long jobSeekerId,int contractCreatorId, bool isAmountFixed,decimal amount) : IRequest<OperationResult<SuccessedContract>>;
 }
+
+

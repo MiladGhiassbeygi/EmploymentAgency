@@ -1,6 +1,7 @@
 ﻿using Application.Features;
 using Application.Features.JobFeatures.JobEssentialSkills.Query;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Web.Api.Dto.JobEssentialSkillsDto;
@@ -12,6 +13,7 @@ namespace Web.Api.Controllers.V1
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/JobEssentialSkills")]
     [ApiController]
+    [Authorize]
     public class JobEssentialSkillsController : BaseController
     {
         private readonly ISender _sender;

@@ -1,6 +1,7 @@
 ﻿using Application.Features.Skills.Command;
 using Application.Features.Skills.Query;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Web.Api.Form.Skill;
@@ -11,6 +12,7 @@ namespace Web.Api.Controllers.V1
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/Skill")]
     [ApiController]
+    [Authorize]
     public class SkillController : BaseController
     {
         private readonly ISender _sender;

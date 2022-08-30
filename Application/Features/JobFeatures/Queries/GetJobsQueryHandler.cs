@@ -1,6 +1,5 @@
 ﻿using Application.Contracts.Persistence;
 using Application.Models.Common;
-using Application.Models.JobModel;
 using Domain.ReadModel;
 using MediatR;
 
