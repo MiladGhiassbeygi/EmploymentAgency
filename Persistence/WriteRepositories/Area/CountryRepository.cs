@@ -29,11 +29,8 @@ namespace Persistence.WriteRepositories
         }
         public async Task<Country> UpdateCountryAsync(Country country)
         {
-            var fetchedCountry = await base.Table.Where(t => t.Id.Equals(country.Id)).FirstOrDefaultAsync();
-
-            if (fetchedCountry == null) return null;
-            await base.UpdateAsync(fetchedCountry);
-            return fetchedCountry;
+            await base.UpdateAsync(country);
+            return country;
         }
         public async Task<Country> DeleteCountryByIdAsync(int id) {
 
