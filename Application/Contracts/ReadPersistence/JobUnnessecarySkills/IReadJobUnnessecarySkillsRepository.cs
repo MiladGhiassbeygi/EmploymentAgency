@@ -5,5 +5,6 @@ namespace Application.Contracts.ReadPersistence
 {
     public interface IReadJobUnnessecarySkillsRepository : IReadBaseRepository<JobUnnecessarySkills>
     {
+        
     }
 }

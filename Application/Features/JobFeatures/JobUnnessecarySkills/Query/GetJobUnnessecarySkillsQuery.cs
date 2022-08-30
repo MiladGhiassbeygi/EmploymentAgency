@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Application.Models.Common;
+using Domain.ReadModel;
+using MediatR;
 
 namespace Application.Features.JobFeatures.Query
 {
-    internal class GetJobUnnessecarySkillsQuery
-    {
-    }
+    public record GetJobUnnessecarySkillsQuery : IRequest<OperationResult<List<JobUnnecessarySkills>>>;
 }
