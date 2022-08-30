@@ -59,7 +59,9 @@ namespace Persistence.ServiceConfiguration
             services.AddScoped<ISkillRepository, SkillRepository>();
             services.AddScoped<IReadSkillRepository, ReadSkillRepository>();
             
-            services.AddScoped<IJobEssentialSkillsRepository,JobEssentialSkillsRepository>();  
+            services.AddScoped<IJobEssentialSkillsRepository,JobEssentialSkillsRepository>();
+            services.AddScoped<IReadJobEssentialSkillsRepository, ReadJobEssentialSkillsRepository>();
+            services.AddScoped<IReadJobUnnessecarySkillsRepository, ReadJobUnnessecarySkillsRepository>();
             services.AddScoped<IJobUnnessecarySkillsRepository,JobUnnessecarySkillsRepository>();
             services.AddScoped<IWorkExperienceSkillRepository, WorkExperienceSkillRepository>();
 

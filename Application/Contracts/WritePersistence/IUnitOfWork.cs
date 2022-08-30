@@ -17,6 +17,8 @@ namespace Application.Contracts.Persistence
         public IReadJobSeekerRepository ReadJobSeekerRepository { get; }
         public IReadJobRepository ReadJobRepository { get; }
         public IReadJobCommissionRepository ReadJobCommissionRepository { get; }
+        public IReadJobUnnessecarySkillsRepository ReadJobUnnessecarySkillsRepository { get; }
+        public IReadJobEssentialSkillsRepository ReadJobEssentialSkillsRepository { get; }
         public IReadEmployerRepository ReadEmployerRepository { get; }
         public IReadEmployerActivitiesRepository ReadEmployerActivitiesRepository { get; }
         public IReadEmployerCommissionRepository ReadEmployerCommissionRepository { get; }
