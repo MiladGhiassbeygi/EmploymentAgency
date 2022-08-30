@@ -2,18 +2,13 @@
 using Application.Models.Common;
 using Domain.ReadModel;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Features.Contract.Queries
 {
     internal class GetSuccessedContractsQueryHandler : IRequestHandler<GetSuccessedContractsQuery, OperationResult<List<SuccessedContract>>>
     {
 
-        readonly IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
         public GetSuccessedContractsQueryHandler(IUnitOfWork unitOfWork)
         {

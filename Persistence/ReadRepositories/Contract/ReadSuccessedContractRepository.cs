@@ -27,5 +27,10 @@ namespace Persistence.ReadRepositories.Contract
         {
             return base.FirstOrDefaultAsync(x => x.SuccessedContractId == id, cancellationToken);
         }
+        public async Task<List<SuccessedContract>> GetHiredPeopleSearch(long jobId,long jobSeekerId,long employerId,CancellationToken cancellationToken)
+        {
+            return await base.GetWithFilterAsync(x => (jobId == 0 || x.JobId == jobId) && (jobSeekerId == 0 || x.JobSeekerId == jobSeekerId)
+                                            && (employerId == 0 && x.EmployerId == employerId));
+        }
     }
 }

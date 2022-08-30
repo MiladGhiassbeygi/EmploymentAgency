@@ -16,6 +16,9 @@ namespace Domain.ReadModel
         [BsonElement("employerId")]
         public long EmployerId { get; set; }
 
+        [BsonElement("jobId")]
+        public long JobId { get; set; }
+
         [BsonElement("jobSeekerId")]
         public long JobSeekerId { get; set; }
 

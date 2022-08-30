@@ -58,6 +58,13 @@ namespace Web.Api.Controllers.V1
         {
             return base.OperationResult(await _sender.Send(new FilterSuccessedContractQuery(term, UserId)));
         }
+
+        [HttpPost("HiredPeopleSearch")]
+        public async Task<IActionResult> HiredPeopleSearch(HiredPeopleSearchDto searchDto)
+        {
+
+            return base.OperationResult(await _sender.Send(new GetHiredPeopleSearchContractsQuery(searchDto.JobId,searchDto.JobSeekerId,searchDto.EmployerId)));
+        }
     }
 }
 
