@@ -28,6 +28,7 @@ namespace Persistence.WriteRepositories.Common
         public IReadCountryRepository ReadCountryRepository { get; }
         public IReadJobSeekerRepository ReadJobSeekerRepository { get; }
         public IReadJobRepository ReadJobRepository { get; }
+        public IReadJobEssentialRepository ReadJobEssentialRepository { get; }
         public IReadJobCommissionRepository ReadJobCommissionRepository { get; }
         public IReadReminderRepository ReadReminderRepository { get; }
         public IReadEmployerRepository ReadEmployerRepository { get; }
@@ -35,6 +36,7 @@ namespace Persistence.WriteRepositories.Common
         public IReadEmployerCommissionRepository ReadEmployerCommissionRepository { get; }
         public IReadWorkExperienceRepository ReadWorkExperienceRepository { get; }
         public IReadSkillRepository ReadSkillRepository { get; }
+        public IReadJobSeekerSkillsRepository ReadJobSeekerSkillsRepository { get; }
         public IReadEducationalBackgroundRepository ReadEducationalBackgroundRepository { get; }
         public IReadSuccessedContractRepository ReadSuccessedContractRepository { get; }
 
@@ -72,6 +74,8 @@ namespace Persistence.WriteRepositories.Common
             ReadCountryRepository = new ReadCountryRepository(_readDb);
             ReadJobSeekerRepository = new ReadJobSeekerRepository(_readDb);
             ReadJobRepository = new ReadJobRepository(_readDb);
+            ReadJobEssentialRepository = new ReadJobEssentialRepository(_readDb);
+            ReadJobSeekerSkillsRepository = new ReadJobSeekerSkillsRepository(_readDb);
             ReadJobCommissionRepository = new ReadJobCommissionRepository(_readDb);
             ReadEmployerRepository = new ReadEmployerRepository(_readDb);
             ReadEmployerActivitiesRepository = new ReadEmployerActivitiesRepository(_readDb);

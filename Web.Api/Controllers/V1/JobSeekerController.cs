@@ -52,14 +52,14 @@ namespace Web.Api.Controllers.V1
         }
 
         [HttpGet("GetJobSeekerById")]
-        public async Task<IActionResult> GetJobSeekerById(long Id)
+        public async Task<IActionResult> GetJobSeekerById(long id)
         {
-            return base.OperationResult(await _sender.Send(new GetJobSeekerQuery(Id)));
+            return base.OperationResult(await _sender.Send(new GetJobSeekerQuery(id)));
         }
         [HttpGet("GetAvalaibleJobs")]
-        public async Task<IActionResult> GetAvalaibleJobs()
+        public async Task<IActionResult> GetAvalaibleJobs(long id)
         {
-            return new JsonResult("MioMio");
+            return base.OperationResult(await _sender.Send(new GetAvailableJobsForJobSeekerQuery(id)));
         }
     }
 }
