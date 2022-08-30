@@ -29,6 +29,8 @@ namespace Application.BackgroundWorker.AddReadJobSeeker
 
                 var writeRepository = scope.ServiceProvider.GetRequiredService<IJobSeekerRepository>();
                 var readRepository = scope.ServiceProvider.GetRequiredService<IReadJobSeekerRepository>();
+                var jobSeekerSkillRepository = scope.ServiceProvider.GetRequiredService<IReadJobSeekerSkillsRepository>();
+
                 try
                 {
                     await foreach (var item in _readModelChannel.ReturnValue(stoppingToken))
@@ -40,7 +42,7 @@ namespace Application.BackgroundWorker.AddReadJobSeeker
                             await readRepository.AddAsync(new JobSeeker
                             {
                                 JobSeekerId = jobSeeker.Id,
-                                FirstName= jobSeeker.FirstName,
+                                FirstName = jobSeeker.FirstName,
                                 LastName = jobSeeker.LastName,
                                 Email = jobSeeker.Email,
                                 CountryId = jobSeeker.CountryId,
@@ -49,7 +51,16 @@ namespace Application.BackgroundWorker.AddReadJobSeeker
                                 DefinerId = jobSeeker.DefinerId
                             }, stoppingToken);
                         }
+                        foreach (var skillId in item.SkillIds)
+                        {
+                            await jobSeekerSkillRepository.AddAsync(new JobSeekerSkills
+                            {
+                                JobSeekerId=jobSeeker.Id,
+                                SkillId = skillId,
+                            }, stoppingToken);
+                        }
                     }
+
                 }
                 catch (Exception e)
                 {

@@ -54,6 +54,7 @@ namespace Persistence.WriteRepositories.Common
         public IEmployerAcivityFieldRepository EmployerAcivityFieldRepository { get; }
         public IReminderRepository ReminderRepository { get; }
         public IJobSeekerRepository JobSeekerRepository { get; }
+        public IJobSeekerSkillsRepository JobSeekerSkillsRepository { get; }
         public IWorkExperienceRepository WorkExperienceRepository { get; }
         public IWorkExperienceSkillRepository WorkExperienceSkillRepository { get; }
         public IEducationalBackgroundRepository EducationalBackgroundRepository { get; }
@@ -96,6 +97,7 @@ namespace Persistence.WriteRepositories.Common
             EmployerRepository = new EmployerRepository(_db);
             EmployerAcivityFieldRepository = new EmployerAcivityFieldRepository(_db);
             JobSeekerRepository = new JobSeekerRepository(_db);
+            JobSeekerSkillsRepository = new JobSeekerSkillsRepository(_db);
             ReminderRepository = new ReminderRepository(_db);
             WorkExperienceRepository = new WorkExperienceRepository(_db);
             WorkExperienceSkillRepository = new WorkExperienceSkillRepository(_db);

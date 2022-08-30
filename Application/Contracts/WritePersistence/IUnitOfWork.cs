@@ -41,6 +41,7 @@ namespace Application.Contracts.Persistence
         public IJobEssentialSkillsRepository JobEssentialSkillsRepository { get; }
         public IJobUnnessecarySkillsRepository JobUnnessecarySkillsRepository { get; }  
         public IJobSeekerRepository JobSeekerRepository { get; }
+        public IJobSeekerSkillsRepository JobSeekerSkillsRepository { get; }
         public IReminderRepository ReminderRepository { get; }
         public IWorkExperienceRepository WorkExperienceRepository { get; }
         public IWorkExperienceSkillRepository WorkExperienceSkillRepository { get; }

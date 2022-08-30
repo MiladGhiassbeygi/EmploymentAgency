@@ -31,15 +31,21 @@ namespace Application.Features.JobFeatures.Commands.CreateJobSeeker
                 ResumeFilePath = request.ResumeFilePath,
                 DefinerId = request.definerId
             };
-
             var result = await _unitOfWork.JobSeekerRepository.CreateJobSeekerAcync(jobSeeker);
 
             await _unitOfWork.CommitAsync();
 
-            await _channel.AddToChannelAsync(new JobSeekerAdded { JobSeekerId = jobSeeker.Id }, cancellationToken);
+            foreach (var item in request.skillIds)
+            {
+                await _unitOfWork.JobSeekerSkillsRepository.CreateJobSeekerSkillsAsync(new JobSeekerSkills { JobSeekerId = jobSeeker.Id, SkillId = item });
+            }
+            
+            await _unitOfWork.CommitAsync();
+
+            await _channel.AddToChannelAsync(new JobSeekerAdded { JobSeekerId = jobSeeker.Id, SkillIds = request.skillIds }, cancellationToken);
 
             result.Definer = null;
-            
+
             return OperationResult<JobSeeker>.SuccessResult(jobSeeker);
         }
     }
