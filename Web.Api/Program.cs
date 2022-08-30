@@ -84,6 +84,7 @@ builder.Services.AddHostedService<AddDeleteCountryWorker>();
 builder.Services.AddHostedService<AddReadAccountWorker>();
 builder.Services.AddHostedService<AddReadJobSeekerWorker>();
 builder.Services.AddHostedService<AddReadSkillWorker>();
+builder.Services.AddHostedService<AddUpdateSkillWorker>();
 builder.Services.AddHostedService<AddUpdateJobSeekerWorker>();
 builder.Services.AddHostedService<AddDeleteJobSeekerWorker>();
 builder.Services.AddHostedService<AddReadJobWorker>();
