@@ -79,6 +79,8 @@ builder.Services.AddSwagger();
 builder.Services.AddSingleton(typeof(ChannelQueue<>));
 
 builder.Services.AddHostedService<AddReadCountryWorker>();
+builder.Services.AddHostedService<AddUpdateCountryWorker>();
+builder.Services.AddHostedService<AddDeleteCountryWorker>();
 builder.Services.AddHostedService<AddReadAccountWorker>();
 builder.Services.AddHostedService<AddReadJobSeekerWorker>();
 builder.Services.AddHostedService<AddReadSkillWorker>();
