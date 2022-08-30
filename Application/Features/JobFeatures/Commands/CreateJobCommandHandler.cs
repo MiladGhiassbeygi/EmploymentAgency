@@ -69,7 +69,7 @@ namespace Application.Features.JobFeature.Commands.CreateJob
             if (!UnnecessarySkillsHasValue)
                 foreach (var skillId in request.UnnecessarySkills.Split(','))
                 {
-                    await _unitOfWork.JobUnnessecarySkillsRepository.CreateJobUnnessecarySkillsAsync(new JobUnnecessarySkills { JobId = job.Id, SkillId = short.Parse(skillId) });
+                    await _unitOfWork.JobUnnessecarySkillsRepository.CreateJobUnnessecarySkillsAsync(new JobUnnessecarySkills { JobId = job.Id, SkillId = short.Parse(skillId) });
                 }
 
             await _unitOfWork.CommitAsync();

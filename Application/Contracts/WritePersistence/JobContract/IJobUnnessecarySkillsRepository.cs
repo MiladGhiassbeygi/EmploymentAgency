@@ -5,10 +5,10 @@ namespace Application.Contracts.Persistence.JobContract
 {
     public interface IJobUnnessecarySkillsRepository
     {
-        Task<JobUnnecessarySkills> CreateJobUnnessecarySkillsAsync(JobUnnecessarySkills jobUnnecessarySkills);
-        Task<List<JobUnnecessarySkills>> GetJobUnnessecarySkillsByIdAsync(long id);
-        Task<JobUnnecessarySkills> UpdateJobUnnessecarySkillsAsync(JobUnnecessarySkills jobUnnecessarySkills);
-        Task<JobUnnecessarySkills> DeleteJobUnnessecarySkillsByIdAsync(long jobId,short skillId);
-        Task<List<JobUnnecessarySkills>> GetAll();
+        Task<JobUnnessecarySkills> CreateJobUnnessecarySkillsAsync(JobUnnessecarySkills jobUnnessecarySkills);
+        Task<List<JobUnnessecarySkills>> GetJobUnnessecarySkillsByIdAsync(long id);
+        Task<JobUnnessecarySkills> UpdateJobUnnessecarySkillsAsync(JobUnnessecarySkills jobUnnessecarySkills);
+        Task<JobUnnessecarySkills> DeleteJobUnnessecarySkillsByIdAsync(long jobId,short skillId);
+        Task<List<JobUnnessecarySkills>> GetAll();
     }
 }

@@ -24,7 +24,7 @@ namespace Domain.WriteModel
         public virtual Employer Employer { get; set; }
         public virtual ICollection<JobCommission> JobCommission { get; set; }
         public virtual ICollection<JobEssentialSkills> JobEssentialSkills { get; set; }
-        public virtual ICollection<JobUnnecessarySkills> JobUnnecessarySkills { get; set; }
+        public virtual ICollection<JobUnnessecarySkills> JobUnnecessarySkills { get; set; }
         public virtual ICollection<SuccessedContract> SuccessedContract { get; set; } = new HashSet<SuccessedContract>();   
     }
 }
