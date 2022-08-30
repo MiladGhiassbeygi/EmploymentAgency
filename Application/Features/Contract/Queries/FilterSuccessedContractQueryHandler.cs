@@ -8,7 +8,7 @@ namespace Application.Features.Contract.Queries
     internal class FilterSuccessedContractQueryHandler : IRequestHandler<FilterSuccessedContractQuery, OperationResult<List<SuccessedContract>>>
     {
 
-        readonly IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
         public FilterSuccessedContractQueryHandler(IUnitOfWork unitOfWork)
         {

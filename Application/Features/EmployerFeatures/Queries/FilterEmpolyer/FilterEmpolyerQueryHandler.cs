@@ -8,7 +8,7 @@ namespace Application.Features.EmployerFeatures.Queries.FilterEmpolyer
     internal class FilterEmpolyerQueryHandler : IRequestHandler<FilterEmpolyerQuery, OperationResult<List<Employer>>>
     {
 
-        readonly IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
         public FilterEmpolyerQueryHandler(IUnitOfWork unitOfWork)
         {

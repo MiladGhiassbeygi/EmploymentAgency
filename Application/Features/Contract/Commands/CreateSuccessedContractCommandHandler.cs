@@ -42,7 +42,9 @@ namespace Application.Features.Contract.Commands
 
                 await _unitOfWork.CommitAsync();
 
-                await _channel.AddToChannelAsync(new SuccessedContractAdded { SuccessedContractId = result.Id }, cancellationToken);
+                Job job = await _unitOfWork.JobRepository.GetJobAggregateByIdAsync(request.jobId);
+
+                await _channel.AddToChannelAsync(new SuccessedContractAdded { SuccessedContractId = result.Id , EmployerId = job.EmployerId}, cancellationToken);
 
                 return OperationResult<SuccessedContract>.SuccessResult(SuccessedContract);
             }

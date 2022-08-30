@@ -47,6 +47,8 @@ namespace Application.BackgroundWorker
                                 Date = successedContract.Date,
                                 IsAmountFixed = successedContract.IsAmountFixed,
                                 Amount = successedContract.Amount,
+                                EmployerId = item.EmployerId,
+                                JobId = successedContract.JobId
                             }, stoppingToken);
                         }
                     }
