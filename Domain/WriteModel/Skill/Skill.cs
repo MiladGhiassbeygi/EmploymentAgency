@@ -7,8 +7,8 @@ namespace Domain.WriteModel
         public string Title { get; set; }
         public byte Percentage { get; set; }
         public virtual ICollection<JobEssentialSkills> JobEssentialSkills { get; set; }
-        public virtual ICollection<JobUnnecessarySkills> JobUnnecessarySkills { get; set; }
+        public virtual ICollection<JobUnnessecarySkills> JobUnnessecarySkills { get; set; }
         public virtual ICollection<JobSeekerEssentialSkills> JobSeekerEssentialSkills { get; set; }
-        public virtual ICollection<JobSeekerUnnecessarySkills> JobSeekerUnnecessarySkills { get; set; }
+        public virtual ICollection<JobSeekerUnnessecarySkills> JobSeekerUnnecessarySkills { get; set; }
     }
 }

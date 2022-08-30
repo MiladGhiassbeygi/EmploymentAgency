@@ -32,7 +32,8 @@ namespace Application.Features.JobFeatures.Commands.CreateJobSeeker
                 DefinerId = request.definerId
             };
 
-            var result = await _unitOfWork.JobSeekerRepository.CreateJobSeekerAcync(jobSeeker);
+            var result = await _unitOfWork.JobSeekerRepository.CreateJobSeekerAcync(jobSeeker,request.essentialSkillIds,request.unnessecarySkillIds);
+            
 
             await _unitOfWork.CommitAsync();
 

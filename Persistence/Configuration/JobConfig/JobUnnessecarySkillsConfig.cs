@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Persistence.Configuration.JobConfig
 {
-    internal class JobUnnessecarySkillsConfig : IEntityTypeConfiguration<JobUnnecessarySkills>
+    internal class JobUnnessecarySkillsConfig : IEntityTypeConfiguration<JobUnnessecarySkills>
     {
-        public void Configure(EntityTypeBuilder<JobUnnecessarySkills> builder)
+        public void Configure(EntityTypeBuilder<JobUnnessecarySkills> builder)
         {
             builder.HasKey(x => new { x.SkillId, x.JobId });
 
@@ -21,7 +21,7 @@ namespace Persistence.Configuration.JobConfig
                 .HasConstraintName("FK_JobUnnecessarySkills_Job");
 
             builder.HasOne(d => d.Skill)
-                .WithMany(d=> d.JobUnnecessarySkills)
+                .WithMany(d=> d.JobUnnessecarySkills)
                 .HasForeignKey(d => d.SkillId)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_JobUnnecessarySkills_Skill");

@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Persistence.Configuration.JobConfig
 {
-    internal class JobSeekerUnnessecarySkillsConfig : IEntityTypeConfiguration<JobSeekerUnnecessarySkills>
+    internal class JobSeekerUnnessecarySkillsConfig : IEntityTypeConfiguration<JobSeekerUnnessecarySkills>
     {
-        public void Configure(EntityTypeBuilder<JobSeekerUnnecessarySkills> builder)
+        public void Configure(EntityTypeBuilder<JobSeekerUnnessecarySkills> builder)
         {
             builder.HasKey(x => new { x.SkillId, x.JobSeekerId });
 

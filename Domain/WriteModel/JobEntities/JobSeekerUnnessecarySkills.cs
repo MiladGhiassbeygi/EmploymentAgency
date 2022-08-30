@@ -3,7 +3,7 @@ using Domain.WriteModel.Common;
 
 namespace Domain.WriteModel
 {
-    public partial class JobSeekerUnnecessarySkills : BaseEntity<int>
+    public partial class JobSeekerUnnessecarySkills : BaseEntity<int>
     {
         public long? JobSeekerId { get; set; }
         public short? SkillId { get; set; }
