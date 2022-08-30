@@ -72,6 +72,9 @@ namespace Persistence.ServiceConfiguration
             services.AddScoped<ISuccessedContractRepository, SuccessedContractRepository>();
             services.AddScoped<IReadSuccessedContractRepository, ReadSuccessedContractRepository>();
 
+            services.AddScoped<IReadJobSeekerSkillsRepository, ReadJobSeekerSkillsRepository>();
+            services.AddScoped<IJobSeekerSkillsRepository, JobSeekerSkillsRepository>();
+
             var mongoClient = new MongoClient("mongodb://localhost:27017");
             var mongoDatabase = mongoClient.GetDatabase("EmploymentAgency");
             services.AddSingleton(mongoDatabase);

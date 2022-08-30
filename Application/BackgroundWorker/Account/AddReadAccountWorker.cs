@@ -2,16 +2,9 @@
 using Application.Common.BaseChannel;
 using Application.Contracts.Identity;
 using Application.Contracts.ReadPersistence.Account;
-using Application.Contracts.ReadPersistence.Area;
-using Domain.WriteModel.User;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.BackgroundWorker.Account
 {

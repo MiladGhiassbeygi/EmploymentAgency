@@ -5,20 +5,20 @@ using MediatR;
 
 namespace Application.Features.Skills.Query
 {
-    internal class GetSkillQueryHandler : IRequestHandler<GetSkillQuery, OperationResult<List<GetSkillDto>>>
+    internal class GetEssentialSkillQueryHandler : IRequestHandler<GetEssentialSkillQuery, OperationResult<List<GetSkillDto>>>
     {
 
         readonly IUnitOfWork _unitOfWork;
 
-        public GetSkillQueryHandler(IUnitOfWork unitOfWork)
+        public GetEssentialSkillQueryHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<OperationResult<List<GetSkillDto>>> Handle(GetSkillQuery request, CancellationToken cancellationToken)
+        public async Task<OperationResult<List<GetSkillDto>>> Handle(GetEssentialSkillQuery request, CancellationToken cancellationToken)
         {
 
-            var skills = await _unitOfWork.ReadSkillRepository.GetAllAsync();
+            var skills = await _unitOfWork.ReadSkillRepository.GetWithFilterAsync(x=> !request.unnessecarySkills.Contains(x.SkillId));
 
             if (skills is not null)
             {

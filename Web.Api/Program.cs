@@ -80,20 +80,25 @@ builder.Services.AddSingleton(typeof(ChannelQueue<>));
 
 builder.Services.AddHostedService<AddReadCountryWorker>();
 builder.Services.AddHostedService<AddReadAccountWorker>();
-builder.Services.AddHostedService<AddReadJobSeekerWorker>();
+
 builder.Services.AddHostedService<AddReadSkillWorker>();
+
+builder.Services.AddHostedService<AddReadJobSeekerWorker>();
 builder.Services.AddHostedService<AddUpdateJobSeekerWorker>();
 builder.Services.AddHostedService<AddDeleteJobSeekerWorker>();
+
 builder.Services.AddHostedService<AddReadJobWorker>();
 builder.Services.AddHostedService<AddUpdateJobWorker>();
 builder.Services.AddHostedService<AddDeleteJobWorker>();
-builder.Services.AddHostedService<AddReadEmployerAcivityFieldWorker>();
+
 builder.Services.AddHostedService<AddReadWorkExperienceWorker>();
+
 builder.Services.AddHostedService<AddReadReminderWorker>();
 
 builder.Services.AddHostedService<AddReadEmplyerCommisionWorker>();
 builder.Services.AddHostedService<AddDeleteEmployerCommissionWorker>();
 builder.Services.AddHostedService<AddUpdateEmployerCommissionWorker>();
+builder.Services.AddHostedService<AddReadEmployerAcivityFieldWorker>();
 
 builder.Services.AddHostedService<AddReadEmplyerWorker>();
 builder.Services.AddHostedService<AddDeleteEmployerWorker>();
@@ -104,6 +109,8 @@ builder.Services.AddHostedService<AddUpdateEducationalBackgroundWorker>();
 builder.Services.AddHostedService<AddDeleteEducationalBackgroundWorker>();
 
 builder.Services.AddHostedService<AddReadSuccessedContractWorker>();
+
+
 #endregion
 
 

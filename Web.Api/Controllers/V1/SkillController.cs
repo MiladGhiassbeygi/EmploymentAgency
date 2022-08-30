@@ -39,5 +39,15 @@ namespace Web.Api.Controllers.V1
         {
             return base.OperationResult(await _sender.Send(new GetSkillQuery()));
         }
+        [HttpGet("GetEssentialSkills")]
+        public async Task<IActionResult> GetEssentialSkills([FromQuery]GetEssentialSkillsDto skillsDto)
+        {
+            return base.OperationResult(await _sender.Send(new GetEssentialSkillQuery(skillsDto.UnnessecarySkills)));
+        }
+        [HttpGet("GetUnnessecarySkills")]
+        public async Task<IActionResult> GetUnnessecarySkills([FromQuery]GetUnnessecarySkillsDto skillsDto)
+        {
+            return base.OperationResult(await _sender.Send(new GetUnnessecarySkillQuery(skillsDto.EssentialSkills)));
+        }
     }
 }

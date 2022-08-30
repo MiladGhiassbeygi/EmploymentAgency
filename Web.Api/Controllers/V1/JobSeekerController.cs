@@ -32,7 +32,6 @@ namespace Web.Api.Controllers.V1
             return base.OperationResult(commandResult);
         }
 
-
         [HttpPut("UpdateJobSeeker")]
         public async Task<IActionResult> UpdateJobSeeker(UpdateJobSeekerForm input, CancellationToken cancellationToken)
         {
@@ -56,6 +55,7 @@ namespace Web.Api.Controllers.V1
         {
             return base.OperationResult(await _sender.Send(new GetJobSeekerQuery(id)));
         }
+        
         [HttpGet("GetAvalaibleJobs")]
         public async Task<IActionResult> GetAvalaibleJobs(long id)
         {
