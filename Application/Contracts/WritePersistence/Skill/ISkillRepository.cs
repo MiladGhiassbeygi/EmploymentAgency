@@ -13,7 +13,7 @@ namespace Application.Contracts.Persistence
         Task<Skill> GetSkillByIdAsync(short id);
         Task<Skill> GetSkillByTitleAsync(string title);
         Task<Skill> UpdateSkillAsync(Skill skill);
-        Task<Skill> DeleteSkillByTitleAsync(string title );
+        Task<Skill> DeleteSkillByIdAsync(short id );
         Task<List<Skill>> GetAll();
     }
 }

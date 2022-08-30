@@ -44,5 +44,11 @@ namespace Web.Api.Controllers.V1
         {
             return base.OperationResult(await _sender.Send(new GetSkillQuery()));
         }
+
+        [HttpDelete("DeleteSkill")]
+        public async Task<IActionResult> DeleteCountry(DeleteSkillForm input, CancellationToken cancellationToken)
+        {
+            return base.OperationResult(await _sender.Send(new DeleteSkillCommand(input.SkillId)));
+        }
     }
 }

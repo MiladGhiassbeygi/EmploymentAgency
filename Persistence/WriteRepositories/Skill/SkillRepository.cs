@@ -23,9 +23,9 @@ namespace Persistence.WriteRepositories
             var skill = await base.TableNoTracking.FirstOrDefaultAsync(x => x.Id.Equals(id));
             return skill;
         }
-        public async Task<Skill> DeleteSkillByTitleAsync(string title)
+        public async Task<Skill> DeleteSkillByIdAsync(short id)
         {
-            var fetchedSkill = await base.Table.Where(t => t.Title.Equals(title)).FirstOrDefaultAsync();
+            var fetchedSkill = await base.Table.Where(t => t.Id.Equals(id)).FirstOrDefaultAsync();
 
             await base.DeleteAsync(fetchedSkill);
             return fetchedSkill;
@@ -44,11 +44,8 @@ namespace Persistence.WriteRepositories
 
         public async Task<Skill> UpdateSkillAsync(Skill skill)
         {
-            var fetchedskill = await base.Table.Where(t => t.Title.Equals(skill.Title)).FirstOrDefaultAsync();
-
-            if (fetchedskill == null) return null;
-            await base.UpdateAsync(fetchedskill);
-            return fetchedskill;
+            await base.UpdateAsync(skill);
+            return skill;
         }
     }
 }
