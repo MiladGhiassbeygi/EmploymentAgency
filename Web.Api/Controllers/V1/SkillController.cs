@@ -2,7 +2,6 @@
 using Application.Features.Skills.Query;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Web.Api.Form.Skill;
 using WebFramework.BaseController;
@@ -34,6 +33,12 @@ namespace Web.Api.Controllers.V1
             return base.OperationResult(commandResult);
         }
 
+        [HttpPut("UpdateSkill")]
+        public async Task<IActionResult> UpdateCountry(UpdateSkillForm input, CancellationToken cancellationToken)
+        {
+            return base.OperationResult(await _sender.Send(new UpdateSkillCommand(input.SkillId, input.Title, input.Percentage)));
+        }
+
         [HttpGet("GetSkills")]
         public async Task<IActionResult> GetSkills()
         {
@@ -48,6 +53,12 @@ namespace Web.Api.Controllers.V1
         public async Task<IActionResult> GetUnnessecarySkills([FromQuery]GetUnnessecarySkillsDto skillsDto)
         {
             return base.OperationResult(await _sender.Send(new GetUnnessecarySkillQuery(skillsDto.EssentialSkills)));
+        }
+
+        [HttpDelete("DeleteSkill")]
+        public async Task<IActionResult> DeleteCountry(DeleteSkillForm input, CancellationToken cancellationToken)
+        {
+            return base.OperationResult(await _sender.Send(new DeleteSkillCommand(input.SkillId)));
         }
     }
 }

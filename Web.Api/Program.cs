@@ -79,9 +79,13 @@ builder.Services.AddSwagger();
 builder.Services.AddSingleton(typeof(ChannelQueue<>));
 
 builder.Services.AddHostedService<AddReadCountryWorker>();
+builder.Services.AddHostedService<AddUpdateCountryWorker>();
+builder.Services.AddHostedService<AddDeleteCountryWorker>();
 builder.Services.AddHostedService<AddReadAccountWorker>();
 
 builder.Services.AddHostedService<AddReadSkillWorker>();
+builder.Services.AddHostedService<AddUpdateSkillWorker>();
+builder.Services.AddHostedService<AddDeleteSkillWorker>();
 
 builder.Services.AddHostedService<AddReadJobSeekerWorker>();
 builder.Services.AddHostedService<AddUpdateJobSeekerWorker>();
@@ -90,6 +94,9 @@ builder.Services.AddHostedService<AddDeleteJobSeekerWorker>();
 builder.Services.AddHostedService<AddReadJobWorker>();
 builder.Services.AddHostedService<AddUpdateJobWorker>();
 builder.Services.AddHostedService<AddDeleteJobWorker>();
+builder.Services.AddHostedService<AddReadJobEssentialSkillsWorker>();
+builder.Services.AddHostedService<AddReadJobUnnessecarySkillsWorker>();
+builder.Services.AddHostedService<AddReadEmployerAcivityFieldWorker>();
 
 builder.Services.AddHostedService<AddReadWorkExperienceWorker>();
 

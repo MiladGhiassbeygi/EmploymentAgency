@@ -5,6 +5,9 @@ using Web.Api.Dto.Area;
 using WebFramework.BaseController;
 using Application.Features.Area;
 using Microsoft.AspNetCore.Authorization;
+using Web.Api.Form.Area;
+using Application.Features.Area.Commands;
+using Application.Features.Area.Commands.DeleteCountry;
 
 namespace Web.Api.Controllers.V1
 {
@@ -28,17 +31,21 @@ namespace Web.Api.Controllers.V1
 
             if (commandResult.IsSuccess)
             {
-                //CreateCountryDto dto = new CreateCountryDto()
-                //{
-                //    Id = commandResult.Result.Id,
-                //    Title = model.Title,
-                //    PostalCode = model.PostalCode,
-                //    AreaCode = model.AreaCode,
-                //};
-
                 return base.OperationResult(commandResult);
             }
             return base.OperationResult(commandResult);
+        }
+
+        [HttpPut("UpdateCountry")]
+        public async Task<IActionResult> UpdateCountry(UpdateCountryForm input, CancellationToken cancellationToken)
+        {
+            return base.OperationResult(await _sender.Send(new UpdateCountryCommand(input.CountryId, input.Title,input.PostalCode,input.AreaCode)));
+        }
+
+        [HttpDelete("DeleteCountry")]
+        public async Task<IActionResult> DeleteCountry (DeleteCountryForm input, CancellationToken cancellationToken)
+        {
+            return base.OperationResult(await _sender.Send(new DeleteCountryCommand(input.Id)));
         }
 
         [HttpGet("GetCountries")]

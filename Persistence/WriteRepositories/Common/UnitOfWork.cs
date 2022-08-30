@@ -30,6 +30,8 @@ namespace Persistence.WriteRepositories.Common
         public IReadJobRepository ReadJobRepository { get; }
         public IReadJobEssentialRepository ReadJobEssentialRepository { get; }
         public IReadJobCommissionRepository ReadJobCommissionRepository { get; }
+        public IReadJobUnnessecarySkillsRepository ReadJobUnnessecarySkillsRepository { get; }
+        public IReadJobEssentialSkillsRepository ReadJobEssentialSkillsRepository { get; }
         public IReadReminderRepository ReadReminderRepository { get; }
         public IReadEmployerRepository ReadEmployerRepository { get; }
         public IReadEmployerActivitiesRepository ReadEmployerActivitiesRepository { get; }
@@ -85,6 +87,8 @@ namespace Persistence.WriteRepositories.Common
             ReadSkillRepository = new ReadSkillRepository(_readDb);
             ReadEducationalBackgroundRepository = new ReadEducationalBackgroundRepository(_readDb);
             ReadSuccessedContractRepository = new ReadSuccessedContractRepository(_readDb);
+            ReadJobUnnessecarySkillsRepository = new ReadJobUnnessecarySkillsRepository(_readDb);
+            ReadJobEssentialSkillsRepository = new ReadJobEssentialSkillsRepository(_readDb);
 
             #endregion
 
