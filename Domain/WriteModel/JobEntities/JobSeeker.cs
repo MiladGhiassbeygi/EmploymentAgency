@@ -27,7 +27,6 @@ namespace Domain.WriteModel
         public virtual User.User Definer { get; set; }
         public virtual Country Country { get; set; }
         public virtual ICollection<JobSeekerSkills> JobSeekerEssentialSkills { get; set; }
-        public virtual ICollection<JobSeekerUnnecessarySkills> JobSeekerUnnecessarySkills { get; set; }
         public virtual ICollection<WorkExperience> WorkExperiences { get; set; }
         public virtual ICollection<EducationalBackground> EducationalBackgrounds { get; set; }
         public virtual ICollection<SuccessedContract> SuccessedContract { get; set; }

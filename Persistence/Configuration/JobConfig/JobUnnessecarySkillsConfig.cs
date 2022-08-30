@@ -21,7 +21,7 @@ namespace Persistence.Configuration.JobConfig
                 .HasConstraintName("FK_JobUnnecessarySkills_Job");
 
             builder.HasOne(d => d.Skill)
-                .WithMany(d=> d.JobUnnessecarySkills)
+                .WithMany(d=> d.JobUnnecessarySkills)
                 .HasForeignKey(d => d.SkillId)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_JobUnnecessarySkills_Skill");

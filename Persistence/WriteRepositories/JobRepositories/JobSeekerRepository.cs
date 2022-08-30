@@ -18,31 +18,10 @@ namespace Persistence.WriteRepositories
             return await base.TableNoTracking
                                 .FirstOrDefaultAsync(x => x.FirstName == firstName && x.LastName == lastName);
         }
-        public async Task<JobSeeker> CreateJobSeekerAcync(JobSeeker jobSeeker, short[] essentialSkillIds, short[] unnessecarySkillIds)
+        public async Task<JobSeeker> CreateJobSeekerAcync(JobSeeker jobSeeker)
         {
             var newJobSeeker = jobSeeker;
             await base.AddAsync(newJobSeeker);
-            DbContext.SaveChanges();
-            foreach (var skillId in essentialSkillIds)
-            {
-                var essential = new JobSeekerEssentialSkills()
-                {
-                    SkillId = skillId,
-                    JobSeekerId = newJobSeeker.Id
-                };
-                await DbContext.Set<JobSeekerEssentialSkills>().AddAsync(essential);
-            }
-            foreach (var skillId in unnessecarySkillIds)
-            {
-                var unnessecary = new JobSeekerUnnessecarySkills()
-                {
-                    SkillId = skillId,
-                    JobSeekerId = newJobSeeker.Id
-                };
-                await DbContext.Set<JobSeekerUnnessecarySkills>().AddAsync(unnessecary);
-            }
-
-
             return newJobSeeker;
         }
 
