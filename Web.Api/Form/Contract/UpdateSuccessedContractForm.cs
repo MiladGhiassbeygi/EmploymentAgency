@@ -2,6 +2,7 @@
 {
     public class UpdateSuccessedContractForm
     {
+        public long SuccessedContractId { get; set; }
         public DateTime Date { get; set; } = DateTime.Now;
         public bool IsAmountFixed { get; set; }
         public decimal Amount { get; set; }

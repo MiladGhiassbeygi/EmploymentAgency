@@ -1,8 +1,7 @@
 ﻿
-
 namespace Application.BackgroundWorker.Common.Events
 {
-    public class SuccessedContractUpdated
+    public class SuccessedContractDeleted
     {
         public long SuccessedContractId { get; set; }
     }

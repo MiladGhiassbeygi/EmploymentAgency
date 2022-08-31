@@ -23,7 +23,7 @@ namespace Application.Features.Contract.Commands
 
             if (fetchedSuccessedContract is null)
                 return OperationResult<SuccessedContract>.FailureResult("The Successed Contract Is Not Exist");
-
+            fetchedSuccessedContract.Id = request.successedContractId;
             fetchedSuccessedContract.Date = request.date;
             fetchedSuccessedContract.IsAmountFixed = request.isAmountFixed;
             fetchedSuccessedContract.Amount = request.amount;
