@@ -41,6 +41,7 @@ namespace Application.BackgroundWorker.AddReadEmployerActivity
                             {
                                 EmployerAcivityFieldId = employerAcivityField.Id,
                                 Title = employerAcivityField.Title,
+                                DefinerId = employerAcivityField.DefinerId
 
                             }, stoppingToken);
                         }

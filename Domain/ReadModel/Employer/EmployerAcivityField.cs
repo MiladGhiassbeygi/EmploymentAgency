@@ -16,6 +16,8 @@ namespace Domain.ReadModel
 
         [BsonElement("title")]
         public string Title { get; set; }
+        [BsonElement("definerId")]
+        public long DefinerId { get; set; }
 
     }
 }

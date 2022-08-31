@@ -1,6 +1,5 @@
 ﻿using Domain.WriteModel.Common;
 
-
 namespace Domain.WriteModel
 {
     public partial class EmployerAcivityField : BaseEntity<byte>
@@ -9,9 +8,9 @@ namespace Domain.WriteModel
         {
             EmployerDetails = new HashSet<Employer>();
         }
-        public byte Id { get; set; }
         public string Title { get; set; }
-
+        public int DefinerId { get; set; }
+        public User.User Definer { get; set; }
         public virtual ICollection<Employer> EmployerDetails { get; set; }
     }
 }

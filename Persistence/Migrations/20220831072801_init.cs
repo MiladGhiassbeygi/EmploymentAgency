@@ -31,21 +31,6 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EmployerAcivityFields",
-                columns: table => new
-                {
-                    Id = table.Column<byte>(type: "smallint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Title = table.Column<string>(type: "text", nullable: false),
-                    CreatedTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    ModifiedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_EmployerAcivityFields", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ReminderData",
                 columns: table => new
                 {
@@ -152,35 +137,21 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Employers",
+                name: "EmployerAcivityFields",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<byte>(type: "smallint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    FirstName = table.Column<string>(type: "text", maxLength: 15, nullable: false),
-                    LastName = table.Column<string>(type: "text", maxLength: 25, nullable: false),
-                    Address = table.Column<string>(type: "text", maxLength: 100, nullable: false),
-                    PhoneNumber = table.Column<string>(type: "text", maxLength: 15, nullable: false),
-                    Email = table.Column<string>(type: "text", maxLength: 30, nullable: false),
-                    WebsiteLink = table.Column<string>(type: "text", maxLength: 30, nullable: false),
-                    NecessaryExplanation = table.Column<string>(type: "text", nullable: false),
-                    IsFixed = table.Column<bool>(type: "boolean", nullable: false),
-                    ExactAmountRecived = table.Column<decimal>(type: "numeric", nullable: false),
-                    FieldOfActivityId = table.Column<byte>(type: "smallint", nullable: false),
-                    DefinerId = table.Column<int>(type: "integer", nullable: false),
+                    Title = table.Column<string>(type: "text", nullable: false),
+                    DefinerId = table.Column<int>(type: "integer", nullable: false, defaultValue: 0),
                     CreatedTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Employers", x => x.Id);
+                    table.PrimaryKey("PK_EmployerAcivityFields", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Employer_EmployerAcivityField",
-                        column: x => x.FieldOfActivityId,
-                        principalTable: "EmployerAcivityFields",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Employer_EmployerDefiner",
+                        name: "FK_EmployerAcivityFields_Users_DefinerId",
                         column: x => x.DefinerId,
                         principalSchema: "usr",
                         principalTable: "Users",
@@ -345,32 +316,40 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Jobs",
+                name: "Employers",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Title = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
-                    HoursOfWork = table.Column<int>(type: "integer", nullable: false),
-                    SalaryMin = table.Column<decimal>(type: "money", nullable: false),
-                    SalaryMax = table.Column<decimal>(type: "money", nullable: false),
-                    AnnualLeave = table.Column<byte>(type: "smallint", nullable: false),
-                    ExactAmountRecived = table.Column<decimal>(type: "money", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: false),
-                    Email = table.Column<string>(type: "text", nullable: true),
-                    HireCompanies = table.Column<string>(type: "text", nullable: true),
-                    EmployerId = table.Column<long>(type: "bigint", nullable: false),
+                    FirstName = table.Column<string>(type: "text", maxLength: 15, nullable: false),
+                    LastName = table.Column<string>(type: "text", maxLength: 25, nullable: false),
+                    Address = table.Column<string>(type: "text", maxLength: 100, nullable: false),
+                    PhoneNumber = table.Column<string>(type: "text", maxLength: 15, nullable: false),
+                    Email = table.Column<string>(type: "text", maxLength: 30, nullable: false),
+                    WebsiteLink = table.Column<string>(type: "text", maxLength: 30, nullable: false),
+                    NecessaryExplanation = table.Column<string>(type: "text", nullable: false),
+                    IsFixed = table.Column<bool>(type: "boolean", nullable: false),
+                    ExactAmountRecived = table.Column<decimal>(type: "numeric", nullable: false),
+                    FieldOfActivityId = table.Column<byte>(type: "smallint", nullable: false),
+                    DefinerId = table.Column<int>(type: "integer", nullable: false),
                     CreatedTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Jobs", x => x.Id);
+                    table.PrimaryKey("PK_Employers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Job_EmployerInformation",
-                        column: x => x.EmployerId,
-                        principalTable: "Employers",
+                        name: "FK_Employer_EmployerAcivityField",
+                        column: x => x.FieldOfActivityId,
+                        principalTable: "EmployerAcivityFields",
                         principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Employer_EmployerDefiner",
+                        column: x => x.DefinerId,
+                        principalSchema: "usr",
+                        principalTable: "Users",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -392,7 +371,7 @@ namespace Persistence.Migrations
                 {
                     table.PrimaryKey("PK_EducationalBackgrounds", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_EducationalBackgrounds_JobSeekers_JobSeekerId",
+                        name: "FK_JobSeeker_JobseekerEducationalBackground",
                         column: x => x.JobSeekerId,
                         principalTable: "JobSeekers",
                         principalColumn: "Id",
@@ -400,33 +379,25 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SuccessedContracts",
+                name: "JobSeekerSkills",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    EmployerId = table.Column<long>(type: "bigint", nullable: false),
                     JobSeekerId = table.Column<long>(type: "bigint", nullable: false),
-                    EmploymentAgencyId = table.Column<int>(type: "integer", nullable: false),
-                    Date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValue: new DateTime(2022, 8, 21, 12, 54, 57, 543, DateTimeKind.Local).AddTicks(2259)),
-                    IsAmountFixed = table.Column<bool>(type: "boolean", nullable: false),
-                    Amount = table.Column<decimal>(type: "money", nullable: false),
-                    CreatedTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    ModifiedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
+                    SkillId = table.Column<short>(type: "smallint", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SuccessedContracts", x => x.Id);
+                    table.PrimaryKey("PK_JobSeekerSkills", x => new { x.SkillId, x.JobSeekerId });
                     table.ForeignKey(
-                        name: "FK_SuccessedContract_Employer",
-                        column: x => x.EmployerId,
-                        principalTable: "Employers",
+                        name: "FK_JobSeekerSkills_JobSeeker",
+                        column: x => x.JobSeekerId,
+                        principalTable: "JobSeekers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_SuccessedContract_JobSeeker",
-                        column: x => x.JobSeekerId,
-                        principalTable: "JobSeekers",
+                        name: "FK_JobSeekerSkills_Skill",
+                        column: x => x.SkillId,
+                        principalTable: "Skills",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -444,7 +415,6 @@ namespace Persistence.Migrations
                     SalaryPaid = table.Column<decimal>(type: "numeric", nullable: false),
                     TypeOfCooperation = table.Column<string>(type: "text", nullable: true),
                     HireCompanies = table.Column<string>(type: "text", nullable: true),
-                    Skills = table.Column<string>(type: "text", nullable: true),
                     JobSeekerId = table.Column<long>(type: "bigint", nullable: false),
                     CreatedTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
@@ -453,11 +423,85 @@ namespace Persistence.Migrations
                 {
                     table.PrimaryKey("PK_WorkExperiences", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_WorkExperiences_JobSeekers_JobSeekerId",
+                        name: "FK_JobSeeker_JobseekerWorkExperience",
                         column: x => x.JobSeekerId,
                         principalTable: "JobSeekers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "EmployerCommissions",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    IsFixed = table.Column<bool>(type: "boolean", nullable: false),
+                    Value = table.Column<int>(type: "integer", nullable: false),
+                    EmployerId = table.Column<long>(type: "bigint", nullable: false),
+                    CreatedTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EmployerCommissions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_EmployerCommission_Employer",
+                        column: x => x.EmployerId,
+                        principalTable: "Employers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Jobs",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Title = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
+                    HoursOfWork = table.Column<int>(type: "integer", nullable: false),
+                    SalaryMin = table.Column<decimal>(type: "money", nullable: false),
+                    SalaryMax = table.Column<decimal>(type: "money", nullable: false),
+                    AnnualLeave = table.Column<byte>(type: "smallint", nullable: false),
+                    ExactAmountRecived = table.Column<decimal>(type: "money", nullable: false),
+                    IsFixed = table.Column<bool>(type: "boolean", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: false),
+                    Email = table.Column<string>(type: "text", nullable: true),
+                    HireCompanies = table.Column<string>(type: "text", nullable: true),
+                    EmployerId = table.Column<long>(type: "bigint", nullable: false),
+                    CreatedTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Jobs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Job_EmployerInformation",
+                        column: x => x.EmployerId,
+                        principalTable: "Employers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "WorkExperienceSkills",
+                columns: table => new
+                {
+                    SkillId = table.Column<short>(type: "smallint", nullable: false),
+                    WorkExperienceId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WorkExperienceSkills", x => new { x.SkillId, x.WorkExperienceId });
+                    table.ForeignKey(
+                        name: "FK_Skill_WorkExperience",
+                        column: x => x.SkillId,
+                        principalTable: "Skills",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_WorkExperience_Skill",
+                        column: x => x.WorkExperienceId,
+                        principalTable: "WorkExperiences",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -491,46 +535,98 @@ namespace Persistence.Migrations
                 },
                 constraints: table =>
                 {
+                    table.PrimaryKey("PK_JobEssentialSkills", x => new { x.SkillId, x.JobId });
                     table.ForeignKey(
                         name: "FK_JobEssentialSkills_Job",
                         column: x => x.JobId,
                         principalTable: "Jobs",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_JobEssentialSkills_Skill",
                         column: x => x.SkillId,
                         principalTable: "Skills",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "JobUnnecessarySkills",
+                name: "JobUnnessecarySkills",
                 columns: table => new
                 {
                     JobId = table.Column<long>(type: "bigint", nullable: false),
-                    SkillId = table.Column<short>(type: "smallint", nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false),
+                    SkillId = table.Column<short>(type: "smallint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_JobUnnessecarySkills", x => new { x.SkillId, x.JobId });
+                    table.ForeignKey(
+                        name: "FK_JobUnnecessarySkills_Job",
+                        column: x => x.JobId,
+                        principalTable: "Jobs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_JobUnnecessarySkills_Skill",
+                        column: x => x.SkillId,
+                        principalTable: "Skills",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SuccessedContracts",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValue: new DateTime(2022, 8, 31, 11, 58, 1, 110, DateTimeKind.Local).AddTicks(8352)),
+                    IsAmountFixed = table.Column<bool>(type: "boolean", nullable: false),
+                    Amount = table.Column<decimal>(type: "money", nullable: false),
+                    JobId = table.Column<long>(type: "bigint", nullable: false),
+                    JobSeekerId = table.Column<long>(type: "bigint", nullable: false),
+                    ContractCreatorId = table.Column<int>(type: "integer", nullable: false),
                     CreatedTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
                 },
                 constraints: table =>
                 {
+                    table.PrimaryKey("PK_SuccessedContracts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_JobUnnecessarySkills_Job",
+                        name: "FK_SuccessedContract_Job",
                         column: x => x.JobId,
                         principalTable: "Jobs",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_JobUnnecessarySkills_Skill",
-                        column: x => x.SkillId,
-                        principalTable: "Skills",
-                        principalColumn: "Id");
+                        name: "FK_SuccessedContract_JobSeeker",
+                        column: x => x.JobSeekerId,
+                        principalTable: "JobSeekers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_SuccessedContracts_Users_ContractCreatorId",
+                        column: x => x.ContractCreatorId,
+                        principalSchema: "usr",
+                        principalTable: "Users",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_EducationalBackgrounds_JobSeekerId",
                 table: "EducationalBackgrounds",
                 column: "JobSeekerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EmployerAcivityFields_DefinerId",
+                table: "EmployerAcivityFields",
+                column: "DefinerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EmployerCommissions_EmployerId",
+                table: "EmployerCommissions",
+                column: "EmployerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Employers_DefinerId",
@@ -553,11 +649,6 @@ namespace Persistence.Migrations
                 column: "JobId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_JobEssentialSkills_SkillId",
-                table: "JobEssentialSkills",
-                column: "SkillId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Jobs_EmployerId",
                 table: "Jobs",
                 column: "EmployerId");
@@ -573,14 +664,14 @@ namespace Persistence.Migrations
                 column: "DefinerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_JobUnnecessarySkills_JobId",
-                table: "JobUnnecessarySkills",
-                column: "JobId");
+                name: "IX_JobSeekerSkills_JobSeekerId",
+                table: "JobSeekerSkills",
+                column: "JobSeekerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_JobUnnecessarySkills_SkillId",
-                table: "JobUnnecessarySkills",
-                column: "SkillId");
+                name: "IX_JobUnnessecarySkills_JobId",
+                table: "JobUnnessecarySkills",
+                column: "JobId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RoleClaims_RoleId",
@@ -596,9 +687,14 @@ namespace Persistence.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_SuccessedContracts_EmployerId",
+                name: "IX_SuccessedContracts_ContractCreatorId",
                 table: "SuccessedContracts",
-                column: "EmployerId");
+                column: "ContractCreatorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SuccessedContracts_JobId",
+                table: "SuccessedContracts",
+                column: "JobId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SuccessedContracts_JobSeekerId",
@@ -646,6 +742,11 @@ namespace Persistence.Migrations
                 name: "IX_WorkExperiences_JobSeekerId",
                 table: "WorkExperiences",
                 column: "JobSeekerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WorkExperienceSkills_WorkExperienceId",
+                table: "WorkExperienceSkills",
+                column: "WorkExperienceId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -654,13 +755,19 @@ namespace Persistence.Migrations
                 name: "EducationalBackgrounds");
 
             migrationBuilder.DropTable(
+                name: "EmployerCommissions");
+
+            migrationBuilder.DropTable(
                 name: "JobCommissions");
 
             migrationBuilder.DropTable(
                 name: "JobEssentialSkills");
 
             migrationBuilder.DropTable(
-                name: "JobUnnecessarySkills");
+                name: "JobSeekerSkills");
+
+            migrationBuilder.DropTable(
+                name: "JobUnnessecarySkills");
 
             migrationBuilder.DropTable(
                 name: "ReminderData");
@@ -693,29 +800,32 @@ namespace Persistence.Migrations
                 schema: "usr");
 
             migrationBuilder.DropTable(
-                name: "WorkExperiences");
+                name: "WorkExperienceSkills");
 
             migrationBuilder.DropTable(
                 name: "Jobs");
-
-            migrationBuilder.DropTable(
-                name: "Skills");
 
             migrationBuilder.DropTable(
                 name: "Roles",
                 schema: "usr");
 
             migrationBuilder.DropTable(
-                name: "JobSeekers");
+                name: "Skills");
+
+            migrationBuilder.DropTable(
+                name: "WorkExperiences");
 
             migrationBuilder.DropTable(
                 name: "Employers");
 
             migrationBuilder.DropTable(
-                name: "Countries");
+                name: "JobSeekers");
 
             migrationBuilder.DropTable(
                 name: "EmployerAcivityFields");
+
+            migrationBuilder.DropTable(
+                name: "Countries");
 
             migrationBuilder.DropTable(
                 name: "Users",

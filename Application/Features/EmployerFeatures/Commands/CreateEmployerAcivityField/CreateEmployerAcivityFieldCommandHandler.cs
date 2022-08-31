@@ -23,7 +23,7 @@ namespace Application.Features.EmployerActivityFieldsFeature.Commands.CreateEmpl
             if (await _unitOfWork.EmployerAcivityFieldRepository.GetEmployerAcivityFieldByTitleAsync(request.Title) is not null)
                 return OperationResult<EmployerAcivityField>.FailureResult("This EmployerAcivityField Already Exists");
 
-            var employerAcivityField = new EmployerAcivityField { Title = request.Title };
+            var employerAcivityField = new EmployerAcivityField { Title = request.Title,DefinerId = request.DefinerId };
 
             var result = await _unitOfWork.EmployerAcivityFieldRepository.CreateEmployerAcivityFieldAsync(employerAcivityField);
 

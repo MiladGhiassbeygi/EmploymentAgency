@@ -11,6 +11,14 @@ namespace Persistence.Configuration.EmployerConfig
             builder.Property(e => e.Id).ValueGeneratedOnAdd();
 
             builder.Property(e => e.Title).IsRequired();
+
+            builder.Property(x => x.DefinerId)
+                .HasDefaultValue(0);
+
+            builder.HasOne(x => x.Definer)
+                .WithMany(x => x.EmployerAcivityFields)
+                .HasForeignKey(x => x.DefinerId);
+
         }
     }
 }
