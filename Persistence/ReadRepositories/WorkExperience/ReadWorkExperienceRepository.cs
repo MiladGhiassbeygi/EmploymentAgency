@@ -3,7 +3,7 @@ using Domain.ReadModel;
 using MongoDB.Driver;
 using Persistence.ReadRepositories.Common;
 
-namespace Persistence.ReadRepositories.ReadWorkExperience
+namespace Persistence.ReadRepositories
 {
     public class ReadWorkExperienceRepository : BaseReadRepository<WorkExperience>, IReadWorkExperienceRepository
     {

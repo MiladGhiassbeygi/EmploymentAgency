@@ -8,12 +8,6 @@ using Application.Contracts.WritePersistence;
 using Application.Contracts.WritePersistence.Reminder;
 using MongoDB.Driver;
 using Persistence.ReadRepositories;
-using Persistence.ReadRepositories.Area;
-using Persistence.ReadRepositories.Contract;
-using Persistence.ReadRepositories.ReadWorkExperience;
-using Persistence.WriteRepositories.EmployerRepositories;
-using Persistence.WriteRepositories.JobRepositories;
-using Persistence.WriteRepositories.Reminder;
 
 namespace Persistence.WriteRepositories.Common
 {

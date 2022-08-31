@@ -5,7 +5,7 @@ using Persistence.WriteRepositories.Common;
 
 namespace Persistence.WriteRepositories
 {
-    internal class CountryRepository : BaseAsyncRepository<Country>, ICountryRepository
+    internal class CountryRepository : BaseAsyncRepository<Country>, IRepoAttribute, ICountryRepository
     {
         public CountryRepository(ApplicationDbContext dbContext) : base(dbContext)
         {

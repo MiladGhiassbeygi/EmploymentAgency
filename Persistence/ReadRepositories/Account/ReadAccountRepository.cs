@@ -3,7 +3,7 @@ using Persistence.ReadRepositories.Common;
 using Domain.ReadModel;
 using Application.Contracts.ReadPersistence.Account;
 
-namespace Persistence.ReadRepositories.Account
+namespace Persistence.ReadRepositories
 {
     
     public class ReadAccountRepository : BaseReadRepository<User>, IReadAccountRepository
