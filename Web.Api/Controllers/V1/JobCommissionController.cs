@@ -27,8 +27,7 @@ namespace Web.Api.Controllers.V1
         public async Task<IActionResult> CreateJobCommission(CreateJobCommissionForm model)
         {
             var commandResult = await _sender.Send(new CreateJobCommissionCommands(
-               model.IsFixed,model.Value, model.JobId
-                ));
+               model.IsFixed,model.Value, model.JobId,UserId));
 
             if (commandResult.IsSuccess)
             {
@@ -47,7 +46,7 @@ namespace Web.Api.Controllers.V1
         [HttpGet("GetJobCommissions")]
         public async Task<IActionResult> GetJobCommissions()
         {
-            return base.OperationResult(await _sender.Send(new GetJobCommissionQueries()));
+            return base.OperationResult(await _sender.Send(new GetJobCommissionQueries(UserId)));
         }
     }
 }
