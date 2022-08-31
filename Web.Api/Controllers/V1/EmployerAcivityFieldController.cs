@@ -44,10 +44,16 @@ namespace Web.Api.Controllers.V1
             return base.OperationResult(commandResult);
         }
 
-        [HttpPut("UpdateEmployerAcivityFields")]
+        [HttpPut("UpdateEmployerAcivityField")]
         public async Task<IActionResult> UpdateEmployerAcivityFields(UpdateEmployerAcivityFieldForm input, CancellationToken cancellationToken)
         {
             return base.OperationResult(await _sender.Send(new UpdateEmployerActivityFieldCommand(input.EmployerAcivityFieldId,input.Title)));
+        }
+
+        [HttpDelete("DeleteEmployerAcivityField")]
+        public async Task<IActionResult> DeleteEmployerAcivityField(DeleteEmployerAcivityFieldsForm input, CancellationToken cancellationToken)
+        {
+            return base.OperationResult(await _sender.Send(new DeleteEmployerAcivityFieldCommand(input.EmployerAcivityFieldId)));
         }
 
         [HttpGet("GetEmployerAcivityFields")]

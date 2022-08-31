@@ -104,6 +104,7 @@ builder.Services.AddHostedService<AddDeleteEmployerCommissionWorker>();
 builder.Services.AddHostedService<AddUpdateEmployerCommissionWorker>();
 builder.Services.AddHostedService<AddReadEmployerAcivityFieldWorker>();
 builder.Services.AddHostedService<AddUpdateEmployerAcivityFieldWorker>();
+builder.Services.AddHostedService<AddDeleteEmployerAcivityFieldWorker>();
 
 builder.Services.AddHostedService<AddReadEmplyerWorker>();
 builder.Services.AddHostedService<AddDeleteEmployerWorker>();
