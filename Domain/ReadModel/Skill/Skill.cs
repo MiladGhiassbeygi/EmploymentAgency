@@ -16,7 +16,5 @@ namespace Domain.ReadModel
         [BsonElement("title")]
         public string Title { get; set; }
 
-        [BsonElement("percentage")]
-        public byte Percentage { get; set; }
     }
 }

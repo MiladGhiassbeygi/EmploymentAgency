@@ -41,7 +41,6 @@ namespace Application.BackgroundWorker
                             {
                                 SkillId = item.SkillId,
                                 Title = skill.Title,
-                                Percentage = skill.Percentage,
                             };
 
                             await readRepository.UpdateAsync(mongoEmployer, x => x.SkillId == item.SkillId, stoppingToken);

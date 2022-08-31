@@ -46,7 +46,6 @@ namespace Application.BackgroundWorker
                             await readRepository.AddAsync(new Skill
                             {
                                 SkillId = item.SkillId,
-                                Percentage = skill.Percentage,
                                 Title = skill.Title,
 
                             }, stoppingToken);
