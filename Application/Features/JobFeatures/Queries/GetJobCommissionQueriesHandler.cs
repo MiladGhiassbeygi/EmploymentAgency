@@ -1,8 +1,6 @@
 ﻿using Application.Contracts.Persistence;
-using Application.Models.Area;
 using Application.Models.Common;
 using Application.Models.JobModel;
-using Domain.WriteModel;
 using MediatR;
 
 namespace Application.Features.JobFeatures.JobCommissionCqrs.Queries
@@ -20,7 +18,7 @@ namespace Application.Features.JobFeatures.JobCommissionCqrs.Queries
         public async Task<OperationResult<List<GetJobCommissionsDto>>> Handle(GetJobCommissionQueries request, CancellationToken cancellationToken)
         {
 
-            var jobCommissions = await _unitOfWork.JobCommissionRepository.GetAll();
+            var jobCommissions = await _unitOfWork.ReadJobCommissionRepository.GetWithFilterAsync(x=> x.DefinerId == request.definerId);
 
             if (jobCommissions is not null)
             {
