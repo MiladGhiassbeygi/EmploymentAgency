@@ -36,7 +36,7 @@ namespace Web.Api.Controllers.V1
         [HttpPut("UpdateSuccessedContract")]
         public async Task<IActionResult> UpdateSuccessedContract(UpdateSuccessedContractForm input, CancellationToken cancellationToken)
         {
-            return base.OperationResult(await _sender.Send(new UpdateSuccessedContractCommand(input.SuccessedContractId,input.Date,input.IsAmountFixed,input.Amount,input.JobId,input.JobSeekerId,input.ContractCreatorId)));
+            return base.OperationResult(await _sender.Send(new UpdateSuccessedContractCommand(input.SuccessedContractId,input.Date,input.IsAmountFixed,input.Amount,input.JobId,input.JobSeekerId)));
         }
 
 

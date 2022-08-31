@@ -19,7 +19,7 @@ namespace Application.Features.Contract.Commands
         public async Task<OperationResult<SuccessedContract>> Handle(UpdateSuccessedContractCommand request, CancellationToken cancellationToken)
         {
 
-            var fetchedSuccessedContract = await _unitOfWork.SuccessedContractRepository.GetSuccessedContractByIdAsync(request.contractCreatorId);
+            var fetchedSuccessedContract = await _unitOfWork.SuccessedContractRepository.GetSuccessedContractByIdAsync(request.successedContractId);
 
             if (fetchedSuccessedContract is null)
                 return OperationResult<SuccessedContract>.FailureResult("The Successed Contract Is Not Exist");
@@ -29,7 +29,6 @@ namespace Application.Features.Contract.Commands
             fetchedSuccessedContract.Amount = request.amount;
             fetchedSuccessedContract.JobId = request.jobId;
             fetchedSuccessedContract.JobSeekerId = request.jobSeekerId;
-            fetchedSuccessedContract.ContractCreatorId = request.contractCreatorId;
 
 
             var result = await _unitOfWork.SuccessedContractRepository.UpdateSuccessedContractAsync(fetchedSuccessedContract);
