@@ -4,6 +4,6 @@ using MediatR;
 
 namespace Application.Features.Contract.Commands
 {
-    public record UpdateSuccessedContractCommand(DateTime date, bool isAmountFixed, decimal amount,
-                                                 long jobId, long jobSeekerId, int contractCreatorId) : IRequest<OperationResult<SuccessedContract>>;
+    public record UpdateSuccessedContractCommand(long successedContractId,DateTime date, bool isAmountFixed, decimal amount,
+                                                 long jobId, long jobSeekerId) : IRequest<OperationResult<SuccessedContract>>;
 }

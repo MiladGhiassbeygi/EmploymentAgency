@@ -12,10 +12,8 @@ using Application.BackgroundWorker.AddDeleteJobSeeker;
 using Application.BackgroundWorker.Reminder;
 using Application.Common.BaseChannel;
 using Application.ServiceConfiguration;
-using Domain.WriteModel.User;
 using Identity.Identity.Dtos;
 using Identity.Identity.SeedDatabaseService;
-using Identity.Jwt;
 using Identity.ServiceConfiguration;
 using InfrastructureServices.Logging;
 using Microsoft.EntityFrameworkCore;
@@ -24,7 +22,6 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Persistence;
 using Persistence.ServiceConfiguration;
 using Serilog;
-using Web.Api.Controllers.V1;
 using WebFramework.Filters;
 using WebFramework.ServiceConfiguration;
 using WebFramework.Swagger;
@@ -106,6 +103,8 @@ builder.Services.AddHostedService<AddReadEmplyerCommisionWorker>();
 builder.Services.AddHostedService<AddDeleteEmployerCommissionWorker>();
 builder.Services.AddHostedService<AddUpdateEmployerCommissionWorker>();
 builder.Services.AddHostedService<AddReadEmployerAcivityFieldWorker>();
+builder.Services.AddHostedService<AddUpdateEmployerAcivityFieldWorker>();
+builder.Services.AddHostedService<AddDeleteEmployerAcivityFieldWorker>();
 
 builder.Services.AddHostedService<AddReadEmplyerWorker>();
 builder.Services.AddHostedService<AddDeleteEmployerWorker>();
@@ -116,6 +115,8 @@ builder.Services.AddHostedService<AddUpdateEducationalBackgroundWorker>();
 builder.Services.AddHostedService<AddDeleteEducationalBackgroundWorker>();
 
 builder.Services.AddHostedService<AddReadSuccessedContractWorker>();
+builder.Services.AddHostedService<AddDeleteSuccessedContractWorker>();
+builder.Services.AddHostedService<AddUpdateSuccessedContractWorker>();
 
 
 #endregion
