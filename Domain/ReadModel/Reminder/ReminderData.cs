@@ -21,6 +21,6 @@ namespace Domain.ReadModel
         public string Note { get; set; }
 
         [BsonElement("ownerId")]
-        public string OwnerId { get; set; }
+        public int OwnerId { get; set; }
     }
 }
