@@ -24,7 +24,10 @@ namespace Web.Api.Controllers.V1
             _sender = sender;
         }
 
-        
+        /// <summary>
+        /// ساختن کارفرمای جدید
+        /// </summary>
+        /// <returns></returns>
         [HttpPost("CreateEmployer")]
         public async Task<IActionResult> CreateEmployer(CreateEmployerForm model)
         {

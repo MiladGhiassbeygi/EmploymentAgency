@@ -37,7 +37,7 @@ namespace Application.Features.Contract.Commands
             {
                 await _unitOfWork.CommitAsync();
 
-                await _channel.AddToChannelAsync(new SuccessedContractUpdated { SuccessedContractId = fetchedSuccessedContract.ContractCreatorId }, cancellationToken);
+                await _channel.AddToChannelAsync(new SuccessedContractUpdated { SuccessedContractId = fetchedSuccessedContract.Id }, cancellationToken);
             }
             catch (Exception ex)
             {
