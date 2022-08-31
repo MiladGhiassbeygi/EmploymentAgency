@@ -43,8 +43,7 @@ namespace Application.BackgroundWorker.AddReadJob
                                 JobCommissionId = jobCommission.Id,
                                 IsFixed = jobCommission.IsFixed,
                                 Value = jobCommission.Value,
-                                JobId = jobCommission.JobId,
-                                DefinerId = item.DefinerId
+                                JobId = jobCommission.JobId
                             }, stoppingToken);
                         }
                     }

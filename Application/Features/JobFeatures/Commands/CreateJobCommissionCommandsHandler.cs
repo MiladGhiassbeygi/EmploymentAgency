@@ -27,7 +27,7 @@ namespace Application.Features.JobFeatures.JobCommissionCqrs.Commands
 
             await _unitOfWork.CommitAsync();
 
-            await _channel.AddToChannelAsync(new JobCommisionAdded { JobCommisionId = result.Id, DefinerId = request.DefinerId }, cancellationToken);
+            await _channel.AddToChannelAsync(new JobCommisionAdded { JobCommisionId = result.Id }, cancellationToken);
 
             return OperationResult<JobCommission>.SuccessResult(jobCommission);
         }

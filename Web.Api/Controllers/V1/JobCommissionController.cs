@@ -26,8 +26,7 @@ namespace Web.Api.Controllers.V1
         [HttpPost("CreateJobCommission")]
         public async Task<IActionResult> CreateJobCommission(CreateJobCommissionForm model)
         {
-            var commandResult = await _sender.Send(new CreateJobCommissionCommands(
-               model.IsFixed,model.Value, model.JobId,UserId));
+            var commandResult = await _sender.Send(new CreateJobCommissionCommands(model.IsFixed,model.Value, model.JobId));
 
             if (commandResult.IsSuccess)
             {
@@ -35,7 +34,6 @@ namespace Web.Api.Controllers.V1
                 {
                    IsFixed = model.IsFixed,
                    Value = model.Value,
-                   JobId = model.JobId
                 };
 
                 return base.OperationResult(commandResult);
@@ -44,9 +42,9 @@ namespace Web.Api.Controllers.V1
         }
 
         [HttpGet("GetJobCommissions")]
-        public async Task<IActionResult> GetJobCommissions()
+        public async Task<IActionResult> GetJobCommissions(long jobId)
         {
-            return base.OperationResult(await _sender.Send(new GetJobCommissionQueries(UserId)));
+            return base.OperationResult(await _sender.Send(new GetJobCommissionQueries(jobId)));
         }
     }
 }

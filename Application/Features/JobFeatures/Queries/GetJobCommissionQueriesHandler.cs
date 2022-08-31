@@ -18,14 +18,13 @@ namespace Application.Features.JobFeatures.JobCommissionCqrs.Queries
         public async Task<OperationResult<List<GetJobCommissionsDto>>> Handle(GetJobCommissionQueries request, CancellationToken cancellationToken)
         {
 
-            var jobCommissions = await _unitOfWork.ReadJobCommissionRepository.GetWithFilterAsync(x=> x.DefinerId == request.definerId);
+            var jobCommissions = await _unitOfWork.ReadJobCommissionRepository.GetWithFilterAsync(x=> x.JobId == request.jobId);
 
             if (jobCommissions is not null)
             {
                 var jobCommissionsDto = new List<GetJobCommissionsDto>();
                 jobCommissionsDto.AddRange(jobCommissions.ConvertAll(x => new GetJobCommissionsDto()
                 {
-                    JobId = x.JobId,
                     Value = x.Value,
                     IsFixed= x.IsFixed
                 }));

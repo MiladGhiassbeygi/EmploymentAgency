@@ -4,5 +4,5 @@ using Domain.WriteModel;
 
 namespace Application.Features.JobFeatures.JobCommissionCqrs.Commands
 {
-    public record CreateJobCommissionCommands(bool IsFixed,int Value,long JobId,int DefinerId) : IRequest<OperationResult<JobCommission>>;
+    public record CreateJobCommissionCommands(bool IsFixed,int Value,long JobId) : IRequest<OperationResult<JobCommission>>;
 }
