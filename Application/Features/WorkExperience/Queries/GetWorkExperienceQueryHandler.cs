@@ -18,7 +18,7 @@ namespace Application.Features.GetWorkExperience
         public async Task<OperationResult<List<WorkExperience>>> Handle(GetWorkExperienceQuery request, CancellationToken cancellationToken)
         {
 
-            var workExperience = await _unitOfWork.ReadWorkExperienceRepository.GetAllAsync();
+            var workExperience = await _unitOfWork.ReadWorkExperienceRepository.GetWithFilterAsync(x=> x.JobSeekerId == request.jobSeekerId);
 
             if (workExperience is not null)
                 return OperationResult<List<WorkExperience>>.SuccessResult(workExperience);
