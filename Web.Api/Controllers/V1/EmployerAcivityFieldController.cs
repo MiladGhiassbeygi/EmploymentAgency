@@ -10,6 +10,7 @@ using Application.Features.EmployerActivityFieldsFeature.Queries.FilterEmployerA
 using Domain.ReadModel;
 using Domain.WriteModel.User;
 using Microsoft.AspNetCore.Authorization;
+using Application.Features.EmployerFeatures.Commands;
 
 namespace Web.Api.Controllers.V1
 {
@@ -41,6 +42,12 @@ namespace Web.Api.Controllers.V1
             //return base.OperationResult(commandResult);
             //}
             return base.OperationResult(commandResult);
+        }
+
+        [HttpPut("UpdateEmployerAcivityFields")]
+        public async Task<IActionResult> UpdateEmployerAcivityFields(UpdateEmployerAcivityFieldForm input, CancellationToken cancellationToken)
+        {
+            return base.OperationResult(await _sender.Send(new UpdateEmployerActivityFieldCommand(input.EmployerAcivityFieldId,input.Title)));
         }
 
         [HttpGet("GetEmployerAcivityFields")]

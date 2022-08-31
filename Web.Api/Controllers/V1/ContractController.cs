@@ -5,6 +5,7 @@ using Web.Api.Form.Contract;
 using Application.Features.Contract.Commands;
 using Microsoft.AspNetCore.Authorization;
 using Application.Features.Contract.Queries;
+using Web.Api.Form.EmployerAcivityField;
 
 namespace Web.Api.Controllers.V1
 {
@@ -39,6 +40,11 @@ namespace Web.Api.Controllers.V1
             return base.OperationResult(await _sender.Send(new UpdateSuccessedContractCommand(input.SuccessedContractId,input.Date,input.IsAmountFixed,input.Amount,input.JobId,input.JobSeekerId)));
         }
 
+        [HttpDelete("DeleteSuccessedContract")]
+        public async Task<IActionResult> DeleteSuccessedContract(DeleteSuccessedContractForm input, CancellationToken cancellationToken)
+        {
+            return base.OperationResult(await _sender.Send(new DeleteSuccessedContractCommand(input.SuccessedContractId)));
+        }
 
         [HttpGet("GetSuccessedContracts")]
         public async Task<IActionResult> GetSuccessedContracts()
