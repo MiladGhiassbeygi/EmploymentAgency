@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace Application.BackgroundWorker.AddDeleteEmployer
+namespace Application.BackgroundWorker
 {
    
     public class AddDeleteEmployerCommissionWorker : BackgroundService

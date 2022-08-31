@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace Application.BackgroundWorker.AddReadCountry
+namespace Application.BackgroundWorker
 {
     public class AddReadCountryWorker : BackgroundService
     {

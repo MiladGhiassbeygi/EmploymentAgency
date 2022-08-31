@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 using Application.Contracts.Persistence.JobContract;
 using Application.Contracts.ReadPersistence;
 
-namespace Application.BackgroundWorker.AddReadJobSeeker
+namespace Application.BackgroundWorker
 {
     public class AddReadJobSeekerWorker : BackgroundService
     {

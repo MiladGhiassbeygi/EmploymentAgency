@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace Application.BackgroundWorker.AddReadEmployer
+namespace Application.BackgroundWorker
 {
     public class AddReadEmplyerWorker : BackgroundService
     {

@@ -1,6 +1,5 @@
 ﻿using Application.BackgroundWorker.Common.Events;
 using Application.Common.BaseChannel;
-using Application.Contracts.Persistence;
 using Application.Contracts.Persistence.JobContract;
 using Application.Contracts.ReadPersistence;
 using Domain.ReadModel;
@@ -8,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace Application.BackgroundWorker.AddReadJob
+namespace Application.BackgroundWorker
 {
     public class AddReadJobCommisionWorker : BackgroundService
     {

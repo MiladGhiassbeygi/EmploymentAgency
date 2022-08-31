@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace Application.BackgroundWorker.Account
+namespace Application.BackgroundWorker
 {
     public class AddReadAccountWorker : BackgroundService
     {
