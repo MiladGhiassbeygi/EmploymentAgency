@@ -18,9 +18,6 @@ namespace Application.Features.Reminders.Command
         }
         public async Task<OperationResult<ReminderData>> Handle(CreateReminderCommand request, CancellationToken cancellationToken)
         {
-            //if (await _unitOfWork.ReminderRepository.IsExist(request.FirstName, request.LastName) is not null)
-            //    return OperationResult<ReminderData>.FailureResult("This Job Seeker Already Exists");
-
             var reminder = new ReminderData
             {
                 EventDate = request.eventDate,

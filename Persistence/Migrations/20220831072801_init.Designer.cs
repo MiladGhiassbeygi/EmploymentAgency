@@ -12,8 +12,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220830085151_appendJobSeekerRelationWithSkill")]
-    partial class appendJobSeekerRelationWithSkill
+    [Migration("20220831072801_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -175,6 +175,11 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("timestamp without time zone");
 
+                    b.Property<int>("DefinerId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasDefaultValue(0);
+
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("timestamp without time zone");
 
@@ -183,6 +188,8 @@ namespace Persistence.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DefinerId");
 
                     b.ToTable("EmployerAcivityFields");
                 });
@@ -378,7 +385,7 @@ namespace Persistence.Migrations
                     b.ToTable("JobSeekers");
                 });
 
-            modelBuilder.Entity("Domain.WriteModel.JobSeekerEssentialSkills", b =>
+            modelBuilder.Entity("Domain.WriteModel.JobSeekerSkills", b =>
                 {
                     b.Property<short?>("SkillId")
                         .HasColumnType("smallint");
@@ -390,25 +397,10 @@ namespace Persistence.Migrations
 
                     b.HasIndex("JobSeekerId");
 
-                    b.ToTable("JobSeekerEssentialSkills");
+                    b.ToTable("JobSeekerSkills");
                 });
 
-            modelBuilder.Entity("Domain.WriteModel.JobSeekerUnnecessarySkills", b =>
-                {
-                    b.Property<short?>("SkillId")
-                        .HasColumnType("smallint");
-
-                    b.Property<long?>("JobSeekerId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("SkillId", "JobSeekerId");
-
-                    b.HasIndex("JobSeekerId");
-
-                    b.ToTable("JobSeekerUnnecessarySkills");
-                });
-
-            modelBuilder.Entity("Domain.WriteModel.JobUnnecessarySkills", b =>
+            modelBuilder.Entity("Domain.WriteModel.JobUnnessecarySkills", b =>
                 {
                     b.Property<short?>("SkillId")
                         .HasColumnType("smallint");
@@ -420,7 +412,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("JobId");
 
-                    b.ToTable("JobUnnecessarySkills");
+                    b.ToTable("JobUnnessecarySkills");
                 });
 
             modelBuilder.Entity("Domain.WriteModel.ReminderData", b =>
@@ -505,7 +497,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("Date")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2022, 8, 30, 13, 21, 50, 867, DateTimeKind.Local).AddTicks(5135));
+                        .HasDefaultValue(new DateTime(2022, 8, 31, 11, 58, 1, 110, DateTimeKind.Local).AddTicks(8352));
 
                     b.Property<bool>("IsAmountFixed")
                         .HasColumnType("boolean");
@@ -877,6 +869,17 @@ namespace Persistence.Migrations
                     b.Navigation("FieldOfActivity");
                 });
 
+            modelBuilder.Entity("Domain.WriteModel.EmployerAcivityField", b =>
+                {
+                    b.HasOne("Domain.WriteModel.User.User", "Definer")
+                        .WithMany("EmployerAcivityFields")
+                        .HasForeignKey("DefinerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Definer");
+                });
+
             modelBuilder.Entity("Domain.WriteModel.EmployerCommission", b =>
                 {
                     b.HasOne("Domain.WriteModel.Employer", "Employer")
@@ -951,49 +954,28 @@ namespace Persistence.Migrations
                     b.Navigation("Definer");
                 });
 
-            modelBuilder.Entity("Domain.WriteModel.JobSeekerEssentialSkills", b =>
+            modelBuilder.Entity("Domain.WriteModel.JobSeekerSkills", b =>
                 {
-                    b.HasOne("Domain.WriteModel.JobSeeker", "Job")
+                    b.HasOne("Domain.WriteModel.JobSeeker", "JobSeeker")
                         .WithMany("JobSeekerEssentialSkills")
                         .HasForeignKey("JobSeekerId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired()
-                        .HasConstraintName("FK_JobSeekerEssentialSkills_JobSeeker");
+                        .HasConstraintName("FK_JobSeekerSkills_JobSeeker");
 
                     b.HasOne("Domain.WriteModel.Skill", "Skill")
-                        .WithMany("JobSeekerEssentialSkills")
+                        .WithMany("JobSeekerSkills")
                         .HasForeignKey("SkillId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired()
-                        .HasConstraintName("FK_JobSeekerEssentialSkills_Skill");
+                        .HasConstraintName("FK_JobSeekerSkills_Skill");
 
-                    b.Navigation("Job");
+                    b.Navigation("JobSeeker");
 
                     b.Navigation("Skill");
                 });
 
-            modelBuilder.Entity("Domain.WriteModel.JobSeekerUnnecessarySkills", b =>
-                {
-                    b.HasOne("Domain.WriteModel.JobSeeker", "Job")
-                        .WithMany("JobSeekerUnnecessarySkills")
-                        .HasForeignKey("JobSeekerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired()
-                        .HasConstraintName("FK_JobSeekerUnnecessarySkills_JobSeeker");
-
-                    b.HasOne("Domain.WriteModel.Skill", "Skill")
-                        .WithMany("JobSeekerUnnecessarySkills")
-                        .HasForeignKey("SkillId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired()
-                        .HasConstraintName("FK_JobSeekerUnnecessarySkills_Skill");
-
-                    b.Navigation("Job");
-
-                    b.Navigation("Skill");
-                });
-
-            modelBuilder.Entity("Domain.WriteModel.JobUnnecessarySkills", b =>
+            modelBuilder.Entity("Domain.WriteModel.JobUnnessecarySkills", b =>
                 {
                     b.HasOne("Domain.WriteModel.Job", "Job")
                         .WithMany("JobUnnecessarySkills")
@@ -1182,8 +1164,6 @@ namespace Persistence.Migrations
 
                     b.Navigation("JobSeekerEssentialSkills");
 
-                    b.Navigation("JobSeekerUnnecessarySkills");
-
                     b.Navigation("SuccessedContract");
 
                     b.Navigation("WorkExperiences");
@@ -1193,9 +1173,7 @@ namespace Persistence.Migrations
                 {
                     b.Navigation("JobEssentialSkills");
 
-                    b.Navigation("JobSeekerEssentialSkills");
-
-                    b.Navigation("JobSeekerUnnecessarySkills");
+                    b.Navigation("JobSeekerSkills");
 
                     b.Navigation("JobUnnecessarySkills");
                 });
@@ -1210,6 +1188,8 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.WriteModel.User.User", b =>
                 {
                     b.Navigation("Claims");
+
+                    b.Navigation("EmployerAcivityFields");
 
                     b.Navigation("Employers");
 

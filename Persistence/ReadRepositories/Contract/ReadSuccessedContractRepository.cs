@@ -3,7 +3,7 @@ using Domain.ReadModel;
 using MongoDB.Driver;
 using Persistence.ReadRepositories.Common;
 
-namespace Persistence.ReadRepositories.Contract
+namespace Persistence.ReadRepositories
 {
     internal class ReadSuccessedContractRepository : BaseReadRepository<SuccessedContract>, IReadSuccessedContractRepository
     {

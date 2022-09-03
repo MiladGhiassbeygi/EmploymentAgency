@@ -1,15 +1,5 @@
 using System.Diagnostics;
 using Application.BackgroundWorker;
-using Application.BackgroundWorker.Account;
-using Application.BackgroundWorker.AddDeleteEmployer;
-using Application.BackgroundWorker.AddReadCountry;
-using Application.BackgroundWorker.AddReadEmployer;
-using Application.BackgroundWorker.AddReadEmployerActivity;
-using Application.BackgroundWorker.AddReadJobSeeker;
-using Application.BackgroundWorker.AddUpdateEmployer;
-using Application.BackgroundWorker.AddUpdateJobSeeker;
-using Application.BackgroundWorker.AddDeleteJobSeeker;
-using Application.BackgroundWorker.Reminder;
 using Application.Common.BaseChannel;
 using Application.ServiceConfiguration;
 using Identity.Identity.Dtos;
@@ -25,9 +15,9 @@ using Serilog;
 using WebFramework.Filters;
 using WebFramework.ServiceConfiguration;
 using WebFramework.Swagger;
-using Application.BackgroundWorker.AddUpdateJob;
-using Application.BackgroundWorker.AddUpdateEducationalBackground;
-using Application.BackgroundWorker.AddDeleteJob;
+using System.Reflection;
+using AutoMapper.Internal;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
@@ -75,49 +65,15 @@ builder.Services.AddSwagger();
 
 builder.Services.AddSingleton(typeof(ChannelQueue<>));
 
-builder.Services.AddHostedService<AddReadCountryWorker>();
-builder.Services.AddHostedService<AddUpdateCountryWorker>();
-builder.Services.AddHostedService<AddDeleteCountryWorker>();
-builder.Services.AddHostedService<AddReadAccountWorker>();
+//Register All Workers by Assembly Reflection ! 
 
-builder.Services.AddHostedService<AddReadSkillWorker>();
-builder.Services.AddHostedService<AddUpdateSkillWorker>();
-builder.Services.AddHostedService<AddDeleteSkillWorker>();
+Assembly assembly = Assembly.LoadFrom("D:\\EmploymentAgency\\EmploymentAgency\\Application\\bin\\Debug\\net6.0\\Application.dll");
+var types = assembly
+   .GetTypes()
+   .Where(t => t.IsSubclassOf(typeof(BackgroundService)));
 
-builder.Services.AddHostedService<AddReadJobSeekerWorker>();
-builder.Services.AddHostedService<AddUpdateJobSeekerWorker>();
-builder.Services.AddHostedService<AddDeleteJobSeekerWorker>();
-
-builder.Services.AddHostedService<AddReadJobWorker>();
-builder.Services.AddHostedService<AddUpdateJobWorker>();
-builder.Services.AddHostedService<AddDeleteJobWorker>();
-builder.Services.AddHostedService<AddReadJobEssentialSkillsWorker>();
-builder.Services.AddHostedService<AddReadJobUnnessecarySkillsWorker>();
-builder.Services.AddHostedService<AddReadEmployerAcivityFieldWorker>();
-
-builder.Services.AddHostedService<AddReadWorkExperienceWorker>();
-
-builder.Services.AddHostedService<AddReadReminderWorker>();
-
-builder.Services.AddHostedService<AddReadEmplyerCommisionWorker>();
-builder.Services.AddHostedService<AddDeleteEmployerCommissionWorker>();
-builder.Services.AddHostedService<AddUpdateEmployerCommissionWorker>();
-builder.Services.AddHostedService<AddReadEmployerAcivityFieldWorker>();
-builder.Services.AddHostedService<AddUpdateEmployerAcivityFieldWorker>();
-builder.Services.AddHostedService<AddDeleteEmployerAcivityFieldWorker>();
-
-builder.Services.AddHostedService<AddReadEmplyerWorker>();
-builder.Services.AddHostedService<AddDeleteEmployerWorker>();
-builder.Services.AddHostedService<AddUpdateEmployerWorker>();
-
-builder.Services.AddHostedService<AddReadEducationalBackgroundWorker>();
-builder.Services.AddHostedService<AddUpdateEducationalBackgroundWorker>();
-builder.Services.AddHostedService<AddDeleteEducationalBackgroundWorker>();
-
-builder.Services.AddHostedService<AddReadSuccessedContractWorker>();
-builder.Services.AddHostedService<AddDeleteSuccessedContractWorker>();
-builder.Services.AddHostedService<AddUpdateSuccessedContractWorker>();
-
+foreach (var type in types)
+    builder.Services.TryAddEnumerable(ServiceDescriptor.Singleton(typeof(IHostedService), type));
 
 #endregion
 

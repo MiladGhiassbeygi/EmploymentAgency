@@ -3,7 +3,7 @@ using Domain.WriteModel;
 using Microsoft.EntityFrameworkCore;
 using Persistence.WriteRepositories.Common;
 
-namespace Persistence.WriteRepositories.EmployerRepositories
+namespace Persistence.WriteRepositories
 {
     internal class EmployerCommissionRepository : BaseAsyncRepository<EmployerCommission>, IEmployerCommissionRepository
     {

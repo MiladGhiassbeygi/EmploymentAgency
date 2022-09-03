@@ -173,6 +173,11 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnType("timestamp without time zone");
 
+                    b.Property<int>("DefinerId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasDefaultValue(0);
+
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("timestamp without time zone");
 
@@ -181,6 +186,8 @@ namespace Persistence.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DefinerId");
 
                     b.ToTable("EmployerAcivityFields");
                 });
@@ -488,7 +495,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("Date")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2022, 8, 30, 16, 17, 47, 475, DateTimeKind.Local).AddTicks(5270));
+                        .HasDefaultValue(new DateTime(2022, 8, 31, 11, 58, 1, 110, DateTimeKind.Local).AddTicks(8352));
 
                     b.Property<bool>("IsAmountFixed")
                         .HasColumnType("boolean");
@@ -860,6 +867,17 @@ namespace Persistence.Migrations
                     b.Navigation("FieldOfActivity");
                 });
 
+            modelBuilder.Entity("Domain.WriteModel.EmployerAcivityField", b =>
+                {
+                    b.HasOne("Domain.WriteModel.User.User", "Definer")
+                        .WithMany("EmployerAcivityFields")
+                        .HasForeignKey("DefinerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Definer");
+                });
+
             modelBuilder.Entity("Domain.WriteModel.EmployerCommission", b =>
                 {
                     b.HasOne("Domain.WriteModel.Employer", "Employer")
@@ -1168,6 +1186,8 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.WriteModel.User.User", b =>
                 {
                     b.Navigation("Claims");
+
+                    b.Navigation("EmployerAcivityFields");
 
                     b.Navigation("Employers");
 

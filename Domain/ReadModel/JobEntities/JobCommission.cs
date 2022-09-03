@@ -22,6 +22,5 @@ namespace Domain.ReadModel
         [BsonElement("jobId")]
         public long JobId { get; set; }
 
-       
     }
 }

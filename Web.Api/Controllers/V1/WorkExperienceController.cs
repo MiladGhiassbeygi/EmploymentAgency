@@ -51,9 +51,9 @@ namespace Web.Api.Controllers.V1
 
 
         [HttpGet("GetWorkExperiences")]
-        public async Task<IActionResult> GetWorkExperiences()
+        public async Task<IActionResult> GetWorkExperiences(long jobSeekerId)
         {
-            return base.OperationResult(await _sender.Send(new GetWorkExperienceQuery()));
+            return base.OperationResult(await _sender.Send(new GetWorkExperienceQuery(jobSeekerId)));
         }
     }
 }

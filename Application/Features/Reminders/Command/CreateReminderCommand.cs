@@ -5,5 +5,5 @@ using MediatR;
 
 namespace Application.Features.Reminders.Command
 {
-    public record CreateReminderCommand(DateTime eventDate,string noteTitle,string note,string ownerId) : IRequest<OperationResult<ReminderData>>;
+    public record CreateReminderCommand(DateTime eventDate,string noteTitle,string note,int ownerId) : IRequest<OperationResult<ReminderData>>;
 }

@@ -27,7 +27,7 @@ namespace Web.Api.Controllers.V1
         [HttpPost("CreateReminder")]
         public async Task<IActionResult> CreateReminder(CreateReminderForm model)
         {
-            var commandResult = await _sender.Send(new CreateReminderCommand(model.EventDate,model.NoteTitle,model.Note,UserId.ToString()));
+            var commandResult = await _sender.Send(new CreateReminderCommand(model.EventDate,model.NoteTitle,model.Note,UserId));
                 
 
             if (commandResult.IsSuccess)

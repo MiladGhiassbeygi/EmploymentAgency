@@ -10,9 +10,9 @@ namespace Application.Contracts.Persistence.JobContract
     public interface IJobCommissionRepository
     {
         Task<JobCommission> CreateJobCommissionAsync(JobCommission jobCommission);
-        Task<JobCommission> GetJobCommissionByIdAsync(int id);
+        Task<JobCommission> GetJobCommissionByIdAsync(long id);
         Task<JobCommission> UpdateJobCommissionAsync(JobCommission jobCommission);
-        Task<JobCommission> DeleteJobCommissionByIdAsync(int id);
+        Task<JobCommission> DeleteJobCommissionByIdAsync(long id);
         Task<List<JobCommission>> GetAll();
     }
 }

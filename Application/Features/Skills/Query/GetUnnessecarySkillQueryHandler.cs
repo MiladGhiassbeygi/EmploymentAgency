@@ -27,7 +27,6 @@ namespace Application.Features.Skills.Query
                 {
                    Title = x.Title,
                    Id = x.SkillId,
-                   Percentage = x.Percentage
                 }));
 
                 return OperationResult<List<GetSkillDto>>.SuccessResult(skillsDto);

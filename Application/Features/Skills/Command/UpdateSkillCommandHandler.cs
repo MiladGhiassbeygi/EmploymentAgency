@@ -26,7 +26,6 @@ namespace Application.Features.Skills.Command
 
             fetchedSkill.Id = request.id;
             fetchedSkill.Title = request.title;
-            fetchedSkill.Percentage = request.percentage;
 
             var result = await _unitOfWork.SkillRepository.UpdateSkillAsync(fetchedSkill);
             try

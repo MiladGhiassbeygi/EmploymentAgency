@@ -5,6 +5,5 @@ namespace Application.Models.Skill
     {
         public short Id { get; set; }
         public string Title { get; set; }
-        public byte Percentage { get; set; }
     }
 }

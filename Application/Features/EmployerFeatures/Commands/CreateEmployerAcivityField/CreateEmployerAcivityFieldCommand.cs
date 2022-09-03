@@ -4,5 +4,5 @@ using MediatR;
 
 namespace Application.Features.EmployerActivityFieldsFeature.Commands.CreateEmployerAcivityField
 {
-    public record CreateEmployerAcivityFieldCommand(string Title) : IRequest<OperationResult<EmployerAcivityField>>;
+    public record CreateEmployerAcivityFieldCommand(string Title,int DefinerId) : IRequest<OperationResult<EmployerAcivityField>>;
 }

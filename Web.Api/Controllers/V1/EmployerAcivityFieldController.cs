@@ -29,18 +29,14 @@ namespace Web.Api.Controllers.V1
         [HttpPost("CreateEmployerAcivityField")]
         public async Task<IActionResult> CreateEmployerAcivityField(CreateEmployerAcivityFieldForm model)
         {
-            var commandResult = await _sender.Send(new CreateEmployerAcivityFieldCommand(model.Title));
-
-            //if (commandResult.IsSuccess)
-            //{
+            var commandResult = await _sender.Send(new CreateEmployerAcivityFieldCommand(model.Title,UserId));
             CreateEmployerAcivityFieldDto employerAcivityFieldDto = new CreateEmployerAcivityFieldDto()
             {
 
                 Title = model.Title
             };
 
-            //return base.OperationResult(commandResult);
-            //}
+        
             return base.OperationResult(commandResult);
         }
 

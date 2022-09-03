@@ -3,7 +3,7 @@ using Domain.WriteModel;
 using Microsoft.EntityFrameworkCore;
 using Persistence.WriteRepositories.Common;
 
-namespace Persistence.WriteRepositories.Reminder
+namespace Persistence.WriteRepositories
 {
     internal class ReminderRepository : BaseAsyncRepository<ReminderData>, IReminderRepository
     {

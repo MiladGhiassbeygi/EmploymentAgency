@@ -3,7 +3,7 @@ using Domain.ReadModel;
 using MongoDB.Driver;
 using Persistence.ReadRepositories.Common;
 
-namespace Persistence.ReadRepositories.Area
+namespace Persistence.ReadRepositories
 {
   
     public class ReadCountryRepository : BaseReadRepository<Country>, IReadCountryRepository

@@ -1,26 +1,9 @@
 ﻿using Application.Contracts.Persistence;
-using Application.Contracts.Persistence.Area;
-using Application.Contracts.Persistence.JobContract;
-using Application.Contracts.ReadPersistence;
-using Application.Contracts.ReadPersistence.Account;
-using Application.Contracts.ReadPersistence.Area;
-using Application.Contracts.ReadPersistence.ReadWorkExperience;
-using Application.Contracts.WritePersistence;
-using Application.Contracts.WritePersistence.Reminder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
-using Persistence.ReadRepositories;
-using Persistence.ReadRepositories.Account;
-using Persistence.ReadRepositories.Area;
-using Persistence.ReadRepositories.Contract;
-using Persistence.ReadRepositories.ReadWorkExperience;
-using Persistence.WriteRepositories;
 using Persistence.WriteRepositories.Common;
-using Persistence.WriteRepositories.EmployerRepositories;
-using Persistence.WriteRepositories.JobRepositories;
-using Persistence.WriteRepositories.Reminder;
 
 namespace Persistence.ServiceConfiguration
 {
@@ -28,54 +11,25 @@ namespace Persistence.ServiceConfiguration
     {
         public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
         {
+
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            services.AddScoped<IReadAccountRepository, ReadAccountRepository>();
+            #region RegisterAllServicesDynamically
 
-            services.AddScoped<ICountryRepository, CountryRepository>();
-            services.AddScoped<IReadCountryRepository, ReadCountryRepository>();
+            var types = AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.GetTypes())
+              .Where(x => !x.IsInterface && !x.IsAbstract && x.Name.Contains("Repository")
+                && (x.Namespace.Equals("Persistence.WriteRepositories")
+                    || x.Namespace.Equals("Persistence.ReadRepositories")))
+              .Select(s => new { Service = s.GetInterface($"I{s.Name}"), Implementation = s })
+              .ToList();
 
-            services.AddScoped<IJobSeekerRepository, JobSeekerRepository>();
-            services.AddScoped<IReadJobSeekerRepository, ReadJobSeekerRepository>();
+            foreach (var type in types)
+            {
+                services.AddScoped(type.Service, type.Implementation);
 
-            services.AddScoped<IJobRepository, JobRepository>();
-            services.AddScoped<IReadJobRepository, ReadJobRepository>();
+            }
 
-            services.AddScoped<IEmployerRepository, EmployerRepository>();
-            services.AddScoped<IReadEmployerRepository, ReadEmployerRepository>();
-
-            services.AddScoped<IEmployerAcivityFieldRepository, EmployerAcivityFieldRepository>();
-            services.AddScoped<IReadEmployerActivitiesRepository, ReadEmployerActivitiesRepository>();
-
-            services.AddScoped<IReminderRepository, ReminderRepository>();
-            services.AddScoped<IReadReminderRepository, ReadReminderRepository>();
-
-            services.AddScoped<IWorkExperienceRepository, WorkExperienceRepository>();
-            services.AddScoped<IReadWorkExperienceRepository, ReadWorkExperienceRepository>();
-
-            services.AddScoped<IEducationalBackgroundRepository, EducationalBackgroundRepository>();
-            services.AddScoped<IReadEducationalBackgroundRepository, ReadEducationalBackgroundRepository>();
-
-            services.AddScoped<ISkillRepository, SkillRepository>();
-            services.AddScoped<IReadSkillRepository, ReadSkillRepository>();
-            
-            services.AddScoped<IJobEssentialSkillsRepository,JobEssentialSkillsRepository>();
-            services.AddScoped<IReadJobEssentialSkillsRepository, ReadJobEssentialSkillsRepository>();
-            services.AddScoped<IReadJobUnnessecarySkillsRepository, ReadJobUnnessecarySkillsRepository>();
-            services.AddScoped<IJobUnnessecarySkillsRepository,JobUnnessecarySkillsRepository>();
-            services.AddScoped<IWorkExperienceSkillRepository, WorkExperienceSkillRepository>();
-
-            services.AddScoped<IEmployerCommissionRepository, EmployerCommissionRepository>();
-            services.AddScoped<IReadEmployerCommissionRepository, ReadEmployerCommissionRepository>();
-           
-            services.AddScoped<IJobCommissionRepository, JobCommissionRepository>();
-            services.AddScoped<IReadJobCommissionRepository,ReadJobCommissionRepository>(); 
-
-            services.AddScoped<ISuccessedContractRepository, SuccessedContractRepository>();
-            services.AddScoped<IReadSuccessedContractRepository, ReadSuccessedContractRepository>();
-
-            services.AddScoped<IReadJobSeekerSkillsRepository, ReadJobSeekerSkillsRepository>();
-            services.AddScoped<IJobSeekerSkillsRepository, JobSeekerSkillsRepository>();
+            #endregion
 
             var mongoClient = new MongoClient("mongodb://localhost:27017");
             var mongoDatabase = mongoClient.GetDatabase("EmploymentAgency");

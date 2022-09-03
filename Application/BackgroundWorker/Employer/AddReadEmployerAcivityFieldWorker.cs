@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace Application.BackgroundWorker.AddReadEmployerActivity
+namespace Application.BackgroundWorker
 {
     public class AddReadEmployerAcivityFieldWorker : BackgroundService
     {
@@ -41,6 +41,7 @@ namespace Application.BackgroundWorker.AddReadEmployerActivity
                             {
                                 EmployerAcivityFieldId = employerAcivityField.Id,
                                 Title = employerAcivityField.Title,
+                                DefinerId = employerAcivityField.DefinerId
 
                             }, stoppingToken);
                         }
