@@ -5,5 +5,5 @@ using MediatR;
 
 namespace Application.Features.JobFeatures.JobCommissionCqrs.Queries
 {
-    public record GetJobCommissionQueries(long jobId) : IRequest<OperationResult<List<GetJobCommissionsDto>>>;
+    public record GetJobCommissionQueries(long jobCommissionId) : IRequest<OperationResult<List<GetJobCommissionsDto>>>;
 }

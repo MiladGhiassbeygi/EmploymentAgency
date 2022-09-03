@@ -1,10 +1,9 @@
-﻿using Application.Features.JobFeatures.JobCommissionCqrs.Commands;
+﻿using Application.Features.JobFeatures;
+using Application.Features.JobFeatures.JobCommissionCqrs.Commands;
 using Application.Features.JobFeatures.JobCommissionCqrs.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Web.Api.Dto.JobCommissionsDto;
 using Web.Api.Form.JobCommissionForm;
 using WebFramework.BaseController;
 
@@ -27,24 +26,25 @@ namespace Web.Api.Controllers.V1
         public async Task<IActionResult> CreateJobCommission(CreateJobCommissionForm model)
         {
             var commandResult = await _sender.Send(new CreateJobCommissionCommands(model.IsFixed,model.Value, model.JobId));
-
-            if (commandResult.IsSuccess)
-            {
-                CreateJobCommissionsDto jobCommissionDto = new CreateJobCommissionsDto()
-                {
-                   IsFixed = model.IsFixed,
-                   Value = model.Value,
-                };
-
-                return base.OperationResult(commandResult);
-            }
             return base.OperationResult(commandResult);
         }
 
-        [HttpGet("GetJobCommissions")]
-        public async Task<IActionResult> GetJobCommissions(long jobId)
+        [HttpPut("UpdateJobCommission")]
+        public async Task<IActionResult> UpdateJobCommission(UpdateJobCommissionForm input, CancellationToken cancellationToken)
         {
-            return base.OperationResult(await _sender.Send(new GetJobCommissionQueries(jobId)));
+            return base.OperationResult(await _sender.Send(new UpdateJobCommissionCommand(input.JobCommissionId, input.IsFixed, input.Value)));
+        }
+
+        [HttpDelete("DeleteJobCommission")]
+        public async Task<IActionResult> DeleteJobCommission(DeleteJobCommissionForm input, CancellationToken cancellationToken)
+        {
+            return base.OperationResult(await _sender.Send(new DeleteJobCommissionCommand(input.JobCommissionId)));
+        }
+
+        [HttpGet("GetJobCommissions")]
+        public async Task<IActionResult> GetJobCommissions(long jobCommissionId)
+        {
+            return base.OperationResult(await _sender.Send(new GetJobCommissionQueries(jobCommissionId)));
         }
     }
 }
