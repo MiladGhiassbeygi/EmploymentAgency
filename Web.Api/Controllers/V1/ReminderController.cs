@@ -44,6 +44,18 @@ namespace Web.Api.Controllers.V1
             return base.OperationResult(commandResult);
         }
 
+        [HttpPut("UpdateReminder")]
+        public async Task<IActionResult> UpdateReminder(UpdateReminderForm input, CancellationToken cancellationToken)
+        {
+            return base.OperationResult(await _sender.Send(new UpdateReminderCommand(input.ReminderId, input.EventDate, input.NoteTitle, input.Note)));
+        }
+
+        [HttpDelete("DeleteReminder")]
+        public async Task<IActionResult> DeleteReminder(DeleteReminderForm input, CancellationToken cancellationToken)
+        {
+            return base.OperationResult(await _sender.Send(new DeleteReminderCommand(input.ReminderId)));
+        }
+
         [Authorize]
         [HttpGet("GetReminder")]
         public async Task<IActionResult> GetReminder()
