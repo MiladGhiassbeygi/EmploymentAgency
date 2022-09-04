@@ -10,8 +10,8 @@
         public byte AnnualLeave { get; set; }
         public decimal ExactAmountRecived { get; set; }
         public string Description { get; set; }
-        public string EssentialSkills { get; set; }
-        public string UnnecessarySkills { get; set; }
+        public short[] EssentialSkills { get; set; }
+        public short[] UnnecessarySkills { get; set; }
         public string Email { get; set; }
         public string HireCompanies { get; set; }
         public long EmployerId { get; set; }

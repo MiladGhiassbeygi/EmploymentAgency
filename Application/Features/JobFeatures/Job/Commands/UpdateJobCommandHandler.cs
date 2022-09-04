@@ -36,16 +36,10 @@ namespace Application.Features.JobFeatures.Commands.UpdateJob
             fetchedJob.HireCompanies = request.hireCompanies;
 
             var result = await _unitOfWork.JobRepository.UpdateJobAsync(fetchedJob);
-            try
-            {
-                await _unitOfWork.CommitAsync();
 
-                await _channel.AddToChannelAsync(new JobUpdated { JobId = fetchedJob.Id }, cancellationToken);
-            }
-            catch (Exception ex)
-            {
-                var exception = ex.Message;
-            }
+            await _unitOfWork.CommitAsync();
+
+            await _channel.AddToChannelAsync(new JobUpdated { JobId = fetchedJob.Id }, cancellationToken);
 
             fetchedJob.Employer = null;
             return OperationResult<Job>.SuccessResult(fetchedJob);
