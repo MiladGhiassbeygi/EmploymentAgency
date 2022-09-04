@@ -45,11 +45,8 @@ namespace Persistence.WriteRepositories
 
         public async Task<ReminderData> UpdateReminderAsync(ReminderData reminder)
         {
-            var fetchedReminder = await base.Table.Where(t => t.Id.Equals(reminder.Id)).FirstOrDefaultAsync();
-
-            if (fetchedReminder == null) return null;
-            await base.UpdateAsync(fetchedReminder);
-            return fetchedReminder;
+            await base.UpdateAsync(reminder);
+            return reminder;
         }
 
         

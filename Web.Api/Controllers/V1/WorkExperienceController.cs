@@ -1,9 +1,11 @@
 ﻿using Application.Features.CreateWorkExperience;
 using Application.Features.GetWorkExperience;
+using Application.Features.WorkExperiences.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Web.Api.Dto.WorkExperience;
+using Web.Api.Form.WorkExperience;
 using Web.Api.Form.WorkExperienceForm;
 using WebFramework.BaseController;
 
@@ -47,6 +49,20 @@ namespace Web.Api.Controllers.V1
                 return base.OperationResult(commandResult);
             }
             return base.OperationResult(commandResult);
+        }
+
+
+        [HttpPut("UpdateWorkExperience")]
+        public async Task<IActionResult> UpdateWorkExperience(UpdateWorkExperienceForm input, CancellationToken cancellationToken)
+        {
+            return base.OperationResult(await _sender.Send(new UpdateWorkExperienceCommand(input.WorkExperienceId, input.JobTitle, input.HoursOfWork, input.StartDate, input.EndDate
+                ,input.SalaryPaid,input.TypeOfCooperation,input.HireCompanies)));
+        }
+
+        [HttpDelete("DeleteWorkExperience")]
+        public async Task<IActionResult> DeleteWorkExperience(DeleteWorkExperienceForm input, CancellationToken cancellationToken)
+        {
+            return base.OperationResult(await _sender.Send(new DeleteWorkExperienceCommand(input.WorkExperienceId)));
         }
 
 

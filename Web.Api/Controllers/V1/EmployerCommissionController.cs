@@ -1,4 +1,5 @@
-﻿using Application.Features.EmployerFeatures.EmployerCommissionCqrs.Commands;
+﻿using Application.Features.EmployerFeatures.Commands;
+using Application.Features.EmployerFeatures.EmployerCommissionCqrs.Commands;
 using Application.Features.EmployerFeatures.EmployerCommissionCqrs.Query;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -42,6 +43,18 @@ namespace Web.Api.Controllers.V1
                 return base.OperationResult(commandResult);
             }
             return base.OperationResult(commandResult);
+        }
+
+        [HttpPut("UpdateEmployerCommission")]
+        public async Task<IActionResult> UpdateEmployerCommission(UpdateEmployerCommissionForm input, CancellationToken cancellationToken)
+        {
+            return base.OperationResult(await _sender.Send(new UpdateEmployerCommissionCommand(input.EmployerCommissionId,input.IsFixed,input.Value)));
+        }
+
+        [HttpDelete("DeleteEmployerCommission")]
+        public async Task<IActionResult> DeleteEmployerCommission(DeleteEmployerCommissionForm input, CancellationToken cancellationToken)
+        {
+            return base.OperationResult(await _sender.Send(new DeleteEmployerCommissionCommand(input.EmployerCommissionId)));
         }
 
         [HttpGet("GetEmployerCommissions")]

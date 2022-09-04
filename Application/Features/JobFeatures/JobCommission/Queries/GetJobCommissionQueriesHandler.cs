@@ -18,7 +18,7 @@ namespace Application.Features.JobFeatures.JobCommissionCqrs.Queries
         public async Task<OperationResult<List<GetJobCommissionsDto>>> Handle(GetJobCommissionQueries request, CancellationToken cancellationToken)
         {
 
-            var jobCommissions = await _unitOfWork.ReadJobCommissionRepository.GetWithFilterAsync(x=> x.JobId == request.jobId);
+            var jobCommissions = await _unitOfWork.ReadJobCommissionRepository.GetWithFilterAsync(x=> x.JobCommissionId == request.jobCommissionId);
 
             if (jobCommissions is not null)
             {

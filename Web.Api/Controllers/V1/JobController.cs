@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using WebFramework.BaseController;
 using Web.Api.Form.Job;
-using Web.Api.Dto.Jobs;
 using Application.Features.JobFeatures.Queries;
 using Application.Features.JobFeatures.Commands.CreateJob;
 using Application.Features.JobFeatures.Queries.FilterJob;
@@ -43,7 +42,7 @@ namespace Web.Api.Controllers.V1
         }
 
         [HttpDelete("DeleteJob")]
-        public async Task<IActionResult> DeleteEmployer(DeleteJobForm input, CancellationToken cancellationToken)
+        public async Task<IActionResult> DeleteJob(DeleteJobForm input, CancellationToken cancellationToken)
         {
             return base.OperationResult(await _sender.Send(new DeleteJobCommand(input.Id)));
         }
