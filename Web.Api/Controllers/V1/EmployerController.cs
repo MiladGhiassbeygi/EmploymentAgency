@@ -25,7 +25,7 @@ namespace Web.Api.Controllers.V1
         }
 
         /// <summary>
-        /// ساختن کارفرمای جدید
+        /// تعریف کارفرمای جدید
         /// </summary>
         /// <returns></returns>
         [HttpPost("CreateEmployer")]
@@ -64,6 +64,7 @@ namespace Web.Api.Controllers.V1
         {
             return base.OperationResult(await _sender.Send(new GetEmployerQuery(Id)));
         }
+
         [HttpGet("Filter")]
         public async Task<IActionResult> Filter([FromQuery] string term)
         {
