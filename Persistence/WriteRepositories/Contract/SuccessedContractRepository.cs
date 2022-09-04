@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 namespace Persistence.WriteRepositories
 {
  
-    internal class SuccessedContractRepository : BaseAsyncRepository<SuccessedContract>, IRepoAttribute, ISuccessedContractRepository
+    internal class SuccessedContractRepository : BaseAsyncRepository<SuccessedContract>, ISuccessedContractRepository
     {
         public SuccessedContractRepository(ApplicationDbContext dbContext) : base(dbContext)
         {

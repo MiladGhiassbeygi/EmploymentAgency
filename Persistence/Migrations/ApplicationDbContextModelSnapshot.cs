@@ -439,9 +439,8 @@ namespace Persistence.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("character varying(20)");
 
-                    b.Property<string>("OwnerId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("OwnerId")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -461,9 +460,6 @@ namespace Persistence.Migrations
 
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("timestamp without time zone");
-
-                    b.Property<byte>("Percentage")
-                        .HasColumnType("smallint");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -495,7 +491,7 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("Date")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone")
-                        .HasDefaultValue(new DateTime(2022, 8, 31, 11, 58, 1, 110, DateTimeKind.Local).AddTicks(8352));
+                        .HasDefaultValue(new DateTime(2022, 9, 3, 14, 1, 36, 862, DateTimeKind.Local).AddTicks(7878));
 
                     b.Property<bool>("IsAmountFixed")
                         .HasColumnType("boolean");
