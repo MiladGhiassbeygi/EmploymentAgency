@@ -39,7 +39,7 @@ namespace Persistence.Migrations
                     EventDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     NoteTitle = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false),
                     Note = table.Column<string>(type: "text", nullable: false),
-                    OwnerId = table.Column<string>(type: "text", nullable: false),
+                    OwnerId = table.Column<int>(type: "integer", nullable: false),
                     CreatedTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
                 },
@@ -73,7 +73,6 @@ namespace Persistence.Migrations
                     Id = table.Column<short>(type: "smallint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Title = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
-                    Percentage = table.Column<byte>(type: "smallint", nullable: false),
                     CreatedTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
                 },
@@ -580,7 +579,7 @@ namespace Persistence.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValue: new DateTime(2022, 8, 31, 11, 58, 1, 110, DateTimeKind.Local).AddTicks(8352)),
+                    Date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValue: new DateTime(2022, 9, 3, 14, 1, 36, 862, DateTimeKind.Local).AddTicks(7878)),
                     IsAmountFixed = table.Column<bool>(type: "boolean", nullable: false),
                     Amount = table.Column<decimal>(type: "money", nullable: false),
                     JobId = table.Column<long>(type: "bigint", nullable: false),

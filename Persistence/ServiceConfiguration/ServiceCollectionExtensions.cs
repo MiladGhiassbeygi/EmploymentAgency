@@ -31,9 +31,18 @@ namespace Persistence.ServiceConfiguration
 
             #endregion
 
+
+            #region Config ReadAndWrite Db Instance's ! 
+
+            #region MongoConfig's 
+
             var mongoClient = new MongoClient("mongodb://localhost:27017");
             var mongoDatabase = mongoClient.GetDatabase("EmploymentAgency");
             services.AddSingleton(mongoDatabase);
+
+            #endregion
+
+            #region RelationlDb Inject
 
             services.AddDbContext<ApplicationDbContext>(options =>
                     {
@@ -42,6 +51,10 @@ namespace Persistence.ServiceConfiguration
                     });
 
             return services;
+            
+            #endregion
+
+            #endregion
         }
     }
 }
