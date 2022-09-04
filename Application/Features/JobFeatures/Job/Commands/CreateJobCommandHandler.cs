@@ -5,7 +5,6 @@ using Application.Features.JobFeatures.Commands.CreateJob;
 using Application.Models.Common;
 using Domain.WriteModel;
 using MediatR;
-using Utils;
 
 namespace Application.Features.JobFeature.Commands.CreateJob
 {
@@ -23,24 +22,7 @@ namespace Application.Features.JobFeature.Commands.CreateJob
         {
             if (await _unitOfWork.JobRepository.GetJobByTitleAsync(request.Title) is not null)
                 return OperationResult<Job>.FailureResult("This Job Already Exists");
-
-            bool EssentialSkillsHasValue;
-            bool UnnecessarySkillsHasValue;
-
-            EssentialSkillsHasValue = string.IsNullOrEmpty(request.EssentialSkills);
-            UnnecessarySkillsHasValue = string.IsNullOrEmpty(request.UnnecessarySkills);
-
-            if (!EssentialSkillsHasValue)
-                if (!IsSkillIdsAreShort(request.EssentialSkills.Split(',')))
-                    return OperationResult<Job>.FailureResult("Essential SkillIds Are Invalid");
-
-            if (!UnnecessarySkillsHasValue)
-                if (!IsSkillIdsAreShort(request.UnnecessarySkills.Split(',')))
-                    return OperationResult<Job>.FailureResult("Unnessecary SkillIds Are Invalid");
-
-
-
-
+            
             var job = new Job
             {
 
@@ -60,16 +42,14 @@ namespace Application.Features.JobFeature.Commands.CreateJob
             var result = await _unitOfWork.JobRepository.CreateJobAsync(job);
 
             await _unitOfWork.CommitAsync();
-            if (!EssentialSkillsHasValue)
-                foreach (var skillId in request.EssentialSkills.Split(','))
+         
+                foreach (var skillId in request.EssentialSkills)
                 {
-                    await _unitOfWork.JobEssentialSkillsRepository.CreateJobEssentialSkillsAsync(new JobEssentialSkills { JobId = job.Id, SkillId = short.Parse(skillId) });
+                    await _unitOfWork.JobEssentialSkillsRepository.CreateJobEssentialSkillsAsync(new JobEssentialSkills { JobId = job.Id, SkillId = skillId});
                 }
-
-            if (!UnnecessarySkillsHasValue)
-                foreach (var skillId in request.UnnecessarySkills.Split(','))
+                foreach (var skillId in request.UnnecessarySkills)
                 {
-                    await _unitOfWork.JobUnnessecarySkillsRepository.CreateJobUnnessecarySkillsAsync(new JobUnnessecarySkills { JobId = job.Id, SkillId = short.Parse(skillId) });
+                    await _unitOfWork.JobUnnessecarySkillsRepository.CreateJobUnnessecarySkillsAsync(new JobUnnessecarySkills { JobId = job.Id, SkillId = skillId});
                 }
 
             await _unitOfWork.CommitAsync();
@@ -77,20 +57,6 @@ namespace Application.Features.JobFeature.Commands.CreateJob
             await _channel.AddToChannelAsync(new JobAdded { JobId = job.Id, DefinerId = request.DefinerId }, cancellationToken);
 
             return OperationResult<Job>.SuccessResult(result);
-        }
-
-        private bool IsSkillIdsAreShort(string[] skillIds)
-        {
-            if (skillIds.Count() == 0)
-                return true;
-            foreach (var skiilId in skillIds)
-            {
-                short shortSkillId;
-                if (!short.TryParse(skiilId, out shortSkillId))
-                    return false;
-            }
-
-            return true;
         }
     }
 }
