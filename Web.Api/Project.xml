@@ -6,7 +6,7 @@
     <members>
         <member name="M:Web.Api.Controllers.V1.EmployerController.CreateEmployer(Web.Api.Form.Employer.CreateEmployerForm)">
             <summary>
-            ساختن کارفرمای جدید
+            تعریف کارفرمای جدید
             </summary>
             <returns></returns>
         </member>
