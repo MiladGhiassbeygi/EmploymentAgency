@@ -38,16 +38,6 @@ namespace Application.BackgroundWorker
                         
                         
                         var skilllList =  await workExperienceSkillRepository.GetWorkExperienceSkillByIdAsync(item.WorkExperienceId);
-                        string skills = "";
-                        if (skilllList is not null)
-                        {
-                            foreach (var essential in skilllList)
-                            {
-                                skills = skills + essential.Skill.Title + ',';
-                            }
-                            skills = skills.Remove(skills.Length - 1);
-
-                        }
 
                         
                         if (workExperience != null)
@@ -62,7 +52,7 @@ namespace Application.BackgroundWorker
                               SalaryPaid = workExperience.SalaryPaid,
                               TypeOfCooperation = workExperience.TypeOfCooperation,
                               HireCompanies = workExperience.HireCompanies,
-                              Skills = skills
+                              Skills = skilllList.Select(x=> x.SkillId).ToArray(),
                             }, stoppingToken);
                         }
                     }

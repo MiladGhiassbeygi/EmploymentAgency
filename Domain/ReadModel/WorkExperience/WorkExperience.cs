@@ -35,7 +35,7 @@ namespace Domain.ReadModel
         public string HireCompanies { get; set; }
 
         [BsonElement("skills")]
-        public string Skills { get; set; }
+        public short[] Skills { get; set; }
 
         [BsonElement("jobSeekerId")]
         public long JobSeekerId { get; set; }

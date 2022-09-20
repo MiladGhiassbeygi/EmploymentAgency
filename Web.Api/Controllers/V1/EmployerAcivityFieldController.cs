@@ -36,7 +36,7 @@ namespace Web.Api.Controllers.V1
                 Title = model.Title
             };
 
-        
+            commandResult.Result.Definer = null;
             return base.OperationResult(commandResult);
         }
 
