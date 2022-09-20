@@ -67,7 +67,7 @@ builder.Services.AddSingleton(typeof(ChannelQueue<>));
 
 //Register All Workers by Assembly Reflection ! 
 
-Assembly assembly = Assembly.LoadFrom("D:\\EmploymentAgency\\EmploymentAgency\\Application\\bin\\Debug\\net6.0\\Application.dll");
+Assembly assembly = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(x=> x.FullName.Contains("Application")); //this is reflection method :))))) ====>>>> /*Assembly.LoadFrom("D:\\EmploymentAgency\\EmploymentAgency\\Application\\bin\\Debug\\net6.0\\Application.dll");*/
 var types = assembly
    .GetTypes()
    .Where(t => t.IsSubclassOf(typeof(BackgroundService)));
