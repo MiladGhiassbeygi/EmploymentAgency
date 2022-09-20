@@ -39,10 +39,10 @@ namespace Domain.ReadModel
         public string Description { get; set; }
 
         [BsonElement("essentialSkills")]
-        public string EssentialSkills { get; set; }
+        public short[] EssentialSkills { get; set; }
 
         [BsonElement("unnecessarySkills")]
-        public string UnnecessarySkills { get; set; }
+        public short[] UnnecessarySkills { get; set; }
 
         [BsonElement("email")]
         public string Email { get; set; }

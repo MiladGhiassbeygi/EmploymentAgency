@@ -37,7 +37,14 @@ namespace Web.Api.Controllers.V1
         {
             _sender = sender;
         }
-
+      
+        /// <summary>
+        ///Employer = 1,
+        ///Job = 2,
+        ///JobSeeker = 3,
+        ///HiredPeople = 4
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("Filter")]
         public async Task<IActionResult> Filter([FromQuery] FilterType type, [FromQuery] string term)
         {

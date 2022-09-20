@@ -41,52 +41,26 @@ namespace Application.BackgroundWorker
                     {
 
                         var job = await writeRepository.GetJobByIdAsync(item.JobId);
-                        
-                       
-                        var essentialList = await jobEssentialSkillsRepository.GetJobEssentialSkillsByIdAsync(item.JobId);
-                        string essentialString = "";
-                        if (essentialList.Count() > 0)
-                        {
-                            foreach (var essential in essentialList)
-                            {
-                                essentialString = essentialString + essential.Skill.Title + ',';
-                            }
-                            essentialString = essentialString.Remove(essentialString.Length - 1);
-
-                        }
-                        
-                        var unnessecaryList = await jobUnnessecarySkillRepository.GetJobUnnessecarySkillsByIdAsync(item.JobId);
-                        string unnessecaryString = "";
-                        if (unnessecaryList.Count() > 0)
-                        {
-                            foreach (var unnessecary in unnessecaryList)
-                            {
-                                unnessecaryString = unnessecaryString + unnessecary.Skill.Title + ',';
-                            }
-                            unnessecaryString = unnessecaryString.Remove(unnessecaryString.Length - 1);
-                        }
-                 
-
                         if (job != null)
                         {
                             await readRepository.AddAsync(new Job
                             {
-                               
-                               Title = job.Title,
-                               JobId = job.Id,
-                               HoursOfWork = job.HoursOfWork,
-                               SalaryMin = job.SalaryMin,
-                               SalaryMax = job.SalaryMax,
-                               AnnualLeave = job.AnnualLeave,
-                               ExactAmountRecived = job.ExactAmountRecived,
-                               Description = job.Description,
-                               Email = job.Email,
-                               EssentialSkills = essentialString,
-                               UnnecessarySkills = unnessecaryString,
-                               HireCompanies = job.HireCompanies,
-                               EmployerId = job.EmployerId,
-                               IsFixed = job.IsFixed,
-                               DefinerId = item.DefinerId
+
+                                Title = job.Title,
+                                JobId = job.Id,
+                                HoursOfWork = job.HoursOfWork,
+                                SalaryMin = job.SalaryMin,
+                                SalaryMax = job.SalaryMax,
+                                AnnualLeave = job.AnnualLeave,
+                                ExactAmountRecived = job.ExactAmountRecived,
+                                Description = job.Description,
+                                Email = job.Email,
+                                EssentialSkills = job.JobEssentialSkills.Select(x => x.SkillId.Value).ToArray(),
+                                UnnecessarySkills = job.JobUnnecessarySkills.Select(x => x.SkillId.Value).ToArray(),
+                                HireCompanies = job.HireCompanies,
+                                EmployerId = job.EmployerId,
+                                IsFixed = job.IsFixed,
+                                DefinerId = item.DefinerId
                             }, stoppingToken);
                         }
                     }

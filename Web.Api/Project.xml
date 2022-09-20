@@ -4,9 +4,18 @@
         <name>Web.Api</name>
     </assembly>
     <members>
+        <member name="M:Web.Api.Controllers.V1.CommonFilterController.Filter(Web.Api.Controllers.V1.FilterType,System.String)">
+             <summary>
+            Employer = 1,
+            Job = 2,
+            JobSeeker = 3,
+            HiredPeople = 4
+             </summary>
+             <returns></returns>
+        </member>
         <member name="M:Web.Api.Controllers.V1.EmployerController.CreateEmployer(Web.Api.Form.Employer.CreateEmployerForm)">
             <summary>
-            ساختن کارفرمای جدید
+            تعریف کارفرمای جدید
             </summary>
             <returns></returns>
         </member>
