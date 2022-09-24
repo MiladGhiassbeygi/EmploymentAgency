@@ -40,7 +40,7 @@ namespace Application.BackgroundWorker
                     await foreach (var item in _readModelChannel.ReturnValue(stoppingToken))
                     {
 
-                        var job = await writeRepository.GetJobByIdAsync(item.JobId);
+                        var job = await writeRepository.GetJobAggregateByIdAsync(item.JobId);
                         if (job != null)
                         {
                             await readRepository.AddAsync(new Job

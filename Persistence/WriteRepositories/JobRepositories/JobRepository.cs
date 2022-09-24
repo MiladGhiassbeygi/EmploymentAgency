@@ -23,6 +23,11 @@ namespace Persistence.WriteRepositories
             var job = await base.TableNoTracking.FirstOrDefaultAsync(x => x.Id.Equals(id));
             return job;
         }
+        public async Task<Job> GetJobByIdAggregateAsync(long id)
+        {
+            var job = await base.TableNoTracking.Include(x => x.JobEssentialSkills).Include(x => x.JobUnnecessarySkills).FirstOrDefaultAsync(x => x.Id.Equals(id));
+            return job;
+        }
         public async Task<Job> GetJobAggregateByIdAsync(long id)
         {
             return await base.Entities.Where(x => x.Id == id)

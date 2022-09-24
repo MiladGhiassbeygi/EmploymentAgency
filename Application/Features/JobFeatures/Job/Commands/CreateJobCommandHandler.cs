@@ -22,7 +22,7 @@ namespace Application.Features.JobFeature.Commands.CreateJob
         {
             if (await _unitOfWork.JobRepository.GetJobByTitleAsync(request.Title) is not null)
                 return OperationResult<Job>.FailureResult("This Job Already Exists");
-            
+
             var job = new Job
             {
 
@@ -42,14 +42,18 @@ namespace Application.Features.JobFeature.Commands.CreateJob
             var result = await _unitOfWork.JobRepository.CreateJobAsync(job);
 
             await _unitOfWork.CommitAsync();
-         
+
+            if (request.EssentialSkills.Count() > 0)
                 foreach (var skillId in request.EssentialSkills)
                 {
-                    await _unitOfWork.JobEssentialSkillsRepository.CreateJobEssentialSkillsAsync(new JobEssentialSkills { JobId = job.Id, SkillId = skillId});
+                    if (skillId != 0)
+                        await _unitOfWork.JobEssentialSkillsRepository.CreateJobEssentialSkillsAsync(new JobEssentialSkills { JobId = job.Id, SkillId = skillId });
                 }
+            if (request.UnnecessarySkills.Count() > 0)
                 foreach (var skillId in request.UnnecessarySkills)
                 {
-                    await _unitOfWork.JobUnnessecarySkillsRepository.CreateJobUnnessecarySkillsAsync(new JobUnnessecarySkills { JobId = job.Id, SkillId = skillId});
+                    if (skillId != 0)
+                        await _unitOfWork.JobUnnessecarySkillsRepository.CreateJobUnnessecarySkillsAsync(new JobUnnessecarySkills { JobId = job.Id, SkillId = skillId });
                 }
 
             await _unitOfWork.CommitAsync();

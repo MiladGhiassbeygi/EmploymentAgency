@@ -6,6 +6,7 @@ namespace Application.Contracts.Persistence
     {
         Task<Job> CreateJobAsync(Job job);
         Task<Job> GetJobByIdAsync(long id);//this was int
+        Task<Job> GetJobByIdAggregateAsync(long id);//this was int
         Task<Job> GetJobAggregateByIdAsync(long id);
         Task<Job> GetJobByTitleAsync(string title);
         Task<Job> UpdateJobAsync(Job job);
